@@ -1,0 +1,67 @@
+/* Modals  form login */
+#modalContent{
+    background: #fff;
+}
+.modal-content {
+    box-shadow: none!important;;
+    border: 0px!important;
+    padding: 0px!important;
+}
+.modal-content .form-submit{
+    width: 100%;
+}
+#modal-content {
+    max-width: 428px;
+    min-height: 310px;
+    width: 100%!important;
+    height: auto!important;
+    padding-top: 30px!important;
+}
+.ctools-modal-content{
+    max-width: 430px;
+    min-height: 320px;
+    margin: 0px!important;
+    height: auto!important;
+}
+
+div#modalBackdrop{
+    background: #0b0b0b!important;
+    opacity: .8!important;
+}
+
+#modal-content .container.messages-content {
+        margin: 0 auto;
+    padding: 20px 50px 0;
+    max-width: 426px;
+    padding-bottom: 0px;
+    width: 100%;
+}
+#modal-content .container.messages-content .alert{margin-bottom: 0px;}
+#modal-content form{
+    margin-top: 10px;
+    padding:30px;
+    padding-top: 10px;
+}
+div#modal-content ul.nav.nav-tabs {
+    position: absolute;
+    top: 0px;
+    width: 100%;
+}
+div.ctools-modal-content{
+    border: 1px solid #ccc;
+}
+div#modal-content .description {
+    padding-top: 15px;
+}
+button.mfp-close{
+    color:#333;
+}
+
+.not-logged-box a.register-link, .not-logged-box a.login-link {
+    padding: 10px 15px!important;
+    font-size: 14px;
+    font-weight: 700;
+    font-family: Montserrat,Arial,sans-serif;
+    text-transform: uppercase;
+    color: #333!important;
+}

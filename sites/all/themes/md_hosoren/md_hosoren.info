@@ -1,0 +1,27 @@
+name = MD Hosoren
+description = Hosoren - One Page / Multi Page Multipurpose
+package = MSS
+version = 2.0
+core = 7.x
+
+;Region
+regions[header] 				= Header
+regions[header_first] 	= Header First
+regions[header_second] 	= Header Second
+regions[branding] 			= Branding
+regions[highlighted] 		= Highlighted
+regions[help] 					= Help
+regions[content] 				= Content
+regions[sidebar_first] 	= Sidebar first
+regions[sidebar_second] = Sidebar second
+regions[bottom] 				= Bottom
+regions[footer] 				= Footer
+regions[footer_first] 	= Region Footer first
+regions[footer_second] 	= Region Footer second
+regions[footer_third] 	= Region Footer third
+regions[footer_fourth] 	= Region Footer fourth
+regions[footer_bottom] 	= Footer bottom
+
+;settings
+awecontent = 1
+

@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the MD View Index feature.
+ */
+
+include_once 'md_view_index.features.inc';

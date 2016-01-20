@@ -1,0 +1,121 @@
+.center {
+    text-align: center;
+}
+.fp-table, .fp-table-cell {
+    width: 100%;
+    height: 100%;
+}
+.fp-table {
+    display: table;
+    table-layout: fixed;
+    text-align: center;
+}
+.fp-table-cell {
+    display: table-cell;
+    vertical-align: middle;
+}
+
+
+.awe-counting {
+    text-align: center;
+}
+.awe-counting:before, .awe-counting:after {
+    content: " | ";
+}
+.awe-counting > h4 {
+    font-size: 20px;
+    text-transform: uppercase;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.awe-counting > span {
+    font-family: Montserrat, Arial, sans-serif;
+    font-size: 50px;
+    font-weight: 700;
+    display: block;
+}
+@media (max-width: 480px) {
+  .awe-counting > h4 {
+    font-size: 10px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .awe-counting > span {
+    font-size: 25px;
+  }
+}
+
+.countdown-soon{
+  display: none;
+}
+
+
+.comming-soon {
+    color: #fff;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
+.comming-soon .comming-soon-logo {
+    margin-bottom: 25px;
+}
+.comming-soon .countdown-time {
+    margin: 25px 0;
+}
+
+.comming-soon header h1 {
+    font-size: 24px;
+    letter-spacing: 10px;
+    margin: 0 0 15px;
+    text-transform: uppercase;
+}
+
+.comming-soon footer  .follow-us {
+  font-size: 16px;
+}
+
+.comming-soon footer  .list-socials {
+  margin-top: 15px;
+}
+.comming-soon footer  .list-socials a{
+  color: #fff;
+  font-size: 20px;
+}
+.comming-soon footer  .list-socials a:hover {
+  color: #ffa200;
+}
+.list-socials {
+    display: inline-block;
+    padding-left: 0;
+    margin-bottom: 0;
+    list-style: none;
+}
+.list-socials > li {
+    display: inline-block;
+}
+.list-socials > li > a {
+    display: inline-block;
+    padding: 0 5px;
+}
+    
+
+@media (min-width: 768px) {
+  .comming-soon .comming-soon-logo {
+      margin-bottom: 45px;
+  }
+  .comming-soon .countdown-time {
+            margin: 50px 0;
+        }
+  .comming-soon header p {
+            font-size: 18px;
+        }
+  .comming-soon header h1 {
+            font-size: 50px;
+            letter-spacing: 20px;
+            margin: 0 0 40px;
+        }
+}

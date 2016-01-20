@@ -1,0 +1,163 @@
+<?php
+
+/**
+ * Implements hook_awecontent_objects_info().
+ */
+function md_ac_hosoren_awecontent_objects_info() {
+  $info = array();
+  $path = drupal_get_path('module', 'md_ac_hosoren');
+
+  $info['carousel'] = array(
+    'js' => array(
+      $path . '/js/awecontent-carousel-item.js' => array('weight' => 14)
+    ),
+    'css' => array(),
+    'theme_callback' => 'awe_carousel',
+  );
+  // $info['pricing_awe'] = array(
+  //    'js' => array(
+  //      $path . '/js/awecontent-pricing-item.js' => array('weight' => 14)
+  //    ),
+  //    'css' => array(),
+  //    'theme_callback' => 'awe_pricing_table',
+  //  );
+  $info['progress_awe'] = array(
+    'js' => array(
+      $path . '/js/awecontent-progress-item.js' => array('weight' => 14)
+    ),
+    'css' => array(),
+    'theme_callback' => 'awe_progress',
+  );
+  $info['team_awe'] = array(
+    'js' => array(
+      $path . '/js/awecontent-team-item.js' => array('weight' => 14)
+    ),
+    'css' => array(),
+    'theme_callback' => 'awe_user',
+  );
+  $info['service_awe'] = array(
+    'js' => array(
+      $path . '/js/awecontent-service-item.js' => array('weight' => 14)
+    ),
+    'css' => array(),
+    'theme_callback' => 'awe_service',
+  );
+  $info['counters_awe'] = array(
+    'js' => array(
+      $path . '/js/awecontent-counters-item.js' => array('weight' => 14)
+    ),
+    'css' => array(),
+    'theme_callback' => 'awe_counters',
+  );
+  return $info;
+}
+
+/**
+ * Implements hook_theme().
+ */
+function md_ac_hosoren_theme($existing, $type, $theme, $path) {
+  $themes = array();
+  $path = drupal_get_path('module', 'md_ac_hosoren');
+
+  $themes['awe_carousel'] = array(
+    'path' => $path . '/templates' ,
+    'template' => 'awe-carousel',
+    'file' => 'theme.inc',
+    'variables' => array(
+      'settings' => NULL,
+      'class_random' => NULL,
+      'node' => NULL
+    ),
+  );
+ // $themes['awe_pricing_table'] = array(
+ //   'path' => $path . '/templates' ,
+ //   'template' => 'awe-pricing-table',
+ //   'file' => 'theme.inc',
+ //   'variables' => array(
+ //     'settings' => NULL,
+ //     'class_random' => NULL,
+ //     'node' => NULL
+ //   ),
+ // );
+  $themes['awe_progress'] = array(
+    'path' => $path . '/templates' ,
+    'template' => 'awe-progress',
+    'file' => 'theme.inc',
+    'variables' => array(
+      'settings' => NULL,
+      'class_random' => NULL,
+      'node' => NULL
+    ),
+  );
+  $themes['awe_user'] = array(
+    'path' => $path . '/templates' ,
+    'template' => 'awe-user',
+    'file' => 'theme.inc',
+    'variables' => array(
+      'settings' => NULL,
+      'class_random' => NULL,
+      'node' => NULL
+    ),
+  );
+  $themes['awe_service'] = array(
+    'path' => $path . '/templates' ,
+    'template' => 'awe-service-box',
+    'file' => 'theme.inc',
+    'variables' => array(
+      'settings' => NULL,
+      'class_random' => NULL,
+      'node' => NULL
+    ),
+  );
+  $themes['awe_counters'] = array(
+    'path' => $path . '/templates' ,
+    'template' => 'awe-counters',
+    'file' => 'theme.inc',
+    'variables' => array(
+      'settings' => NULL,
+      'class_random' => NULL,
+      'node' => NULL
+    ),
+  );
+
+  return $themes;
+}
+
+
+/**
+ * Implement hook_awecontent_block_support()
+ * @param string $delta
+ * @param string $module
+ * @return array
+ */
+function md_ac_hosoren_awecontent_block_support($delta = '', $module = '') {
+  global  $base_url;
+  $output = array();
+  $path  = $base_url . '/' . drupal_get_path('module', 'md_ac_hosoren');
+  $path_theme = $base_url . '/' . drupal_get_path('theme', 'md_hosoren');
+  
+  // process for block of views module
+    $css = array();
+    $js = array();
+
+  
+    $js[] = $path_theme . '/js/libs/owl.carousel-transform.js';
+    $js[] = $path_theme . '/js/libs/masonry.pkgd.min.js';
+
+
+    if ($module == 'views') {
+      $js[] = $path . '/js_site_view/awecontent_hosoren.js';
+    }
+    $output = array('css' => $css, 'js' => $js);
+    return $output;
+}
+
+
+/**
+ * Implement hook_preprocess_page()
+ */
+function md_ac_hosoren_preprocess_page(&$vars) {
+  if (isset($_GET['ac_layout']) && $_GET['ac_layout'] == 1) {
+    $vars['tabs'] = FALSE;
+  }
+}

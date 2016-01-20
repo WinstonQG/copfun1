@@ -1,0 +1,97 @@
+<?php
+/**
+ * Implement hook_form_alter()
+ * @ $form
+ * @ $form_state
+ * @ $form_id
+ */
+function md_commerce_filter_form_alter(&$form, &$form_state, $form_id) {
+    if ($form_id == 'views_exposed_form') {
+      if (isset($form['price_min']) || isset($form['price_max'])) {        
+        hide($form['price_min']);
+        hide($form['price_max']);
+        unset($form['#info']['filter-commerce_price_amount']);
+        unset($form['#info']['filter-commerce_price_amount_1']);
+      }
+    }
+    // if(isset($form['commerce_price_amount']['min']) || isset($form['commerce_price_amount']['max'])){
+    //   hide($form['commerce_price_amount']);
+    //   unset($form['#info']['filter-commerce_price_amount']);
+    // }
+}
+
+/**
+ * Implements hook_block_info()
+ */
+function md_commerce_filter_block_info() {
+  $blocks = array();
+
+  $blocks['commerce_filter_price'] = array(
+    'info' => t('MD Hosoren: Price filter'),
+  );
+
+  return $blocks;
+}
+
+/**
+ * Implements hook_block_view()
+ */
+function md_commerce_filter_block_view($delta = '') {
+  $block = array();
+
+  switch ($delta) {
+    case 'commerce_filter_price':
+      $block['subject'] = 'Price';
+      $block['content'] = array(
+        '#theme' => 'commerce_product_filter_price',
+      );
+      drupal_add_library('system', 'ui');
+      drupal_add_library('system', 'ui.slider');
+      break;
+     }
+  return $block;
+}
+/**
+ * Implement hook_theme().
+ */
+function md_commerce_filter_theme($existing, $type, $theme, $path) {
+  $themes = array();
+  $themes['commerce_product_filter_price'] = array(
+    'variables' => array('url' => NULL),
+    'template' => 'commerce-product-filter-price',
+    'path' => drupal_get_path('module', 'md_commerce_filter') . '/templates',
+  );
+  return $themes;
+}
+
+function md_commerce_filter_preprocess_commerce_product_filter_price(&$vars) {
+
+  $query = db_select('field_data_commerce_price');
+  $query->addExpression('MIN(commerce_price_amount)', 'min');
+  $query->addExpression('MAX(commerce_price_amount)', 'max');
+  $limits = $query->execute()->fetch();
+
+  $price_min = $limits->min/100;
+  $price_max = $limits->max/100;
+
+
+  $query_parameters = drupal_get_query_parameters();
+  
+  if (empty($vars['url'])) {
+    $vars['url'] = $GLOBALS['base_url'] . '/' . current_path();
+  }
+  
+  $vars['htmlId'] = drupal_html_id('slider');
+
+  $settings['price_min'] = isset($query_parameters['price_min']) && !empty($query_parameters['price_min']) ? $query_parameters['price_min'] : $price_min;
+  $settings['price_max'] = isset($query_parameters['price_max']) && !empty($query_parameters['price_max']) ? $query_parameters['price_max'] : $price_max;
+  $settings['config_price_min'] = $price_min;
+  $settings['config_price_max'] = $price_max;
+  $settings['currentFilters'] = empty($query_parameters) ? new stdClass : $query_parameters;
+  $settings['baseUrl'] = $vars['url'];
+  $settings['htmlId'] = $vars['htmlId'];
+  
+  drupal_add_js(array('priceFilter' => array('setting' => $settings)), 'setting');
+  drupal_add_js(drupal_get_path('module', 'md_commerce_filter') . '/js/product-filter-price.js');
+  drupal_add_css(drupal_get_path('module', 'md_commerce_filter') . '/css/product-filter-price.css');
+}

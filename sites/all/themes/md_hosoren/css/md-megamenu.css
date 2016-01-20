@@ -1,0 +1,490 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : Oct 9, 2015, 5:00:00 PM
+    Author     : ThanhHust
+*/
+
+/* MD-megamenu-megamenu */
+.md-megamenu{
+  width: 1140px;
+}
+
+@media (min-width: 1200px) {
+  .header-style-3 .awe-logo{
+    display: none;
+  }
+  .header-style-3 .menu-logo a{
+    line-height: 80px;
+  }
+}
+@media (max-width: 1199px) {
+  .header-style-3 .menu-logo{
+    display: none;
+  }
+}
+/* End Header For Style */
+
+#header {
+    border-bottom: solid 1px #e1e1e1;
+}
+.md-megamenu.awemenu-nav{
+    border-bottom : 0px;
+}
+.header-style-4 .awemenu-nav{
+		border-bottom: solid 1px #e1e1e1;
+}
+
+/* Header style */
+.md-megamenu{
+    height: 80px;
+    background-color: #fff;
+    margin: 0 auto;
+}
+.md-megamenu-megamenu-user, .md-megamenu-megamenu-user-header-4{
+		height: auto;
+		background: none;
+		line-height: 1;
+}
+
+.md-megamenu .awemenu-megamenu-wrapper h3.mm-header{
+    font-size: 25px;
+    margin-top: 0;
+    margin-bottom: 15px;
+    color: #333;
+    font-weight: 700!important;;
+}
+.md-megamenu .awemenu-standard .awemenu .awemenu-item a{
+    padding-top: 0px;
+    padding-bottom: 0px;
+}
+.md-megamenu a.mega-link{
+    color: #333!important;
+    font-family: Montserrat,Arial,sans-serif; 
+    font-size: 14px;
+    font-weight: 700;
+    text-transform: uppercase;
+    text-overflow: ellipsis;
+    text-decoration: none;
+}
+.md-megamenu .awemenu-left .awemenu .awemenu-item>a,
+.md-megamenu .mega-link .awemenu-megamenu-wrapper a{
+    color: #333!important;
+    font-family: Montserrat,Arial,sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    text-transform: uppercase;
+    line-height: 80px;
+    padding-left: 15px;
+    padding-right: 15px;
+    display: block;
+    position: relative;
+    text-decoration: none;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    -webkit-transition: color .3s ease,background-color .3s ease;
+    -o-transition: color .3s ease,background-color .3s ease;
+    transition: color .3s ease,background-color .3s ease;
+}
+
+
+.mega-link .awemenu-submenu a {
+    line-height: 40px!important;
+    padding: 0px!important;
+}
+
+/*
+.md-megamenu-megamenu .awemenu-default.awemenu-standard .awemenu .awemenu-item:hover > a{
+    background-color: transparent;
+    color:#ffa200;
+}
+.md-megamenu-megamenu .awemenu-default.awemenu-standard .awemenu, .md-megamenu-mega-main-menu-style4 .awemenu-default.awemenu-standard .awemenu{
+    border-bottom: solid 1px #e1e1e1; 
+    height: 79px;
+}
+*/
+/* Button */
+.md-megamenu .awemenu-submenu .bottom-link a:link{
+    color: #333!important;
+}
+.md-megamenu .bottom-link a:link:hover{
+    color: #fff!important;
+}
+.md-megamenu .fp-table .btn{
+    font-size: 12px!important;
+    font-weight: 700!important;
+    line-height: 1!important;
+    -webkit-border-radius: 0!important;
+    border-radius: 0;
+    text-transform: uppercase!important;
+    padding: 10px 15px;
+    border: 1px solid transparent;
+}
+.md-megamenu .fp-table a{
+    display:inline!important;
+}
+.md-megamenu a.mega-link:hover{
+    color: #333!important;
+}
+.md-megamenu .fp-table-cell a{
+    color: #333!important;
+}
+.md-megamenu .fp-table-cell a:hover{
+    color: #333!important;
+}
+.md-megamenu .numbers-list a:hover{
+    color: #fff!important;
+}
+
+
+.awemenu-megamenu-wrapper a:hover {
+    color: #ffa200;
+}
+.awemenu-nav .awemenu-megamenu-wrapper a:hover {
+    color: #ffa200!important;
+}
+
+
+
+
+/*Main*/
+.md-megamenu .awemenu-item-title{
+    padding: 10px 15px!important;
+}
+.md-megamenu .awemenu-item-level-1 a.awemenu-item-link{
+    line-height: 80px;
+}
+.md-megamenu ul.awemenu-submenu.awemenu-megamenu{
+    background: #fff;
+    -webkit-box-shadow: 1px 2px 3px rgba(0,0,0,.15);
+    box-shadow: 1px 2px 3px rgba(0,0,0,.15);
+    text-align: left;
+}
+.md-megamenu .awemenu-submenu a, .md-megamenu .awemenu-submenu a:link{
+    padding: 10px;
+    display: block;
+    color: #898989;
+}
+.md-megamenu .awemenu-submenu .block-views .nano-content a, 
+.md-megamenu .awemenu-submenu .block-views .nano-content a:link{
+		padding: 0;
+}
+
+.md-megamenu .awemenu-submenu .awe-media-image a{
+    padding: 0px;
+}
+.md-megamenu .awemenu-submenu .awe-media-image .fp-table a{
+    padding: 10px;
+}
+
+
+.awemenu-submenu .bottom-link a {
+    color: #333!important;
+}
+.awemenu-submenu .bottom-link a:hover {
+    color: #fff!important;
+}
+/* block */
+.md-megamenu .view-product-box-categories .box-list .numbers-list a{
+    padding : 0px!important;
+}
+.md-megamenu .awemenu-megamenu-wrapper ul.numbers-list li{
+    padding: 0px 0px 10px!important;
+}
+.awemenu-megamenu-wrapper h3.widget-title{
+    color:#898989;
+    margin-bottom: 15px;
+    font-size: 14px;
+}
+.md-megamenu .awemenu-megamenu .widget-title {
+    text-transform: none;
+    font-family: Roboto,Arial,sans-serif!important;
+}
+
+.awemenu-bars .fa {
+    margin: 7px auto;
+    margin-left: 8px;
+    width: 23px;
+}
+.md-megamenu .awemenu-bars .fa{
+    font-family: "awe-glyphicons-awesome";
+}
+.md-megamenu .awemenu-bars .fa-navicon:before, 
+.md-megamenu .awemenu-bars .fa-reorder:before, 
+.md-megamenu .awemenu-bars .fa-bars:before {
+    content: '\e921';
+}
+.md-megamenu .cart-action ul.links li.last a:hover, .md-megamenu .cart-action ul.links li.first a:hover{
+    color:#fff!important;
+}
+
+
+/* Megamenu header style 4*/
+.header-style-4 .header-top{
+	border-bottom: none;
+}
+.header-style-4 .md-megamenu-mega-main-menu-style4 ul.awemenu {
+    width: 256px;
+}
+
+.md-megamenu-megamenu-user-header-4{
+    height: auto;
+}
+.md-megamenu-megamenu-user-header-4 .awemenu-container ul.awemenu{
+    float: none;
+    position: relative;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    width: 256px;
+}
+.md-megamenu-megamenu-user-header-4 .awemenu-container ul.awemenu li.awemenu-item{
+    float: none;
+    display: block;
+    position: static;
+    text-align: center;
+}
+.md-megamenu-megamenu-user-header-4 .awemenu-item > a.awemenu-item-link{
+    line-height: 50px;
+}
+
+.md-megamenu-megamenu-user-header-4 .awemenu-item .awemenu-submenu.awemenu-megamenu,
+.md-megamenu-megamenu-user .awemenu-item .awemenu-submenu.awemenu-megamenu{
+    box-shadow: 1px 2px 3px rgba(0,0,0,.15);
+}
+.md-megamenu-megamenu-user-header-4 .awemenu-item .awemenu-submenu.awemenu-megamenu{
+    top: 0;
+    left: 100% !important;
+}
+
+.header-style-4 .md-megamenu-mega-main-menu-style4 .awemenu-logo{
+    display: block;
+    margin-right: 0;
+    float: none;
+    height: 80px;
+    line-height: 80px;
+    border-bottom: solid 1px #e1e1e1;
+    text-align: center;
+}
+.header-style-4 .md-megamenu-mega-main-menu-style4 span.awemenu-item-title{
+    color: #333;
+}
+.header-style-4 .md-megamenu-mega-main-menu-style4 ul.awemenu > li.awemenu-item:hover span.awemenu-item-title{
+    color: #ffa200;
+    -webkit-transition: color .3s ease,background-color .3s ease;
+    -o-transition: color .3s ease,background-color .3s ease;
+    transition: color .3s ease,background-color .3s ease;
+}
+
+/* CSS Search Form style 4*/
+.search-icon-form > a.awemenu-item-link:before{
+    content: '\e93f';
+}
+.search-icon-form > a .awemenu-item-title{
+    display: none;
+}
+
+.header-style-4 li.search-icon-form{
+    padding: 15px 0;
+}
+.header-style-4 #block-search-form{
+
+}
+
+/*Block header */
+.header-top-relative .md-megamenu-megamenu-user {
+    float: right;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    width: auto !important;
+    border-left: solid 1px #e1e1e1;
+    border-right: solid 1px #e1e1e1;
+    border-bottom: 0px;
+    margin-top: 1px;
+}
+.md-megamenu .view-product-box-categories .box-list .numbers-list a:hover {
+    color: #fff!important;
+}
+.md-megamenu .wishlist-icon .whishlist-action a {
+    color: #333!important;
+}
+.md-megamenu .wishlist-icon .whishlist-action a:hover {
+    color: #fff!important;
+}
+
+
+
+/*Responsive megamenu*/
+
+@media (max-width: 1454px) and (min-width: 1200px){
+    .header-style-4 {
+        width: 256px;
+    }
+		
+		.header-style-4 + #main .container, 
+		.header-style-4 ~ .footer .container{
+			width: 970px;
+		}
+}
+@media (max-width: 1200px){
+    /* Responsive mega menu*/
+    .md-megamenu ul.awemenu {
+        width: 100%;
+    }
+    .md-megamenu i.awemenu-arrow.fa.fa-close {
+        float: right;
+        margin-top: 30px;
+        margin-right: 60px;
+    }
+    .md-megamenu i.awemenu-arrow.fa.fa-angle-down {
+        float: right;
+        margin-top: 30px;
+        margin-right: 60px;
+    }
+    .md-megamenu li.awemenu-item-level-1{
+        position: relative;
+        background: #fff;
+    }
+    .md-megamenu ul.awemenu-submenu.awemenu-megamenu {
+        -webkit-box-shadow: none;
+        text-align: left;
+        background-color: #FDFCFC;
+        box-shadow: none;
+    }
+    .md-megamenu .awemenu-item-level-1 > a:link {
+        padding: 30px;
+        width: 100%;
+    }
+		.md-megamenu .awemenu{
+        border-bottom : 1px solid#ccc;
+    }
+		
+		
+		.md-megamenu-megamenu-user .awemenu, 
+		.md-megamenu-megamenu-user-header-4 .awemenu{
+			border-bottom: none;
+		}
+		
+		.md-megamenu-megamenu-user li.awemenu-item-level-1,
+		.md-megamenu-megamenu-user-header-4 li.awemenu-item-level-1{
+			background: none;
+		}
+    .md-megamenu-megamenu-user .awemenu-container ul.awemenu {
+        float: none;
+        position: relative;
+        width: 100%;
+    }
+    .md-megamenu-megamenu-user .awemenu-container ul.awemenu >li.awemenu-item {
+        float: none;
+        display: block;
+        position: static;
+        text-align: center;
+        width: 33.33333333%;
+        float: left;
+        min-height: 80px;
+        padding: 0;
+    }
+    .md-megamenu-megamenu-user .awemenu-submenu >li {
+        width: 100%!important;
+    }
+    .header-style-1 .md-megamenu-megamenu-user .account-icon .awemenu-submenu.awemenu-megamenu {
+        top: 80px;
+        width: 170px !important;
+        right: 0px !important;
+        display: block;
+        border-top: 1px solid#ccc;
+
+    }
+    .header-style-1 .md-megamenu-megamenu-user .wishlist-icon .awemenu-submenu.awemenu-megamenu,
+    .header-style-1 .md-megamenu-megamenu-user .cart-icon .awemenu-submenu.awemenu-megamenu {
+        top: 80px;
+        width: 330px;
+        right: 0px !important;
+        display: block;
+        border-top: 1px solid#ccc;
+
+    }
+
+		
+		
+		
+    
+    
+    .awemenu-nav .awemenu-megamenu-wrapper{
+        padding-left: 50px;
+    }
+    .awemenu-nav.awemenu-has-logo .awemenu {
+        position: absolute;
+        z-index: 9999;
+    }
+    .awemenu-standard .awemenu > .awemenu-item .awemenu-submenu.awemenu-megamenu{
+        z-index: 999999!important;
+        margin-top: -12px;
+    }
+
+    .awemenu-bars .fa {
+        margin: 7px auto;
+        margin-left: 8px;
+        width: 23px;
+    }
+    .md-megamenu .awemenu-bars .fa{
+        font-family: "awe-glyphicons-awesome";
+    }
+    .md-megamenu .awemenu-bars .fa-navicon:before, .md-megamenu .awemenu-bars .fa-reorder:before, .md-megamenu .awemenu-bars .fa-bars:before {
+        content: '\e921';
+    }
+    .md-megamenu .cart-action ul.links li.last a:hover{
+        color:#fff!important;
+    }
+    .header-style-1 .md-megamenu .awemenu-bars {
+        width: 30px;
+        float: right;
+        margin-right: 15px;
+    }
+
+    .awemenu-standard .awemenu > .awemenu-item .awemenu-submenu.awemenu-megamenu{
+        z-index: 999999!important;
+        margin-top: 2px;
+    }
+
+		/* Style 3 */
+	.header-style-3 .md-megamenu-megamenu-user{
+		float: none;
+	}
+		
+
+    /* style 4*/
+		.header-style-4 .awemenu-nav{
+			border-bottom: none;
+		}
+		.header-style-4 .md-megamenu-megamenu-user-header-4{
+			width: 200px !important;
+			margin: 0;
+		}
+		.header-style-4 .md-megamenu-mega-main-menu-style4 ul.awemenu{
+			width: 100%;
+			border-bottom: solid 1px #e1e1e1;
+		}
+		.md-megamenu-megamenu-user-header-4 .awemenu-container ul.awemenu li.awemenu-item{
+			float: left;
+		}
+		.md-megamenu-megamenu-user-header-4 .awemenu-item .awemenu-submenu.awemenu-megamenu{
+			left: 0 !important;
+			top: 100%;
+		}
+		
+		.header-style-4 .awe-menubar-search{
+			height: auto;
+			line-height: 1;
+			position: absolute;
+			right: 48px;
+			top: -52px;
+		}
+
+
+}
+
+

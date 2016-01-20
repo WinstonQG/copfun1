@@ -1,0 +1,1 @@
+(function(a){Drupal.behaviors.export_import_cuteslider={attach:function(b,c){a("input[name=export-button]",b).click(function(){var d=a("#edit-menus input:checked",b).val();a.post(c.basePath+"?q=admin/structure/md-megamenu/export-data",{mids:d},function(e){a("#edit-export-data",b).val(e)})})}}})(jQuery);

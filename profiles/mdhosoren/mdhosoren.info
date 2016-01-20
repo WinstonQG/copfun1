@@ -1,0 +1,10 @@
+name = MD Hosoren
+description = Select this profile to install demo profile for MD Hosoren theme.
+core = 7.x
+exclusive = 1
+dependencies[] = node
+dependencies[] = contact
+files[] = mdhosoren.profile
+
+version = "7.32"
+project = "drupal"

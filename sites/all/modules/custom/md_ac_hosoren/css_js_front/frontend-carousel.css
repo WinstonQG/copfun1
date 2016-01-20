@@ -1,0 +1,11 @@
+.awe-carousel.owl-theme .owl-controls{
+	position: relative;
+}
+.awe-carousel.owl-theme .owl-controls .owl-page span{
+	 background: rgba(0, 0, 0, 0.3);
+	 border: none;
+}
+.awe-carousel.owl-theme .owl-controls .owl-page.active span{
+ 		background: rgba(0, 0, 0, 0.7);
+    border: 2px solid rgba(0, 0, 0, 0.7);
+}

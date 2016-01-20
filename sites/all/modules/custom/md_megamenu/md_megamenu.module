@@ -1,0 +1,646 @@
+<?php
+@include_once dirname(__FILE__) . '/includes/md_megamenu.class.inc';
+@include_once dirname(__FILE__) . '/includes/md_megamenu.utils.inc';
+@include_once dirname(__FILE__) . '/includes/tweet.inc';
+
+/**
+ * Implements hook_menu()
+ */
+function md_megamenu_menu() {
+  $items = array();
+  $module_path = drupal_get_path('module', 'md_megamenu');
+
+  $items['admin/structure/md-megamenu'] = array(
+    'title' => t('MD MegaMenu'),
+    'description' => t('Add new menus to your site, edit existing menus, and rename and reorganize menu links.'),
+    'page callback' => 'md_megamenu_overview_page',
+    'access callback' => 'user_access',
+    'access arguments' => array('administer md_megamenu'),
+    'file path' => $module_path . '/includes',
+    'file' => 'md_megamenu.admin.inc',
+  );
+
+  $items['admin/structure/md-megamenu/import-export'] = array(
+    'title' => t('Export & Import'),
+    'description' => t('Import and Export MDMegaMenu'),
+    'page callback' => 'drupal_get_form',
+    'access callback' => 'user_access',
+    'page arguments' => array('md_megamenu_import_form'),
+    'access arguments' => array('delete md_megamenu'),
+    'file path' => $module_path . '/includes',
+    'file' => 'md_megamenu.admin.inc',
+    'type' => MENU_LOCAL_TASK,
+    'weight' => 2,
+  );
+
+  $items['admin/structure/md-megamenu/common-settings'] = array(
+    'title' => t('Settings'),
+    'description' => t('Common settings for MD MegaMenu'),
+    'page callback' => 'drupal_get_form',
+    'access callback' => 'user_access',
+    'page arguments' => array('md_megamenu_common_settings_form'),
+    'access arguments' => array('delete md_megamenu'),
+    'file path' => $module_path . '/includes',
+    'file' => 'md_megamenu.admin.inc',
+    'type' => MENU_LOCAL_TASK,
+    'weight' => 3,
+  );
+
+  $items['admin/structure/md-megamenu/manage'] = array(
+    'title' => t('Manage'),
+    'type' => MENU_DEFAULT_LOCAL_TASK,
+    'weight' => 0,
+  );
+
+  $items['admin/structure/md-megamenu/create'] = array(
+    'title' => t('Add new MDMegamenu'),
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('md_megamenu_configure_form'),
+    'access arguments' => array('delete md_megamenu'),
+    'type' => MENU_LOCAL_ACTION,
+    'file path' => $module_path . '/includes',
+    'file' => 'md_megamenu.admin.inc',
+  );
+
+  $items['admin/structure/md-megamenu/%md_megamenu_ids'] = array(
+    'description' => t('Configure for existing menu.'),
+    'page callback' => 'menu_manage',
+    'access callback' => 'user_access',
+    'page arguments' => array(3),
+    'access arguments' => array('administer md_megamenu'),
+    'file path' => $module_path . '/includes',
+    'file' => 'md_megamenu.admin.inc',
+    'type' => MENU_NORMAL_ITEM,
+  );
+
+  $items['admin/structure/md-megamenu/%md_megamenu_ids/edit'] = array(
+    'title' => t('Edit'),
+    'description' => t('Edit existing menus.'),
+    'page callback' => 'menu_manage',
+    'access callback' => 'user_access',
+    'page arguments' => array(3, 4),
+    'access arguments' => array('administer md_megamenu'),
+    'file path' => $module_path . '/includes',
+    'file' => 'md_megamenu.admin.inc',
+    'type' => MENU_LOCAL_TASK,
+    'weight' => 2,
+  );
+
+  $items['admin/structure/md-megamenu/%md_megamenu_ids/configure'] = array(
+    'title' => t('Configure'),
+    'type' => MENU_DEFAULT_LOCAL_TASK,
+    'weight' => 0,
+  );
+
+  $items['admin/structure/md-megamenu/%md_megamenu_ids/clone'] = array(
+    'page callback' => 'md_megamenu_clone_menu',
+    'page arguments' => array(3),
+    'type' => MENU_CALLBACK,
+    'access arguments' => array('delete md_megamenu'),
+    'file path' => $module_path . '/includes',
+    'file' => 'md_megamenu.admin.inc',
+  );
+
+  $items['admin/structure/md-megamenu/delete-tab'] = array(
+    'page callback' => 'delete_tab',
+    'access arguments' => array('administer md_megamenu'),
+    'type' => MENU_CALLBACK,
+    'file path' => $module_path . '/includes',
+    'file' => 'md_megamenu.admin.inc',
+  );
+
+  $items['admin/structure/md-megamenu/essential-item'] = array(
+    'page callback' => 'get_essential_item',
+    'access arguments' => array('administer md_megamenu'),
+    'type' => MENU_CALLBACK,
+    'file path' => $module_path . '/includes',
+    'file' => 'md_megamenu.admin.inc',
+  );
+
+  $items['admin/structure/md-megamenu/get-font-style'] = array(
+    'page callback' => 'get_font_configure',
+    'access arguments' => array('administer md_megamenu'),
+    'type' => MENU_CALLBACK,
+    'file path' => $module_path . '/includes',
+    'file' => 'md_megamenu.admin.inc',
+  );
+
+  $items['admin/structure/md-megamenu/delete/confirm'] = array(
+    'title' => t('Delete menu'),
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('md_megamenu_confirm_delete_form', 5),
+    'access arguments' => array('delete md_megamenu'),
+    'file path' => $module_path . '/includes',
+    'file' => 'md_megamenu.admin.inc',
+  );
+
+  $items['admin/structure/md-megamenu/export-data'] = array(
+    'description' => t('Respone data for export request'),
+    'page callback' => 'md_megamenu_export_data',
+    'access arguments' => array('delete md_megamenu'),
+    'file path' => $module_path . '/includes',
+    'file' => 'md_megamenu.admin.inc',
+  );
+
+  $items['admin/structure/md-megamenu/tweet'] = array(
+    'description' => t('Respone data for twitter block'),
+    'page callback' => '_md_megamenu_tweet',
+    'access arguments' => array('access content'),
+    'file path' => $module_path . '/includes',
+    'file' => 'md_megamenu.admin.inc',
+  );
+
+  return $items;
+}
+
+/**
+ * Load menus ids
+ */
+function  md_megamenu_ids_load($ids) {
+  if (is_numeric($ids)) {
+    $ids = array($ids);
+  }
+  elseif (preg_match('/^([0-9]+,){1,5}[0-9]+$/', $ids)) {
+    $ids = explode(',', $ids);
+  }
+
+  return $ids;
+}
+
+/**
+ * Implements hook_permission()
+ */
+function md_megamenu_permission() {
+  return array(
+    'administer md_megamenu' => array(
+      'title' => t('Edit all MD Megamenu'),
+      'description' => t('Edit all existing megamenus.')
+    ),
+    'delete md_megamenu' => array(
+      'title' => t('Administer MD Megamenu'),
+      'description' => t('Create, import/export and delete megamenu.'),
+    ),
+  );
+}
+
+/**
+ * Implements hook_theme()
+ */
+function md_megamenu_theme() {
+  $themes = array();
+
+  $themes['md_megamenu_admin_overview'] = array(
+    'file' => 'includes/md_megamenu.admin.inc',
+    'variables' => array('title' => NULL, 'description' => NULL),
+  );
+
+  $themes['item_setting_forms'] = array(
+    'template' => 'essential_items_form_setting',
+    'path' => drupal_get_path('module', 'md_megamenu') . '/templates/admin',
+    'variables' => array('parameters' => NULL),
+  );
+
+  $themes['megamenu_item_admin'] = array(
+    'template' => 'megamenu_item_admin',
+    'path' => drupal_get_path('module', 'md_megamenu') . '/templates/admin',
+    'variables' => array('item' => NULL, 'icon_style' => NULL),
+    'file' => 'theme.inc',
+  );
+
+  $themes['menu_admin_form'] = array(
+    'template' => 'menu_links_edit_form',
+    'path' => drupal_get_path('module', 'md_megamenu') . '/templates/admin',
+    'file' => 'theme.inc',
+  );
+
+  $themes['tab_settings_form'] = array(
+    'template' => 'tab_settings_form',
+    'path' => drupal_get_path('module', 'md_megamenu') . '/templates/admin',
+  );
+
+  $themes['megamenu_theme'] = array(
+    'template' => 'md_megamenu_theme',
+    'path' => drupal_get_path('module', 'md_megamenu') . '/templates/menu',
+    'variables' => array('menu_settings' => NULL, 'menu_tabs' => NULL),
+    'file' => 'theme.inc',
+  );
+
+  $themes['megamenu_tab_theme'] = array(
+    'template' => 'md_megamenu_tab',
+    'path' => drupal_get_path('module', 'md_megamenu') . '/templates/menu',
+    'variables' => array('tab' => NULL,),
+    'file' => 'theme.inc',
+  );
+
+  $themes['megamenu_col_content'] = array(
+    'path' => drupal_get_path('module', 'md_megamenu') . '/templates/menu',
+    'variables' => array('items' => NULL,),
+    'file' => 'theme.inc',
+  );
+
+  $themes['megamenu_essential_item_theme'] = array(
+    'template' => 'md_megamenu_essential_item',
+    'path' => drupal_get_path('module', 'md_megamenu') . '/templates/menu',
+    'variables' => array('type' => NULL, 'item' => NULL),
+    'file' => 'theme.inc',
+  );
+
+  $themes['megamenu_block_item'] = array(
+    'path' => drupal_get_path('module', 'md_megamenu') . '/templates/menu',
+    'variables' => array('items' => NULL,),
+    'file' => 'theme.inc',
+  );
+
+  $themes['megamenu_dropdown_tab'] = array(
+    'template' => 'md_megamenu_dropdown_tab',
+    'path' => drupal_get_path('module', 'md_megamenu') . '/templates/menu',
+    'variables' => array('tab' => NULL, 'key' => NULL),
+    'file' => 'theme.inc',
+  );
+
+  $themes['md_megamenu'] = array(
+    'template' => 'md-awemenu',
+    'path' => drupal_get_path('module', 'md_megamenu') . '/templates/menu',
+    'file' => 'theme.inc',
+    'variables' => array('menu' => NULL, 'items' => array())
+  );
+  $themes['awemenu_item'] = array(
+    'template' => 'md-awemenu-item',
+    'path' => drupal_get_path('module', 'md_megamenu') . '/templates/menu',
+    'file' => 'theme.inc',
+    'variables' => array(
+      'menu' => NULL,
+      'item' => NULL,
+      'submenu' => array(),
+      'level' => 1
+    )
+  );
+
+  $themes['md_submenu_megamenu'] = array(
+    'template' => 'md-submenu-megamenu',
+    'path' => drupal_get_path('module', 'md_megamenu') . '/templates/menu',
+    'file' => 'theme.inc',
+    'variables' => array('rows' => array())
+  );
+  return $themes;
+}
+
+/**
+ * Implements hook_page_build()
+ */
+function md_megamenu_page_build(&$page) {
+  $current_path = current_path();
+  if (strpos($current_path, 'md-megamenu') !== FALSE && strpos($current_path, 'edit') !== FALSE) {
+    $page['content']['md_megamenu_tab_settings'] = array(
+      '#markup' => theme('tab_settings_form'),
+    );
+  }
+}
+
+/**
+ * Implements hook_preprocess_html()
+ */
+function md_megamenu_preprocess_html(&$variables) {
+  $url = $_GET['q'];
+  if (strpos($url, 'md-megamenu') !== FALSE && strpos($url, 'edit') !== FALSE) {
+    $url_array = explode('/', $url);
+    $mid = $url_array[3];
+    $menu = MDMegaMenu::getById($mid);
+    $dm_right = $menu->settings['general']['dm_right'];
+    if (in_array('dmg_desc', $dm_right)) {
+      $variables['classes_array'][] = 'showdesc';
+    }
+
+    if (in_array('dmg_cssclasses', $dm_right)) {
+      $variables['classes_array'][] = 'showcssclasses';
+    }
+
+    if (in_array('dmg_menuicon', $dm_right)) {
+      $variables['classes_array'][] = 'showmenuicon';
+    }
+
+    if (in_array('dmg_menuitemicon', $dm_right)) {
+      $variables['classes_array'][] = 'showmenuitemicon';
+    }
+  }
+}
+
+/**
+ * implements hook_forms()
+ */
+function md_megamenu_forms($form_id, $args) {
+  $forms['edit_menu'] = array(
+    'callback' => 'md_megamenu_edit_links_form',
+  );
+
+  $forms['configure_menu'] = array(
+    'callback' => 'md_megamenu_configure_form',
+  );
+
+  return $forms;
+}
+
+/**
+ * Implements hook_block_info()
+ */
+function md_megamenu_block_info() {
+  $blocks = array();
+
+  $megamenus = MDMegaMenu::getAll();
+
+  if (is_array($megamenus)) {
+    foreach ($megamenus as $menu) {
+      $blocks[$menu->mid]['info'] = t('MD Megamenu: ' . $menu->title);
+      $blocks[$menu->mid]['cache'] = DRUPAL_NO_CACHE;
+    }
+  }
+
+  return $blocks;
+}
+
+/**
+ * Implements hook_block_view()
+ */
+function md_megamenu_block_view($delta = '') {
+  $block = _md_awemenu_render($delta);
+  return $block;
+}
+
+/**
+ * Implements hook_contextual_links_view_alter()
+ *
+ * Add new contextual links
+ */
+function md_megamenu_contextual_links_view_alter(&$element, &$items) {
+  if (isset($element['#element']['#block']) && $element['#element']['#block']->module == "md_megamenu") {
+    $element['#links']['edit-menu'] = array(
+      'title' => 'Edit menu',
+      'href' => url('admin/structure/md-megamenu/' . $element['#element']['#block']->delta . '/edit', array('absolute' => TRUE)) . '?destination=' . $_GET['q'],
+      'weight' => -100,
+    );
+
+    $element['#links']['config-menu'] = array(
+      'title' => 'Configure menu',
+      'href' => url('admin/structure/md-megamenu/' . $element['#element']['#block']->delta, array('absolute' => TRUE)) . '?destination=' . $_GET['q'],
+    );
+  }
+}
+
+/**
+ * Load megamenu to render menu in views
+ */
+function megamenu_loads($mid) {
+  $block = array('menu_title' => t(''), 'menu_content' => '');
+  $menu = MDMegaMenu::getById($mid);
+  $tabs = MDMegaTab::getTabsByMenu($mid);
+
+  # Check menu is existing?
+  if (!$menu || count($tabs) == 0) {
+    return $block;
+  }
+
+  $module_path = drupal_get_path('module', 'md_megamenu');
+  drupal_add_css($module_path . '/menu_styles/css/grid.css');
+  drupal_add_css($module_path . '/menu_styles/css/mm-base.css', array('weight' => 1));
+
+  # Load predefine css file
+  md_megamenu_load_predefine_style($menu->settings['design']['dms_predefine'], $menu->machine_name);
+
+  drupal_add_css('public://megamenu-' . $mid . '-custom.css', array('weight' => 3));
+
+  if ($menu->settings['animation']['dma_trigger'] != 'click') {
+    drupal_add_js($module_path . '/menu_styles/js/hover-intent.js');
+  }
+
+  if ($menu->settings['animation']['dma_easing'] != '0') {
+    drupal_add_js($module_path . '/menu_styles/js/jquery.easing.js');
+  }
+
+  drupal_add_js($module_path . '/menu_styles/js/md.menu.js');
+
+  if (!is_null($menu)) {
+    $block['menu_title'] = $menu->title;
+    $block['menu_content'] = theme('megamenu_theme', array(
+      "menu_settings" => $menu->settings,
+      "menu_tabs" => $tabs,
+      "mid" => $mid
+    ));
+  }
+
+  # Add js to control mega-menu
+  $megamenujs = '(function($) {
+  $(document).ready(function(){
+    var option = Drupal.settings.mmoptions_' . $mid . ';
+    ';
+  $megamenujs .= '$("#megamenu-' . $mid . ' > ul").megadrupalMenu(option);
+      }); })(jQuery);';
+  drupal_add_js($megamenujs, 'inline');
+
+  return $block;
+}
+
+/**
+ * Load predefine style
+ */
+function md_megamenu_load_predefine_style($style, $machine_name) {
+  $style_file = '';
+  if ($style == 'custom') {
+    $theme = variable_get('theme_default');
+    $style_file = drupal_get_path('theme', $theme) . "/css/md-megamenu-{$machine_name}.css";
+    if (!file_exists($style_file)) {
+      $style_file = drupal_get_path('theme', $theme) . '/css/md-megamenu.css';
+
+      if (!file_exists($style_file)) {
+        $style_file = "sites/all/libraries/megadrupal/megamenu/md-megamenu-{$machine_name}.css";
+
+        if (!file_exists($style_file)) {
+          $style_file = "sites/all/libraries/megadrupal/megamenu/md-megamenu.css";
+
+          if (!file_exists($style_file)) {
+            $style_file = "";
+          }
+        }
+      }
+    }
+  }
+  if ($style_file != '') {
+    drupal_add_css($style_file, array('weight' => 2));
+  }
+}
+
+/**
+ * implements hook_libary
+ */
+function md_megamenu_library() {
+  $libraries = array();
+  $path = drupal_get_path('module', 'md_megamenu');
+
+  $libraries['md_awemenu_frontend'] = array(
+    'title' => t('MDAWEMenu Frontend'),
+    'version' => '1.0',
+    'js' => array(
+      "{$path}/js/awemenu.min.js" => array(),
+    ),
+    'css' => array(
+      "{$path}/css/awemenu/css/lib/font-awesome.min.css" => array(),
+      "{$path}/css/awemenu/css/awemenu.css" => array(),
+      "{$path}/css/awemenu/css/themes.css" => array(),
+      "{$path}/css/awemenu/css/md-megamenu-style.css" => array(),
+    )
+  );
+
+  return $libraries;
+}
+
+/**
+ * Implements hook_library_alter().
+ */
+function md_megamenu_library_alter(&$libraries, $module) {
+  $path = drupal_get_path('module', 'md_megamenu');
+  $current_path = current_path();
+  if (strpos($current_path, 'admin/structure/md-megamenu/') !== FALSE) {
+    if ($module == 'system') {
+      $libraries['jquery']['version'] = '1.4.4';
+      $libraries['jquery']['js'] = array(
+        'misc/jquery.js' => array(
+          'group' => -100,
+          'weight' => -20,
+          'data' => "{$path}/js/jquery.js"
+        )
+      );
+      // replace jquery ui
+      foreach ($libraries as $name => &$library) {
+        if (strpos($name, 'ui.') !== FALSE || strpos($name, 'effects') !== FALSE) {
+          $library['js'] = array();
+        }
+      }
+      $ui_path = "{$path}/js/jquery-ui.min.js";
+      $libraries['ui']['js'] = array(
+        $ui_path => array(
+          'group' => -100,
+          'weight' => -1,
+          'data' => $ui_path
+        )
+      );
+      $libraries['ui']['version'] = '1.8.7';
+    }
+  }
+}
+
+
+/**
+ * callback to load data of menu by mid
+ */
+function _md_awemenu_load($mid = -1) {
+  $menu_data = FALSE;
+  if ($mid && $mid > 0) {
+    $menu = MDMegamenu::getById($mid);
+    if ($menu) {
+      $items = MDMegaTab::getTabsByMenu($mid);
+      $menu_data = array('menu' => $menu, 'items' => $items);
+    }
+  }
+
+  return $menu_data;
+}
+
+/**
+ * callback to render megamenu by awemenu type
+ */
+function _md_awemenu_render($mid = -1) {
+  $path = drupal_get_path('module', 'md_megamenu');
+  $menu_data = _md_awemenu_load($mid);
+  if ($menu_data) {
+    $menu_settings = $menu_data['menu']->settings;
+
+    if (isset($menu_settings['responsive']['res_text']) && $menu_settings['responsive']['res_text']) {
+      $options['customMenuBar'] = sprintf('<span class="fa fa-bars"></span><span class="awemenu-bars-text">%s</span>', t($menu_settings['responsive']['res_text']));
+    }
+    $trigger = isset($menu_settings['menu_desktop_trigger']) ? $menu_settings['menu_desktop_trigger'] : 'hover';
+    $style = "md-{$menu_settings['design']['dms_predefine']}";
+    $position = isset($menu_settings['menu_type']) ? $menu_settings['menu_type'] : 'standard';
+    $enableAnimation = isset($menu_settings['menu_animation']) ? ($menu_settings['menu_animation'] != 'none') : TRUE;
+    $defaultDesktopAnimation = isset($menu_settings['menu_animation']) ? $menu_settings['menu_animation'] : 'fadeup';
+    $desktopDurationDefault = isset($menu_settings['default_animation_duration']) ? $menu_settings['default_animation_duration'] : 500;
+    $showArrow = in_array('dmg_arrow', $menu_settings['general']['dm_right']);
+    $responsiveWidth = $menu_settings['responsive']['res_width'];
+    $mobileTrigger = isset($menu_settings['responsive']['mobile_trigger']) ? $menu_settings['responsive']['mobile_trigger'] : 'click';
+    $mobileStyle = "md-mobile-{$menu_settings['design']['dms_predefine']}";
+    $mobileAnimationDuration = isset($menu_settings['responsive']['mobile_animation_duration']) ? $menu_settings['responsive']['mobile_animation_duration'] : 500;
+    $mobilePosition = isset($menu_settings['responsive']['mobile_menu_type']) ? $menu_settings['responsive']['mobile_menu_type'] : 'standard';
+    $showMobileArrow = isset($menu_settings['responsive']['mobile_arrow']) ? $menu_settings['responsive']['mobile_arrow'] : TRUE;
+    $sticky = isset($menu_settings['menu_sticky']) ? $menu_settings['menu_sticky'] : FALSE;
+    $hover_time = isset($menu_settings['hover_delay']) ? $menu_settings['hover_delay'] : 500;
+
+    $options = sprintf('{
+            trigger : "%s",
+            style : "%s",
+            position : "%s",
+            enableAnimation : %d,
+            defaultDesktopAnimation : "%s",
+            desktopDurationDefault : "%s",
+            showArrow : %d,
+            hoverTime: %d,
+            responsiveWidth : %d,
+            mobileTrigger : "%s",
+            mobileStyle : "%s",
+            mobileAnimationDuration : %d,
+            mobilePosition : "%s",
+            showMobileArrow : %d,
+            sticky : %d,
+            stickyOffset : ".region-page-top|#admin-menu",
+            initialize : function(menu){
+                if (menu.options.sticky) {
+                    $("#toolbar a.toggle").click(function(event) {
+                        event.preventDefault();
+                        if (menu.stickyActivated) {
+                            var select = this.options.stickyOffset.split("|");
+                            $.each(select, function(index, value){
+                               if ($(value).length) {
+                                   selectOffset = value;
+                                  return  selectOffset;
+                               }
+                            });
+
+                            menu.$el.css("top", $(selectOffset).offset().top + $(selectOffset).height());
+                        }
+                    });
+                }
+            }
+        }', $trigger, $style, $position, intval($enableAnimation),
+      $defaultDesktopAnimation, $desktopDurationDefault, intval($showArrow), $hover_time,
+      intval($responsiveWidth), $mobileTrigger, $mobileStyle, intval($mobileAnimationDuration),
+      $mobilePosition, intval($showMobileArrow), intval($sticky));
+    $js = sprintf('
+            (function($) {
+                $(document).ready(function() {
+                    $("#md-megamenu-%s").aweMenu(%s);
+                });
+            })(jQuery);
+        ', $mid, $options);
+
+    // add css
+    drupal_add_css("{$path}/css/awemenu/css/lib/bootstrap-grid.css");
+    drupal_add_css("{$path}/css/awemenu/css/lib/font-awesome.min.css");
+    drupal_add_css("{$path}/css/awemenu/css/awemenu.css");
+    drupal_add_css("{$path}/css/awemenu/css/themes.css");
+    drupal_add_css("{$path}/css/awemenu/css/md-megamenu-style.css");
+
+    // add js files
+    drupal_add_js("{$path}/js/awemenu.min.js");
+    drupal_add_js($js, 'inline');
+    md_megamenu_load_predefine_style($menu_settings['design']['dms_predefine'], $menu_data['menu']->machine_name);
+    drupal_add_css('public://megamenu-' . $mid . '-custom.css', array('weight' => 3));
+
+    return array(
+      'subject' => $menu_data['menu']->title,
+      'content' => array(
+        '#theme' => 'md_megamenu',
+        '#menu' => $menu_data['menu'],
+        '#items' => $menu_data['items']
+      )
+    );
+  }
+
+  return array();
+}

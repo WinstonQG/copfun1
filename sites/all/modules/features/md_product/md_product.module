@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the MD Product feature.
+ */
+
+include_once 'md_product.features.inc';

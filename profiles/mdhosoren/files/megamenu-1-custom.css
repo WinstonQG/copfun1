@@ -1,0 +1,35 @@
+#md-megamenu-1 .awemenu-submenu {
+font-family: "Roboto";font-weight: normal;font-size: 14px;
+	color: #898989;
+}
+@media (min-width: 1200px) {
+	#md-megamenu-1 {width: 1140px !important} 
+}
+#md-megamenu-1 {width: 100%}
+#md-megamenu-1 .awemenu-item-level-1 > a {font-family: "Montserrat";font-weight: normal;font-size: 14px;text-transform: uppercase;}
+#md-megamenu-1 .awemenu-item-level-1 > a,
+#md-megamenu-1 .awemenu-item-level-1 > a:link {
+font-weight: bold;
+}
+#md-megamenu-1 .awemenu-submenu a,
+#md-megamenu-1 .awemenu-submenu a:link {
+color: #898989;
+}
+#md-megamenu-1 h1 {
+	font-family: "Montserrat";font-weight: normal;
+}
+#md-megamenu-1 h2 {
+	font-family: "Montserrat";font-weight: normal;
+}
+#md-megamenu-1 h3 {
+	font-family: "Montserrat";font-weight: normal;
+}
+#md-megamenu-1 h5 {
+	font-family: "Montserrat";font-weight: normal;
+}
+#md-megamenu-1 h6 {
+	font-family: "Montserrat";font-weight: normal;
+}
+#md-megamenu-1 .awemenu-submenu h3.mm-header {
+	font-family: "Roboto";font-weight: normal;
+}

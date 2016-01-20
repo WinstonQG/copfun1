@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the MD Blog feature.
+ */
+
+include_once 'md_blog.features.inc';

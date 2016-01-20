@@ -1,0 +1,4 @@
+name = Commerce Block Filter
+description = jQuery UI Slider for range price and filter taxonomy
+package = Megadrupal Site
+core = 7.x

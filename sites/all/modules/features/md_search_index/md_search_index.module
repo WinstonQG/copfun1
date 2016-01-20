@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the MD Search Index feature.
+ */
+
+include_once 'md_search_index.features.inc';

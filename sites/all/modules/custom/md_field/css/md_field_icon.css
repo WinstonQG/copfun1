@@ -1,0 +1,42 @@
+.icon-markup i,
+.icon-popup i{
+  font-size: 24px;
+  padding: 5px;
+}
+.icon-markup i.active,
+.icon-popup i.active{
+  background: #ccc;
+}
+
+.icon-preview h3,
+.social-icon-preview h3{
+    cursor: pointer;
+}
+.icon-preview i{
+  display: inline-block;
+  width: 24px;
+  height: 24px;
+  font-size: 24px;
+}
+
+.icon-preview i:before{
+    background: #ccc;
+    padding: 5px;
+}
+
+
+h3.social-icon-preview .chose_social{
+  background: #ccc;
+  display: inline-block;
+  min-height: 10px;
+  min-width: 10px;
+  padding: 5px;
+  vertical-align: middle;
+}
+.social-container .form-item{
+  padding: 0;
+  margin: 0;
+}
+.social-container{
+  margin: 10px 0;
+}

@@ -1,0 +1,7 @@
+name = Hosoren Shortcode
+description = Custom Shortcode for theme Hosoren
+core = 7.x
+version = 7.x-1.0
+package = MegaDrupal
+
+dependencies[] = awecontent

@@ -1,0 +1,766 @@
+<?php
+
+/**
+ * hook_block_info().
+ */
+function md_block_custom_block_info() {
+  $blocks = array();
+  $blocks['mls_social_blog'] = array(
+    'info' => t('MD Hosoren: Social Blog')
+  );
+  $blocks['mls_social_footer'] = array(
+    'info' => t('MD Hosoren: Social Footer : Are you like me')
+  );
+  $blocks['mls_instagram'] = array(
+    'info' => t('MD Hosoren: INSTAGRAM ')
+  );
+  $blocks['mls_payment_accept'] = array(
+    'info' => t('MD Hosoren: PAYMENT ACCEPT ')
+  );
+
+//  $blocks['mls_breadcrumb_block'] = array(
+//    'info' => t('MD Hosoren: Breadcrumb Block ')
+//  );
+
+  $blocks['mls_footer_copyright'] = array(
+    'info' => t('MD Hosoren: Copyright © Footer Menu'),
+  );
+  $blocks['mls_user_block'] = array(
+    'info' => t('MD Hosoren: User block'),
+  );
+  $blocks['mls_search_block'] = array(
+    'info' => t('MD Hosoren: Search block'),
+  );
+  $blocks['mls_policy_icon_block'] = array(
+    'info' => t('MD Hosoren: Policy Icon block'),
+  );
+
+  return $blocks;
+}
+
+/**
+ * Implements hook_block_configure().
+ */
+function md_block_custom_block_configure($delta = '') {
+  $form = array();
+  switch ($delta) {
+
+    case 'mls_social_blog':
+      /* ----------------------------- Follow Add More Icon -------------------------------- */
+      // Add js,css
+      $form['#attached']['library'] = array(
+        array('system', 'ui.dialog'),
+        array('system', 'ui.sortable'),
+      );
+      $form['#attached']['js'] = array(
+        drupal_get_path('module', 'md_block_custom') . '/add/js/moreicon.js',
+      );
+      $form['#attached']['css'] = array(
+        drupal_get_path('module', 'md_block_custom') . '/add/css/moreicon.css'
+      );
+
+      // Creat Form
+      $form['social_blog_settings']['follow_icon'] = array(
+        '#type' => 'fieldset',
+        '#title' => t('Follow Icon'),
+        '#collapsible' => TRUE,
+        '#collapsed' => FALSE,
+      );
+
+      $form['social_blog_settings']['follow_icon']['follow_social'] = array(
+        '#type' => 'hidden',
+        '#default_value' => variable_get('follow_social', ''),
+        '#attributes' => array(
+          'class' => array('follow-isocial')
+        )
+      );
+
+      $markup = '<ul id="sortable">
+                    <li class="icon-sort">
+                      <div class="toolbar">
+                          <a class="delete-icon" href="#">Delete</a>
+                          <a class="clone-icon" href="#">Clone</a>
+                      </div>
+                      <div class="wrap-icon">
+
+                      </div>
+                    </li>
+                  </ul>';
+      $form['social_blog_settings']['follow_icon']['markup_icon'] = array(
+        '#type' => 'markup',
+        '#markup' => '<div class="list-icon">' . $markup . '</div>',
+      );
+      $form_popup = '<div class="form-popup">
+                          <ul >
+                            <li><div class="choose-icon">Choose Icon<a href="#"><i class=""></i></a></div></li>
+                            <li><label>Enter Links</label><input class="form-text icon-link" type="text" name="link-icon" value="" /></li>
+                          </ul>
+                        </div>';
+      $form['social_blog_settings']['footer_icon']['popup_form'] = array(
+        '#type' => 'markup',
+        '#markup' => $form_popup
+      );
+
+
+      $icon_bundles = icon_bundles();
+      $icons = array();
+      foreach ($icon_bundles as $bundles) {
+        $icons[] = md_icon_bundle_list($bundles);
+      }
+      $form['social_blog_settings']['follow_icon']['popup_icon'] = array(
+        '#type' => 'markup',
+        '#markup' => '<div class="icon-popup">' . drupal_render($icons) . '</div>',
+      );
+
+      break;
+
+    case 'mls_social_footer':
+      /* ----------------------------- Follow Add More Icon -------------------------------- */
+      // Add js,css
+      $form['#attached']['library'] = array(
+        array('system', 'ui.dialog'),
+        array('system', 'ui.sortable'),
+      );
+      $form['#attached']['js'] = array(
+        drupal_get_path('module', 'md_block_custom') . '/add/js/moreicon.js',
+      );
+      $form['#attached']['css'] = array(
+        drupal_get_path('module', 'md_block_custom') . '/add/css/moreicon.css'
+      );
+
+      // Creat Form
+      $form['social_footer_settings']['follow_icon'] = array(
+        '#type' => 'fieldset',
+        '#title' => t('Follow Icon'),
+        '#collapsible' => TRUE,
+        '#collapsed' => FALSE,
+      );
+
+      $form['social_footer_settings']['follow_icon']['follow_social_footer'] = array(
+        '#type' => 'hidden',
+        '#default_value' => variable_get('follow_social_footer', ''),
+        '#attributes' => array(
+          'class' => array('follow-isocial')
+        )
+      );
+
+      $markup = '<ul id="sortable">
+                    <li class="icon-sort">
+                      <div class="toolbar">
+                          <a class="delete-icon" href="#">Delete</a>
+                          <a class="clone-icon" href="#">Clone</a>
+                      </div>
+                      <div class="wrap-icon">
+
+                      </div>
+                    </li>
+                  </ul>';
+      $form['social_footer_settings']['follow_icon']['markup_icon'] = array(
+        '#type' => 'markup',
+        '#markup' => '<div class="list-icon">' . $markup . '</div>',
+      );
+      $form_popup = '<div class="form-popup">
+                          <ul >
+                            <li><div class="choose-icon">Choose Icon<a href="#"><i class=""></i></a></div></li>
+                            <li><label>Enter Links</label><input class="form-text icon-link" type="text" name="link-icon" value="" /></li>
+                          </ul>
+                        </div>';
+      $form['social_blog_settings']['footer_icon']['popup_form'] = array(
+        '#type' => 'markup',
+        '#markup' => $form_popup
+      );
+
+
+      $icon_bundles = icon_bundles();
+      $icons = array();
+      foreach ($icon_bundles as $bundles) {
+        $icons[] = md_icon_bundle_list($bundles);
+      }
+      $form['social_blog_settings']['follow_icon']['popup_icon'] = array(
+        '#type' => 'markup',
+        '#markup' => '<div class="icon-popup">' . drupal_render($icons) . '</div>',
+      );
+
+      break;
+    case 'mls_instagram':
+      /* ----------------------------- Instagram latest -------------------------------- */
+      $form['setting_instagram_id'] = array(
+        '#type' => 'textfield',
+        '#title' => t('ID Instagram account'),
+        '#required' => TRUE,
+        '#default_value' => variable_get('setting_instagram_id', NULL),
+        '#description' => t('Eg: 1522148439 - You can find your ID Instagram at http://jelled.com/instagram/lookup-user-id ')
+      );
+
+      $form['setting_instagram_api'] = array(
+        '#type' => 'textfield',
+        '#title' => t('Instagram Access Token'),
+        '#required' => TRUE,
+        '#default_value' => variable_get('setting_instagram_api', NULL),
+        '#description' => t('This field is REQUIRED. Find your Access Token Instagram by visit http://instagram.pixelunion.net/ ')
+      );
+      $form['setting_instagram_client_id'] = array(
+        '#type' => 'textfield',
+        '#title' => t('Your Instagram ClientID'),
+        '#required' => TRUE,
+        '#default_value' => variable_get('setting_instagram_client_id', NULL),
+        '#description' => t('Eg: 459e67f613f841ceb508193898eddd29')
+      );
+
+      $path_img = drupal_get_path('module', 'md_block_custom') . '/add/img';
+      $image_options = array(
+        'path' => $path_img . '/Capture.JPG',
+        'alt' => 'How to create Instagram App and get Client ID and API',
+        'title' => 'How to create Instagram App and get Client ID and API',
+        'width' => '50%',
+        'height' => '50%',
+        'attributes' => array('class' => 'create-app', 'id' => 'instagram-app'),
+      );
+      $image = theme('image', $image_options);
+      $form['how_to_created_instagram_app'] = array(
+        '#title' => t('How to get Instagram Client ID'),
+        '#markup' => 'Visit https://instagram.com/developer/, you can create free Instagram App. Then you will receive a Client ID and API key <br/><br/>'
+        . $image,
+      );
+
+      $form['setting_instagram_number_img'] = array(
+        '#type' => 'select',
+        '#title' => t('Choose number image display?'),
+        '#default_value' => variable_get('setting_instagram_number_img', '6'),
+        '#options' => drupal_map_assoc(array(2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 25, 30))
+      );
+      $form['setting_instagram_sort'] = array(
+        '#type' => 'select',
+        '#title' => t('Sort Instagram Post?'),
+        '#default_value' => variable_get('setting_instagram_sort', 'most-recent'),
+        '#options' => array(
+          'most-recent' => 'Most Recent',
+          'most-liked' => 'Most Liked',
+          'random' => 'Random'
+        )
+      );
+      break;
+
+    case 'mls_payment_accept':
+      /* ----------------------------- Payment Accept Icon -------------------------------- */
+      // Add js,css
+      $form['#attached']['library'] = array(
+        array('system', 'ui.dialog'),
+        array('system', 'ui.sortable'),
+      );
+      $form['#attached']['js'] = array(
+        drupal_get_path('module', 'md_block_custom') . '/add/js/moreicon.js',
+      );
+      $form['#attached']['css'] = array(
+        drupal_get_path('module', 'md_block_custom') . '/add/css/moreicon.css'
+      );
+
+      // Creat Form
+      $form['payment_accept_settings']['follow_icon'] = array(
+        '#type' => 'fieldset',
+        '#title' => t('Follow Icon'),
+        '#collapsible' => TRUE,
+        '#collapsed' => FALSE,
+      );
+
+      $form['payment_accept_settings']['payment_icon']['payment_accept_icon'] = array(
+        '#type' => 'hidden',
+        '#default_value' => variable_get('payment_accept_icon', ''),
+        '#attributes' => array(
+          'class' => array('follow-isocial')
+        )
+      );
+
+      $markup = '<ul id="sortable">
+                    <li class="icon-sort">
+                      <div class="toolbar">
+                          <a class="delete-icon" href="#">Delete</a>
+                          <a class="clone-icon" href="#">Clone</a>
+                      </div>
+                      <div class="wrap-icon">
+
+                      </div>
+                    </li>
+                  </ul>';
+      $form['payment_accept_settings']['follow_icon']['markup_icon'] = array(
+        '#type' => 'markup',
+        '#markup' => '<div class="list-icon">' . $markup . '</div>',
+      );
+      $form_popup = '<div class="form-popup">
+                          <ul >
+                            <li><div class="choose-icon">Choose Icon<a href="#"><i class=""></i></a></div></li>
+                            <li><label>Enter Links</label><input class="form-text icon-link" type="text" name="link-icon" value="" /></li>
+                          </ul>
+                        </div>';
+      $form['payment_accept_settings']['payment_icon']['popup_form'] = array(
+        '#type' => 'markup',
+        '#markup' => $form_popup
+      );
+
+
+      $icon_bundles = icon_bundles();
+      $icons = array();
+      foreach ($icon_bundles as $bundles) {
+        $icons[] = md_icon_bundle_list($bundles);
+      }
+      $form['payment_accept_settings']['follow_icon']['popup_icon'] = array(
+        '#type' => 'markup',
+        '#markup' => '<div class="icon-popup">' . drupal_render($icons) . '</div>',
+      );
+
+      break;
+
+
+    // Footer Block : copyright
+    case 'mls_footer_copyright':
+      $form['md_hosoren_copyright_text'] = array(
+        '#type' => 'textarea',
+        '#title' => t('Copyright Footer Text'),
+        '#default_value' => variable_get('md_hosoren_copyright_text', 'Copyright © 2015 Megadrupal - All Rights Reserved.'),
+      );
+
+      $menu_list = menu_get_menus();
+      $form['md_hosoren_copyright_menu'] = array(
+        '#type' => 'select',
+        '#title' => t('Choose MENU for COPYRIGHT FOOTER'),
+        '#options' => $menu_list,
+        '#default_value' => variable_get('md_hosoren_copyright_menu', ''),
+        '#description' => t('Choose a Menu to display on Footer Copyright'),
+      );
+      break;
+    
+    case 'mls_policy_icon_block':
+      /* ----------------------------- Policy Icon Block-------------------------------- */
+      // Add js,css
+      $form['#attached']['library'] = array(
+        array('system', 'ui.dialog'),
+        array('system', 'ui.sortable'),
+      );
+      $form['#attached']['js'] = array(
+        drupal_get_path('module', 'md_block_custom') . '/add/js/policy_icon_block.js',
+      );
+      $form['#attached']['css'] = array(
+        drupal_get_path('module', 'md_block_custom') . '/add/css/moreicon.css'
+      );
+
+      // Creat Form
+      $form['policy_icon_settings']['follow_icon'] = array(
+        '#type' => 'fieldset',
+        '#title' => t('Follow Icon'),
+        '#collapsible' => TRUE,
+        '#collapsed' => FALSE,
+      );
+
+      $form['policy_icon_settings']['policy_icon']['policy_social'] = array(
+        '#type' => 'hidden',
+        '#default_value' => variable_get('policy_social', ''),
+        '#attributes' => array(
+          'class' => array('follow-isocial')
+        )
+      );
+
+      $markup = '<ul id="sortable">
+                    <li class="icon-sort">
+                      <div class="toolbar">
+                          <a class="delete-icon" href="#">Delete</a>
+                          <a class="clone-icon" href="#">Clone</a>
+                      </div>
+                      <div class="wrap-icon">
+
+                      </div>
+                    </li>
+                  </ul>';
+      $form['policy_icon_settings']['follow_icon']['markup_icon'] = array(
+        '#type' => 'markup',
+        '#markup' => '<div class="list-icon">' . $markup . '</div>',
+      );
+      $form_popup = '<div class="form-popup">
+                          <ul >
+                            <li><div class="choose-icon">Choose Icon<a href="#"><i class=""></i></a></div></li>
+                            <li><label>Title</label><input class="form-text icon-link" type="text" name="link-icon" value="" /></li>
+                            <li><label>Content</label><input class="form-text policy-name-icon" type="text" name="policy-name-icon" value="" /></li>
+                          </ul>
+                        </div>';
+      $form['policy_icon_settings']['policy_icon']['popup_form'] = array(
+        '#type' => 'markup',
+        '#markup' => $form_popup
+      );
+
+
+      $icon_bundles = icon_bundles();
+      $icons = array();
+      foreach ($icon_bundles as $bundles) {
+        $icons[] = md_icon_bundle_list($bundles);
+      }
+      $form['policy_icon_settings']['policy_icon']['popup_icon'] = array(
+        '#type' => 'markup',
+        '#markup' => '<div class="icon-popup">' . drupal_render($icons) . '</div>',
+      );
+
+      break;
+    
+  }
+  return $form;
+}
+
+/**
+ * Implements hook_block_save().
+ */
+function md_block_custom_block_save($delta = '', $edit = array()) {
+  switch ($delta) {
+
+    case 'mls_social_blog':
+      variable_set('follow_social', $edit['follow_social']);
+      break;
+     case 'mls_policy_icon_block':
+      variable_set('policy_social', $edit['policy_social']);
+      break;
+    case 'mls_social_footer':
+      variable_set('follow_social_footer', $edit['follow_social_footer']);
+      break;
+    case 'mls_payment_accept':
+      variable_set('payment_accept_icon', $edit['payment_accept_icon']);
+      break;
+    case 'mls_instagram':
+      variable_set('setting_instagram_id', $edit['setting_instagram_id']);
+      variable_set('setting_instagram_client_id', $edit['setting_instagram_client_id']);
+      variable_set('setting_instagram_number_img', $edit['setting_instagram_number_img']);
+      variable_set('setting_instagram_api', $edit['setting_instagram_api']);
+      variable_set('setting_instagram_sort', $edit['setting_instagram_sort']);
+      break;
+
+    case 'mls_footer_copyright':
+      variable_set('md_hosoren_copyright_text', $edit['md_hosoren_copyright_text']);
+      variable_set('md_hosoren_copyright_menu', $edit['md_hosoren_copyright_menu']);
+      break;
+  }
+}
+
+/**
+ * Implement hook_block_view()
+ */
+function md_block_custom_block_view($delta) {
+  $block = array();
+  switch ($delta) {
+
+    case 'mls_social_blog':
+      $block['content'] = theme('follow', array('config' => NULL));
+      break;
+    case 'mls_social_footer':
+      $block['content'] = theme('follow_footer', array('config' => NULL));
+      break;
+    case 'mls_payment_accept':
+      $block['content'] = theme('payment_accept', array('config' => NULL));
+      break;
+    case 'mls_policy_icon_block':
+      $block['content'] = theme('policy_icon', array('config' => NULL));
+      break;
+//    case 'mls_breadcrumb_block':
+//      $block['content'] = theme('breadcrumb_block', array('config' => NULL));
+//      break;
+    case 'mls_instagram':
+
+      drupal_add_js(drupal_get_path('module', 'md_block_custom') . '/add/js/instafeed.min.js');
+      drupal_add_css(drupal_get_path('module', 'md_block_custom') . '/add/css/instagram_block.css');
+      $block['content'] = array(
+        '#theme' => 'widget_instagram',
+        '#settings' => array(
+          'setting_instagram_id' => variable_get('setting_instagram_id', NULL),
+          'setting_instagram_client_id' => variable_get('setting_instagram_client_id', NULL),
+          'setting_instagram_number_img' => variable_get('setting_instagram_number_img', 6),
+          'setting_instagram_api' => variable_get('setting_instagram_api', NULL),
+          'setting_instagram_sort' => variable_get('setting_instagram_sort', 'most-recent')
+        )
+      );
+      break;
+
+    case 'mls_footer_copyright':
+      //drupal_add_css(drupal_get_path('module', 'md_block_custom') . '/footer_block/copyright/md_make_copyright.css');
+      $block['content'] = array(
+        '#title' => t('MD Hosoren Copyright :'),
+        '#theme' => 'copyright',
+        '#settings' => array(
+          'md_hosoren_copyright_text' => variable_get('md_hosoren_copyright_text', 'Copyright © 2015 Hosoren - All Rights Reserved.'),
+          'md_hosoren_copyright_menu' => variable_get('md_hosoren_copyright_menu', ''),
+        )
+      );
+      break;
+
+    case 'mls_user_block':
+      drupal_add_css(drupal_get_path('module', 'md_block_custom') . '/add/css/modals_pop.css');
+      $block['content'] = array(
+        '#title' => t('MD User Block :'),
+        '#theme' => 'userinfo',
+      );
+      break;
+
+    case 'mls_search_block':
+      $block['content'] = array(
+        '#title' => t('MD Seach Block :'),
+        '#theme' => 'searchblock',
+      );
+      break;
+  }
+  return $block;
+}
+
+function md_block_custom_theme() {
+  $themes = array();
+  $path = drupal_get_path('module', 'md_block_custom') . '/add/template';
+
+  $themes['follow'] = array(
+    'path' => $path,
+    'template' => 'follow',
+    'variable' => array('config' => NULL)
+  );
+  $themes['follow_footer'] = array(
+    'path' => $path,
+    'template' => 'follow-footer',
+    'variable' => array('config' => NULL)
+  );
+  $themes['payment_accept'] = array(
+    'path' => $path,
+    'template' => 'payment-accept',
+    'variable' => array('config' => NULL)
+  );
+  $themes['policy_icon'] = array(
+    'path' => $path,
+    'template' => 'policy_icon',
+    'variable' => array('config' => NULL)
+  );
+//  $themes['breadcrumb_block'] = array(
+//    'path' => $path,
+//    'template' => 'breadcrumb-block',
+//    'variables' => array('config' => NULL)
+//  );
+  $themes['widget_instagram'] = array(
+    'path' => $path,
+    'variables' => array('settings' => array('setting_instagram_id' => NULL, 'setting_instagram_number_img' => NULL, 'setting_instagram_api' => NULL, 'setting_instagram_client_id' => NULL)),
+    'template' => 'widget_instagram'
+  );
+  $themes['copyright'] = array(
+    'path' => $path,
+    'template' => 'copyright',
+    'variables' => array('settings' => array(
+        'md_hosoren_copyright_text' => NULL,
+        'md_hosoren_copyright_menu' => NULL
+      )),
+  );
+  $themes['userinfo'] = array(
+    'path' => $path,
+    'template' => 'userinfo',
+    'variables' => array('settings' => array()),
+  );
+  $themes['searchblock'] = array(
+    'path' => $path,
+    'template' => 'searchblock',
+    'variables' => array('settings' => array()),
+  );
+  return $themes;
+}
+
+/* * ****************************************************************************
+ * Config Block View
+ * **************************************************************************** */
+
+function md_block_custom_form_alter(&$form, &$form_state, $form_id) {
+  global $user;
+  if ($form_id == 'block_admin_configure' || $form_id == 'block_add_block_form') {
+    $delta = $form['delta']['#value'];
+    $module = $form['module']['#value'];
+    if ($delta != 'main') {
+
+      // Text after Title
+      $form['settings']['custom_id'] = array(
+        '#type' => 'textfield',
+        '#title' => t('Custom Block ID'),
+        '#default_value' => variable_get($module.'_'.$delta . '_custom_id', ''),
+        '#size' => 60,
+        '#weight' => -18,
+        '#maxlength' => 128,
+      );
+      $form['settings']['custom_class'] = array(
+        '#type' => 'textfield',
+        '#title' => t('Custom Block Class'),
+        '#default_value' => variable_get($module.'_'.$delta . '_custom_class', ''),
+        '#size' => 60,
+        '#weight' => -18,
+        '#maxlength' => 128,
+      );
+
+      // ============== Block Type ==========================
+        $form['settings']['select_block_type'] = array(
+          '#type' => 'select',
+          '#title' => t('Block Type'),
+          '#options' => array(
+            0 => t('Normal'),
+            1 => t('Widget Sidebar'),
+            2 => t('Widget Footer'),
+          ),
+          '#default_value' => variable_get($module.'_'.$delta . '_select_block_type', '0'),
+        );
+
+        //-------------block Type Background Header---------------
+        $form['settings']['block_setting']['title_setting'] = array(
+                '#type' => 'fieldset',
+                '#title' => t('Background Title Header'),
+                '#collapsible' => TRUE,
+                '#collapsed' => FALSE,
+                '#states' => array(
+                            'visible' => array(
+                              ':input[name="select_block_type"]' => array('value' => '3'),
+                            ),
+                          ),
+          );
+
+        
+        if(module_exists('media')) {
+            $form['settings']['block_setting']['title_setting']['background_header_title'] = array(
+                '#type' => 'media',
+                '#title' => t('Upload Background'),
+                '#description' => t("If you don't have direct file access to the server, use this field to upload your background."),
+                // '#tree' => TRUE,
+                '#input' => TRUE,
+                '#extended' => TRUE,
+                '#default_value' => _return_media_file($module.'_'.$delta.'_background_header_title'),
+            );
+        }
+
+      //Submit Form
+      $form['#submit'][] = 'md_block_custom_form_submit';
+    }
+  }
+
+  return $form;
+}
+
+function _return_media_file($name) {
+  $media_file = array('fid' => variable_get($name, NULL));
+  if ($media_file['fid'] && ($media_file = file_load($media_file['fid']))) {
+    $media_file = get_object_vars($media_file);
+  }
+  return $media_file;
+}
+
+/**
+ * Submit block configure form alter
+ */
+function md_block_custom_form_submit($form, &$form_state) {
+
+  $values = $form_state['values'];
+  $module = $form_state['values']['module'];
+  $delta = $form_state['values']['delta'];
+
+  variable_set($module.'_'.$delta . '_custom_id', $values['custom_id']);
+  variable_set($module.'_'.$delta . '_custom_class', $values['custom_class']);
+  variable_set($module.'_'.$delta . '_select_block_type', $values['select_block_type']);
+  
+
+  if (isset($values['background_header_title']['fid'])) {
+    variable_set($module.'_'.$delta.'_background_header_title', $values['background_header_title']['fid']);
+  }
+}
+
+/*
+ * Option id, class, attributes => block 
+ */
+
+function md_block_custom_preprocess_block(&$vars) {
+  global $base_url;
+
+  $block_menu = $vars['block']->module;
+  $block_delta = $vars['block']->delta;
+  $block_custom_id = variable_get($block_menu.'_'.$block_delta . '_custom_id');
+  $block_custom_class = variable_get($block_menu.'_'.$block_delta . '_custom_class');
+  $block_select_type = variable_get($block_menu.'_'.$block_delta . '_select_block_type');
+  $block_background_header = variable_get($block_menu.'_'.$block_delta.'_background_header_title');
+
+  //Define variable in block
+  if ($block_custom_id) {
+    $vars['block_html_id'] = drupal_html_id($block_custom_id);
+  }
+  if ($block_custom_class) {
+    $custom_class = explode(" ", $block_custom_class);
+    $vars['classes_array'] = array_merge($custom_class, $vars['classes_array']);
+  }
+  $vars['select_block_type'] = $block_select_type;
+
+  if(($block_select_type) && ($block_select_type== 3)){
+    if (($block_background_header) && ($block_background_header != 0)) {
+      $file = file_load($block_background_header);
+      $vars['data_background'] = file_create_url($file->uri);
+    }else {
+      $vars['data_background'] = $base_url . '/' . path_to_theme() . '/images/heading-blog.jpg';
+    }
+  }
+}
+
+function md_block_custom_preprocess_follow(&$vars) {
+  $social_follow = variable_get('follow_social', '');
+  if ($social_follow != '') {
+    $social_follow_array = explode(',', $social_follow);
+    $social_follow_array = array_chunk($social_follow_array, 3);
+    $vars['social'] = $social_follow_array;
+  }
+}
+
+function md_block_custom_preprocess_follow_footer(&$vars) {
+  $social_follow_footer = variable_get('follow_social_footer', '');
+  if ($social_follow_footer != '') {
+    $social_follow_footer_array = explode(',', $social_follow_footer);
+    $social_follow_footer_array = array_chunk($social_follow_footer_array, 3);
+    $vars['social_footer'] = $social_follow_footer_array;
+  }
+}
+function md_block_custom_preprocess_policy_icon(&$vars) {
+  $policy_icon_markup = variable_get('policy_social', '');
+  if ($policy_icon_markup != '') {
+    $policy_icon_markup_array = explode(',', $policy_icon_markup);
+    $policy_icon_markup_array = array_chunk($policy_icon_markup_array, 4);
+    $vars['policy_icon'] = $policy_icon_markup_array;
+  }
+}
+
+function md_block_custom_preprocess_payment_accept(&$vars) {
+  $payment_accept_icon = variable_get('payment_accept_icon', '');
+  if ($payment_accept_icon != '') {
+    $payment_accept_icon_array = explode(',', $payment_accept_icon);
+    $payment_accept_icon_array = array_chunk($payment_accept_icon_array, 3);
+    $vars['payment_accept'] = $payment_accept_icon_array;
+  }
+}
+
+/*
+ * Add image style user avatar
+ */
+
+function md_block_custom_image_default_styles() {
+  $styles = array();
+
+  $styles['avatar_thumb'] = array(
+    'label' => 'Avatar thumbnail(62x62)',
+    'effects' => array(
+      array(
+        'name' => 'image_scale_and_crop',
+        'data' => array('width' => 62, 'height' => 62),
+        'weight' => 0,
+      ),
+    ),
+  );
+  return $styles;
+}
+
+function md_block_custom_menu() {
+  $items['user-form/%ctools_js/%'] = array(
+    'title' => '',
+    'page arguments' => array(1, 2),
+    'page callback' => 'user_form_ajax',
+    'access callback' => TRUE,
+    'type' => MENU_CALLBACK,
+    'file' => 'user_form.pages.inc',
+  );
+
+  return $items;
+}
+
+

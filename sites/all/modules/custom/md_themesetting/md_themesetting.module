@@ -1,0 +1,235 @@
+<?php
+
+/*******************************************************************************
+ * Config Path
+ ******************************************************************************/
+/**
+ * Implements hook_menu_alter().
+ */
+function md_themesetting_menu_alter(&$items) {
+  $items['node']['title'] = t('');
+  $items['node']['page callback'] = 'page_blank_content';
+}
+function page_blank_content() {
+  drupal_set_title('');
+  return '';
+}
+
+/* Mode View */
+function md_themesetting_entity_info_alter(&$entity_info) {
+  $entity_info['node']['view modes']['modal_content'] = array(
+    'label' => t('Modal Content'),
+    'custom settings' => FALSE,
+  );
+}
+function _md_themesite_modal_content_product_pcb($nid) {
+  $node = node_load($nid);
+  $content = node_view($node, 'modal_content');
+  return print drupal_render($content);
+}
+
+/**
+ * Implement hook_menu()
+ *
+ */
+function md_themesetting_menu() {
+  $items['node-modal/%'] = array(
+    'page callback' => '_md_themesite_modal_content_product_pcb',
+    'access arguments' => array('access content'),
+    'page arguments' => array(1),
+    'type' => MENU_CALLBACK,
+  );
+  $items['page-404'] = array(
+    'page callback' => 'page_blank_content',
+    'access arguments' => array('access content'),
+    'type' => MENU_CALLBACK,
+  );
+  $items["creat-image-style"] = array(
+      "type" => MENU_CALLBACK,
+      "page callback" => "theme_settings_creat_image_url",
+      "access arguments" => array("access content"),
+  );
+  return $items;
+}
+
+/**
+ * Page callback Return array of image
+ */
+function theme_settings_creat_image_url() {
+  $output = array(
+      "status" => 0,
+      "url" => ""
+  );
+  if (isset($_POST["fid"]) && intval($_POST["fid"]) > 0 && ($image = file_load($_POST["fid"]))) {
+    $output = array(
+        "status" => 1,
+        "fid" => $_POST['fid'],
+        "url" => image_style_url('thumbnail', $image->uri)
+    );
+  }
+
+  drupal_json_output($output);
+  exit();
+}
+
+/*******************************************************************************
+ * Config Theme-setting
+ ******************************************************************************/
+/**
+ * Support font icon
+ * @param $bundle
+ * @return array
+ *
+ */
+function md_icon_bundle_list($bundle) {
+  $build = array();
+  foreach ($bundle['icons'] as $icon => $value) {
+    $build[] = array(
+      '#theme' => 'icon',
+      '#bundle' => $bundle['name'],
+      '#icon' => $icon,
+      '#attributes' => array(
+        'title' => $icon,
+        'data-value' => $bundle['name'] . '|' . $icon,
+        'data-icon' => $icon
+      ),
+    );
+  }
+  $bundle_context = $bundle;
+  drupal_alter('icon_bundle_list', $build, $bundle_context);
+  return $build;
+}
+
+/**
+ * Implement hook_registry_alter()
+ * @param $theme_registry
+ */
+function md_themesetting_theme_registry_alter(&$theme_registry) {
+  if (!empty($theme_registry['form_element'])) {
+    $theme_registry['form_element']['function'] = 'md_themesetting_form_element';
+  }
+  if (!empty($theme_registry['radio'])) {
+    $theme_registry['radio']['function'] = 'md_themesetting_radio';
+  }
+  if (!empty($theme_registry['form_element_label'])) {
+    $theme_registry['form_element_label']['function'] = 'md_themesetting_form_element_label';
+  }
+}
+
+/**
+ * Overwrite theme_form_element()
+ */
+function md_themesetting_form_element($variables) {
+  $element = &$variables['element'];
+  $element += array(
+    '#title_display' => 'before',
+  );
+
+  if (isset($element['#markup']) && !empty($element['#id'])) {
+    $attributes['id'] = $element['#id'];
+  }
+  $attributes['class'] = array('form-item');
+  if (!empty($element['#type'])) {
+    $attributes['class'][] = 'form-type-' . strtr($element['#type'], '_', '-');
+  }
+  if (!empty($element['#name'])) {
+    $attributes['class'][] = 'form-item-' . strtr($element['#name'], array(
+        ' ' => '-',
+        '_' => '-',
+        '[' => '-',
+        ']' => ''
+      ));
+  }
+  if (!empty($element['#attributes']['disabled'])) {
+    $attributes['class'][] = 'form-disabled';
+  }
+  $output = '<div' . drupal_attributes($attributes) . '><div class="form-elements">' . "\n";
+
+  if (!isset($element['#title'])) {
+    $element['#title_display'] = 'none';
+  }
+  $prefix = isset($element['#field_prefix']) ? '' . $element['#field_prefix'] . '' : '';
+  $suffix = isset($element['#field_suffix']) ? '' . $element['#field_suffix'] . '' : '';
+
+  switch ($element['#title_display']) {
+    case 'before':
+    case 'invisible':
+      $output .= ' ' . theme('form_element_label', $variables);
+      $output .= ' ' . $prefix . $element['#children'] . $suffix . "\n";
+      break;
+
+    case 'after':
+      $output .= ' ' . $prefix . $element['#children'] . $suffix;
+      $output .= ' ' . theme('form_element_label', $variables) . "\n";
+      break;
+
+    case 'none':
+    case 'attribute':
+      // Output no label and no required marker, only the children.
+      $output .= ' ' . $prefix . $element['#children'] . $suffix . "\n";
+      break;
+  }
+
+  if (!empty($element['#description'])) {
+    $output .= '<div class="description">' . $element['#description'] . "</div>\n";
+  }
+
+  $output .= "</div></div>\n";
+
+  return $output;
+}
+
+/**
+ * Overwrite theme_form_element_label()
+ */
+function md_themesetting_form_element_label($variables) {
+  $element = $variables['element'];
+  $t = get_t();
+
+  if ((!isset($element['#title']) || $element['#title'] === '') && empty($element['#required'])) {
+    return '';
+  }
+
+  $required = !empty($element['#required']) ? theme('form_required_marker', array('element' => $element)) : '';
+
+  $title = filter_xss_admin($element['#title']);
+
+  $attributes = array();
+  if ($element['#title_display'] == 'after') {
+    $attributes['class'] = 'label-' . $element['#type'] . ' option';
+  }
+  elseif ($element['#title_display'] == 'invisible') {
+    $attributes['class'] = 'element-invisible';
+  }
+
+  if (!empty($element['#id'])) {
+    $attributes['for'] = $element['#id'];
+  }
+  if ($element['#type'] == 'checkbox' || $element['#type'] == 'radio') {
+
+  }
+  return ' <label' . drupal_attributes($attributes) . '>' . $t('!title !required', array(
+    '!title' => $title,
+    '!required' => $required
+  )) . "</label>\n";
+}
+
+/**
+ * Overwrite theme_radio()
+ */
+function md_themesetting_radio($variables) {
+  $element = $variables['element'];
+  $element['#attributes']['type'] = 'radio';
+  element_set_attributes($element, array(
+    'id',
+    'name',
+    '#return_value' => 'value'
+  ));
+
+  if (isset($element['#return_value']) && $element['#value'] !== FALSE && $element['#value'] == $element['#return_value']) {
+    $element['#attributes']['checked'] = 'checked';
+  }
+  _form_set_class($element, array('form-input-radio'));
+  $element['#attributes']['class'][] = 'input-radio';
+  return '<input' . drupal_attributes($element['#attributes']) . ' />';
+}

@@ -1,0 +1,75 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : Oct 20, 2015, 2:55:04 PM
+    Author     : ThanhHust
+*/
+
+.awe-region {
+    background: transparent;
+    min-height: 200px;
+    border: 1px solid#aaa;
+    padding-right: 0px;
+    float: left;
+    background: -webkit-linear-gradient(top, transparent 40%, #F3F3F3 100%);
+}
+.region-12 {
+    width: 100%;
+}
+.region-11 {
+    width: 91.66666667%;
+}
+.region-10 {
+    width: 83.33333333%;
+}
+.region-9 {
+    width: 75%;
+}
+.region-8 {
+    width: 66.66666667%;
+}
+.region-7 {
+    width: 58.33333333%;
+}
+.region-6 {
+    width: 50%;
+}
+.region-5 {
+    width: 41.66666667%;
+}
+.region-4 {
+    width: 33.33333333%;
+}
+.region-3 {
+    width: 25%;
+}
+.region-2 {
+    width: 16.66666667%;
+}
+.region-1 {
+    width: 8.33333333%;
+}
+.wrap-region {
+    width: 600px;
+    background-image: url("../img/bg.png");
+    background-repeat: repeat-x;
+    min-height: 200px;
+    border: 1px solid #ccc;
+}
+.footer-text {
+    color: #333;
+    font-weight: bold;
+    margin: 0 auto;
+    margin-top: 90px;
+    text-align: center;
+}
+.awe-region-full{height: auto}
+.setting-footer #select-collumn {
+    margin: 20px 0px;
+    border: 1px solid#ccc;
+    padding: 10px 15px 10px 15px;
+}
+.wrap-region .display-none{display: none}

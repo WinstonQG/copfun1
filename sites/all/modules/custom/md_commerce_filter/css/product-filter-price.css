@@ -1,0 +1,47 @@
+.filter-price-slider .ui-slider .ui-slider-handle {
+    background: url(img/ranger-bar.png) center center no-repeat #b9b9b9;
+    cursor: pointer;
+    height: 15px;
+    width: 15px;
+    position: absolute;
+    z-index: 2;
+    margin-left: 0;
+    top: -6.5px;
+    -webkit-border-radius: 0;
+    border-radius: 0;
+    border: none;
+    -webkit-transition: left .15s ease;
+    -o-transition: left .15s ease;
+    transition: left .15s ease;
+}
+
+.filter-price-slider .ui-slider .ui-slider-range {
+    background: #ffa200;
+    border: none;
+    display: block;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    z-index: 1;
+}
+.filter-price-slider .ui-slider {
+    height: 3px;
+    background: #e1e1e1;
+    position: relative;
+    border: none;
+}
+.filter-price-slider{
+	padding-right: 20px;
+}
+
+.slider-value-price{
+    margin-top: 25px;
+}
+.slider-value-price .btn-filter{
+    float: left;
+}
+.slider-value-price .price{
+    font-family: Montserrat,Arial,sans-serif;
+    float: right;
+    padding: 6px 0;
+}
