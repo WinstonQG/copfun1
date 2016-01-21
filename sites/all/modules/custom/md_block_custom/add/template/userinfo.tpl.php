@@ -22,7 +22,7 @@ if ($logged_in):
   $user_id = $variables['user']->uid;
   $user = user_load($user_id);
   $user_url = $base_url . '/user/' . $user->uid;
-  $user_image_alt= $user->picture->alt;
+  $user_image_alt = isset($user->picture) ? $user->picture->alt : '';
   ?>
   <div class="container-fluid">
       <div class="header-account">
