@@ -1,7 +1,0 @@
-<?php
-/**
- * @file
- * Code for the MD Portfolio feature.
- */
-
-include_once 'md_portfolio.features.inc';

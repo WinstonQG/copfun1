@@ -1,7 +1,0 @@
-<?php
-/**
- * @file
- * Code for the MD Testimonials feature.
- */
-
-include_once 'md_testimonials.features.inc';
