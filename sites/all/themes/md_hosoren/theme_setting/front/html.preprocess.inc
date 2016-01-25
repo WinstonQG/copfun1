@@ -32,7 +32,7 @@ function md_hosoren_preprocess_html(&$vars) {
   
 
   //  drupal_add_css();
-  drupal_add_css("{$path_theme}/css/libs/bootstrap.css");
+  /*drupal_add_css("{$path_theme}/css/libs/bootstrap.css");
   drupal_add_css("{$path_theme}/css/libs/easyzoom.css");
   drupal_add_css("{$path_theme}/css/libs/magnific-popup.css");
   drupal_add_css("{$path_theme}/css/libs/nanoscroller.css");
@@ -46,14 +46,15 @@ function md_hosoren_preprocess_html(&$vars) {
   drupal_add_css("{$path_theme}/css/md_hosoren_awecontent.css");
   drupal_add_css("{$path_theme}/css/md-megamenu.css");
   drupal_add_css("{$path_theme}/css/md-megamenu-megamenu-user.css");
-  
+  */
+ drupal_add_css("{$path_theme}/css/style.css");
 
   /*   * *********************************************
     Theme Settings
    * ********************************************** */
 
   //loading
-	$Picture_loading = $base_url.'/'.$path_theme.'/logo.png';
+	$Picture_loading = $base_url.'/'.$path_theme.'/images/logo-loading.png';
 	if (theme_get_setting('preload_loading')){
 		$fid_preload_loading = theme_get_setting('preload_loading',null);
 		$file = file_load($fid_preload_loading);

@@ -1,0 +1,265 @@
+.owl-carousel .owl-controls .owl-buttons .owl-prev,
+.owl-carousel .owl-controls .owl-buttons .owl-next {
+  top: 50%;
+  -webkit-border-radius: 0;
+          border-radius: 0;
+  margin: 0;
+
+  position: absolute;
+  text-decoration: none;
+  width: 20px;
+  height: 30px;
+  margin-top: -15px;
+  padding: 0;
+  border: none;
+  outline: none;
+  overflow: hidden;
+  text-indent: 101%;
+  white-space: nowrap;
+}
+
+.owl-carousel .owl-controls .owl-buttons .owl-prev:before,
+.owl-carousel .owl-controls .owl-buttons .owl-next:before {
+  font-family: "awe-glyphicons-awesome";
+  text-indent: 0;
+  position: absolute;
+  left: 0;
+  width: 20px;
+  height: 30px;
+  text-align: center;
+  line-height: 26px;
+  font-size: 20px;
+}
+
+.owl-carousel .owl-controls .owl-buttons .owl-prev {
+  left: -25px;
+}
+
+.owl-carousel .owl-controls .owl-buttons .owl-prev:before {
+  content: '\e9e6';
+}
+
+.owl-carousel .owl-controls .owl-buttons .owl-next {
+  right: -25px;
+}
+
+.owl-carousel .owl-controls .owl-buttons .owl-next:before {
+  content: '\e9e7';
+}
+
+.owl-carousel .owl-controls .owl-buttons .disabled {
+  opacity: 0.5;
+  cursor: default;
+}
+
+@media (max-width: 768px) {
+  .owl-carousel .owl-controls .owl-buttons .owl-prev,
+  .owl-carousel .owl-controls .owl-buttons .owl-next {
+    background: rgba(0, 0, 0, 0.5);
+  }
+  .owl-carousel .owl-controls .owl-buttons .owl-prev:before,
+  .owl-carousel .owl-controls .owl-buttons .owl-next:before {
+    font-size: 14px;
+    color: #fff;
+  }
+  .owl-carousel .owl-controls .owl-buttons .owl-prev {
+    left: 0;
+  }
+  .owl-carousel .owl-controls .owl-buttons .owl-next {
+    right: 0;
+  }
+}
+
+
+
+/* Inset */
+.owl-carousel-inset .owl-controls .owl-buttons .owl-prev {
+  left: 0;
+}
+
+.owl-carousel-inset .owl-controls .owl-buttons .owl-next {
+  right: 0;
+}
+.owl-carousel-inset .owl-prev,
+.owl-carousel-inset .owl-next {
+  opacity: 0;
+  visibility: hidden;
+  -webkit-transition: all 0.5s ease;
+       -o-transition: all 0.5s ease;
+          transition: all 0.5s ease;
+}
+.owl-carousel-inset:hover .owl-prev,
+.owl-carousel-inset:hover .owl-next {
+  opacity: 1;
+  visibility: visible;
+}
+.owl-carousel-inset:hover .owl-prev.disabled,
+.owl-carousel-inset:hover .owl-next.disabled {
+  opacity: 0.5;
+}
+.owl-carousel-inset:hover .owl-controls .owl-buttons .owl-prev {
+  left: 25px;
+}
+.owl-carousel-inset:hover .owl-controls .owl-buttons .owl-next {
+  right: 25px;
+}
+
+
+/* Home Product */
+.view-product-slider{
+  margin: 0 -15px;
+}
+.view-product-slider .owl-carousel .owl-wrapper,
+.view-product-slider .owl-carousel .owl-item{
+  -ms-transform: none;
+  -webkit-transform: none;
+  transform: none;
+}
+.products.owl-carousel .owl-item .product-grid{
+  margin: 0 15px 50px;
+}
+.products.owl-carousel .owl-controls .owl-buttons .owl-prev,
+.products.owl-carousel .owl-controls .owl-buttons .owl-next {
+  margin-top: 0;
+  top: 33%;
+}
+
+.products.owl-carousel .owl-controls .owl-buttons .owl-prev,
+.products.owl-carousel .owl-controls .owl-buttons .owl-next{
+  margin-top: 0;
+  top: 33%;
+  width: 40px;
+  height: 40px;
+  text-align: center;
+  padding: 0;
+  color: white;
+  background-color: rgba(0, 0, 0, 0.75);
+  opacity: 0;
+  visibility: hidden;
+  -webkit-transition: all 0.25s ease;
+       -o-transition: all 0.25s ease;
+          transition: all 0.25s ease;
+  z-index: 999;
+}
+
+.products.owl-carousel .owl-controls .owl-buttons .owl-prev:before,
+.products.owl-carousel .owl-controls .owl-buttons .owl-next:before {
+  width: 40px;
+  height: 40px;
+  font-size: 14px;
+  line-height: 38px;
+  text-align: center;
+}
+
+.products.owl-carousel .owl-controls .owl-buttons .owl-prev{
+  left: 25px;
+}
+
+.products.owl-carousel .owl-controls .owl-buttons .owl-next{
+  right: 25px;
+}
+
+.products.owl-carousel:hover .owl-controls .owl-buttons .owl-prev,
+.products.owl-carousel:hover .owl-controls .owl-buttons .owl-next{
+  opacity: 1;
+  visibility: visible;
+}
+
+.products.owl-carousel:hover .owl-controls .owl-buttons .owl-prev.disabled,
+.products.owl-carousel:hover .owl-controls .owl-buttons .owl-next.disabled{
+  opacity: 0.5;
+}
+
+.products.owl-carousel:hover .owl-controls .owl-buttons .owl-prev{
+  left: 15px;
+}
+.products.owl-carousel:hover .owl-controls .owl-buttons .owl-next{
+  right: 15px;
+}
+
+
+/* Home Post */
+.home-section-posts.owl-carousel .owl-controls .owl-buttons{
+    position: absolute;
+    right: 0;
+    top: -85px;
+}
+.home-section-posts.owl-carousel .owl-controls .owl-buttons .owl-prev,
+.home-section-posts.owl-carousel .owl-controls .owl-buttons .owl-next {
+  border: 1px solid #333;
+  background: none;
+  color: #333333;
+
+  display: inline-block;
+  left: 0;
+  position: relative;
+  width: 30px;
+  height: 30px;
+  -webkit-transition: all 0.25s ease;
+  -o-transition: all 0.25s ease;
+  transition: all 0.25s ease;
+}
+.home-section-posts.owl-carousel .owl-controls .owl-buttons .owl-prev:before,
+.home-section-posts.owl-carousel .owl-controls .owl-buttons .owl-next:before {
+  font-size: 12px;
+  width: 28px;
+}
+.home-section-posts.owl-carousel .owl-controls .owl-buttons .owl-prev:hover,
+.home-section-posts.owl-carousel .owl-controls .owl-buttons .owl-next:hover {
+  color: #fff;
+  background: #333;
+}
+.home-section-posts.owl-carousel .owl-controls .owl-buttons .owl-prev:hover:before,
+.home-section-posts.owl-carousel .owl-controls .owl-buttons .owl-next:hover:before {
+  color: #fff;
+}
+.home-section-posts.owl-carousel .owl-controls .owl-buttons .owl-prev {
+    margin-right: 10px;
+}
+@media (max-width: 768px){
+    .owl-carousel .owl-controls .owl-buttons .owl-prev:before, 
+		.owl-carousel .owl-controls .owl-buttons .owl-next:before{
+        color: inherit;
+    }
+}
+
+
+/* Style Carousel Detail Portfolio*/
+.portfolio-carousel.owl-carousel .owl-controls .owl-buttons .owl-prev, 
+.portfolio-carousel.owl-carousel .owl-controls .owl-buttons .owl-next {
+    background: transparent;
+    color: #333;
+}
+.lasted-portfolio-carousel{
+margin-left: -10px;
+}
+
+/* ----------- Carousel Element ---------- */
+.image-carousel .owl-dots{
+    position: absolute;
+    left: 0;
+    width: 100%;
+    bottom: 25px;
+}
+.owl-carousel .owl-dots .owl-dot span:before {
+    content: "\e809";
+    font-family: "awe-glyphicons-awesome";
+    font-style: normal;
+    font-weight: normal;
+    speak: none;
+    display: inline-block;
+    text-decoration: inherit;
+    width: 1em;
+    margin-right: .2em;
+    text-align: center;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1em;
+    margin-left: .2em;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+.owl-carousel .owl-dots .owl-dot.active>span:before {
+    content: "\e808";
+}
+

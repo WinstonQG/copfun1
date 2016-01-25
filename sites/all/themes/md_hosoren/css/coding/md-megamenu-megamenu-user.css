@@ -1,0 +1,580 @@
+.account-icon a.awemenu-item-link,
+.wishlist-icon a.awemenu-item-link,
+.cart-icon a.awemenu-item-link {
+  padding: 0 15px !important;
+  line-height: 80px;
+  display: block;
+}
+.account-icon a.awemenu-item-link:before {
+  content: '\e835';
+}
+.wishlist-icon a.awemenu-item-link:before {
+  content: '\e800';
+}
+.cart-icon a i {
+  opacity: .8;
+  font-size: 18px;
+  position: relative;
+}
+.cart-icon a i:before {
+  margin: 0;
+}
+.account-icon a.awemenu-item-link:before,
+.wishlist-icon a.awemenu-item-link:before,
+.search-icon-form a.awemenu-item-link:before {
+  font-family: "awe-glyphicons-awesome";
+  font-style: normal;
+  font-weight: normal;
+  speak: none;
+  display: inline-block;
+  text-decoration: inherit;
+  width: 1em;
+  text-align: center;
+  opacity: .8;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1em;
+  font-size: 18px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-shadow: 1px 1px 1px rgba(127, 127, 127, 0.3);
+}
+.account-icon a.awemenu-item-link:hover,
+.wishlist-icon a.awemenu-item-link:hover,
+.cart-icon a.awemenu-item-link:hover {
+  color: #005daf !important;
+  background: transparent !important;
+  box-shadow: none !important;
+}
+.account-icon span.awemenu-item-title,
+.wishlist-icon span.awemenu-item-title,
+.cart-icon span.awemenu-item-title {
+  display: none;
+}
+.account-icon .awemenu-submenu.awemenu-megamenu,
+.wishlist-icon .awemenu-submenu.awemenu-megamenu,
+.cart-icon .awemenu-submenu.awemenu-megamenu {
+  background: #fff !important;
+}
+.account-icon .awemenu-megamenu-wrapper {
+  padding: 20px 0 0 !important;
+}
+.account-icon .awemenu-megamenu-wrapper .header-account h4 a {
+  color: #333;
+}
+.account-icon .awemenu-megamenu-wrapper .header-account h4 a:hover {
+  color: #005daf;
+}
+.account-icon .awemenu-megamenu-wrapper .header-account ul li {
+  padding: 0;
+}
+.account-icon .awemenu-megamenu-wrapper .header-account ul li a {
+  color: #898989 !important;
+  display: block;
+  padding: 7px 0;
+  font-size: 14px;
+}
+.account-icon .awemenu-megamenu-wrapper .header-account ul li a:hover {
+  color: #005daf !important;
+}
+.wishlist-icon .awemenu-megamenu-wrapper,
+.cart-icon .awemenu-megamenu-wrapper {
+  padding: 0 15px !important;
+}
+.wishlist-icon ul.whishlist li,
+.cart-icon ul.whishlist li {
+  padding: 0;
+  margin: 0;
+}
+.whishlist-action {
+  border-top: 1px solid #eee;
+  padding-top: 20px;
+}
+.wishlist-icon ul.whishlist li .whishlist-item,
+.cart-icon ul.whishlist li .whishlist-item {
+  margin-bottom: 15px;
+}
+.cart-icon ul.whishlist li .whishlist-item a img {
+  height: 70px;
+}
+.wishlist-icon ul.whishlist li > a {
+  display: none;
+}
+.wishlist-icon ul.whishlist .whishlist-item h3 a,
+.cart-icon ul.whishlist .whishlist-item h3 a {
+  color: #333;
+}
+.wishlist-icon ul.whishlist .whishlist-item h3 a:hover,
+.cart-icon ul.whishlist .whishlist-item h3 a:hover {
+  color: #005daf;
+}
+.wishlist-icon .whishlist-action a {
+  color: #333;
+}
+.cart-icon .cart-action ul li {
+  padding: 0 !important;
+}
+.cart-icon > a.awemenu-item-link {
+  position: relative;
+}
+.account-icon .awemenu-megamenu-wrapper .submenu.dropdown {
+  margin-bottom: 10px;
+}
+.account-icon .awemenu-megamenu-wrapper .submenu.dropdown li {
+  padding: 0px 15px;
+}
+.account-icon .awemenu-megamenu-wrapper .submenu.dropdown li a {
+  color: #333;
+  font-size: 14px;
+  font-weight: 700;
+  font-family: Montserrat, Arial, sans-serif;
+  text-transform: uppercase;
+  padding: 0px 15px 10px 0;
+}
+.account-icon .awemenu-megamenu-wrapper .submenu.dropdown li a:hover {
+  color: #005daf;
+}
+.md-megamenu-megamenu-user {
+  z-index: 998;
+}
+.md-megamenu-megamenu {
+  z-index: 997;
+}
+.footer a.back-top {
+  z-index: 996;
+}
+.account-icon .awemenu-submenu.awemenu-megamenu .container-fluid,
+.wishlist-icon ul.whishlist,
+.cart-icon .awemenu-megamenu-wrapper {
+  text-align: left;
+}
+.header-style-4 #block-search-form {
+  position: fixed;
+  width: 500px;
+  left: 256px;
+  top: 610px;
+}
+.header-style-1 .search-icon-form a.awemenu-item-link {
+  padding: 0 35px 0 15px !important;
+  line-height: 80px;
+  display: block;
+  border-right: 1px solid #e1e1e1;
+}
+.search-icon-form ul.awemenu-submenu.awemenu-megamenu {
+  display: none !important;
+}
+.header-style-1 #block-search-form {
+  position: fixed;
+  width: 636px;
+  top: 40px;
+  z-index: 999;
+}
+.header-style-1 .md-megamenu-megamenu .awemenu li:last-child {
+  padding-right: 52px;
+}
+.header-style-1 .account-icon ul.awemenu-submenu {
+  width: 170px !important;
+  right: 0;
+  left: auto !important;
+}
+.header-style-1 .wishlist-icon ul.awemenu-submenu,
+.header-style-1 .cart-icon ul.awemenu-submenu {
+  width: 330px !important;
+  right: 0;
+  left: auto !important;
+}
+.awe-col-wrapper .block-simplenews h3.widget-title {
+  display: none;
+}
+.header-style-1 .header-top #logo {
+  float: left;
+  height: 80px;
+  line-height: 80px;
+}
+.header-style-1 .md-megamenu-megamenu ul.awemenu {
+  width: 1140px !important;
+  margin: 0 auto;
+}
+.page-node-109 #page-wrapper,
+.page-node-109 #admin-menu {
+  margin-left: 256px;
+}
+#block-md-block-custom-mls-search-block input.form-control {
+  width: 100% !important;
+}
+#block-md-block-custom-mls-search-block {
+  z-index: 998;
+}
+.account-icon a,
+.wishlist-icon a,
+.cart-icon a {
+  color: #000;
+}
+.cart-icon i:before {
+  overflow: hidden;
+  height: 20px;
+}
+#block-md-block-custom-mls-search-block {
+  position: relative;
+}
+/* --------------------Mega menu header style 1---------------------- */
+.header-style-1 .awemenu-container {
+  position: relative;
+}
+.header-style-1 .search-wrap {
+  position: absolute;
+  z-index: 998;
+  right: 0;
+}
+.header-style-1 .header-top-relative {
+  z-index: 999;
+}
+@media (max-width: 1200px) {
+  .search-wrap {
+    width: 100%;
+  }
+  .header-style-1 .header-top-relative .md-megamenu-megamenu-user {
+    float: left;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    width: auto !important;
+    border-bottom: 0px;
+    padding-left: 50px;
+    border: none;
+  }
+  .header-style-1 .md-megamenu-megamenu ul.awemenu {
+    width: 100% !important;
+    margin: 0 auto;
+  }
+  .header-style-1 .md-megamenu-megamenu {
+    height: 84px;
+    background-color: transparent !important;
+  }
+  .header-style-1 .header-top .header-top-relative {
+    position: relative;
+    z-index: 998;
+  }
+  .header-style-1 .navbar-search a {
+    padding-right: 0;
+  }
+  .header-style-1 .container.search-wrap {
+    width: 100% !important;
+  }
+  .header-style-1 .container.search-wrap #block-md-block-custom-mls-search-block {
+    width: 100% !important;
+  }
+  .header-style-1 #block-md-block-custom-mls-search-block .menubar-search-form {
+    padding-left: 30px;
+    width: 100% !important;
+  }
+  .header-style-1 .menubar-search-form {
+    -webkit-box-shadow: none;
+    box-shadow: none;
+    padding-top: 25px;
+    background: transparent;
+  }
+  .header-style-1 .md-megamenu-megamenu .awemenu li:last-child {
+    padding-right: 0;
+  }
+  .header-style-1 .md-megamenu-megamenu ul.awemenu li ul.awemenu-submenu {
+    width: 100% !important;
+  }
+}
+@media (max-width: 480px) {
+  .header-style-1 .header-top #logo {
+    display: block;
+    width: 100%;
+    text-align: center;
+  }
+  .header-style-1 .header-top-relative .md-megamenu-megamenu-user {
+    padding-left: 0;
+  }
+  .header-style-1 .md-megamenu-megamenu-user .awemenu-submenu.awemenu-megamenu {
+    left: 0px !important;
+    width: 280px !important;
+  }
+}
+/* --------------------Mega menu header style 2---------------------- */
+.header-style-2 .awemenu-style-2 .awemenu-container {
+  position: relative;
+}
+.header-style-2 #block-md-block-custom-mls-search-block {
+  position: absolute;
+  right: 0;
+  z-index: 998;
+}
+.header-style-2 .md-megamenu-megamenu ul.awemenu {
+  padding-right: 52px;
+}
+.header-style-2 #block-md-block-custom-mls-search-block .menubar-search-form {
+  width: 636px !important;
+}
+.header-style-2 .account-icon .awemenu-submenu.awemenu-megamenu {
+  width: 170px !important;
+  right: 0px !important;
+  left: auto !important;
+}
+.header-style-2 .cart-icon .awemenu-submenu.awemenu-megamenu,
+.header-style-2 .wishlist-icon .awemenu-submenu.awemenu-megamenu {
+  width: 330px !important;
+  right: 0px !important;
+  left: auto !important;
+}
+@media (max-width: 1200px) {
+  .header-style-2 .md-megamenu-megamenu ul.awemenu {
+    padding-right: 0;
+  }
+  .header-style-2 .header-top-relative .md-megamenu-megamenu-user {
+    float: none;
+    width: 75% !important;
+    border: none;
+  }
+  .header-style-2 #block-md-block-custom-mls-search-block {
+    z-index: 1000;
+    width: 100%;
+  }
+  .header-style-2 #block-md-block-custom-mls-search-block .menubar-search-form {
+    width: 100% !important;
+    padding-top: 25px;
+    background: transparent;
+    box-shadow: none;
+  }
+  .header-style-2 .account-icon .awemenu-submenu.awemenu-megamenu {
+    width: 100% !important;
+    right: auto !important;
+    left: 0px !important;
+  }
+  .header-style-2 .cart-icon .awemenu-submenu.awemenu-megamenu,
+  .header-style-2 .wishlist-icon .awemenu-submenu.awemenu-megamenu {
+    width: 100% !important;
+    right: auto !important;
+    left: 0px !important;
+  }
+  .header-style-2 .md-megamenu-megamenu ul.awemenu li ul.awemenu-submenu {
+    width: 100% !important;
+  }
+}
+/* --------------------Mega menu header style 3---------------------- */
+.header-style-3 {
+  width: 1140px;
+  margin: 0 auto;
+  position: relative;
+}
+.header-style-3 .header-top {
+  border: none;
+}
+.header-style-3 .awemenu-style-2 {
+  float: right;
+  width: 994px;
+}
+.header-style-3 .awemenu-style-2 .awemenu-container {
+  position: relative;
+}
+.header-style-3 #block-md-block-custom-mls-search-block {
+  position: absolute;
+  z-index: 999;
+}
+.header-style-3 .md-megamenu-megamenu {
+  width: 100% !important;
+  position: absolute;
+}
+.header-style-3 .md-megamenu-megamenu ul.awemenu {
+  padding-right: 185px;
+}
+.header-style-3 #block-md-block-custom-mls-search-block .menubar-search-form {
+  right: -910px !important;
+  width: 926px !important;
+}
+.header-style-3 .account-icon .awemenu-submenu.awemenu-megamenu {
+  width: 170px !important;
+  right: 0px !important;
+  left: auto !important;
+}
+.header-style-3 .cart-icon .awemenu-submenu.awemenu-megamenu,
+.header-style-3 .wishlist-icon .awemenu-submenu.awemenu-megamenu {
+  width: 330px !important;
+  right: 0px !important;
+  left: auto !important;
+}
+.header-style-3 .md-megamenu-megamenu li.menu-logo {
+  padding: 0 15px;
+}
+@media (max-width: 1200px) {
+  .header-style-3 {
+    width: 100% !important;
+  }
+  .header-style-3 .md-megamenu-megamenu {
+    padding: 0 15px;
+  }
+  .header-style-3 .md-megamenu-megamenu ul.awemenu {
+    padding-right: 0px;
+  }
+  .header-style-3 .md-megamenu-megamenu-user {
+    width: 100% !important;
+    border: none !important;
+  }
+  .header-style-3 #block-md-block-custom-mls-search-block {
+    padding-left: 15px;
+  }
+  .header-style-3 #block-md-block-custom-mls-search-block {
+    position: inherit;
+  }
+  .header-style-3 .header-top {
+    width: 75%;
+    float: left;
+  }
+  .header-style-3 #block-md-block-custom-mls-search-block .menubar-search-form {
+    padding: 25px 15px 0 15px;
+    box-shadow: none;
+    background: transparent;
+  }
+  .header-style-3 .account-icon .awemenu-submenu.awemenu-megamenu {
+    width: 100% !important;
+    left: 15px !important;
+  }
+  .header-style-3 .cart-icon .awemenu-submenu.awemenu-megamenu,
+  .header-style-3 .wishlist-icon .awemenu-submenu.awemenu-megamenu {
+    width: 100% !important;
+    left: 15px !important;
+  }
+  .header-style-3 #block-md-block-custom-mls-search-block .menubar-search-form {
+    right: 0 !important;
+    width: 0!important;
+  }
+  .md-megamenu-megamenu .awemenu > li {
+    display: block;
+    width: 100%;
+  }
+  .header-style-3 .md-megamenu-megamenu li.menu-logo {
+    display: none;
+  }
+  .header-style-3 .md-megamenu-megamenu ul.awemenu li ul.awemenu-submenu {
+    width: 100% !important;
+  }
+}
+/* --------------------Mega menu header style 4---------------------- */
+.header-style-4 .header-top a#logo {
+  display: block;
+  text-align: center;
+  line-height: 80px;
+  border-bottom: 1px solid #e1e1e1;
+}
+@media (max-width: 1200px) {
+  .header-style-4 {
+    position: relative;
+  }
+  .header-style-4 #block-md-block-custom-mls-search-block {
+    z-index: 990;
+  }
+  .header-style-4 .md-megamenu-megamenu-user-header-4 {
+    width: 75% !important;
+  }
+  .header-style-4 .md-megamenu-megamenu-user-header-4 ul.awemenu {
+    border: none;
+  }
+  .header-style-4 #block-md-block-custom-mls-search-block .menubar-search-form {
+    padding: 0 15px;
+    background: transparent;
+  }
+  .header-style-4 .md-megamenu-mega-main-menu-style4 ul.awemenu {
+    padding: 0px 15px;
+    background: #fff;
+    margin-top: 83px;
+  }
+  .page-node-109 #page-wrapper,
+  .page-node-109 #admin-menu {
+    margin-left: 0;
+  }
+  .header-style-4 .md-megamenu-mega-main-menu-style4 ul.awemenu li ul.awemenu-submenu {
+    width: 100% !important;
+  }
+}
+/* --------------------Mega menu header default---------------------- */
+.header-style-default .md-megamenu-megamenu {
+  position: absolute;
+}
+.header-style-default .md-megamenu-megamenu ul.awemenu {
+  padding-right: 215px;
+}
+.header-style-default .account-icon .awemenu-submenu.awemenu-megamenu {
+  width: 170px !important;
+  right: 0px !important;
+  left: auto !important;
+  margin-top: 1px;
+}
+.header-style-default .cart-icon .awemenu-submenu.awemenu-megamenu,
+.header-style-default .wishlist-icon .awemenu-submenu.awemenu-megamenu {
+  width: 330px !important;
+  right: 0px !important;
+  left: auto !important;
+  margin-top: 1px;
+}
+.header-style-default .cart-icon .awemenu-submenu.awemenu-megamenu {
+  margin-top: -1px;
+}
+.header-style-default #block-md-block-custom-mls-search-block .menubar-search-form {
+  width: 636px !important;
+  right: 160px !important;
+}
+@media (max-width: 1200px) {
+  .header-style-default {
+    width: 100%;
+  }
+  .header-style-default .header-top {
+    float: left;
+    width: 75%;
+    border: none;
+  }
+  .header-style-default .header-top .md-megamenu-megamenu-user {
+    width: 100% !important;
+    border: none;
+  }
+  .header-style-default #block-md-block-custom-mls-search-block {
+    float: right;
+    width: 25%;
+  }
+  .header-style-default #block-md-block-custom-mls-search-block ul.navbar-search {
+    text-align: center;
+    width: 100%;
+  }
+  .header-style-default #block-md-block-custom-mls-search-block ul.navbar-search > li {
+    width: 100%;
+  }
+  .header-style-default .md-megamenu-megamenu ul.awemenu {
+    padding-right: 0;
+  }
+  .header-style-default .cart-icon .awemenu-submenu.awemenu-megamenu,
+  .header-style-default .wishlist-icon .awemenu-submenu.awemenu-megamenu {
+    width: 100%!important;
+    right: auto !important;
+    left: 15px!important;
+  }
+  .header-style-default .account-icon .awemenu-submenu.awemenu-megamenu {
+    width: 100% !important;
+    right: auto !important;
+    left: 15px!important;
+  }
+  .header-style-default #block-md-block-custom-mls-search-block .menubar-search-form {
+    width: 500px !important;
+    right: 15px !important;
+    padding-top: 20px;
+    background: transparent;
+    box-shadow: none;
+  }
+  .header-style-default .md-megamenu-megamenu {
+    padding: 0 15px;
+  }
+  .header-style-default #block-md-block-custom-mls-search-block {
+    z-index: 999;
+  }
+  .header-style-default .md-megamenu-megamenu ul.awemenu li ul.awemenu-submenu {
+    width: 100% !important;
+  }
+}
+@media (max-width: 550px) {
+  .header-style-default #block-md-block-custom-mls-search-block .menubar-search-form {
+    width: 285px !important;
+    right: 15px !important;
+  }
+}

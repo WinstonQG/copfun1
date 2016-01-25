@@ -70,7 +70,7 @@ function md_hosoren_preprocess_page(&$vars, $hook) {
 								$vars['logo'] = file_create_url($file->uri);
 						}
 						else {
-								$vars['logo'] = $base_url . '/' . $themepath . '/logo.png';
+								$vars['logo'] = $base_url . '/' . $themepath . '/images/logo.png';
 						}
 				}
 				else {
@@ -311,7 +311,7 @@ function md_hosoren_preprocess_maintenance_page(&$vars) {
 
 
   // Logo  
-  $vars['logo'] = $base_url . '/' . drupal_get_path('theme', 'md_hosoren') . '/logo.png';
+  $vars['logo'] = $base_url . '/' . drupal_get_path('theme', 'md_hosoren') . '/images/logo.png';
   if (theme_get_setting('maintenance_logo')){
     $fid_logo_maintenance = theme_get_setting('maintenance_logo',null);
     $file = file_load($fid_logo_maintenance);

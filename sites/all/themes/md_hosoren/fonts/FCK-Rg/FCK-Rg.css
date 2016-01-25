@@ -1,0 +1,12 @@
+/* Webfont: FCK-Rg */@font-face {
+    font-family: 'FCK';
+    src: url('FCK-Rg.eot'); /* IE9 Compat Modes */
+    src: url('FCK-Rg.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+         url('FCK-Rg.woff') format('woff'), /* Modern Browsers */
+         url('FCK-Rg.ttf') format('truetype'), /* Safari, Android, iOS */
+         url('FCK-Rg.svg#FCK-Rg') format('svg'); /* Legacy iOS */
+    font-style: normal;
+    font-weight: normal;
+    text-rendering: optimizeLegibility;
+}
+
