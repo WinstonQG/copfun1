@@ -6,7 +6,7 @@
   <div class="<?php print $fluid; ?>">
     <?php foreach ($rows as $row):?>
     <div class="row">
-      <?php foreach ($row as $column):?>
+      <?php foreach ($row as $column):?>        
         <?php print render($column); ?>
       <?php endforeach; ?>
     </div>

@@ -20,7 +20,7 @@
   <div class="awe-col-content <?php print $settings['textAlign']; ?>">
     <?php print $overlay['html'];?>
     <div class="awe-col-wrapper">
-    <?php foreach ($items as $key => $item):?>
+    <?php foreach ($items as $key => $item):?>      
       <?php print render($item); ?>
     <?php endforeach ?>
     </div>

@@ -2015,7 +2015,7 @@ function awecontent_get_objects_item($without_perms=FALSE) {
       if ((!isset($user_permissions["awe_item_{$obj_name}"]) || !$user_permissions["awe_item_{$obj_name}"]) && !in_array($obj_name, array('drupal_block', 'drupal_field')))
         unset($short_codes[$obj_name]);
     }
-  }
+  }  
 
   return $short_codes;
 }

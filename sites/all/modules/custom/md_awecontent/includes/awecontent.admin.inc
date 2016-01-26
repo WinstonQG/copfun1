@@ -483,8 +483,7 @@ function ac_render_drupal_element() {
           if (isset($_POST['custom_title']) && $_POST['custom_title'])
             $block->title = $_POST['custom_title'];
 
-          $renderable_block = _block_get_renderable_array(_block_render_blocks(array($block)));
-
+          $renderable_block = _block_get_renderable_array(_block_render_blocks(array($block)));          
           $output = array(
             'status' => 1,
             'blockContent' => drupal_render($renderable_block)
@@ -548,7 +547,7 @@ function ac_render_drupal_element() {
             $field_instances = field_info_instance('node', $field_name, $node->type);
             if ($field_instances) {
               $display = field_get_display($field_instances, 'full', $node);
-              $field_render = field_view_field('node', $nodes[$node->nid], $field_name, $display);
+              $field_render = field_view_field('node', $nodes[$node->nid], $field_name, $display);              
               $field_content = drupal_render($field_render);
             }
             else {

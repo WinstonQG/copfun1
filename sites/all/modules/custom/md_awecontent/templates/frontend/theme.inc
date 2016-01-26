@@ -113,9 +113,10 @@ function awecontent_preprocess_awecontent_section(&$vars) {
  */
 function awecontent_preprocess_awecontent_column(&$vars) {
   $items = $vars['items'];
-  $short_codes = awecontent_get_objects_item(TRUE);
+  $short_codes = awecontent_get_objects_item(TRUE);  
   if (count($items) > 0) {
     foreach ($items as $key => $item) {
+
       $item['#settings'] = $item;
       $item['#node'] = $vars['node'];
       $item['#class_random'] = $vars['class_random'] . '-' . $key . '-' . $item['machine_name'];
@@ -123,7 +124,7 @@ function awecontent_preprocess_awecontent_column(&$vars) {
         if (isset($short_codes[$item['machine_name']]['callback_render'])
           && $short_codes[$item['machine_name']]['callback_render'] != ''
         ) {
-          $callback_render = $short_codes[$item['machine_name']]['callback_render'];
+          $callback_render = $short_codes[$item['machine_name']]['callback_render'];          
           $file_path = isset($short_codes[$item['machine_name']]['file_path']) ?
             $short_codes[$item['machine_name']]['file_path'] : FALSE;
           $file_name = isset($short_codes[$item['machine_name']]['file']) ?
@@ -145,11 +146,11 @@ function awecontent_preprocess_awecontent_column(&$vars) {
               $class_random,
               $vars['node']
             )) :
-            $warning;
+            $warning;            
         }
         elseif (isset($short_codes[$item['machine_name']]['theme_callback'])
           && $short_codes[$item['machine_name']]['theme_callback'] != ''
-        ) {
+        ) {          
           $item['#theme'] = $short_codes[$item['machine_name']]['theme_callback'];
         }
       }
@@ -1376,13 +1377,22 @@ function awecontent_preprocess_awe_accordion(&$vars) {
   drupal_add_css( $style, array('type' => 'inline', 'group' => CSS_THEME));
 }
 
-function awecontent_preprocess_awe_drupal_block(&$vars) {
+function awecontent_preprocess_awe_drupal_block(&$vars) {  
   $settings = $vars['settings'];
   $block = block_load($settings['module'], $settings['delta']);
   $block->awe_settings = $settings;
   $block->awe_node = $vars['node'];
-  $renderable_block = _block_get_renderable_array(_block_render_blocks(array($block)));
-  $vars['content'] = drupal_render($renderable_block);
+
+  $renderable_block = _block_get_renderable_array(_block_render_blocks(array($block)));  
+  
+  if (sizeof($renderable_block) > 1) {    
+    $vars['content'] = drupal_render($renderable_block); 
+  } else {        
+    $renderable_block['undef_block']['#markup'] = '<div class="awe-ub"></div>';
+    $vars['content'] = drupal_render($renderable_block); 
+
+  }
+  
 }
 
 /**
