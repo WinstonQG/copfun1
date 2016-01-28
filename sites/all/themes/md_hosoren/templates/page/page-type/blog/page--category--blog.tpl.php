@@ -276,7 +276,10 @@ global $base_url;
         </div>
       </div>
     </div>
-
+    
+    <?php print theme('md_hosoren_categories_list', 
+  array('page' => $page)); ?>
+  
     <?php print theme('md_hosoren_footer', array(
       'page' => $page, 
       'colum_number' => $select_collum_footer,
