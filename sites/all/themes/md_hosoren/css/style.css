@@ -18505,6 +18505,37 @@ span {
 ul li {
   font-family: FCK;
 }
+.col-xs-15,
+.col-sm-15,
+.col-md-15,
+.col-lg-15 {
+  position: relative;
+  min-height: 1px;
+  padding-right: 10px;
+  padding-left: 10px;
+}
+.col-xs-15 {
+  width: 20%;
+  float: left;
+}
+@media (min-width: 768px) {
+  .col-sm-15 {
+    width: 20%;
+    float: left;
+  }
+}
+@media (min-width: 992px) {
+  .col-md-15 {
+    width: 20%;
+    float: left;
+  }
+}
+@media (min-width: 1200px) {
+  .col-lg-15 {
+    width: 20%;
+    float: left;
+  }
+}
 .btn-primary,
 .fdsfds a {
   background-color: #005daf;
@@ -18514,4 +18545,12 @@ ul li {
 .fdsfds a:hover {
   background: #006dbf;
   border-color: #006dbf;
+}
+.l-categories-list {
+  padding-bottom: 45px;
+}
+.l-categories-list .item-list ul li {
+  margin: 0;
+  padding: 4px 0;
+  list-style: none;
 }

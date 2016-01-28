@@ -1,0 +1,17 @@
+name = FCK Categories
+core = 7.x
+package = Copengagen
+dependencies[] = features
+dependencies[] = taxonomy
+dependencies[] = views
+features[ctools][] = views:views_default:3.0
+features[features_api][] = api:2
+features[taxonomy][] = accessories
+features[taxonomy][] = baby
+features[taxonomy][] = clothing
+features[taxonomy][] = gifts
+features[taxonomy][] = match_kits
+features[views_view][] = fck_all_by_category
+features[views_view][] = fck_categories
+features_exclude[dependencies][ctools] = ctools
+project path = sites/all/modules/features

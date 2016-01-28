@@ -245,105 +245,64 @@ global $base_url;
 				<?php print $messages; ?>
 
         <div class="container">
-            <div class="row">
-                <?php if ($page['sidebar_first']): ?>
-                  <div id="sidebar-first" class="col-md-3 sidebar">
-                      <?php print render($page['sidebar_first']); ?>
-                  </div>
-                <?php endif; ?>
-
-                <?php if ($page['sidebar_first'] && $page['sidebar_second']): ?>
-                  <div id="content" class="col-md-6">
-                      <a id="main-content"></a>
-                      <?php print render($title_prefix); ?>
-                      <?php print render($title_suffix); ?>
-                      <?php if ($tabs): ?><div class="tabs"><?php print render($tabs); ?></div><?php endif; ?>
-                      <?php print render($page['help']); ?>
-                      <?php if ($action_links): ?><ul class="action-links"><?php print render($action_links); ?></ul><?php endif; ?>
-                      <?php print render($page['content']); ?>
-                      <?php print $feed_icons; ?>
-                  </div>
-                <?php elseif ($page['sidebar_first'] || $page['sidebar_second']): ?>
-                  <div id="content" class="col-md-9">
-                      <a id="main-content"></a>
-                      <?php print render($title_prefix); ?>
-                      <?php print render($title_suffix); ?>
-                      <?php if ($tabs): ?><div class="tabs"><?php print render($tabs); ?></div><?php endif; ?>
-                      <?php print render($page['help']); ?>
-                      <?php if ($action_links): ?><ul class="action-links"><?php print render($action_links); ?></ul><?php endif; ?>
-                      <?php print render($page['content']); ?>
-                      <?php print $feed_icons; ?>
-                  </div>
-                <?php else: ?>
-                  <div id="content">
-                      <a id="main-content"></a>
-                      <?php print render($title_prefix); ?>
-                      <?php print render($title_suffix); ?>
-                      <?php if ($tabs): ?><div class="tabs"><?php print render($tabs); ?></div><?php endif; ?>
-                      <?php print render($page['help']); ?>
-                      <?php if ($action_links): ?><ul class="action-links"><?php print render($action_links); ?></ul><?php endif; ?>
-                      <?php print render($page['content']); ?>
-                      <?php print $feed_icons; ?>
-                  </div>
-                <?php endif; ?>
-
-                <?php if ($page['sidebar_second']): ?>
-                  <div id="sidebar-second" class="col-md-3 sidebar">
-                      <?php print render($page['sidebar_second']); ?>
-                  </div>
-                <?php endif; ?>
-            </div>
-        </div>
-
-    </div>
-
-<footer class="footer clearfix">
-        <div class="footer-wrapper">
-            <div class="footer-widgets">
-                <div class="container">
-                    <div class="row">
-                        <?php if ($page['footer_first']): ?>
-                          <div class="<?php print $footer_setting_region_1;?>">
-                              <?php print render($page['footer_first']); ?>
-                          </div>
-                        <?php endif; ?>
-
-                        <?php if ($page['footer_second'] & $select_collum_footer != '4' ): ?>
-                          <div class="<?php print $footer_setting_region_2;?>">
-                              <?php print render($page['footer_second']); ?>
-                          </div>
-                        <?php endif; ?>
-
-                        <?php if ($page['footer_third'] & $select_collum_footer != '4' & $select_collum_footer !='3' ): ?>
-                          <div class="<?php print $footer_setting_region_3;?>">
-                              <?php print render($page['footer_third']); ?>
-                          </div>
-                        <?php endif; ?>
-
-                        <?php if ($page['footer_fourth'] & $select_collum_footer != '4' & $select_collum_footer !='3' & $select_collum_footer != '2'  ): ?>
-                          <div class="<?php print $footer_setting_region_4;?>">
-                              <?php print render($page['footer_fourth']); ?>
-                          </div>
-                        <?php endif; ?>
-                    </div>
-                </div>
-            </div>
-            <?php if ($page['footer_bottom']): ?>
-              <div class="footer-copyright">
-                <div class="container">
-                  <?php print render($page['footer_bottom']); ?>
-                </div>
+          <div class="row">
+            <?php if ($page['sidebar_first']): ?>
+              <div id="sidebar-first" class="col-md-3 sidebar">
+                  <?php print render($page['sidebar_first']); ?>
               </div>
-            <?php endif;?>
-            <?php print render($page['footer']); ?>
-        </div>
-        <a href="#" class="back-top" title="">
-                <span class="back-top-image">
-                    <img src="<?php print $base_url.'/'.drupal_get_path('theme', 'md_hosoren');?>/images/back-top.png" alt="">
-                </span>
+            <?php endif; ?>
 
-                <small><?php print t('Back to top'); ?></small>
-            </a>
-    </footer>
+            <?php if ($page['sidebar_first'] && $page['sidebar_second']): ?>
+              <div id="content" class="col-md-6">
+                  <a id="main-content"></a>
+                  <?php print render($title_prefix); ?>
+                  <?php print render($title_suffix); ?>
+                  <?php if ($tabs): ?><div class="tabs"><?php print render($tabs); ?></div><?php endif; ?>
+                  <?php print render($page['help']); ?>
+                  <?php if ($action_links): ?><ul class="action-links"><?php print render($action_links); ?></ul><?php endif; ?>
+                  <?php print render($page['content']); ?>
+                  <?php print $feed_icons; ?>
+              </div>
+            <?php elseif ($page['sidebar_first'] || $page['sidebar_second']): ?>
+              <div id="content" class="col-md-9">
+                  <a id="main-content"></a>
+                  <?php print render($title_prefix); ?>
+                  <?php print render($title_suffix); ?>
+                  <?php if ($tabs): ?><div class="tabs"><?php print render($tabs); ?></div><?php endif; ?>
+                  <?php print render($page['help']); ?>
+                  <?php if ($action_links): ?><ul class="action-links"><?php print render($action_links); ?></ul><?php endif; ?>
+                  <?php print render($page['content']); ?>
+                  <?php print $feed_icons; ?>
+              </div>
+            <?php else: ?>
+              <div id="content">
+                  <a id="main-content"></a>
+                  <?php print render($title_prefix); ?>
+                  <?php print render($title_suffix); ?>
+                  <?php if ($tabs): ?><div class="tabs"><?php print render($tabs); ?></div><?php endif; ?>
+                  <?php print render($page['help']); ?>
+                  <?php if ($action_links): ?><ul class="action-links"><?php print render($action_links); ?></ul><?php endif; ?>
+                  <?php print render($page['content']); ?>
+                  <?php print $feed_icons; ?>
+              </div>
+            <?php endif; ?>
+
+            <?php if ($page['sidebar_second']): ?>
+              <div id="sidebar-second" class="col-md-3 sidebar">
+                  <?php print render($page['sidebar_second']); ?>
+              </div>
+            <?php endif; ?>
+          </div>
+        </div>
+      </div>
+  
+  <?php print theme('md_hosoren_footer', array(
+    'page' => $page, 
+    'colum_number' => $select_collum_footer,
+    'footer_setting_region_1' => $footer_setting_region_1,
+    'footer_setting_region_2' => $footer_setting_region_2,
+    'footer_setting_region_3' => $footer_setting_region_3,
+    'footer_setting_region_4' => $footer_setting_region_4,
+  )); ?>
 
 </div>

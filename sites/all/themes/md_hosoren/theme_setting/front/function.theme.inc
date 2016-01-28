@@ -480,6 +480,27 @@ function md_hosoren_theme() {
     'template' => 'simplenews-block-form',
     'path' => $path . '/simplenews',
   );
+  // Categories list
+  $themes['md_hosoren_categories_list'] = array(    
+    'variables' => array(
+      'page' => NULL,       
+    ),
+    'template' => 'categories-list',
+    'path' => $path . '/page'
+  );
+  // Footer
+  $themes['md_hosoren_footer'] = array(    
+    'variables' => array(
+      'page' => NULL, 
+      'colum_number' => 0,
+      'footer_setting_region_1' => '',
+      'footer_setting_region_2' => '',
+      'footer_setting_region_3' => '',
+      'footer_setting_region_4' => '',     
+    ),
+    'template' => 'footer',
+    'path' => $path . '/page'
+  );
 
   return $themes;
 }
