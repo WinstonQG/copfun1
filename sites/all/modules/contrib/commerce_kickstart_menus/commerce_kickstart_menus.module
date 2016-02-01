@@ -373,7 +373,7 @@ function commerce_kickstart_menus_menu_alter(&$items) {
   if (module_exists('commerce_discount') && isset($items['admin/commerce/store/discounts'])) {
     $items['admin/commerce/store/discounts']['parent'] = 'admin/commerce/config/promotions';
   }
-  $advanced_store_items = array(
+  $advanced_store_items = array(    
     'admin/commerce/customer-profiles',
     'admin/commerce/config/shipping',
     'admin/commerce/config/taxes',
@@ -386,6 +386,10 @@ function commerce_kickstart_menus_menu_alter(&$items) {
     'admin/commerce/config/commerce_search_api',
     'admin/commerce/config/demo',
   );
+  if (module_exists('commerce_coupon') && isset($items['admin/commerce/coupons'])) {
+    $items['admin/commerce/coupons']['parent'] = 'admin/commerce/config/promotions';
+  }
+
   $weight = 0;
   foreach ($advanced_store_items as $advanced_store_item) {
     if (isset($items[$advanced_store_item])) {
