@@ -1,0 +1,59 @@
+<?php
+
+/**
+ * @file
+ * Commerce Billy PDF installation file.
+ */
+
+/**
+ * Implements hook_enable().
+ */
+function commerce_billy_pdf_enable() {
+  // Init some defaults.
+  $commerce_billy_pdf_text_settings = array(
+    'invoice_header' => 'My company<br/>Street 123, State<br/>United States',
+    'invoice_location' => 'Location',
+    'invoice_text' => '',
+    'invoice_footer' => 'My company, Street 123, State, United States',
+  );
+  variable_set(
+    'commerce_billy_pdf_text_settings_default',
+    variable_get('commerce_billy_pdf_text_settings_default', $commerce_billy_pdf_text_settings)
+  );
+}
+
+/**
+ * Implements hook_uninstall().
+ */
+function commerce_billy_pdf_uninstall() {
+  _commerce_billy_pdf_delete_variables();
+}
+
+/**
+ * Helper function to delete all variables that we might have set.
+ */
+function _commerce_billy_pdf_delete_variables() {
+  global $conf;
+  $variables = array();
+  foreach (array_keys($conf) as $key) {
+    if (preg_match('/^commerce_billy_pdf_.+/', $key)) {
+      array_push($variables, $key);
+    }
+  }
+  foreach ($variables as $variable) {
+    variable_del($variable);
+  }
+}
+
+/**
+ * Rename all default variables set by 7.x-1.0 or earlier.
+ */
+function commerce_billy_pdf_update_7100() {
+  variable_set('commerce_billy_pdf_text_settings_default', variable_get('commerce_billy_pdf_text_settings'));
+  variable_del('commerce_billy_pdf_text_settings');
+  variable_set('commerce_billy_pdf_logo_default', variable_get('commerce_billy_pdf_logo'));
+  variable_del('commerce_billy_pdf_logo');
+  variable_set('commerce_billy_pdf_css_files_default', variable_get('commerce_billy_pdf_css_files'));
+  variable_del('commerce_billy_pdf_css_files');
+  return array();
+}

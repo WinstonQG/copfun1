@@ -1,0 +1,6 @@
+name = Commerce Kickstart Custom
+description = Provide common functions from Kickstart .profile file
+package = Commerce Kickstart
+core = 7.x
+; Files
+dependencies[] = features
