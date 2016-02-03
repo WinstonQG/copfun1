@@ -20,7 +20,7 @@
         this.bootstrapBacktop();
         this.bootstrapBackgroundParallax();
         this.bootstrapToogle();
-        this.bootstrapProductsThumbSwap();
+        //this.bootstrapProductsThumbSwap();
     };
 
     hosoren.bootstrapProductsThumbSwap = function() {

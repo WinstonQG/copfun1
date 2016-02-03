@@ -196,6 +196,7 @@ function aweProductRender(thumbHorizontal) {
         $('.easyzoom').easyZoom();
     }
 
+    /*
     var sMain = new Swiper('.product-slider-main', {
         loop: false,
 
@@ -214,4 +215,5 @@ function aweProductRender(thumbHorizontal) {
 
     sMain.params.control = sThumb;
     sThumb.params.control = sMain;
+    */
 }

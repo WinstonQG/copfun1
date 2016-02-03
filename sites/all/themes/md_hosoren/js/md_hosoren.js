@@ -1,5 +1,23 @@
 (function ($) {
 
+    Drupal.behaviors.testAjax = {
+      
+        attach: function(data, settings) { 
+            /* Product Single */
+            if ($('.product-slider-main').length > 0) {
+                aweProductRender(true);
+            }
+
+            if ($('.product-quickview-slider').length > 0) {
+                $('.product-quickview-slider').owlCarousel({
+                    items: 1,
+                    navigation: true,
+                    pagination: false
+                });
+            }
+        }
+    };
+
 		$(window).load(function() {
         if (window.SHOW_LOADING) {
             var $body = $('body')
@@ -61,10 +79,8 @@
         $(function () {
             aweTestimonialMasonry();
         });
+        
 
-
-
-        /* Product Single */
         if ($('.product-slider-main').length > 0) {
             aweProductRender(true);
         }

@@ -97,9 +97,11 @@ function md_hosoren_preprocess_node(&$vars) {
 
     //field categories
     $categories_content = '';
-    $field_categories = field_get_items('node', $node, 'field_product_category');
-    foreach ($field_categories as $key => $categories_item) {
-      $categories_content .= l($categories_item['taxonomy_term']->name, 'taxonomy/term/' . $categories_item['taxonomy_term']->tid);
+    $field_categories = field_get_items('node', $node, 'field_product_category');    
+    if (isset($field_categories) && !empty($field_categories)) {
+      foreach ($field_categories as $key => $categories_item) {
+        $categories_content .= l($categories_item['taxonomy_term']->name, 'taxonomy/term/' . $categories_item['taxonomy_term']->tid);
+      }
     }
     $vars['categories_list'] = $categories_content;
   }

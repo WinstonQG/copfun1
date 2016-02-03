@@ -139,10 +139,9 @@
         <h2 class="product-name"><a href="<?php print $node_url; ?>"><?php print $title; ?></a></h2>
         <div class="product-category"><span><?php print $categories_list; ?></span></div>
         <div class="product-price"><?php print render($content['product:commerce_price']); ?><?php print render($content['product:field_price_old']); ?></div>
-    </div>
-
+    </div>    
     <!-- Modal -->
-      <?php if (isset($content['field_product_store'][0]['quantity'])):?>
+      <?php if (isset($content['field_product_store'])):?>
         <div class="mfp-wrap modal-product product-<?php print $node->nid; ?>">
           <div class="mfp-container mfp-ajax-holder mfp-s-ready">
             <div class="mfp-content">
@@ -155,6 +154,7 @@
                     <?php endif; ?>
                     <div class="product-body">
                       <h2 class="product-name"><a href="<?php print $node_url; ?>"><?php print $title; ?></a></h2>
+                      <?php if (0) : ?>
                       <div class="product-status">
                         <?php if (isset($content['field_product_store'][0]['quantity'])):?>
                             <span><?php print t('In Stock') ?></span><span>-</span><div class="small inline"><?php print render($content['product:sku']); ?></div>
@@ -162,6 +162,7 @@
                             <h5><?php print t('SOLD OUT')?></h5>
                         <?php endif; ?>
                       </div>
+                      <?php endif; ?>
                       <!-- /.product-status -->
 
                       <div class="product-price"><?php print render($content['product:commerce_price']); ?></div>
@@ -171,7 +172,7 @@
 
                       <div class="product-list-actions-wrapper">
                           <?php print render($content['field_product_store']); ?>
-                          <?php if(user_is_logged_in()) : ?>
+                          <?php if (user_is_logged_in()) : ?>
                             <?php if (isset($content['flag_wishlist']['#markup'])): ?>
                               <?php print render($content['flag_wishlist']['#markup']); ?>
                             <?php endif; ?>
@@ -202,11 +203,13 @@
   <div class="product product-list <?php print $classes; ?> node-<?php print $node->nid; ?> shop_teaser clearfix"<?php print $attributes; ?>>
     
     <div class="product-media">
+      <?php if (isset($content['product:field_product_images'])) : ?>
       <div class="product-thumbnail">
         <a href="<?php print $node_url; ?>">
           <img src="<?php print image_style_url('product_teaser',$content['product:field_product_images']['#items'][0]['uri'])?>" alt="<?php print render($content['product:field_product_images']['#items'][0]['alt']); ?>">
         </a>
       </div>
+      <?php endif; ?>
       <!-- /.product-thumbnail -->
 
       <?php if (isset($content['product:field_price_old'][0]['#markup'])): ?>
@@ -224,8 +227,9 @@
 
         <div class="product-price"><?php print render($content['product:commerce_price']); ?></div>
 
+        <?php if (0) : ?>
         <div class="product-stars"><?php print render($content['field_rate_five']); ?></div>
-
+        <?php endif; ?>
         <div class="product-description">
             <p><?php print render($content['body']['#items'][0]['summary']); ?></p>
         </div>
@@ -273,7 +277,8 @@
 
         <div class="product-details-wrapper productcart_inline">
           <h2 class="product-name"><?php print $title; ?></h2>
-
+          
+          <?php if (0) : ?>
           <div class="product-status">
             <?php if (isset($content['field_product_store'][0]['quantity'])):?>
                 <span><?php print t('In Stock') ?></span><span>-</span><div class="small inline"><?php print render($content['product:sku']); ?></div>
@@ -281,11 +286,14 @@
                 <h5><?php print t('SOLD OUT')?></h5>
             <?php endif; ?>
           </div>
+          <?php endif; ?>                    
           <!-- /.product-status -->
-
+          
+          <?php if (0) : ?>
           <div class="product-stars">
             <?php print render($content['field_rate_five']); ?>
           </div>
+          <?php endif; ?>
           <!-- /.product-stars -->
 
           <span class="product-price"><?php print render($content['product:commerce_price']); ?><?php print render($content['product:field_price_old']); ?></span>
@@ -302,14 +310,20 @@
           </div>
           <!-- /.product-description -->
 
-          <?php if (isset($content['field_product_store'][0]['quantity'])): ?>
+          <?php if (isset($content['field_product_store'])): ?>
             <div class="product-actions-wrapper">
                 <?php print render($content['field_product_store']); ?>
             </div>
           <?php endif; ?>
           <!-- /.product-actions-wrapper -->
-
+                    
+          <?php if (isset($content['flag_wishlist']['#markup'])): ?>
+            <?php print render($content['flag_wishlist']['#markup']); ?>
+          <?php endif; ?>
+          
+          <?php if (0) : ?>
           <div class="product-meta"><span class="product-category"><span><?php print render($content['field_product_category']['#title']); ?>:</span><?php print $categories_list; ?></span><span> - </span><span class="product-tags"><span>Tags:</span><?php print render($content['field_tags']); ?></span></div>
+          <?php endif; ?>
           <!-- /.product-meta -->
         </div>
       </div>
@@ -319,6 +333,7 @@
           <?php print render($content['sharethis']); ?>
         </div>
     <?php endif; ?>
+    <?php if (0) : ?>
      <div class="product-details-left">
         <div role="tabpanel" class="product-details">
           <?php if (isset($content['comments'])): ?>
@@ -368,5 +383,6 @@
           <?php endif; ?>
           </div>
       </div>
+      <?php endif; ?>
   </div>
 <?php endif; ?>

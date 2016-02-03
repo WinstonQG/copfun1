@@ -513,7 +513,7 @@ input[type="submit"] + input[type="submit"]{
 /*Customer Carousel*/
 .customers-carousel.owl-theme .owl-controls .owl-page.active span {
     background: #333;
-    border: 1px solid#fff;
+    border: 1px solid #fff;
 
 }
 .customers-carousel.owl-theme .owl-controls .owl-page span{
@@ -569,7 +569,7 @@ input[type="submit"] + input[type="submit"]{
 }
 #block-node-recent .delete a {
     padding: 5px;
-    border-bottom: 1px solid#ccc;
+    border-bottom: 1px solid #ccc;
 }
 
 #block-node-recent ul {
@@ -636,7 +636,11 @@ input[type="submit"] + input[type="submit"]{
 .commerce-add-to-cart .form-submit{
     font-size: 12px;
     letter-spacing: 1px;
-    padding: 12px 25px;
+    padding: 12px 25px;    
+    &:focus {
+        background: @active_color;
+        border-color: @active_color;
+    } 
 }
 
 

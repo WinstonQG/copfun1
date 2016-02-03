@@ -9740,7 +9740,7 @@ img {
   color: #3CBC8D;
 }
 .alert-warning {
-  background-color: #FCA13F;
+  background-color: #005daf;
   border-color: transparent;
   color: #fff;
 }
@@ -9751,12 +9751,12 @@ img {
   color: #e6e6e6;
 }
 .alert-warning.alert-outline {
-  color: #FCA13F;
+  color: #005daf;
   background-color: transparent;
-  border-color: #FCA13F;
+  border-color: #005daf;
 }
 .alert-warning.alert-outline .close {
-  color: #FCA13F;
+  color: #005daf;
 }
 .alert-danger {
   background-color: #fd6a4d;
@@ -10379,8 +10379,8 @@ img {
 }
 .btn-warning {
   color: #fff;
-  background-color: #FCA13F;
-  border-color: #FCA13F;
+  background-color: #005daf;
+  border-color: #005daf;
 }
 .btn-warning:focus,
 .btn-warning.focus {
@@ -10424,14 +10424,14 @@ img {
   border-radius: 50px;
 }
 .btn-warning.btn-outline {
-  color: #FCA13F;
-  border-color: #FCA13F;
+  color: #005daf;
+  border-color: #005daf;
   background: transparent;
 }
 .btn-warning.btn-outline:hover {
   color: #fff;
-  border-color: #FCA13F;
-  background: #FCA13F;
+  border-color: #005daf;
+  background: #005daf;
 }
 .btn-warning.btn-outline:active,
 .btn-warning.btn-outline.active,
@@ -10746,7 +10746,7 @@ img {
   background-color: #3CBC8D;
 }
 .progress-bar-warning {
-  background-color: #FCA13F;
+  background-color: #005daf;
 }
 .progress-bar-danger {
   background-color: #fd6a4d;
@@ -13179,7 +13179,7 @@ h2.entry-title {
 .nano > .nano-pane > .nano-slider:hover,
 .nano > .nano-pane > .nano-slider:focus,
 .nano > .nano-pane > .nano-slider:active {
-  background: #ffbe4d;
+  background: #005daf;
 }
 .owl-carousel .owl-nav .owl-prev,
 .owl-carousel .owl-nav .owl-next {
@@ -16468,7 +16468,7 @@ input[type="submit"] + input[type="submit"] {
 /*Customer Carousel*/
 .customers-carousel.owl-theme .owl-controls .owl-page.active span {
   background: #333;
-  border: 1px solid#fff;
+  border: 1px solid #fff;
 }
 .customers-carousel.owl-theme .owl-controls .owl-page span {
   background: #fff;
@@ -16521,7 +16521,7 @@ input[type="submit"] + input[type="submit"] {
 }
 #block-node-recent .delete a {
   padding: 5px;
-  border-bottom: 1px solid#ccc;
+  border-bottom: 1px solid #ccc;
 }
 #block-node-recent ul {
   padding: 0;
@@ -16581,6 +16581,10 @@ input[type="submit"] + input[type="submit"] {
   font-size: 12px;
   letter-spacing: 1px;
   padding: 12px 25px;
+}
+.commerce-add-to-cart .form-submit:focus {
+  background: #005daf;
+  border-color: #005daf;
 }
 /* Shop Teaser */
 .product-list-actions .field-name-field-product-store {
