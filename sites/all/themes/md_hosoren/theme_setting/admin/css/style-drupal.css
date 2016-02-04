@@ -269,6 +269,10 @@ input.form-submit:active {
     color: #5A5A5A;
 }
 
+input.form-submit:select {
+    background: @active_color;
+}
+
 .md-updateimage {
     margin-bottom: 30px;
     position: relative;

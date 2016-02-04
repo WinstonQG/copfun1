@@ -90,8 +90,10 @@
 						</div>
 					<?php endforeach; ?>
 				</div>
+				<?php if (0) : ?>
         <div class="swiper-button-prev"><i class="icon icon-left-open"></i></div>
         <div class="swiper-button-next"><i class="icon icon-right-open"></i></div>
+      	<?php endif; ?>
 		</div>
 		<div class="swiper-container product-slider-thumbs">
 	    <div class="swiper-wrapper">

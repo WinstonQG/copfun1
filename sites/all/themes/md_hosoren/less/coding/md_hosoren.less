@@ -654,26 +654,33 @@ input[type="submit"] + input[type="submit"]{
 }
 
 /* Button Wishlist */
-.logged-in .product-quickview-popup a.product-quick-whistlist, .logged-in .shop_teaser a.product-quick-whistlist{
+.logged-in .product-quickview-popup a.product-quick-whistlist, 
+.logged-in .shop_teaser a.product-quick-whistlist,
+.logged-in .product_full a.product-quick-whistlist {
   text-indent: -99999px;
   background: url("img/wishlist.png") no-repeat;
   height: 38px;
   width: 167px;
   display: block;
 }
-.logged-in .product-quickview-popup a.has_wishlist, .logged-in .shop_teaser a.has_wishlist{
+.logged-in .product-quickview-popup a.has_wishlist, 
+.logged-in .shop_teaser a.has_wishlist,
+.logged-in .product_full a.has_wishlist {
   background: url("img/no_wishlist.png") no-repeat;
 }
-.product-quickview-popup .tooltip, .logged-in .shop_teaser .tooltip{
+.product-quickview-popup .tooltip, 
+.logged-in .shop_teaser .tooltip,
+.logged-in .product_full .tooltip {
   display: none !important;
 }
-.logged-in .product-quickview-popup a.product-quick-whistlist:hover, .logged-in .shop_teaser a.product-quick-whistlist:hover{
+.logged-in .product-quickview-popup a.product-quick-whistlist:hover, 
+.logged-in .shop_teaser a.product-quick-whistlist:hover,
+.logged-in .product_full a.product-quick-whistlist:hover {
   opacity: 0.9;
 }
 
 .logged-in .shop_teaser a.product-quick-whistlist{
-  display: inline-block;
-  vertical-align: middle;
+  margin-top: 15px;
 }
 
 

@@ -119,7 +119,7 @@
                   <?php endif; ?>
                 <?php else : ?>
                   <a href="<?php print base_path().'user'; ?>"  class="awe-button product-quick-whistlist" data-toggle="tooltip" title="Add to whistlist"><i class="icon icon-star"></i></a>
-                <?php endif; ?>
+                <?php endif; ?>                
                 <a href="#" class="awe-button quick-view-product" data-node-modal="product-<?php print $node->nid; ?>" data-toggle="tooltip" title="Quickview">
                     <i class="icon icon-eye"></i>
                 </a>
@@ -181,8 +181,9 @@
                           <?php endif; ?>
                       </div>
                       <!-- /.product-actions-wrapper -->
-
+                      <?php if (0) : ?>
                       <div class="product-meta"><span class="product-category"><span><?php print render($content['field_product_category']['#title']); ?>:</span><?php print $categories_list; ?></span><span> - </span><span class="product-tags"><span>Tags:</span><?php print render($content['field_tags']); ?></span></div>
+                      <?php endif; ?>
                       <!-- /.product-meta -->
                     
                     </div>  
@@ -304,7 +305,7 @@
             </div>
           <?php endif; ?>
           <div class="product-features">
-              <h3><?php print render($content['body']['#title']); ?>:</h3>
+              <h3><?php print render($content['body']['#title']); ?></h3>
               <?php print render($content['body'][0]['#markup']); ?>
           </div>
           <!-- /.product-description -->          

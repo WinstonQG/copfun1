@@ -196,12 +196,12 @@ function aweProductRender(thumbHorizontal) {
         $('.easyzoom').easyZoom();
     }
 
-    /*
+    
     var sMain = new Swiper('.product-slider-main', {
         loop: false,
 
-        nextButton: '.swiper-button-next',
-        prevButton: '.swiper-button-prev'
+        //nextButton: '.swiper-button-next',
+        //prevButton: '.swiper-button-prev'
     });
 
     var sThumb = new Swiper('.product-slider-thumbs', {
@@ -212,8 +212,7 @@ function aweProductRender(thumbHorizontal) {
         direction: thumbHorizontal ? 'horizontal' : 'vertical',
         slideToClickedSlide: true
     });
-
+    
     sMain.params.control = sThumb;
-    sThumb.params.control = sMain;
-    */
+    sThumb.params.control = sMain;    
 }
