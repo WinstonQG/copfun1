@@ -72,11 +72,19 @@
 <?php else: ?>
     
 	<?php if(count($items) == 1):?>
-		<div class="easyzoom easyzoom--overlay">
-			<a href="<?php print file_create_url($items[0]['#item']['uri']); ?>" title="<?php print render($items[0]['#item']['title']); ?>">
-	        <img src="<?php print image_style_url('product_full',$items[0]['#item']['uri']); ?>" alt="<?php print render($items[0]['#item']['alt']); ?>">
-	    </a>
+		<div class="swiper-container product-slider-main">
+      <div class="swiper-wrapper">
+				<div class="easyzoom easyzoom--overlay">
+					<a href="<?php print file_create_url($items[0]['#item']['uri']); ?>" title="<?php print render($items[0]['#item']['title']); ?>">
+			        <img src="<?php print image_style_url('product_full',$items[0]['#item']['uri']); ?>" alt="<?php print render($items[0]['#item']['alt']); ?>">
+			    </a>
+				</div>
+			</div>
 		</div>
+		<div class="swiper-container product-slider-thumbs">
+	    <div class="swiper-wrapper">
+	    </div>
+	  </div>
 	<?php else: ?>	
 		<div class="swiper-container product-slider-main">
 	      <div class="swiper-wrapper">

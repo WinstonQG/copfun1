@@ -304,8 +304,7 @@
                 <p><?php print render($content['body']['#items'][0]['summary']); ?></p>
             </div>
           <?php endif; ?>
-          <div class="product-features">
-              <h3><?php print render($content['body']['#title']); ?></h3>
+          <div class="product-features">              
               <?php print render($content['body'][0]['#markup']); ?>
           </div>
           <!-- /.product-description -->          

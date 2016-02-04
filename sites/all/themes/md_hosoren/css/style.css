@@ -12053,11 +12053,15 @@ h2.entry-title {
   margin-bottom: 30px;
 }
 .product-media {
-  background: #F7F7F7;
+  background: #fff;
   text-align: center;
   overflow: hidden;
   position: relative;
   z-index: 40;
+}
+.products .product-media {
+  background: #fff;
+  height: 320px;
 }
 .product-media a {
   display: block;
@@ -12244,6 +12248,12 @@ h2.entry-title {
 .whishlist > li:last-child .cart-item,
 .cart-list > li:last-child .cart-item {
   margin-bottom: 0;
+}
+.cart-icon ul.whishlist li .whishlist-item a img {
+  height: auto !important;
+}
+.modal-product .product-media {
+  height: 490px;
 }
 .whishlist-item,
 .cart-item {
