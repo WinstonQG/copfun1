@@ -52,7 +52,12 @@
                 return;
             }
 
+            if (settings.views_infinite_scroll == undefined) {
+                return;
+            }
             var settings = settings.views_infinite_scroll[0];
+
+
 
             // Ensure we are refreshing the view component.
             var view_selector = 'div.view-id-' + settings.view_name + '.view-display-id-' + settings.display;
