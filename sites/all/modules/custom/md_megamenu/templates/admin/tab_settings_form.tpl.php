@@ -51,6 +51,9 @@
               <input type="text" name="submenu_width" class="form-text w60" value="" />
               <span class="field-suffix">px</span>
             </div>
+            <div class="form-item form-item-hide-logged-in">
+              <input type="checkbox" name="hide_logged_in" id="hide-logged-in"/><label for="hide-logged-in">Hide when logged in</label>
+            </div>
             <div class="form-item form-cssclasses">
               <label for="mnu_class"><?php print t('Custom classes')?></label>
               <input type="text" name="mnu_class" id="mnu_class" class="form-text" value="" />

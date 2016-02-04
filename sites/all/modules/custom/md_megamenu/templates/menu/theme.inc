@@ -213,7 +213,7 @@ function template_preprocess_megamenu_tab_theme(&$variables) {
   $variables['path'] = ($tab->settings['general']['path'] != '') ? $tab->settings['general']['path'] : '#';
 
   if (is_active_link($variables['path'], $_GET['q'])) {
-    $tab->classes[] = 'mm-active';
+    $tab->classes[] = 'awemenu-active';
   }
   $variables['tab_classes'] = implode(' ', $tab->classes);
 }
@@ -453,7 +453,7 @@ function template_preprocess_megamenu_dropdown_tab(&$variables) {
   $variables['tab_content'] = render_dropdown_tab_frontend($tab->items, $children_active, $actived);
 
   if ($children_active || $actived) {
-    $tab->classes[] = 'mm-active';
+    $tab->classes[] = 'awemenu-active';
   }
   $variables['tab_classes'] = implode(' ', $tab->classes);
 }
@@ -473,7 +473,7 @@ function render_dropdown_tab_frontend($items, &$active, $parent_actived = FALSE)
       $item_path = ($item->setting->a_path != '#') ? url($item->setting->a_path, array('absolute' => TRUE)) : '';
       if (!$parent_actived && is_active_link($item_path, $_GET['q'])) {
         $current_active = TRUE;
-        $a_classes[] = 'active';
+        $a_classes[] = 'awemenu-active';
       }
 
       if (count($item->subItems)) {
@@ -483,7 +483,7 @@ function render_dropdown_tab_frontend($items, &$active, $parent_actived = FALSE)
 
       if ($current_active || $child_active) {
         $active = TRUE;
-        $li_classes[] = 'mm-active';
+        $li_classes[] = 'awemenu-active';
       }
 
       $options = array();
@@ -645,51 +645,53 @@ function md_megamenu_preprocess_md_megamenu(&$vars) {
     $general_settings = $item->settings['general'];
     $layout_settings = $item->settings['layout'];
 
-    $item_data = array(
-      'title_enabled' => $item->settings['general']['title_enable'],
-      'title' => $item->settings['general']['title'],
-      'path' => $item->settings['general']['path'],
-      'target' => '',
-      'icon' => $item->settings['general']['icon'],
-      'classes' => $item->settings['general']['css_class'],
-      'position' => isset($item->settings['general']['item_position']) ? $item->settings['general']['item_position'] : 'auto'
-    );
+    if (!isset($general_settings['hide_when_logged_in']) || !$general_settings['hide_when_logged_in']) {
+      $item_data = array(
+        'title_enabled' => $item->settings['general']['title_enable'],
+        'title' => $item->settings['general']['title'],
+        'path' => $item->settings['general']['path'],
+        'target' => '',
+        'icon' => $item->settings['general']['icon'],
+        'classes' => $item->settings['general']['css_class'],
+        'position' => isset($item->settings['general']['item_position']) ? $item->settings['general']['item_position'] : 'auto'
+      );
 
-    $is_fullwidth = TRUE;
-    if (isset($general_settings['submenu_fullwidth'])) {
-      $is_fullwidth = $general_settings['submenu_fullwidth'];
-    }
-    elseif (isset($layout_settings['is_full_width'])) {
-      $is_fullwidth = $layout_settings['is_full_width'];
-    }
+      $is_fullwidth = TRUE;
+      if (isset($general_settings['submenu_fullwidth'])) {
+        $is_fullwidth = $general_settings['submenu_fullwidth'];
+      }
+      elseif (isset($layout_settings['is_full_width'])) {
+        $is_fullwidth = $layout_settings['is_full_width'];
+      }
 
-    $submenu_width = !$general_settings['is_dropdown_menu'] ? 250 : '100%';
-    if (isset($general_settings['submenu_width'])) {
-      $submenu_width = $general_settings['submenu_width'];
-    }
-    elseif (isset($layout_settings['submenu_width'])) {
-      $submenu_width = $layout_settings['submenu_width'];
-    }
+      $submenu_width = !$general_settings['is_dropdown_menu'] ? 250 : '100%';
+      if (isset($general_settings['submenu_width'])) {
+        $submenu_width = $general_settings['submenu_width'];
+      }
+      elseif (isset($layout_settings['submenu_width'])) {
+        $submenu_width = $layout_settings['submenu_width'];
+      }
 
-    $submenu = array(
-      'data' => $item->items,
-      'settings' => array(
-        'is_mega' => !$general_settings['is_dropdown_menu'],
-        'is_fullwidth' => $is_fullwidth,
-        'submenu_width' => $submenu_width
-      )
-    );
+      $submenu = array(
+        'data' => $item->items,
+        'settings' => array(
+          'is_mega' => !$general_settings['is_dropdown_menu'],
+          'is_fullwidth' => $is_fullwidth,
+          'submenu_width' => $submenu_width
+        )
+      );
 
-    if (!$item->settings['general']['is_dropdown_menu']) {
-      $submenu['layout'] = $item->settings['layout'];
+      if (!$item->settings['general']['is_dropdown_menu']) {
+        $submenu['layout'] = $item->settings['layout'];
+      }
+      $items_render[] = array(
+        '#theme' => 'awemenu_item',
+        '#menu' => $menu,
+        '#item' => $item_data,
+        '#submenu' => $submenu,
+        '#level' => 1
+      );
     }
-    $items_render[] = array(
-      '#theme' => 'awemenu_item',
-      '#menu' => $menu,
-      '#item' => $item_data,
-      '#submenu' => $submenu,
-      '#level' => 1
-    );
   }
   $vars['menu_items'] = $items_render;
 }

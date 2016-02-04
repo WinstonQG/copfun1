@@ -11,7 +11,7 @@ function md_product_field_default_field_instances() {
   $field_instances = array();
 
   // Exported field_instance:
-  // 'comment-comment_node_shop_product-field_your_rating'
+  // 'comment-comment_node_shop_product-field_your_rating'.
   $field_instances['comment-comment_node_shop_product-field_your_rating'] = array(
     'bundle' => 'comment_node_shop_product',
     'default_value' => NULL,
@@ -58,7 +58,7 @@ function md_product_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'commerce_product-product-field_color'
+  // Exported field_instance: 'commerce_product-product-field_color'.
   $field_instances['commerce_product-product-field_color'] = array(
     'bundle' => 'product',
     'commerce_cart_settings' => array(
@@ -75,7 +75,7 @@ function md_product_field_default_field_instances() {
         'module' => 'taxonomy',
         'settings' => array(),
         'type' => 'taxonomy_term_reference_link',
-        'weight' => 10,
+        'weight' => 7,
       ),
       'line_item' => array(
         'label' => 'above',
@@ -119,7 +119,7 @@ function md_product_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'commerce_product-product-field_price_old'
+  // Exported field_instance: 'commerce_product-product-field_price_old'.
   $field_instances['commerce_product-product-field_price_old'] = array(
     'bundle' => 'product',
     'default_value' => NULL,
@@ -133,7 +133,7 @@ function md_product_field_default_field_instances() {
           'calculation' => FALSE,
         ),
         'type' => 'commerce_price_formatted_amount',
-        'weight' => 4,
+        'weight' => 2,
       ),
       'line_item' => array(
         'label' => 'above',
@@ -184,7 +184,7 @@ function md_product_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'commerce_product-product-field_product_images'
+  // Exported field_instance: 'commerce_product-product-field_product_images'.
   $field_instances['commerce_product-product-field_product_images'] = array(
     'bundle' => 'product',
     'deleted' => 0,
@@ -198,7 +198,7 @@ function md_product_field_default_field_instances() {
           'image_style' => '',
         ),
         'type' => 'image',
-        'weight' => 8,
+        'weight' => 4,
       ),
       'line_item' => array(
         'label' => 'hidden',
@@ -284,7 +284,7 @@ function md_product_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'commerce_product-product-field_size'
+  // Exported field_instance: 'commerce_product-product-field_size'.
   $field_instances['commerce_product-product-field_size'] = array(
     'bundle' => 'product',
     'commerce_cart_settings' => array(
@@ -301,7 +301,7 @@ function md_product_field_default_field_instances() {
         'module' => 'taxonomy',
         'settings' => array(),
         'type' => 'taxonomy_term_reference_link',
-        'weight' => 9,
+        'weight' => 6,
       ),
       'line_item' => array(
         'label' => 'above',
@@ -345,7 +345,7 @@ function md_product_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-lookbook-body'
+  // Exported field_instance: 'node-lookbook-body'.
   $field_instances['node-lookbook-body'] = array(
     'bundle' => 'lookbook',
     'default_value' => NULL,
@@ -390,7 +390,7 @@ function md_product_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-lookbook-field_image'
+  // Exported field_instance: 'node-lookbook-field_image'.
   $field_instances['node-lookbook-field_image'] = array(
     'bundle' => 'lookbook',
     'deleted' => 0,
@@ -447,7 +447,7 @@ function md_product_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-lookbook-field_product_lookbook'
+  // Exported field_instance: 'node-lookbook-field_product_lookbook'.
   $field_instances['node-lookbook-field_product_lookbook'] = array(
     'bundle' => 'lookbook',
     'default_value' => NULL,
@@ -484,7 +484,7 @@ function md_product_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-lookbook-field_subtitle'
+  // Exported field_instance: 'node-lookbook-field_subtitle'.
   $field_instances['node-lookbook-field_subtitle'] = array(
     'bundle' => 'lookbook',
     'default_value' => NULL,
@@ -524,7 +524,7 @@ function md_product_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-lookbook-field_thumbnail'
+  // Exported field_instance: 'node-lookbook-field_thumbnail'.
   $field_instances['node-lookbook-field_thumbnail'] = array(
     'bundle' => 'lookbook',
     'deleted' => 0,
@@ -581,7 +581,7 @@ function md_product_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-shop_product-body'
+  // Exported field_instance: 'node-shop_product-body'.
   $field_instances['node-shop_product-body'] = array(
     'bundle' => 'shop_product',
     'default_value' => NULL,
@@ -652,11 +652,54 @@ function md_product_field_default_field_instances() {
         'summary_rows' => 5,
       ),
       'type' => 'text_textarea_with_summary',
+      'weight' => 7,
+    ),
+  );
+
+  // Exported field_instance: 'node-shop_product-field_accessories'.
+  $field_instances['node-shop_product-field_accessories'] = array(
+    'bundle' => 'shop_product',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'taxonomy',
+        'settings' => array(),
+        'type' => 'taxonomy_term_reference_link',
+        'weight' => 17,
+      ),
+      'modal_content' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_accessories',
+    'label' => 'Accessories',
+    'required' => 0,
+    'settings' => array(
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'options',
+      'settings' => array(),
+      'type' => 'options_select',
       'weight' => 2,
     ),
   );
 
-  // Exported field_instance: 'node-shop_product-field_additional_infomation'
+  // Exported field_instance: 'node-shop_product-field_additional_infomation'.
   $field_instances['node-shop_product-field_additional_infomation'] = array(
     'bundle' => 'shop_product',
     'default_value' => NULL,
@@ -721,11 +764,97 @@ function md_product_field_default_field_instances() {
         'summary_rows' => 5,
       ),
       'type' => 'text_textarea_with_summary',
-      'weight' => 4,
+      'weight' => 9,
     ),
   );
 
-  // Exported field_instance: 'node-shop_product-field_description'
+  // Exported field_instance: 'node-shop_product-field_baby'.
+  $field_instances['node-shop_product-field_baby'] = array(
+    'bundle' => 'shop_product',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'taxonomy',
+        'settings' => array(),
+        'type' => 'taxonomy_term_reference_link',
+        'weight' => 20,
+      ),
+      'modal_content' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_baby',
+    'label' => 'Baby',
+    'required' => 0,
+    'settings' => array(
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'options',
+      'settings' => array(),
+      'type' => 'options_select',
+      'weight' => 5,
+    ),
+  );
+
+  // Exported field_instance: 'node-shop_product-field_clothing'.
+  $field_instances['node-shop_product-field_clothing'] = array(
+    'bundle' => 'shop_product',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'taxonomy',
+        'settings' => array(),
+        'type' => 'taxonomy_term_reference_link',
+        'weight' => 18,
+      ),
+      'modal_content' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_clothing',
+    'label' => 'Clothing',
+    'required' => 0,
+    'settings' => array(
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'options',
+      'settings' => array(),
+      'type' => 'options_select',
+      'weight' => 3,
+    ),
+  );
+
+  // Exported field_instance: 'node-shop_product-field_description'.
   $field_instances['node-shop_product-field_description'] = array(
     'bundle' => 'shop_product',
     'default_value' => NULL,
@@ -790,11 +919,54 @@ function md_product_field_default_field_instances() {
         'summary_rows' => 5,
       ),
       'type' => 'text_textarea_with_summary',
-      'weight' => 3,
+      'weight' => 8,
     ),
   );
 
-  // Exported field_instance: 'node-shop_product-field_group'
+  // Exported field_instance: 'node-shop_product-field_gifts'.
+  $field_instances['node-shop_product-field_gifts'] = array(
+    'bundle' => 'shop_product',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'taxonomy',
+        'settings' => array(),
+        'type' => 'taxonomy_term_reference_link',
+        'weight' => 21,
+      ),
+      'modal_content' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_gifts',
+    'label' => 'Gifts',
+    'required' => 0,
+    'settings' => array(
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'options',
+      'settings' => array(),
+      'type' => 'options_select',
+      'weight' => 6,
+    ),
+  );
+
+  // Exported field_instance: 'node-shop_product-field_group'.
   $field_instances['node-shop_product-field_group'] = array(
     'bundle' => 'shop_product',
     'default_value' => NULL,
@@ -856,11 +1028,54 @@ function md_product_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_buttons',
-      'weight' => 11,
+      'weight' => 16,
     ),
   );
 
-  // Exported field_instance: 'node-shop_product-field_product_brand'
+  // Exported field_instance: 'node-shop_product-field_match_kits'.
+  $field_instances['node-shop_product-field_match_kits'] = array(
+    'bundle' => 'shop_product',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'taxonomy',
+        'settings' => array(),
+        'type' => 'taxonomy_term_reference_link',
+        'weight' => 19,
+      ),
+      'modal_content' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_match_kits',
+    'label' => 'Match Kits',
+    'required' => 0,
+    'settings' => array(
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'options',
+      'settings' => array(),
+      'type' => 'options_select',
+      'weight' => 4,
+    ),
+  );
+
+  // Exported field_instance: 'node-shop_product-field_product_brand'.
   $field_instances['node-shop_product-field_product_brand'] = array(
     'bundle' => 'shop_product',
     'default_value' => NULL,
@@ -916,11 +1131,11 @@ function md_product_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_select',
-      'weight' => 6,
+      'weight' => 11,
     ),
   );
 
-  // Exported field_instance: 'node-shop_product-field_product_category'
+  // Exported field_instance: 'node-shop_product-field_product_category'.
   $field_instances['node-shop_product-field_product_category'] = array(
     'bundle' => 'shop_product',
     'default_value' => NULL,
@@ -982,11 +1197,11 @@ function md_product_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_select',
-      'weight' => 5,
+      'weight' => 10,
     ),
   );
 
-  // Exported field_instance: 'node-shop_product-field_product_lookbook'
+  // Exported field_instance: 'node-shop_product-field_product_lookbook'.
   $field_instances['node-shop_product-field_product_lookbook'] = array(
     'bundle' => 'shop_product',
     'default_value' => NULL,
@@ -1045,11 +1260,11 @@ function md_product_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'taxonomy_autocomplete',
-      'weight' => 7,
+      'weight' => 12,
     ),
   );
 
-  // Exported field_instance: 'node-shop_product-field_product_store'
+  // Exported field_instance: 'node-shop_product-field_product_store'.
   $field_instances['node-shop_product-field_product_store'] = array(
     'bundle' => 'shop_product',
     'deleted' => 0,
@@ -1062,7 +1277,7 @@ function md_product_field_default_field_instances() {
           'combine' => 0,
           'default_quantity' => 1,
           'line_item_type' => 'product',
-          'show_quantity' => 1,
+          'show_quantity' => 0,
           'show_single_product_attributes' => 0,
         ),
         'type' => 'commerce_cart_add_to_cart_form',
@@ -1088,7 +1303,7 @@ function md_product_field_default_field_instances() {
           'combine' => 0,
           'default_quantity' => 1,
           'line_item_type' => 'product',
-          'show_quantity' => 1,
+          'show_quantity' => 0,
           'show_single_product_attributes' => 0,
         ),
         'type' => 'commerce_cart_add_to_cart_form',
@@ -1141,7 +1356,13 @@ function md_product_field_default_field_instances() {
     'settings' => array(
       'field_injection' => 1,
       'referenceable_types' => array(
+        'outwear_adult_custom' => 0,
+        'outwear_adult_regular' => 0,
+        'outwear_baby_regular' => 0,
+        'outwear_children_custom' => 0,
+        'outwear_children_regular' => 0,
         'product' => 'product',
+        'simple_product' => 0,
       ),
       'user_register_form' => FALSE,
     ),
@@ -1166,7 +1387,7 @@ function md_product_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-shop_product-field_rate_five'
+  // Exported field_instance: 'node-shop_product-field_rate_five'.
   $field_instances['node-shop_product-field_rate_five'] = array(
     'bundle' => 'shop_product',
     'default_value' => NULL,
@@ -1267,11 +1488,11 @@ function md_product_field_default_field_instances() {
       'module' => 'fivestar',
       'settings' => array(),
       'type' => 'exposed',
-      'weight' => 10,
+      'weight' => 15,
     ),
   );
 
-  // Exported field_instance: 'node-shop_product-field_tags'
+  // Exported field_instance: 'node-shop_product-field_tags'.
   $field_instances['node-shop_product-field_tags'] = array(
     'bundle' => 'shop_product',
     'default_value' => NULL,
@@ -1336,11 +1557,11 @@ function md_product_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'taxonomy_autocomplete',
-      'weight' => 9,
+      'weight' => 14,
     ),
   );
 
-  // Exported field_instance: 'node-shop_product-field_trending'
+  // Exported field_instance: 'node-shop_product-field_trending'.
   $field_instances['node-shop_product-field_trending'] = array(
     'bundle' => 'shop_product',
     'default_value' => NULL,
@@ -1382,21 +1603,26 @@ function md_product_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'taxonomy_autocomplete',
-      'weight' => 8,
+      'weight' => 13,
     ),
   );
 
   // Translatables
   // Included for use with string extractors like potx.
+  t('Accessories');
   t('Additional Infomation');
+  t('Baby');
   t('Body');
   t('Brand');
   t('Category');
+  t('Clothing');
   t('Color');
   t('Description');
+  t('Gifts');
   t('Group');
   t('Image');
   t('LookBook');
+  t('Match Kits');
   t('Price Old');
   t('Product Images');
   t('Product LookBook');

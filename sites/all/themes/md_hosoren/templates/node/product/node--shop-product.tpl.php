@@ -294,8 +294,7 @@
             <?php print render($content['field_rate_five']); ?>
           </div>
           <?php endif; ?>
-          <!-- /.product-stars -->
-
+          <!-- /.product-stars -->          
           <span class="product-price"><?php print render($content['product:commerce_price']); ?><?php print render($content['product:field_price_old']); ?></span>
           <!-- /.product-price -->
 
@@ -308,7 +307,7 @@
               <h3><?php print render($content['body']['#title']); ?>:</h3>
               <?php print render($content['body'][0]['#markup']); ?>
           </div>
-          <!-- /.product-description -->
+          <!-- /.product-description -->          
 
           <?php if (isset($content['field_product_store'])): ?>
             <div class="product-actions-wrapper">

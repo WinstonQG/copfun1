@@ -10,7 +10,7 @@
 function md_components_field_default_field_instances() {
   $field_instances = array();
 
-  // Exported field_instance: 'taxonomy_term-product_category-field_image'
+  // Exported field_instance: 'taxonomy_term-product_category-field_image'.
   $field_instances['taxonomy_term-product_category-field_image'] = array(
     'bundle' => 'product_category',
     'deleted' => 0,
@@ -73,7 +73,7 @@ function md_components_field_default_field_instances() {
   );
 
   // Exported field_instance:
-  // 'taxonomy_term-product_category-field_sub_description'
+  // 'taxonomy_term-product_category-field_sub_description'.
   $field_instances['taxonomy_term-product_category-field_sub_description'] = array(
     'bundle' => 'product_category',
     'default_value' => NULL,
@@ -114,7 +114,7 @@ function md_components_field_default_field_instances() {
   );
 
   // Exported field_instance:
-  // 'taxonomy_term-product_category-field_thumbnail_picture'
+  // 'taxonomy_term-product_category-field_thumbnail_picture'.
   $field_instances['taxonomy_term-product_category-field_thumbnail_picture'] = array(
     'bundle' => 'product_category',
     'deleted' => 0,
@@ -180,7 +180,7 @@ function md_components_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'taxonomy_term-product_trending-field_image'
+  // Exported field_instance: 'taxonomy_term-product_trending-field_image'.
   $field_instances['taxonomy_term-product_trending-field_image'] = array(
     'bundle' => 'product_trending',
     'deleted' => 0,

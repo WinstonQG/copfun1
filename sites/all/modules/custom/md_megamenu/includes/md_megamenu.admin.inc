@@ -1201,6 +1201,7 @@ function md_megamenu_edit_links_form_submit($form, &$form_state) {
 
     $settings['general']['is_dropdown_menu'] = $tab_settings->mnu_fly_type;
     $settings['general']['submenu_width'] = isset($tab_settings->submenu_width) ? $tab_settings->submenu_width: 250;
+    $settings['general']['hide_when_logged_in'] = isset($tab_settings->hide_when_logged_in) ? $tab_settings->hide_when_logged_in: FALSE;
     $settings['general']['submenu_fullwidth'] = isset($tab_settings->submenu_fullwidth) ? $tab_settings->submenu_fullwidth : TRUE;
     $settings['general']['item_position'] = isset($tab_settings->item_position) ? $tab_settings->item_position : 'auto';
     $settings['general']['title_enable'] = $tab_settings->title_enabled;

@@ -10,7 +10,7 @@
 function md_components_field_default_field_bases() {
   $field_bases = array();
 
-  // Exported field_base: 'body'
+  // Exported field_base: 'body'.
   $field_bases['body'] = array(
     'active' => 1,
     'cardinality' => 1,
@@ -31,7 +31,7 @@ function md_components_field_default_field_bases() {
     'type' => 'text_with_summary',
   );
 
-  // Exported field_base: 'commerce_customer_address'
+  // Exported field_base: 'commerce_customer_address'.
   $field_bases['commerce_customer_address'] = array(
     'active' => 1,
     'cardinality' => 1,
@@ -48,7 +48,7 @@ function md_components_field_default_field_bases() {
     'type' => 'addressfield',
   );
 
-  // Exported field_base: 'commerce_customer_billing'
+  // Exported field_base: 'commerce_customer_billing'.
   $field_bases['commerce_customer_billing'] = array(
     'active' => 1,
     'cardinality' => 1,
@@ -72,7 +72,7 @@ function md_components_field_default_field_bases() {
     'type' => 'commerce_customer_profile_reference',
   );
 
-  // Exported field_base: 'commerce_display_path'
+  // Exported field_base: 'commerce_display_path'.
   $field_bases['commerce_display_path'] = array(
     'active' => 1,
     'cardinality' => 1,
@@ -95,7 +95,7 @@ function md_components_field_default_field_bases() {
     'type' => 'text',
   );
 
-  // Exported field_base: 'commerce_line_items'
+  // Exported field_base: 'commerce_line_items'.
   $field_bases['commerce_line_items'] = array(
     'active' => 1,
     'cardinality' => -1,
@@ -115,8 +115,30 @@ function md_components_field_default_field_bases() {
     'translatable' => 0,
     'type' => 'commerce_line_item_reference',
   );
-  
-  // Exported field_base: 'commerce_product'
+
+  // Exported field_base: 'commerce_order_total'.
+  $field_bases['commerce_order_total'] = array(
+    'active' => 1,
+    'cardinality' => 1,
+    'deleted' => 0,
+    'entity_types' => array(
+      0 => 'commerce_order',
+    ),
+    'field_name' => 'commerce_order_total',
+    'indexes' => array(
+      'currency_price' => array(
+        0 => 'amount',
+        1 => 'currency_code',
+      ),
+    ),
+    'locked' => 1,
+    'module' => 'commerce_price',
+    'settings' => array(),
+    'translatable' => 0,
+    'type' => 'commerce_price',
+  );
+
+  // Exported field_base: 'commerce_product'.
   $field_bases['commerce_product'] = array(
     'active' => 1,
     'cardinality' => 1,
@@ -139,7 +161,7 @@ function md_components_field_default_field_bases() {
     'type' => 'commerce_product_reference',
   );
 
-  // Exported field_base: 'commerce_total'
+  // Exported field_base: 'commerce_total'.
   $field_bases['commerce_total'] = array(
     'active' => 1,
     'cardinality' => 1,
@@ -161,7 +183,29 @@ function md_components_field_default_field_bases() {
     'type' => 'commerce_price',
   );
 
-  // Exported field_base: 'field_additional_infomation'
+  // Exported field_base: 'commerce_unit_price'.
+  $field_bases['commerce_unit_price'] = array(
+    'active' => 1,
+    'cardinality' => 1,
+    'deleted' => 0,
+    'entity_types' => array(
+      0 => 'commerce_line_item',
+    ),
+    'field_name' => 'commerce_unit_price',
+    'indexes' => array(
+      'currency_price' => array(
+        0 => 'amount',
+        1 => 'currency_code',
+      ),
+    ),
+    'locked' => 1,
+    'module' => 'commerce_price',
+    'settings' => array(),
+    'translatable' => 0,
+    'type' => 'commerce_price',
+  );
+
+  // Exported field_base: 'field_additional_infomation'.
   $field_bases['field_additional_infomation'] = array(
     'active' => 1,
     'cardinality' => 1,
@@ -180,7 +224,7 @@ function md_components_field_default_field_bases() {
     'type' => 'text_with_summary',
   );
 
-  // Exported field_base: 'field_category_blog'
+  // Exported field_base: 'field_category_blog'.
   $field_bases['field_category_blog'] = array(
     'active' => 1,
     'cardinality' => 1,
@@ -206,7 +250,7 @@ function md_components_field_default_field_bases() {
     'type' => 'taxonomy_term_reference',
   );
 
-  // Exported field_base: 'field_color'
+  // Exported field_base: 'field_color'.
   $field_bases['field_color'] = array(
     'active' => 1,
     'cardinality' => 1,
@@ -232,7 +276,7 @@ function md_components_field_default_field_bases() {
     'type' => 'taxonomy_term_reference',
   );
 
-  // Exported field_base: 'field_customer_avatar'
+  // Exported field_base: 'field_customer_avatar'.
   $field_bases['field_customer_avatar'] = array(
     'active' => 1,
     'cardinality' => 1,
@@ -254,7 +298,7 @@ function md_components_field_default_field_bases() {
     'type' => 'image',
   );
 
-  // Exported field_base: 'field_customer_testimonial'
+  // Exported field_base: 'field_customer_testimonial'.
   $field_bases['field_customer_testimonial'] = array(
     'active' => 1,
     'cardinality' => 1,
@@ -273,7 +317,7 @@ function md_components_field_default_field_bases() {
     'type' => 'text_long',
   );
 
-  // Exported field_base: 'field_customer_website'
+  // Exported field_base: 'field_customer_website'.
   $field_bases['field_customer_website'] = array(
     'active' => 1,
     'cardinality' => 1,
@@ -302,7 +346,7 @@ function md_components_field_default_field_bases() {
     'type' => 'link_field',
   );
 
-  // Exported field_base: 'field_description'
+  // Exported field_base: 'field_description'.
   $field_bases['field_description'] = array(
     'active' => 1,
     'cardinality' => 1,
@@ -321,7 +365,7 @@ function md_components_field_default_field_bases() {
     'type' => 'text_with_summary',
   );
 
-  // Exported field_base: 'field_display_media_type'
+  // Exported field_base: 'field_display_media_type'.
   $field_bases['field_display_media_type'] = array(
     'active' => 1,
     'cardinality' => 1,
@@ -346,7 +390,7 @@ function md_components_field_default_field_bases() {
     'type' => 'list_text',
   );
 
-  // Exported field_base: 'field_group'
+  // Exported field_base: 'field_group'.
   $field_bases['field_group'] = array(
     'active' => 1,
     'cardinality' => 1,
@@ -371,7 +415,7 @@ function md_components_field_default_field_bases() {
     'type' => 'list_text',
   );
 
-  // Exported field_base: 'field_image'
+  // Exported field_base: 'field_image'.
   $field_bases['field_image'] = array(
     'active' => 1,
     'cardinality' => 1,
@@ -393,7 +437,7 @@ function md_components_field_default_field_bases() {
     'type' => 'image',
   );
 
-  // Exported field_base: 'field_media_blog'
+  // Exported field_base: 'field_media_blog'.
   $field_bases['field_media_blog'] = array(
     'active' => 1,
     'cardinality' => -1,
@@ -412,7 +456,7 @@ function md_components_field_default_field_bases() {
     'type' => 'media',
   );
 
-  // Exported field_base: 'field_multimedia'
+  // Exported field_base: 'field_multimedia'.
   $field_bases['field_multimedia'] = array(
     'active' => 1,
     'cardinality' => -1,
@@ -431,7 +475,7 @@ function md_components_field_default_field_bases() {
     'type' => 'media',
   );
 
-  // Exported field_base: 'field_portfolio_categories'
+  // Exported field_base: 'field_portfolio_categories'.
   $field_bases['field_portfolio_categories'] = array(
     'active' => 1,
     'cardinality' => -1,
@@ -457,7 +501,7 @@ function md_components_field_default_field_bases() {
     'type' => 'taxonomy_term_reference',
   );
 
-  // Exported field_base: 'field_portfolio_client'
+  // Exported field_base: 'field_portfolio_client'.
   $field_bases['field_portfolio_client'] = array(
     'active' => 1,
     'cardinality' => 1,
@@ -478,7 +522,7 @@ function md_components_field_default_field_bases() {
     'type' => 'text',
   );
 
-  // Exported field_base: 'field_portfolio_date'
+  // Exported field_base: 'field_portfolio_date'.
   $field_bases['field_portfolio_date'] = array(
     'active' => 1,
     'cardinality' => 1,
@@ -499,7 +543,7 @@ function md_components_field_default_field_bases() {
     'type' => 'text',
   );
 
-  // Exported field_base: 'field_price_old'
+  // Exported field_base: 'field_price_old'.
   $field_bases['field_price_old'] = array(
     'active' => 1,
     'cardinality' => 1,
@@ -519,7 +563,7 @@ function md_components_field_default_field_bases() {
     'type' => 'commerce_price',
   );
 
-  // Exported field_base: 'field_product_brand'
+  // Exported field_base: 'field_product_brand'.
   $field_bases['field_product_brand'] = array(
     'active' => 1,
     'cardinality' => 1,
@@ -545,7 +589,7 @@ function md_components_field_default_field_bases() {
     'type' => 'taxonomy_term_reference',
   );
 
-  // Exported field_base: 'field_product_category'
+  // Exported field_base: 'field_product_category'.
   $field_bases['field_product_category'] = array(
     'active' => 1,
     'cardinality' => -1,
@@ -571,7 +615,7 @@ function md_components_field_default_field_bases() {
     'type' => 'taxonomy_term_reference',
   );
 
-  // Exported field_base: 'field_product_images'
+  // Exported field_base: 'field_product_images'.
   $field_bases['field_product_images'] = array(
     'active' => 1,
     'cardinality' => -1,
@@ -593,7 +637,7 @@ function md_components_field_default_field_bases() {
     'type' => 'image',
   );
 
-  // Exported field_base: 'field_product_lookbook'
+  // Exported field_base: 'field_product_lookbook'.
   $field_bases['field_product_lookbook'] = array(
     'active' => 1,
     'cardinality' => 1,
@@ -619,7 +663,7 @@ function md_components_field_default_field_bases() {
     'type' => 'taxonomy_term_reference',
   );
 
-  // Exported field_base: 'field_product_store'
+  // Exported field_base: 'field_product_store'.
   $field_bases['field_product_store'] = array(
     'active' => 1,
     'cardinality' => -1,
@@ -640,7 +684,7 @@ function md_components_field_default_field_bases() {
     'type' => 'commerce_product_reference',
   );
 
-  // Exported field_base: 'field_project_description'
+  // Exported field_base: 'field_project_description'.
   $field_bases['field_project_description'] = array(
     'active' => 1,
     'cardinality' => 1,
@@ -659,7 +703,7 @@ function md_components_field_default_field_bases() {
     'type' => 'text_long',
   );
 
-  // Exported field_base: 'field_rate_five'
+  // Exported field_base: 'field_rate_five'.
   $field_bases['field_rate_five'] = array(
     'active' => 1,
     'cardinality' => 1,
@@ -676,7 +720,7 @@ function md_components_field_default_field_bases() {
     'type' => 'fivestar',
   );
 
-  // Exported field_base: 'field_size'
+  // Exported field_base: 'field_size'.
   $field_bases['field_size'] = array(
     'active' => 1,
     'cardinality' => 1,
@@ -702,7 +746,7 @@ function md_components_field_default_field_bases() {
     'type' => 'taxonomy_term_reference',
   );
 
-  // Exported field_base: 'field_sub_description'
+  // Exported field_base: 'field_sub_description'.
   $field_bases['field_sub_description'] = array(
     'active' => 1,
     'cardinality' => 1,
@@ -723,7 +767,7 @@ function md_components_field_default_field_bases() {
     'type' => 'text',
   );
 
-  // Exported field_base: 'field_subtitle'
+  // Exported field_base: 'field_subtitle'.
   $field_bases['field_subtitle'] = array(
     'active' => 1,
     'cardinality' => 1,
@@ -744,7 +788,7 @@ function md_components_field_default_field_bases() {
     'type' => 'text',
   );
 
-  // Exported field_base: 'field_tags'
+  // Exported field_base: 'field_tags'.
   $field_bases['field_tags'] = array(
     'active' => 1,
     'cardinality' => -1,
@@ -770,7 +814,7 @@ function md_components_field_default_field_bases() {
     'type' => 'taxonomy_term_reference',
   );
 
-  // Exported field_base: 'field_tags_blog'
+  // Exported field_base: 'field_tags_blog'.
   $field_bases['field_tags_blog'] = array(
     'active' => 1,
     'cardinality' => -1,
@@ -796,7 +840,7 @@ function md_components_field_default_field_bases() {
     'type' => 'taxonomy_term_reference',
   );
 
-  // Exported field_base: 'field_thumbnail'
+  // Exported field_base: 'field_thumbnail'.
   $field_bases['field_thumbnail'] = array(
     'active' => 1,
     'cardinality' => 1,
@@ -818,7 +862,7 @@ function md_components_field_default_field_bases() {
     'type' => 'image',
   );
 
-  // Exported field_base: 'field_thumbnail_picture'
+  // Exported field_base: 'field_thumbnail_picture'.
   $field_bases['field_thumbnail_picture'] = array(
     'active' => 1,
     'cardinality' => 1,
@@ -840,7 +884,7 @@ function md_components_field_default_field_bases() {
     'type' => 'image',
   );
 
-  // Exported field_base: 'field_trending'
+  // Exported field_base: 'field_trending'.
   $field_bases['field_trending'] = array(
     'active' => 1,
     'cardinality' => 1,
@@ -866,7 +910,7 @@ function md_components_field_default_field_bases() {
     'type' => 'taxonomy_term_reference',
   );
 
-  // Exported field_base: 'field_your_rating'
+  // Exported field_base: 'field_your_rating'.
   $field_bases['field_your_rating'] = array(
     'active' => 1,
     'cardinality' => 1,
