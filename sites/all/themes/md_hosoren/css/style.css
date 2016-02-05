@@ -18571,3 +18571,47 @@ ul li {
   padding: 4px 0;
   list-style: none;
 }
+#commerce-checkout-form-checkout input[type='text'],
+.page-checkout-review input[type='text'],
+#commerce-checkout-form-checkout select,
+.page-checkout-review select {
+  width: 220px;
+}
+#commerce-checkout-form-checkout .form-item-commerce-shipping-shipping-service input[type='radio'],
+.page-checkout-review .form-item-commerce-shipping-shipping-service input[type='radio'],
+#commerce-checkout-form-checkout .form-item-commerce-shipping-shipping-service label,
+.page-checkout-review .form-item-commerce-shipping-shipping-service label {
+  display: inline-block;
+}
+#commerce-checkout-form-checkout .checkout-help,
+.page-checkout-review .checkout-help {
+  margin-bottom: 15px;
+  font-size: 18px;
+  font-weight: bold;
+}
+#commerce-checkout-form-checkout .view-order-coupon-list .views-table,
+.page-checkout-review .view-order-coupon-list .views-table {
+  margin-top: 10px;
+}
+#commerce-checkout-form-checkout .view-order-coupon-list .views-table th,
+.page-checkout-review .view-order-coupon-list .views-table th,
+#commerce-checkout-form-checkout .view-order-coupon-list .views-table td,
+.page-checkout-review .view-order-coupon-list .views-table td {
+  padding: 8px;
+}
+#commerce-checkout-form-checkout .view-order-coupon-list .views-table ul,
+.page-checkout-review .view-order-coupon-list .views-table ul {
+  margin: 0;
+}
+#commerce-checkout-form-checkout .view-order-coupon-list .views-table ul li,
+.page-checkout-review .view-order-coupon-list .views-table ul li {
+  margin: 0;
+  list-style: none;
+}
+.page-user .profile ul li {
+  list-style: none;
+}
+.page-user .profile table th,
+.page-user .profile table td {
+  padding: 8px;
+}
