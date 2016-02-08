@@ -13,11 +13,9 @@
 <?php print drupal_render($form['range-max']) ?>
 
 <?php print drupal_render($form['range-slider']) ?>
-<div class="slider_value center small gray">
-	<span><?php print t('Start from') ?></span>
-	<span id="amount" class="dark bold"><?php print drupal_render($form['range-from']) ?></span>
-	<span><?php print t('to') ?></span>
-	<span class="dark bold"><?php print drupal_render($form['range-to']) ?></span>
+<div class="slider_value center small gray">	
+	<span id="amount" class="fck_range_from dark bold"><?php print drupal_render($form['range-from']) ?> kr.</span>	
+	<span class="fck_range_to dark bold"><?php print drupal_render($form['range-to']) ?> kr.</span>
 </div>
 
 <div style="display: none">

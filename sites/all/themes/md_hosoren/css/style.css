@@ -18608,6 +18608,32 @@ ul li {
   margin: 0;
   list-style: none;
 }
+.block-facetapi {
+  clear: both;
+}
+.block-facetapi .widget-content .search-api-ranges-widget {
+  margin-bottom: 70px;
+}
+.block-facetapi .widget-content .search-api-ranges-widget .range-slider {
+  margin-bottom: 15px;
+}
+.block-facetapi .widget-content .search-api-ranges-widget .slider_value .fck_range_from {
+  float: left;
+}
+.block-facetapi .widget-content .search-api-ranges-widget .slider_value .fck_range_to {
+  float: right;
+}
+.block-facetapi .widget-content .facetapi-facetapi-checkbox-links {
+  margin-bottom: 20px;
+  padding: 0px;
+}
+.block-facetapi .widget-content .facetapi-facetapi-checkbox-links li {
+  margin: 0px;
+  padding: 0 0 10px 0;
+}
+.block-facetapi .widget-content .facetapi-facetapi-checkbox-links li .facet-count {
+  float: right;
+}
 .page-user .profile ul li {
   list-style: none;
 }

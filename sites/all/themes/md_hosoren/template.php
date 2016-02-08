@@ -4,6 +4,19 @@ include_once './' . drupal_get_path('theme', 'md_hosoren') . '/theme_setting/fro
 include_once './' . drupal_get_path('theme', 'md_hosoren') . '/theme_setting/front/page.preprocess.inc';
 include_once './' . drupal_get_path('theme', 'md_hosoren') . '/theme_setting/front/function.theme.inc';
 
+function md_hosoren_facetapi_title($variables) {
+  return t('@title', array('@title' => drupal_strtolower($variables['title'])));
+}
+
+function md_hosoren_facetapi_count($variables) {
+  $count = (int) $variables['count'];
+  $one_item = t('pc.');
+  $more_items = t('pcs.');
+  //pcs.   
+  $output = format_plural($count, '1 ' . $one_item, '@count ' . $more_items);
+  return '<span class="facet-count">(' . $output . ')</span>';
+}
+
 /**
  * Implements hook_js_alter()
  * Add/ Remove JS

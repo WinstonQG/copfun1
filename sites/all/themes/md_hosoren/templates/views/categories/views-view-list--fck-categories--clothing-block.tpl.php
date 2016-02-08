@@ -14,7 +14,7 @@
     <h3><?php print $title; ?></h3>
   <?php endif; ?>
   <?php print $list_type_prefix; ?>
-    	<li class="fck-see-all"><?php print l(t('See all'), 'all-by-category/'.$view->result[0]->taxonomy_term_data_vid); ?></li>
+    	<li class="fck-see-all"><?php print l(t('See all'), 'categories/clothing/all'); ?></li>
     <?php foreach ($rows as $id => $row): ?>
       <li class="<?php print $classes_array[$id]; ?>"><?php print $row; ?></li>
     <?php endforeach; ?>

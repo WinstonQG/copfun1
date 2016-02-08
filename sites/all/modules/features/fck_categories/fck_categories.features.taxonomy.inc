@@ -15,7 +15,7 @@ function fck_categories_taxonomy_default_vocabularies() {
       'description' => 'Accessories',
       'hierarchy' => 0,
       'module' => 'taxonomy',
-      'weight' => -6,
+      'weight' => -5,
       'rdf_mapping' => array(
         'rdftype' => array(
           0 => 'skos:ConceptScheme',
@@ -38,7 +38,7 @@ function fck_categories_taxonomy_default_vocabularies() {
       'description' => 'Baby',
       'hierarchy' => 0,
       'module' => 'taxonomy',
-      'weight' => -4,
+      'weight' => -3,
       'rdf_mapping' => array(
         'rdftype' => array(
           0 => 'skos:ConceptScheme',
@@ -61,7 +61,7 @@ function fck_categories_taxonomy_default_vocabularies() {
       'description' => 'Clothing',
       'hierarchy' => 0,
       'module' => 'taxonomy',
-      'weight' => -5,
+      'weight' => -4,
       'rdf_mapping' => array(
         'rdftype' => array(
           0 => 'skos:ConceptScheme',
@@ -84,7 +84,7 @@ function fck_categories_taxonomy_default_vocabularies() {
       'description' => 'Gifts',
       'hierarchy' => 0,
       'module' => 'taxonomy',
-      'weight' => -3,
+      'weight' => -2,
       'rdf_mapping' => array(
         'rdftype' => array(
           0 => 'skos:ConceptScheme',
@@ -107,7 +107,7 @@ function fck_categories_taxonomy_default_vocabularies() {
       'description' => 'Match Kits',
       'hierarchy' => 0,
       'module' => 'taxonomy',
-      'weight' => -7,
+      'weight' => -6,
       'rdf_mapping' => array(
         'rdftype' => array(
           0 => 'skos:ConceptScheme',
