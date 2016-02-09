@@ -39,6 +39,8 @@ function fck_search_default_search_api_index() {
       "index_directly" : 1,
       "cron_limit" : "50",
       "fields" : {
+        "body:summary" : { "type" : "text" },
+        "body:value" : { "type" : "text" },
         "changed" : { "type" : "date" },
         "created" : { "type" : "date" },
         "field_accessories" : { "type" : "integer", "entity_type" : "taxonomy_term" },
@@ -84,7 +86,18 @@ function fck_search_default_search_api_index() {
         "commerce_search_api_alter_product_status" : { "status" : 1, "weight" : "-9", "settings" : [] },
         "search_api_alter_node_status" : { "status" : 0, "weight" : "0", "settings" : [] },
         "search_api_alter_node_access" : { "status" : 0, "weight" : "0", "settings" : [] },
-        "search_api_alter_add_aggregation" : { "status" : 1, "weight" : "0", "settings" : [] },
+        "search_api_alter_add_aggregation" : {
+          "status" : 1,
+          "weight" : "0",
+          "settings" : { "fields" : { "search_api_aggregation_1" : {
+                "name" : "product_shop_title_and_body",
+                "type" : "fulltext",
+                "fields" : [ "title", "body:value", "body:summary" ],
+                "description" : "A Fulltext aggregation of the following fields: Title, The main body text \\u00bb Text, The main body text \\u00bb Summary."
+              }
+            }
+          }
+        },
         "search_api_alter_add_url" : { "status" : 0, "weight" : "0", "settings" : [] },
         "search_api_alter_add_viewed_entity" : { "status" : 0, "weight" : "0", "settings" : { "mode" : "full" } },
         "search_api_alter_add_hierarchy" : { "status" : 0, "weight" : "0", "settings" : { "fields" : [] } }
@@ -477,6 +490,16 @@ function fck_search_default_search_api_server() {
             "table" : "search_api_db_shop_product",
             "column" : "field_gifts_tid",
             "type" : "integer",
+            "boost" : "1.0"
+          },
+          "body:value" : {
+            "table" : "search_api_db_shop_product_text",
+            "type" : "text",
+            "boost" : "1.0"
+          },
+          "body:summary" : {
+            "table" : "search_api_db_shop_product_text",
+            "type" : "text",
             "boost" : "1.0"
           }
         }

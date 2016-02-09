@@ -176,6 +176,35 @@ function fck_search_views_default_views() {
   $handler->display->display_options['filters']['field_gifts_vocabulary_machine_name']['field'] = 'field_gifts_vocabulary_machine_name';
   $handler->display->display_options['filters']['field_gifts_vocabulary_machine_name']['value'] = 'gifts';
   $handler->display->display_options['path'] = 'categories/gifts/%';
+
+  /* Display: Standard search */
+  $handler = $view->new_display('page', 'Standard search', 'standard_search');
+  $handler->display->display_options['defaults']['title'] = FALSE;
+  $handler->display->display_options['title'] = 'Search';
+  $handler->display->display_options['defaults']['arguments'] = FALSE;
+  /* Contextual filter: Search: Fulltext search */
+  $handler->display->display_options['arguments']['search_api_views_fulltext']['id'] = 'search_api_views_fulltext';
+  $handler->display->display_options['arguments']['search_api_views_fulltext']['table'] = 'search_api_index_shop_product';
+  $handler->display->display_options['arguments']['search_api_views_fulltext']['field'] = 'search_api_views_fulltext';
+  $handler->display->display_options['arguments']['search_api_views_fulltext']['default_argument_type'] = 'fixed';
+  $handler->display->display_options['arguments']['search_api_views_fulltext']['summary']['format'] = 'default_summary';
+  $handler->display->display_options['arguments']['search_api_views_fulltext']['break_phrase'] = 0;
+  $handler->display->display_options['arguments']['search_api_views_fulltext']['not'] = 0;
+  $handler->display->display_options['arguments']['search_api_views_fulltext']['fields'] = array(
+    'body:summary' => 'body:summary',
+    'body:value' => 'body:value',
+    'title' => 'title',
+  );
+  $handler->display->display_options['defaults']['filter_groups'] = FALSE;
+  $handler->display->display_options['defaults']['filters'] = FALSE;
+  /* Filter criterion: Indexed Node: Content type */
+  $handler->display->display_options['filters']['type']['id'] = 'type';
+  $handler->display->display_options['filters']['type']['table'] = 'search_api_index_shop_product';
+  $handler->display->display_options['filters']['type']['field'] = 'type';
+  $handler->display->display_options['filters']['type']['value'] = array(
+    'shop_product' => 'shop_product',
+  );
+  $handler->display->display_options['path'] = 'st-search/%';
   $translatables['fck_search_pages'] = array(
     t('Master'),
     t('Clothing'),
@@ -193,6 +222,8 @@ function fck_search_views_default_views() {
     t('Match Kits'),
     t('Baby'),
     t('Gifts'),
+    t('Standard search'),
+    t('Search'),
   );
   $export['fck_search_pages'] = $view;
 

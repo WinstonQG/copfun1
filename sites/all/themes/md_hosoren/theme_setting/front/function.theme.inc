@@ -442,10 +442,17 @@ function md_hosoren_form_alter(&$form, &$form_state, $form_id) {
         break;
       case 'search_block_form':
         $form['search_block_form']['#attributes']['placeholder'] = t("Search your entry here...");
+        $form['#submit'][] = 'md_hosoren_search_form_submit';
         break;
 
     }
   }
+}
+
+function md_hosoren_search_form_submit($form, $form_state) {
+  $search_str = $form_state['values']['search_block_form'];
+  $form_state['rebuild'] = TRUE;
+  drupal_goto('st-search/'.$search_str);
 }
 
 /**
