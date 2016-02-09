@@ -124,7 +124,7 @@ function fck_categories_views_default_views() {
 
   /* Display: Master */
   $handler = $view->new_display('default', 'Master', 'default');
-  $handler->display->display_options['title'] = 'Baby';
+  $handler->display->display_options['title'] = 'Player Jerseys';
   $handler->display->display_options['use_more_always'] = FALSE;
   $handler->display->display_options['access']['type'] = 'perm';
   $handler->display->display_options['cache']['type'] = 'none';
@@ -150,7 +150,7 @@ function fck_categories_views_default_views() {
   $handler->display->display_options['fields']['name']['field'] = 'name';
   $handler->display->display_options['fields']['name']['label'] = '';
   $handler->display->display_options['fields']['name']['alter']['make_link'] = TRUE;
-  $handler->display->display_options['fields']['name']['alter']['path'] = 'clothing-search/[tid]';
+  $handler->display->display_options['fields']['name']['alter']['path'] = 'categories/sale/[tid]';
   $handler->display->display_options['fields']['name']['alter']['word_boundary'] = FALSE;
   $handler->display->display_options['fields']['name']['alter']['ellipsis'] = FALSE;
   $handler->display->display_options['fields']['name']['element_label_colon'] = FALSE;
@@ -159,11 +159,11 @@ function fck_categories_views_default_views() {
   $handler->display->display_options['filters']['machine_name']['table'] = 'taxonomy_vocabulary';
   $handler->display->display_options['filters']['machine_name']['field'] = 'machine_name';
   $handler->display->display_options['filters']['machine_name']['value'] = array(
-    'baby' => 'baby',
+    'player_jerseys' => 'player_jerseys',
   );
 
-  /* Display: Clothing block */
-  $handler = $view->new_display('block', 'Clothing block', 'clothing_block');
+  /* Display: Clothing Block */
+  $handler = $view->new_display('block', 'Clothing Block', 'clothing_block');
   $handler->display->display_options['defaults']['title'] = FALSE;
   $handler->display->display_options['title'] = 'Clothing';
   $handler->display->display_options['defaults']['fields'] = FALSE;
@@ -288,6 +288,15 @@ function fck_categories_views_default_views() {
   $handler->display->display_options['fields']['name']['alter']['word_boundary'] = FALSE;
   $handler->display->display_options['fields']['name']['alter']['ellipsis'] = FALSE;
   $handler->display->display_options['fields']['name']['element_label_colon'] = FALSE;
+  $handler->display->display_options['defaults']['filter_groups'] = FALSE;
+  $handler->display->display_options['defaults']['filters'] = FALSE;
+  /* Filter criterion: Taxonomy vocabulary: Machine name */
+  $handler->display->display_options['filters']['machine_name']['id'] = 'machine_name';
+  $handler->display->display_options['filters']['machine_name']['table'] = 'taxonomy_vocabulary';
+  $handler->display->display_options['filters']['machine_name']['field'] = 'machine_name';
+  $handler->display->display_options['filters']['machine_name']['value'] = array(
+    'baby' => 'baby',
+  );
 
   /* Display: Gifts Block */
   $handler = $view->new_display('block', 'Gifts Block', 'gifts_block');
@@ -322,9 +331,26 @@ function fck_categories_views_default_views() {
   $handler->display->display_options['filters']['machine_name']['value'] = array(
     'gifts' => 'gifts',
   );
+
+  /* Display: Player Jerseys Block */
+  $handler = $view->new_display('block', 'Player Jerseys Block', 'player_jerseys_block');
+
+  /* Display: Sale Block */
+  $handler = $view->new_display('block', 'Sale Block', 'sale_block');
+  $handler->display->display_options['defaults']['title'] = FALSE;
+  $handler->display->display_options['title'] = 'Sale';
+  $handler->display->display_options['defaults']['filter_groups'] = FALSE;
+  $handler->display->display_options['defaults']['filters'] = FALSE;
+  /* Filter criterion: Taxonomy vocabulary: Machine name */
+  $handler->display->display_options['filters']['machine_name']['id'] = 'machine_name';
+  $handler->display->display_options['filters']['machine_name']['table'] = 'taxonomy_vocabulary';
+  $handler->display->display_options['filters']['machine_name']['field'] = 'machine_name';
+  $handler->display->display_options['filters']['machine_name']['value'] = array(
+    'sale' => 'sale',
+  );
   $translatables['fck_categories'] = array(
     t('Master'),
-    t('Baby'),
+    t('Player Jerseys'),
     t('more'),
     t('Apply'),
     t('Reset'),
@@ -333,15 +359,19 @@ function fck_categories_views_default_views() {
     t('Desc'),
     t('.'),
     t(','),
-    t('Clothing block'),
+    t('Clothing Block'),
     t('Clothing'),
     t('Accessories Block'),
     t('Accessories'),
     t('Match Kits Block'),
     t('Match Kits'),
     t('Baby Block'),
+    t('Baby'),
     t('Gifts Block'),
     t('Gifts'),
+    t('Player Jerseys Block'),
+    t('Sale Block'),
+    t('Sale'),
   );
   $export['fck_categories'] = $view;
 

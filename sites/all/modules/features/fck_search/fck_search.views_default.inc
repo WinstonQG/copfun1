@@ -22,7 +22,7 @@ function fck_search_views_default_views() {
 
   /* Display: Master */
   $handler = $view->new_display('default', 'Master', 'default');
-  $handler->display->display_options['title'] = 'Clothing';
+  $handler->display->display_options['title'] = 'New';
   $handler->display->display_options['use_more_always'] = FALSE;
   $handler->display->display_options['access']['type'] = 'none';
   $handler->display->display_options['cache']['type'] = 'none';
@@ -36,14 +36,14 @@ function fck_search_views_default_views() {
   $handler->display->display_options['fields']['nid']['id'] = 'nid';
   $handler->display->display_options['fields']['nid']['table'] = 'search_api_index_shop_product';
   $handler->display->display_options['fields']['nid']['field'] = 'nid';
-  /* Contextual filter: Clothing: Term ID (indexed) */
-  $handler->display->display_options['arguments']['field_clothing_tid']['id'] = 'field_clothing_tid';
-  $handler->display->display_options['arguments']['field_clothing_tid']['table'] = 'search_api_index_shop_product';
-  $handler->display->display_options['arguments']['field_clothing_tid']['field'] = 'field_clothing_tid';
-  $handler->display->display_options['arguments']['field_clothing_tid']['default_argument_type'] = 'fixed';
-  $handler->display->display_options['arguments']['field_clothing_tid']['summary']['format'] = 'default_summary';
-  $handler->display->display_options['arguments']['field_clothing_tid']['break_phrase'] = 0;
-  $handler->display->display_options['arguments']['field_clothing_tid']['not'] = 0;
+  /* Contextual filter: Player Jerseys: Term ID (indexed) */
+  $handler->display->display_options['arguments']['field_player_jerseys_tid']['id'] = 'field_player_jerseys_tid';
+  $handler->display->display_options['arguments']['field_player_jerseys_tid']['table'] = 'search_api_index_shop_product';
+  $handler->display->display_options['arguments']['field_player_jerseys_tid']['field'] = 'field_player_jerseys_tid';
+  $handler->display->display_options['arguments']['field_player_jerseys_tid']['default_argument_type'] = 'fixed';
+  $handler->display->display_options['arguments']['field_player_jerseys_tid']['summary']['format'] = 'default_summary';
+  $handler->display->display_options['arguments']['field_player_jerseys_tid']['break_phrase'] = 0;
+  $handler->display->display_options['arguments']['field_player_jerseys_tid']['not'] = 0;
   /* Filter criterion: Indexed Node: Content type */
   $handler->display->display_options['filters']['type']['id'] = 'type';
   $handler->display->display_options['filters']['type']['table'] = 'search_api_index_shop_product';
@@ -205,9 +205,75 @@ function fck_search_views_default_views() {
     'shop_product' => 'shop_product',
   );
   $handler->display->display_options['path'] = 'st-search/%';
+
+  /* Display: New Products */
+  $handler = $view->new_display('page', 'New Products', 'news_page');
+  $handler->display->display_options['defaults']['arguments'] = FALSE;
+  $handler->display->display_options['defaults']['filter_groups'] = FALSE;
+  $handler->display->display_options['defaults']['filters'] = FALSE;
+  /* Filter criterion: Indexed Node: Content type */
+  $handler->display->display_options['filters']['type']['id'] = 'type';
+  $handler->display->display_options['filters']['type']['table'] = 'search_api_index_shop_product';
+  $handler->display->display_options['filters']['type']['field'] = 'type';
+  $handler->display->display_options['filters']['type']['value'] = array(
+    'shop_product' => 'shop_product',
+  );
+  /* Filter criterion: Indexed Node: Group */
+  $handler->display->display_options['filters']['field_group']['id'] = 'field_group';
+  $handler->display->display_options['filters']['field_group']['table'] = 'search_api_index_shop_product';
+  $handler->display->display_options['filters']['field_group']['field'] = 'field_group';
+  $handler->display->display_options['filters']['field_group']['value'] = array(
+    'new' => 'new',
+  );
+  $handler->display->display_options['path'] = 'new-products';
+
+  /* Display: Sale */
+  $handler = $view->new_display('page', 'Sale', 'sale_page');
+  $handler->display->display_options['defaults']['title'] = FALSE;
+  $handler->display->display_options['title'] = 'Sale';
+  $handler->display->display_options['defaults']['arguments'] = FALSE;
+  /* Contextual filter: Sale: Term ID (indexed) */
+  $handler->display->display_options['arguments']['field_sale_tid']['id'] = 'field_sale_tid';
+  $handler->display->display_options['arguments']['field_sale_tid']['table'] = 'search_api_index_shop_product';
+  $handler->display->display_options['arguments']['field_sale_tid']['field'] = 'field_sale_tid';
+  $handler->display->display_options['arguments']['field_sale_tid']['default_action'] = 'empty';
+  $handler->display->display_options['arguments']['field_sale_tid']['default_argument_type'] = 'fixed';
+  $handler->display->display_options['arguments']['field_sale_tid']['summary']['format'] = 'default_summary';
+  $handler->display->display_options['arguments']['field_sale_tid']['break_phrase'] = 0;
+  $handler->display->display_options['arguments']['field_sale_tid']['not'] = 0;
+  $handler->display->display_options['defaults']['filter_groups'] = FALSE;
+  $handler->display->display_options['defaults']['filters'] = FALSE;
+  /* Filter criterion: Indexed Node: Content type */
+  $handler->display->display_options['filters']['type']['id'] = 'type';
+  $handler->display->display_options['filters']['type']['table'] = 'search_api_index_shop_product';
+  $handler->display->display_options['filters']['type']['field'] = 'type';
+  $handler->display->display_options['filters']['type']['value'] = array(
+    'shop_product' => 'shop_product',
+  );
+  $handler->display->display_options['path'] = 'categories/sale/%';
+
+  /* Display: Player Jerseys */
+  $handler = $view->new_display('page', 'Player Jerseys', 'player_jerseys_page');
+  $handler->display->display_options['defaults']['title'] = FALSE;
+  $handler->display->display_options['title'] = 'Player Jerseys';
+  $handler->display->display_options['defaults']['filter_groups'] = FALSE;
+  $handler->display->display_options['defaults']['filters'] = FALSE;
+  /* Filter criterion: Indexed Node: Content type */
+  $handler->display->display_options['filters']['type']['id'] = 'type';
+  $handler->display->display_options['filters']['type']['table'] = 'search_api_index_shop_product';
+  $handler->display->display_options['filters']['type']['field'] = 'type';
+  $handler->display->display_options['filters']['type']['value'] = array(
+    'shop_product' => 'shop_product',
+  );
+  /* Filter criterion: Player Jerseys » Vocabulary: Machine name (indexed) */
+  $handler->display->display_options['filters']['field_player_jerseys_vocabulary_machine_name']['id'] = 'field_player_jerseys_vocabulary_machine_name';
+  $handler->display->display_options['filters']['field_player_jerseys_vocabulary_machine_name']['table'] = 'search_api_index_shop_product';
+  $handler->display->display_options['filters']['field_player_jerseys_vocabulary_machine_name']['field'] = 'field_player_jerseys_vocabulary_machine_name';
+  $handler->display->display_options['filters']['field_player_jerseys_vocabulary_machine_name']['value'] = 'player_jerseys';
+  $handler->display->display_options['path'] = 'categories/player_jerseys/%';
   $translatables['fck_search_pages'] = array(
     t('Master'),
-    t('Clothing'),
+    t('New'),
     t('more'),
     t('Apply'),
     t('Reset'),
@@ -218,12 +284,16 @@ function fck_search_views_default_views() {
     t('.'),
     t(','),
     t('All'),
+    t('Clothing'),
     t('Accessories'),
     t('Match Kits'),
     t('Baby'),
     t('Gifts'),
     t('Standard search'),
     t('Search'),
+    t('New Products'),
+    t('Sale'),
+    t('Player Jerseys'),
   );
   $export['fck_search_pages'] = $view;
 
