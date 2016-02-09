@@ -154,15 +154,14 @@
                     <?php endif; ?>
                     <div class="product-body">
                       <h2 class="product-name"><a href="<?php print $node_url; ?>"><?php print $title; ?></a></h2>
-                      <?php if (0) : ?>
+                      
                       <div class="product-status">
                         <?php if (isset($content['field_product_store'][0]['quantity'])):?>
                             <span><?php print t('In Stock') ?></span><span>-</span><div class="small inline"><?php print render($content['product:sku']); ?></div>
                         <?php else: ?>
                             <h5><?php print t('SOLD OUT')?></h5>
                         <?php endif; ?>
-                      </div>
-                      <?php endif; ?>
+                      </div>                      
                       <!-- /.product-status -->
 
                       <div class="product-price"><?php print render($content['product:commerce_price']); ?></div>
@@ -278,16 +277,14 @@
 
         <div class="product-details-wrapper productcart_inline">
           <h2 class="product-name"><?php print $title; ?></h2>
-          
-          <?php if (0) : ?>
+                    
           <div class="product-status">
             <?php if (isset($content['field_product_store'][0]['quantity'])):?>
                 <span><?php print t('In Stock') ?></span><span>-</span><div class="small inline"><?php print render($content['product:sku']); ?></div>
             <?php else: ?>
                 <h5><?php print t('SOLD OUT')?></h5>
             <?php endif; ?>
-          </div>
-          <?php endif; ?>                    
+          </div>          
           <!-- /.product-status -->
           
           <?php if (0) : ?>
