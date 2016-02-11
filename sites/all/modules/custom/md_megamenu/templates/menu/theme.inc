@@ -746,7 +746,7 @@ function md_megamenu_preprocess_awemenu_item(&$vars) {
     }
   }
   if ($item['title_enabled']) {
-    $vars['item_link_content'] .= sprintf('<span class="awemenu-item-title">%s</span>', $item['title']);
+    $vars['item_link_content'] .= sprintf('<span class="awemenu-item-title">%s</span>', t($item['title']));
   }
 
   // process submenu render
