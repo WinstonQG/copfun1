@@ -4753,7 +4753,8 @@ h2.entry-title {
   margin-bottom: 0;
 }
 
-.cart-icon ul.whishlist li .whishlist-item a img {
+.whishlist-item a img,
+.cart-item a img {
   height: auto !important;
 }
 
@@ -4785,6 +4786,7 @@ h2.entry-title {
 .cart-item .product-name h3,
 .cart-item .product-name a {
   font-size: 14px;
+  color: @grey_color !important;
 }
 
 .whishlist-item .product-price,
@@ -4795,30 +4797,40 @@ h2.entry-title {
   font-weight: 700;
 }
 
-.whishlist .product-image {
-  width: 54px;
-  margin-right: 15px;
+.whishlist, .cart {
+  .product-image {
+    width: 54px;
+    margin-right: 15px;
+  }
 }
 
-.whishlist .product-body {
-  padding-right: 35px;
+.whishlist, .cart {
+  .product-body {
+    padding-right: 35px;
+  }
 }
 
-.whishlist .whishlist-name h2,
-.whishlist .whishlist-name h3 {
-  font-size: 12px;
-  margin-top: 0;
-  margin-bottom: 10px;
+.whishlist .whishlist-name,
+.cart .product-name {
+
+  h2, h3 {
+    font-size: 14px;
+    margin-top: 0;
+    margin-bottom: 10px;
+  }
 }
 
 .whishlist .whishlist-quantity,
-.whishlist .whishlist-price {
+.whishlist .whishlist-price,
+.cart .cart-price,
+.cart .cart-quantity, {
   font-family: Montserrat, Arial, sans-serif;
   color: #898989;
   font-size: 12px;
 }
 
-.whishlist > li .remove {
+.whishlist > li .remove,
+.cart > li .remove {
   font-size: 10px;
   margin-top: 0;
   top: 0;

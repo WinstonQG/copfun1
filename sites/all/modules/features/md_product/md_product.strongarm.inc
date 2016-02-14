@@ -151,7 +151,7 @@ function md_product_strongarm() {
     'extra_fields' => array(
       'form' => array(
         'flag' => array(
-          'weight' => '17',
+          'weight' => '18',
         ),
         'title' => array(
           'weight' => '0',
@@ -164,7 +164,7 @@ function md_product_strongarm() {
             'visible' => TRUE,
           ),
           'modal_content' => array(
-            'weight' => '-10',
+            'weight' => '0',
             'visible' => TRUE,
           ),
           'teaser' => array(
@@ -178,7 +178,7 @@ function md_product_strongarm() {
             'visible' => FALSE,
           ),
           'modal_content' => array(
-            'weight' => '-5',
+            'weight' => '15',
             'visible' => FALSE,
           ),
           'teaser' => array(
@@ -192,7 +192,7 @@ function md_product_strongarm() {
             'visible' => FALSE,
           ),
           'modal_content' => array(
-            'weight' => '5',
+            'weight' => '25',
             'visible' => FALSE,
           ),
           'teaser' => array(
@@ -206,7 +206,7 @@ function md_product_strongarm() {
             'visible' => TRUE,
           ),
           'modal_content' => array(
-            'weight' => '0',
+            'weight' => '1',
             'visible' => TRUE,
           ),
           'teaser' => array(
@@ -220,7 +220,7 @@ function md_product_strongarm() {
             'visible' => FALSE,
           ),
           'modal_content' => array(
-            'weight' => '6',
+            'weight' => '26',
             'visible' => FALSE,
           ),
           'teaser' => array(
@@ -262,7 +262,7 @@ function md_product_strongarm() {
             'visible' => FALSE,
           ),
           'modal_content' => array(
-            'weight' => '5',
+            'weight' => '23',
             'visible' => FALSE,
           ),
           'teaser' => array(
@@ -290,7 +290,7 @@ function md_product_strongarm() {
             'visible' => TRUE,
           ),
           'modal_content' => array(
-            'weight' => '10',
+            'weight' => '28',
             'visible' => FALSE,
           ),
           'teaser' => array(
@@ -300,7 +300,7 @@ function md_product_strongarm() {
         ),
         'flippy_pager' => array(
           'modal_content' => array(
-            'weight' => '5',
+            'weight' => '24',
             'visible' => FALSE,
           ),
           'default' => array(
@@ -312,43 +312,65 @@ function md_product_strongarm() {
             'visible' => TRUE,
           ),
         ),
-        'product:commerce_stock' => array(
-          'default' => array(
-            'weight' => '42',
-            'visible' => TRUE,
-          ),
-          'modal_content' => array(
-            'weight' => '42',
-            'visible' => TRUE,
-          ),
-        ),
         'product:field_outwear_adult_size' => array(
           'default' => array(
-            'weight' => '37',
+            'weight' => '5',
             'visible' => TRUE,
           ),
           'modal_content' => array(
-            'weight' => '37',
+            'weight' => '5',
+            'visible' => TRUE,
+          ),
+          'teaser' => array(
+            'weight' => '5',
             'visible' => TRUE,
           ),
         ),
         'product:field_outwear_children_size' => array(
           'default' => array(
-            'weight' => '39',
+            'weight' => '6',
             'visible' => TRUE,
           ),
           'modal_content' => array(
-            'weight' => '39',
+            'weight' => '6',
+            'visible' => TRUE,
+          ),
+          'teaser' => array(
+            'weight' => '6',
             'visible' => TRUE,
           ),
         ),
         'product:field_outwear_baby_size' => array(
           'default' => array(
-            'weight' => '41',
+            'weight' => '7',
             'visible' => TRUE,
           ),
           'modal_content' => array(
-            'weight' => '41',
+            'weight' => '7',
+            'visible' => TRUE,
+          ),
+          'teaser' => array(
+            'weight' => '7',
+            'visible' => TRUE,
+          ),
+        ),
+        'product:commerce_stock' => array(
+          'default' => array(
+            'weight' => '11',
+            'visible' => TRUE,
+          ),
+          'modal_content' => array(
+            'weight' => '11',
+            'visible' => TRUE,
+          ),
+          'teaser' => array(
+            'weight' => '11',
+            'visible' => TRUE,
+          ),
+        ),
+        'product:field_foot_size' => array(
+          'modal_content' => array(
+            'weight' => '2',
             'visible' => TRUE,
           ),
         ),

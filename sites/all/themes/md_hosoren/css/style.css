@@ -12250,7 +12250,8 @@ h2.entry-title {
 .cart-list > li:last-child .cart-item {
   margin-bottom: 0;
 }
-.cart-icon ul.whishlist li .whishlist-item a img {
+.whishlist-item a img,
+.cart-item a img {
   height: auto !important;
 }
 .modal-product .product-media {
@@ -12276,6 +12277,7 @@ h2.entry-title {
 .cart-item .product-name h3,
 .cart-item .product-name a {
   font-size: 14px;
+  color: #333333 !important;
 }
 .whishlist-item .product-price,
 .cart-item .product-price {
@@ -12284,26 +12286,33 @@ h2.entry-title {
   font-size: 16px;
   font-weight: 700;
 }
-.whishlist .product-image {
+.whishlist .product-image,
+.cart .product-image {
   width: 54px;
   margin-right: 15px;
 }
-.whishlist .product-body {
+.whishlist .product-body,
+.cart .product-body {
   padding-right: 35px;
 }
 .whishlist .whishlist-name h2,
-.whishlist .whishlist-name h3 {
-  font-size: 12px;
+.cart .product-name h2,
+.whishlist .whishlist-name h3,
+.cart .product-name h3 {
+  font-size: 14px;
   margin-top: 0;
   margin-bottom: 10px;
 }
 .whishlist .whishlist-quantity,
-.whishlist .whishlist-price {
+.whishlist .whishlist-price,
+.cart .cart-price,
+.cart .cart-quantity {
   font-family: Montserrat, Arial, sans-serif;
   color: #898989;
   font-size: 12px;
 }
-.whishlist > li .remove {
+.whishlist > li .remove,
+.cart > li .remove {
   font-size: 10px;
   margin-top: 0;
   top: 0;
@@ -18041,7 +18050,8 @@ and open the template in the editor.
 .cart-icon ul.whishlist li .whishlist-item {
   margin-bottom: 15px;
 }
-.cart-icon ul.whishlist li .whishlist-item a img {
+.cart-icon ul.whishlist li .whishlist-item a img,
+.cart-item a img {
   height: 70px;
 }
 .wishlist-icon ul.whishlist li > a {

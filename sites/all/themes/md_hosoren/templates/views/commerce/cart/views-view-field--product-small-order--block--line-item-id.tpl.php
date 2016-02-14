@@ -22,36 +22,41 @@
  * the view is modified.
  */
 
-$node = entity_load_single('node', $output);
-$wrapper = entity_metadata_wrapper('node', $node);
-// price
-$commerce_price_data = $wrapper
-	->field_product_store[0]
-	->commerce_price
-	->value();
-$commerce_price = commerce_currency_format(
+$line_item = entity_load_single('commerce_line_item', $output);
+$wrapper = entity_metadata_wrapper('commerce_line_item', $line_item);
+
+
+$title = $wrapper->commerce_product->title->value();
+$commerce_price_data = $wrapper->commerce_product->commerce_price->value();
+$price = commerce_currency_format(
 	$commerce_price_data['amount'], 
 	$commerce_price_data['currency_code']
 );
-// image
-$first_image = $wrapper->field_product_store[0]->field_product_images[0]->value();
+$qty = (int)$wrapper->quantity->value();
+$first_image = $wrapper->commerce_product->field_product_images[0]->value();
 if (isset($first_image['uri'])) {
-	$url = image_style_url('product_list_small', $first_image['uri']);	
+	$image_url = image_style_url('product_list_small', $first_image['uri']);	
 }
+
+$dislay_path = $row->field_commerce_display_path[0]['raw']['value'];
 
 ?>
 
-<div class="whishlist-item">
+<div class="cart-item">
 	<div class="product-image">
-		<?php print l(theme('image', array('path' => $url)), 'node/'.$output, array('html' => TRUE)); ?>
+		<?php print l(theme('image', array('path' => $image_url)), $dislay_path, array('html' => TRUE)); ?>
 	</div>
 	<div class="product-body">
-		<div class="whishlist-name">
-			<h3><?php print l($node->title, 'node/'.$node->nid); ?></h3>
+		<div class="product-name">
+			<h3><?php print l($title, $dislay_path); ?></h3>
 		</div>
-		<div class="whishlist-price">
+		<div class="cart-price">
 			<span><?php print t('Price') ?>:</span>
-			<strong><?php print $commerce_price; ?></strong>
+			<strong><?php print $price; ?></strong>
+		</div>
+		<div class="cart-quantity">
+			<span><?php print t('Quantity') ?>:</span>
+			<strong><?php print $qty; ?></strong>
 		</div>
 	</div>
 </div>

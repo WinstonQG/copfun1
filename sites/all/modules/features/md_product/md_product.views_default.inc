@@ -105,19 +105,6 @@ function md_product_views_default_views() {
   $handler->display->display_options['filters']['parent']['field'] = 'parent';
   $handler->display->display_options['filters']['parent']['operator'] = '>';
   $handler->display->display_options['filters']['parent']['value']['value'] = '0';
-  $translatables['product_box_categories'] = array(
-    t('Master'),
-    t('Brand'),
-    t('more'),
-    t('Apply'),
-    t('Reset'),
-    t('Sort by'),
-    t('Asc'),
-    t('Desc'),
-    t('Size'),
-    t('Shop Size'),
-    t('All'),
-  );
   $export['product_box_categories'] = $view;
 
   $view = new view();
@@ -226,28 +213,6 @@ function md_product_views_default_views() {
   $handler = $view->new_display('block', 'Block', 'block');
   $handler->display->display_options['defaults']['use_ajax'] = FALSE;
   $handler->display->display_options['use_ajax'] = TRUE;
-  $translatables['product_brand_grid'] = array(
-    t('Master'),
-    t('more'),
-    t('Apply'),
-    t('Reset'),
-    t('Sort by'),
-    t('Asc'),
-    t('Desc'),
-    t('Items per page'),
-    t('- All -'),
-    t('Offset'),
-    t('«'),
-    t('‹'),
-    t('›'),
-    t('»'),
-    t('Displaying @start - @end of @total  Items'),
-    t('Last Comment'),
-    t('Lastest'),
-    t('Recommend'),
-    t('All'),
-    t('Block'),
-  );
   $export['product_brand_grid'] = $view;
 
   $view = new view();
@@ -353,18 +318,6 @@ function md_product_views_default_views() {
     'product_category' => 'product_category',
   );
   $handler->display->display_options['filters']['machine_name']['group'] = 1;
-  $translatables['product_category_accordion'] = array(
-    t('Master'),
-    t('Categories'),
-    t('more'),
-    t('Apply'),
-    t('Reset'),
-    t('Sort by'),
-    t('Asc'),
-    t('Desc'),
-    t('Accordion'),
-    t('Parent'),
-  );
   $export['product_category_accordion'] = $view;
 
   $view = new view();
@@ -505,7 +458,7 @@ function md_product_views_default_views() {
   $handler->display->display_options['relationships']['field_product_store_product_id']['field'] = 'field_product_store_product_id';
   $handler->display->display_options['relationships']['field_product_store_product_id']['required'] = TRUE;
   $handler->display->display_options['defaults']['arguments'] = FALSE;
-  /* Contextual filter: Commerce Product: Color (field_color) */
+  /* Contextual filter: Commerce Product: Out of use - Color (field_color) */
   $handler->display->display_options['arguments']['field_color_tid']['id'] = 'field_color_tid';
   $handler->display->display_options['arguments']['field_color_tid']['table'] = 'field_data_field_color';
   $handler->display->display_options['arguments']['field_color_tid']['field'] = 'field_color_tid';
@@ -538,7 +491,7 @@ function md_product_views_default_views() {
   $handler->display->display_options['relationships']['field_product_store_product_id']['field'] = 'field_product_store_product_id';
   $handler->display->display_options['relationships']['field_product_store_product_id']['required'] = TRUE;
   $handler->display->display_options['defaults']['arguments'] = FALSE;
-  /* Contextual filter: Commerce Product: Size (field_size) */
+  /* Contextual filter: Commerce Product: Out of use - Size (field_size) */
   $handler->display->display_options['arguments']['field_size_tid']['id'] = 'field_size_tid';
   $handler->display->display_options['arguments']['field_size_tid']['table'] = 'field_data_field_size';
   $handler->display->display_options['arguments']['field_size_tid']['field'] = 'field_size_tid';
@@ -657,35 +610,6 @@ function md_product_views_default_views() {
     'new' => 'new',
   );
   $handler->display->display_options['path'] = 'new-arrivals-full';
-  $translatables['product_category_grid'] = array(
-    t('Master'),
-    t('more'),
-    t('Apply'),
-    t('Reset'),
-    t('Sort by'),
-    t('Asc'),
-    t('Desc'),
-    t('Items per page'),
-    t('- All -'),
-    t('Offset'),
-    t('«'),
-    t('‹'),
-    t('›'),
-    t('»'),
-    t('Displaying @start - @end of @total  Items'),
-    t('Last Comment'),
-    t('Products referenced by field_product_store'),
-    t('Lastest'),
-    t('Recommend'),
-    t('Price higher - lower'),
-    t('All'),
-    t('Block'),
-    t('Color'),
-    t('Size'),
-    t('New Arrivals'),
-    t('Bestseller'),
-    t('Full New Arrivals'),
-  );
   $export['product_category_grid'] = $view;
 
   $view = new view();
@@ -777,19 +701,6 @@ function md_product_views_default_views() {
 
   /* Display: Block */
   $handler = $view->new_display('block', 'Block', 'block');
-  $translatables['product_demo'] = array(
-    t('Master'),
-    t('more'),
-    t('Apply'),
-    t('Reset'),
-    t('Sort by'),
-    t('Asc'),
-    t('Desc'),
-    t('taxonomy/term/[tid]'),
-    t('.'),
-    t(','),
-    t('Block'),
-  );
   $export['product_demo'] = $view;
 
   $view = new view();
@@ -861,18 +772,6 @@ function md_product_views_default_views() {
 
   /* Display: Block */
   $handler = $view->new_display('block', 'Block', 'block');
-  $translatables['product_demo_colum'] = array(
-    t('Master'),
-    t('more'),
-    t('Apply'),
-    t('Reset'),
-    t('Sort by'),
-    t('Asc'),
-    t('Desc'),
-    t('.'),
-    t(','),
-    t('Block'),
-  );
   $export['product_demo_colum'] = $view;
 
   $view = new view();
@@ -961,18 +860,6 @@ function md_product_views_default_views() {
 
   /* Display: Block */
   $handler = $view->new_display('block', 'Block', 'block');
-  $translatables['product_demo_mixed'] = array(
-    t('Master'),
-    t('more'),
-    t('Apply'),
-    t('Reset'),
-    t('Sort by'),
-    t('Asc'),
-    t('Desc'),
-    t('.'),
-    t(','),
-    t('Block'),
-  );
   $export['product_demo_mixed'] = $view;
 
   $view = new view();
@@ -1044,18 +931,6 @@ function md_product_views_default_views() {
 
   /* Display: Block */
   $handler = $view->new_display('block', 'Block', 'block');
-  $translatables['product_demo_overlay'] = array(
-    t('Master'),
-    t('more'),
-    t('Apply'),
-    t('Reset'),
-    t('Sort by'),
-    t('Asc'),
-    t('Desc'),
-    t('.'),
-    t(','),
-    t('Block'),
-  );
   $export['product_demo_overlay'] = $view;
 
   $view = new view();
@@ -1128,42 +1003,6 @@ function md_product_views_default_views() {
   $handler->display->display_options['filters']['delta']['field'] = 'delta';
   $handler->display->display_options['filters']['delta']['value']['value'] = '0';
   $handler->display->display_options['filters']['delta']['group'] = 1;
-  /* Filter criterion: Commerce Product: Size (field_size) */
-  $handler->display->display_options['filters']['field_size_tid']['id'] = 'field_size_tid';
-  $handler->display->display_options['filters']['field_size_tid']['table'] = 'field_data_field_size';
-  $handler->display->display_options['filters']['field_size_tid']['field'] = 'field_size_tid';
-  $handler->display->display_options['filters']['field_size_tid']['relationship'] = 'field_product_store_product_id';
-  $handler->display->display_options['filters']['field_size_tid']['group'] = 1;
-  $handler->display->display_options['filters']['field_size_tid']['exposed'] = TRUE;
-  $handler->display->display_options['filters']['field_size_tid']['expose']['operator_id'] = 'field_size_tid_op';
-  $handler->display->display_options['filters']['field_size_tid']['expose']['label'] = 'Size';
-  $handler->display->display_options['filters']['field_size_tid']['expose']['operator'] = 'field_size_tid_op';
-  $handler->display->display_options['filters']['field_size_tid']['expose']['identifier'] = 'field_size_tid';
-  $handler->display->display_options['filters']['field_size_tid']['expose']['remember_roles'] = array(
-    2 => '2',
-    1 => 0,
-    3 => 0,
-  );
-  $handler->display->display_options['filters']['field_size_tid']['type'] = 'select';
-  $handler->display->display_options['filters']['field_size_tid']['vocabulary'] = 'product_store_size';
-  /* Filter criterion: Commerce Product: Color (field_color) */
-  $handler->display->display_options['filters']['field_color_tid']['id'] = 'field_color_tid';
-  $handler->display->display_options['filters']['field_color_tid']['table'] = 'field_data_field_color';
-  $handler->display->display_options['filters']['field_color_tid']['field'] = 'field_color_tid';
-  $handler->display->display_options['filters']['field_color_tid']['relationship'] = 'field_product_store_product_id';
-  $handler->display->display_options['filters']['field_color_tid']['group'] = 1;
-  $handler->display->display_options['filters']['field_color_tid']['exposed'] = TRUE;
-  $handler->display->display_options['filters']['field_color_tid']['expose']['operator_id'] = 'field_color_tid_op';
-  $handler->display->display_options['filters']['field_color_tid']['expose']['label'] = 'Color';
-  $handler->display->display_options['filters']['field_color_tid']['expose']['operator'] = 'field_color_tid_op';
-  $handler->display->display_options['filters']['field_color_tid']['expose']['identifier'] = 'field_color_tid';
-  $handler->display->display_options['filters']['field_color_tid']['expose']['remember_roles'] = array(
-    2 => '2',
-    1 => 0,
-    3 => 0,
-  );
-  $handler->display->display_options['filters']['field_color_tid']['type'] = 'select';
-  $handler->display->display_options['filters']['field_color_tid']['vocabulary'] = 'product_store_color';
   /* Filter criterion: Commerce Product: Price (commerce_price:amount) */
   $handler->display->display_options['filters']['commerce_price_amount']['id'] = 'commerce_price_amount';
   $handler->display->display_options['filters']['commerce_price_amount']['table'] = 'field_data_commerce_price';
@@ -1250,7 +1089,7 @@ function md_product_views_default_views() {
   /* Display: LookBook */
   $handler = $view->new_display('block', 'LookBook', 'block_2');
   $handler->display->display_options['defaults']['arguments'] = FALSE;
-  /* Contextual filter: Content: Product LookBook (field_product_lookbook) */
+  /* Contextual filter: Content: LookBook (field_product_lookbook) */
   $handler->display->display_options['arguments']['field_product_lookbook_tid']['id'] = 'field_product_lookbook_tid';
   $handler->display->display_options['arguments']['field_product_lookbook_tid']['table'] = 'field_data_field_product_lookbook';
   $handler->display->display_options['arguments']['field_product_lookbook_tid']['field'] = 'field_product_lookbook_tid';
@@ -1263,27 +1102,6 @@ function md_product_views_default_views() {
   $handler->display->display_options['arguments']['field_product_lookbook_tid']['summary']['number_of_records'] = '0';
   $handler->display->display_options['arguments']['field_product_lookbook_tid']['summary']['format'] = 'default_summary';
   $handler->display->display_options['arguments']['field_product_lookbook_tid']['summary_options']['items_per_page'] = '25';
-  $translatables['product_full_fillter'] = array(
-    t('Master'),
-    t('more'),
-    t('Apply'),
-    t('Reset'),
-    t('Sort by'),
-    t('Asc'),
-    t('Desc'),
-    t('Displaying @start - @end of @total  Items'),
-    t('Products referenced by field_product_store'),
-    t('Post date'),
-    t('Size'),
-    t('Color'),
-    t('Price (commerce_price:amount)'),
-    t('Price'),
-    t('Category'),
-    t('Block'),
-    t('Trending'),
-    t('All'),
-    t('LookBook'),
-  );
   $export['product_full_fillter'] = $view;
 
   $view = new view();
@@ -1441,35 +1259,6 @@ function md_product_views_default_views() {
   $handler->display->display_options['exposed_form']['options']['expose_sort_order'] = FALSE;
   $handler->display->display_options['exposed_form']['options']['autosubmit'] = TRUE;
   $handler->display->display_options['path'] = 'products-grid-full';
-  $translatables['product_grid'] = array(
-    t('Master'),
-    t('more'),
-    t('Apply'),
-    t('Reset'),
-    t('Sort by'),
-    t('Asc'),
-    t('Desc'),
-    t('Items per page'),
-    t('- All -'),
-    t('Offset'),
-    t('«'),
-    t('‹'),
-    t('›'),
-    t('»'),
-    t('<div class="view-icons">
-		<a class="view-icon  active"><span class="icon icon-th"></span></a>
-		<a href="products-list" class="view-icon"><span class="icon icon-th-list"></span></a>
-</div>'),
-    t('<p class="display-line"><span class="text-muted">Displaying @start - @end of @total  Items</span></p>'),
-    t('Last Comment'),
-    t('Products referenced by field_product_store'),
-    t('Lastest'),
-    t('Recommend'),
-    t('Form Price Min'),
-    t('Price (commerce_price:amount)'),
-    t('Form Price Max'),
-    t('Page'),
-  );
   $export['product_grid'] = $view;
 
   $view = new view();
@@ -1604,34 +1393,6 @@ function md_product_views_default_views() {
   $handler->display->display_options['exposed_form']['options']['expose_sort_order'] = FALSE;
   $handler->display->display_options['exposed_form']['options']['autosubmit'] = TRUE;
   $handler->display->display_options['path'] = 'products-list-full';
-  $translatables['product_list'] = array(
-    t('Master'),
-    t('more'),
-    t('Apply'),
-    t('Reset'),
-    t('Sort by'),
-    t('Asc'),
-    t('Desc'),
-    t('Items per page'),
-    t('- All -'),
-    t('Offset'),
-    t('«'),
-    t('‹'),
-    t('›'),
-    t('»'),
-    t('<div class="view-icons">
-		<a href="products-grid" class="view-icon "><span class="icon icon-th"></span></a>
-		<a class="view-icon active"><span class="icon icon-th-list"></span></a>
-</div>'),
-    t('<p class="display-line"><span class="text-muted">Displaying @start - @end of @total  Items</span></p>'),
-    t('Last Comment'),
-    t('Products referenced by field_product_store'),
-    t('Lastest'),
-    t('Recommend'),
-    t('Form Price Min'),
-    t('Form Price Max'),
-    t('Page'),
-  );
   $export['product_list'] = $view;
 
   $view = new view();
@@ -1724,24 +1485,6 @@ function md_product_views_default_views() {
   $handler->display->display_options['filters']['sticky']['table'] = 'node';
   $handler->display->display_options['filters']['sticky']['field'] = 'sticky';
   $handler->display->display_options['filters']['sticky']['value'] = '1';
-  $translatables['product_load_grid'] = array(
-    t('Master'),
-    t('more'),
-    t('Apply'),
-    t('Reset'),
-    t('Sort by'),
-    t('Asc'),
-    t('Desc'),
-    t('Items per page'),
-    t('- All -'),
-    t('Offset'),
-    t('« first'),
-    t('‹ previous'),
-    t('next ›'),
-    t('last »'),
-    t('View more'),
-    t('Block'),
-  );
   $export['product_load_grid'] = $view;
 
   $view = new view();
@@ -1815,7 +1558,7 @@ function md_product_views_default_views() {
   $handler->display->display_options['fields']['field_subtitle']['field'] = 'field_subtitle';
   $handler->display->display_options['fields']['field_subtitle']['label'] = '';
   $handler->display->display_options['fields']['field_subtitle']['element_label_colon'] = FALSE;
-  /* Field: Content: Product LookBook */
+  /* Field: Content: LookBook */
   $handler->display->display_options['fields']['field_product_lookbook']['id'] = 'field_product_lookbook';
   $handler->display->display_options['fields']['field_product_lookbook']['table'] = 'field_data_field_product_lookbook';
   $handler->display->display_options['fields']['field_product_lookbook']['field'] = 'field_product_lookbook';
@@ -1844,24 +1587,6 @@ function md_product_views_default_views() {
   /* Display: Page */
   $handler = $view->new_display('page', 'Page', 'page');
   $handler->display->display_options['path'] = 'lookbook';
-  $translatables['product_lookbook'] = array(
-    t('Master'),
-    t('more'),
-    t('Apply'),
-    t('Reset'),
-    t('Sort by'),
-    t('Asc'),
-    t('Desc'),
-    t('Items per page'),
-    t('- All -'),
-    t('Offset'),
-    t('« first'),
-    t('‹ previous'),
-    t('next ›'),
-    t('last »'),
-    t('View more'),
-    t('Page'),
-  );
   $export['product_lookbook'] = $view;
 
   $view = new view();
@@ -1926,17 +1651,6 @@ function md_product_views_default_views() {
   $handler->display->display_options['exposed_form']['type'] = 'basic';
   $handler->display->display_options['exposed_form']['options']['expose_sort_order'] = FALSE;
   $handler->display->display_options['exposed_form']['options']['autosubmit'] = TRUE;
-  $translatables['product_sidebar_brands'] = array(
-    t('Master'),
-    t('Brands'),
-    t('more'),
-    t('Apply'),
-    t('Reset'),
-    t('Sort by'),
-    t('Asc'),
-    t('Desc'),
-    t('Block'),
-  );
   $export['product_sidebar_brands'] = $view;
 
   $view = new view();
@@ -2054,20 +1768,6 @@ function md_product_views_default_views() {
   $handler->display->display_options['arguments']['parent']['summary']['number_of_records'] = '0';
   $handler->display->display_options['arguments']['parent']['summary']['format'] = 'default_summary';
   $handler->display->display_options['arguments']['parent']['summary_options']['items_per_page'] = '25';
-  $translatables['product_sidebar_category'] = array(
-    t('Master'),
-    t('Categories'),
-    t('more'),
-    t('Apply'),
-    t('Reset'),
-    t('Sort by'),
-    t('Asc'),
-    t('Desc'),
-    t('Block'),
-    t('Childrend'),
-    t('Parent'),
-    t('All'),
-  );
   $export['product_sidebar_category'] = $view;
 
   $view = new view();
@@ -2114,18 +1814,6 @@ function md_product_views_default_views() {
 
   /* Display: Block */
   $handler = $view->new_display('block', 'Block', 'block');
-  $translatables['product_sidebar_color'] = array(
-    t('Master'),
-    t('Color'),
-    t('more'),
-    t('Apply'),
-    t('Reset'),
-    t('Sort by'),
-    t('Asc'),
-    t('Desc'),
-    t('<span class="color [name]"></span>'),
-    t('Block'),
-  );
   $export['product_sidebar_color'] = $view;
 
   $view = new view();
@@ -2194,20 +1882,6 @@ function md_product_views_default_views() {
 
   /* Display: Block */
   $handler = $view->new_display('block', 'Block', 'block');
-  $translatables['product_sidebar_size'] = array(
-    t('Master'),
-    t('Size'),
-    t('more'),
-    t('Apply'),
-    t('Reset'),
-    t('Sort by'),
-    t('Asc'),
-    t('Desc'),
-    t('taxonomy/term/[tid]'),
-    t('.'),
-    t(','),
-    t('Block'),
-  );
   $export['product_sidebar_size'] = $view;
 
   $view = new view();
@@ -2404,26 +2078,6 @@ function md_product_views_default_views() {
   $handler->display->display_options['filters']['field_group_value']['value'] = array(
     'new' => 'new',
   );
-  $translatables['product_slider'] = array(
-    t('Master'),
-    t('more'),
-    t('Apply'),
-    t('Reset'),
-    t('Sort by'),
-    t('Asc'),
-    t('Desc'),
-    t('Lastest'),
-    t('Block'),
-    t('Index Category'),
-    t('All'),
-    t('Related'),
-    t('<div class="relared-products-header margin-bottom-50">
-		<h3 class="upper">Related Products</h3>
-</div>'),
-    t('New Arrivals'),
-    t('New Arrivals More'),
-    t('More Product'),
-  );
   $export['product_slider'] = $view;
 
   $view = new view();
@@ -2448,7 +2102,7 @@ function md_product_views_default_views() {
   $handler->display->display_options['style_plugin'] = 'list';
   $handler->display->display_options['style_options']['default_row_class'] = FALSE;
   $handler->display->display_options['style_options']['row_class_special'] = FALSE;
-  $handler->display->display_options['style_options']['class'] = 'whishlist';
+  $handler->display->display_options['style_options']['class'] = 'cart';
   $handler->display->display_options['style_options']['wrapper_class'] = '';
   $handler->display->display_options['row_plugin'] = 'fields';
   /* Footer: Commerce Line Item: Line item summary */
@@ -2483,80 +2137,15 @@ function md_product_views_default_views() {
   $handler->display->display_options['fields']['commerce_display_path']['label'] = '';
   $handler->display->display_options['fields']['commerce_display_path']['exclude'] = TRUE;
   $handler->display->display_options['fields']['commerce_display_path']['element_label_colon'] = FALSE;
-  /* Field: Commerce Line item: Product */
-  $handler->display->display_options['fields']['commerce_product']['id'] = 'commerce_product';
-  $handler->display->display_options['fields']['commerce_product']['table'] = 'field_data_commerce_product';
-  $handler->display->display_options['fields']['commerce_product']['field'] = 'commerce_product';
-  $handler->display->display_options['fields']['commerce_product']['relationship'] = 'commerce_line_items_line_item_id';
-  $handler->display->display_options['fields']['commerce_product']['label'] = '';
-  $handler->display->display_options['fields']['commerce_product']['exclude'] = TRUE;
-  $handler->display->display_options['fields']['commerce_product']['alter']['text'] = '<p class="product-image"><a href="[commerce_display_path]">[commerce_product] </a></p>';
-  $handler->display->display_options['fields']['commerce_product']['alter']['make_link'] = TRUE;
-  $handler->display->display_options['fields']['commerce_product']['alter']['path'] = '[commerce_display_path]';
-  $handler->display->display_options['fields']['commerce_product']['element_label_colon'] = FALSE;
-  $handler->display->display_options['fields']['commerce_product']['type'] = 'commerce_product_reference_rendered_product';
-  $handler->display->display_options['fields']['commerce_product']['settings'] = array(
-    'view_mode' => 'line_item',
-    'page' => 1,
-  );
-  /* Field: Commerce Line Item: Title */
-  $handler->display->display_options['fields']['line_item_title']['id'] = 'line_item_title';
-  $handler->display->display_options['fields']['line_item_title']['table'] = 'commerce_line_item';
-  $handler->display->display_options['fields']['line_item_title']['field'] = 'line_item_title';
-  $handler->display->display_options['fields']['line_item_title']['relationship'] = 'commerce_line_items_line_item_id';
-  $handler->display->display_options['fields']['line_item_title']['label'] = '';
-  $handler->display->display_options['fields']['line_item_title']['exclude'] = TRUE;
-  $handler->display->display_options['fields']['line_item_title']['alter']['make_link'] = TRUE;
-  $handler->display->display_options['fields']['line_item_title']['alter']['path'] = '[commerce_display_path]';
-  $handler->display->display_options['fields']['line_item_title']['element_label_colon'] = FALSE;
-  /* Field: Commerce Line Item: Quantity */
-  $handler->display->display_options['fields']['quantity']['id'] = 'quantity';
-  $handler->display->display_options['fields']['quantity']['table'] = 'commerce_line_item';
-  $handler->display->display_options['fields']['quantity']['field'] = 'quantity';
-  $handler->display->display_options['fields']['quantity']['relationship'] = 'commerce_line_items_line_item_id';
-  $handler->display->display_options['fields']['quantity']['label'] = '';
-  $handler->display->display_options['fields']['quantity']['exclude'] = TRUE;
-  $handler->display->display_options['fields']['quantity']['element_label_colon'] = FALSE;
-  $handler->display->display_options['fields']['quantity']['precision'] = '0';
-  /* Field: Commerce Line item: Unit price */
-  $handler->display->display_options['fields']['commerce_unit_price']['id'] = 'commerce_unit_price';
-  $handler->display->display_options['fields']['commerce_unit_price']['table'] = 'field_data_commerce_unit_price';
-  $handler->display->display_options['fields']['commerce_unit_price']['field'] = 'commerce_unit_price';
-  $handler->display->display_options['fields']['commerce_unit_price']['relationship'] = 'commerce_line_items_line_item_id';
-  $handler->display->display_options['fields']['commerce_unit_price']['label'] = '';
-  $handler->display->display_options['fields']['commerce_unit_price']['exclude'] = TRUE;
-  $handler->display->display_options['fields']['commerce_unit_price']['alter']['text'] = '[quantity] x [commerce_unit_price] ';
-  $handler->display->display_options['fields']['commerce_unit_price']['element_label_colon'] = FALSE;
-  $handler->display->display_options['fields']['commerce_unit_price']['click_sort_column'] = 'amount';
-  $handler->display->display_options['fields']['commerce_unit_price']['settings'] = array(
-    'calculation' => FALSE,
-  );
-  /* Field: Global: Custom text */
-  $handler->display->display_options['fields']['nothing']['id'] = 'nothing';
-  $handler->display->display_options['fields']['nothing']['table'] = 'views';
-  $handler->display->display_options['fields']['nothing']['field'] = 'nothing';
-  $handler->display->display_options['fields']['nothing']['label'] = '';
-  $handler->display->display_options['fields']['nothing']['alter']['text'] = '<div class="whishlist-item">
-	<div class="product-image">
-		[commerce_product]
-	</div>
-	<div class="product-body">
-		<div class="whishlist-name">
-				<h3>[line_item_title]</h3>
-		</div>
-		<div class="whishlist-price">
-				<span>Price:</span>
-				<strong>[commerce_unit_price]</strong>
-		</div>
-		<div class="whishlist-quantity">
-				<span>Quantity:</span>
-				<span>[quantity]</span>
-		</div>
-	</div>
-</div>';
-  $handler->display->display_options['fields']['nothing']['element_type'] = '0';
-  $handler->display->display_options['fields']['nothing']['element_label_colon'] = FALSE;
-  $handler->display->display_options['fields']['nothing']['element_wrapper_type'] = '0';
+  /* Field: Commerce Line Item: Line item ID */
+  $handler->display->display_options['fields']['line_item_id']['id'] = 'line_item_id';
+  $handler->display->display_options['fields']['line_item_id']['table'] = 'commerce_line_item';
+  $handler->display->display_options['fields']['line_item_id']['field'] = 'line_item_id';
+  $handler->display->display_options['fields']['line_item_id']['relationship'] = 'commerce_line_items_line_item_id';
+  $handler->display->display_options['fields']['line_item_id']['label'] = '';
+  $handler->display->display_options['fields']['line_item_id']['element_type'] = '0';
+  $handler->display->display_options['fields']['line_item_id']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['line_item_id']['element_default_classes'] = FALSE;
   /* Contextual filter: Commerce Order: Order ID */
   $handler->display->display_options['arguments']['order_id']['id'] = 'order_id';
   $handler->display->display_options['arguments']['order_id']['table'] = 'commerce_order';
@@ -2582,41 +2171,6 @@ function md_product_views_default_views() {
 
   /* Display: Block */
   $handler = $view->new_display('block', 'Block', 'block');
-  $translatables['product_small_order'] = array(
-    t('Master'),
-    t('more'),
-    t('Apply'),
-    t('Reset'),
-    t('Sort by'),
-    t('Asc'),
-    t('Desc'),
-    t('<span class="text-muted">Cart is empty</span>'),
-    t('Line items referenced by commerce_line_items'),
-    t('<p class="product-image"><a href="[commerce_display_path]">[commerce_product] </a></p>'),
-    t('.'),
-    t(','),
-    t('[quantity] x [commerce_unit_price] '),
-    t('<div class="whishlist-item">
-	<div class="product-image">
-		[commerce_product]
-	</div>
-	<div class="product-body">
-		<div class="whishlist-name">
-				<h3>[line_item_title]</h3>
-		</div>
-		<div class="whishlist-price">
-				<span>Price:</span>
-				<strong>[commerce_unit_price]</strong>
-		</div>
-		<div class="whishlist-quantity">
-				<span>Quantity:</span>
-				<span>[quantity]</span>
-		</div>
-	</div>
-</div>'),
-    t('All'),
-    t('Block'),
-  );
   $export['product_small_order'] = $view;
 
   $view = new view();
@@ -2768,34 +2322,6 @@ function md_product_views_default_views() {
   $handler->display->display_options['fields']['nid']['element_type'] = '0';
   $handler->display->display_options['fields']['nid']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['nid']['element_default_classes'] = FALSE;
-  $translatables['product_small_wishlist'] = array(
-    t('Master'),
-    t('View Wishlist'),
-    t('Apply'),
-    t('Reset'),
-    t('Sort by'),
-    t('Asc'),
-    t('Desc'),
-    t('<span class="text-muted">Wishlist is empty</span>'),
-    t('Products referenced by field_product_store'),
-    t('<div class="whishlist-item">
-	<div class="product-image">
-		[field_product_images]
-	</div>
-	<div class="product-body">
-		<div class="whishlist-name">
-			<h3>[title]</h3>
-		</div>
-		<div class="whishlist-price">
-			<span>Price:</span>
-			<strong>[commerce_price]</strong>
-		</div>
-	</div>
-</div>'),
-    t('Block'),
-    t('more'),
-    t('flag'),
-  );
   $export['product_small_wishlist'] = $view;
 
   $view = new view();
@@ -2874,24 +2400,6 @@ function md_product_views_default_views() {
 
   /* Display: Block */
   $handler = $view->new_display('block', 'Block', 'block');
-  $translatables['product_trending'] = array(
-    t('Master'),
-    t('more'),
-    t('Apply'),
-    t('Reset'),
-    t('Sort by'),
-    t('Asc'),
-    t('Desc'),
-    t('<div class="awe-media">
-	<div class="awe-media-image">
-		[field_image]
-	</div>
-	<div class="awe-media-body center margin-vertical-20">
-		[name]
-	</div>
-</div>'),
-    t('Block'),
-  );
   $export['product_trending'] = $view;
 
   $view = new view();
@@ -2987,23 +2495,6 @@ function md_product_views_default_views() {
   /* Display: Page */
   $handler = $view->new_display('page', 'Page', 'page');
   $handler->display->display_options['path'] = 'wishlist';
-  $translatables['product_wishlist'] = array(
-    t('Master'),
-    t('more'),
-    t('Apply'),
-    t('Reset'),
-    t('Sort by'),
-    t('Asc'),
-    t('Desc'),
-    t('<h3>Please choose products <a href="products-list">here</a> add to your wishlist</h3>'),
-    t('flag'),
-    t('Flag user'),
-    t('Image'),
-    t('Product Details'),
-    t('Price'),
-    t('Flag link'),
-    t('Page'),
-  );
   $export['product_wishlist'] = $view;
 
   return $export;

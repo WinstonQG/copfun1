@@ -62,7 +62,7 @@ function md_product_field_default_field_instances() {
   $field_instances['commerce_product-product-field_color'] = array(
     'bundle' => 'product',
     'commerce_cart_settings' => array(
-      'attribute_field' => 1,
+      'attribute_field' => 0,
       'attribute_widget' => 'select',
       'attribute_widget_title' => 'Color',
     ),
@@ -105,7 +105,7 @@ function md_product_field_default_field_instances() {
     ),
     'entity_type' => 'commerce_product',
     'field_name' => 'field_color',
-    'label' => 'Color',
+    'label' => 'Out of use - Color',
     'required' => 0,
     'settings' => array(
       'user_register_form' => FALSE,
@@ -115,7 +115,7 @@ function md_product_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_select',
-      'weight' => 6,
+      'weight' => 11,
     ),
   );
 
@@ -180,7 +180,7 @@ function md_product_field_default_field_instances() {
         'currency_code' => 'default',
       ),
       'type' => 'commerce_price_full',
-      'weight' => 3,
+      'weight' => 8,
     ),
   );
 
@@ -265,7 +265,11 @@ function md_product_field_default_field_instances() {
       'module' => 'media',
       'settings' => array(
         'allowed_schemes' => array(
+          'private' => 0,
           'public' => 'public',
+          'soundcloud' => 0,
+          'vimeo' => 0,
+          'youtube' => 0,
         ),
         'allowed_types' => array(
           'audio' => 0,
@@ -276,11 +280,12 @@ function md_product_field_default_field_instances() {
         'browser_plugins' => array(
           'media_default--media_browser_1' => 'media_default--media_browser_1',
           'media_default--media_browser_my_files' => 0,
+          'media_internet' => 'media_internet',
           'upload' => 'upload',
         ),
       ),
       'type' => 'media_generic',
-      'weight' => 4,
+      'weight' => 9,
     ),
   );
 
@@ -288,7 +293,7 @@ function md_product_field_default_field_instances() {
   $field_instances['commerce_product-product-field_size'] = array(
     'bundle' => 'product',
     'commerce_cart_settings' => array(
-      'attribute_field' => 1,
+      'attribute_field' => 0,
       'attribute_widget' => 'select',
       'attribute_widget_title' => 'Size',
     ),
@@ -331,7 +336,7 @@ function md_product_field_default_field_instances() {
     ),
     'entity_type' => 'commerce_product',
     'field_name' => 'field_size',
-    'label' => 'Size',
+    'label' => 'Out of use - Size',
     'required' => 0,
     'settings' => array(
       'user_register_form' => FALSE,
@@ -341,7 +346,7 @@ function md_product_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_select',
-      'weight' => 5,
+      'weight' => 10,
     ),
   );
 
@@ -609,7 +614,7 @@ function md_product_field_default_field_instances() {
           'trim_length' => 600,
         ),
         'type' => 'text_summary_or_trimmed',
-        'weight' => 8,
+        'weight' => 9,
       ),
       'product_ajax' => array(
         'label' => 'hidden',
@@ -652,7 +657,7 @@ function md_product_field_default_field_instances() {
         'summary_rows' => 5,
       ),
       'type' => 'text_textarea_with_summary',
-      'weight' => 7,
+      'weight' => 9,
     ),
   );
 
@@ -674,7 +679,7 @@ function md_product_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 0,
+        'weight' => 16,
       ),
       'teaser' => array(
         'label' => 'above',
@@ -695,7 +700,7 @@ function md_product_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_select',
-      'weight' => 2,
+      'weight' => 3,
     ),
   );
 
@@ -724,7 +729,7 @@ function md_product_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 10,
+        'weight' => 29,
       ),
       'product_ajax' => array(
         'label' => 'above',
@@ -764,7 +769,7 @@ function md_product_field_default_field_instances() {
         'summary_rows' => 5,
       ),
       'type' => 'text_textarea_with_summary',
-      'weight' => 9,
+      'weight' => 11,
     ),
   );
 
@@ -786,7 +791,7 @@ function md_product_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 0,
+        'weight' => 18,
       ),
       'teaser' => array(
         'label' => 'above',
@@ -807,7 +812,7 @@ function md_product_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_select',
-      'weight' => 5,
+      'weight' => 6,
     ),
   );
 
@@ -829,7 +834,7 @@ function md_product_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 0,
+        'weight' => 20,
       ),
       'teaser' => array(
         'label' => 'above',
@@ -850,7 +855,7 @@ function md_product_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_select',
-      'weight' => 3,
+      'weight' => 4,
     ),
   );
 
@@ -879,7 +884,7 @@ function md_product_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 9,
+        'weight' => 27,
       ),
       'product_ajax' => array(
         'label' => 'above',
@@ -919,7 +924,7 @@ function md_product_field_default_field_instances() {
         'summary_rows' => 5,
       ),
       'type' => 'text_textarea_with_summary',
-      'weight' => 8,
+      'weight' => 10,
     ),
   );
 
@@ -941,7 +946,7 @@ function md_product_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 0,
+        'weight' => 19,
       ),
       'teaser' => array(
         'label' => 'above',
@@ -962,7 +967,7 @@ function md_product_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_select',
-      'weight' => 6,
+      'weight' => 7,
     ),
   );
 
@@ -992,7 +997,7 @@ function md_product_field_default_field_instances() {
         'module' => 'list',
         'settings' => array(),
         'type' => 'list_default',
-        'weight' => 15,
+        'weight' => 13,
       ),
       'product_ajax' => array(
         'label' => 'above',
@@ -1028,7 +1033,7 @@ function md_product_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_buttons',
-      'weight' => 16,
+      'weight' => 19,
     ),
   );
 
@@ -1050,7 +1055,7 @@ function md_product_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 0,
+        'weight' => 17,
       ),
       'teaser' => array(
         'label' => 'above',
@@ -1071,7 +1076,50 @@ function md_product_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_select',
-      'weight' => 4,
+      'weight' => 5,
+    ),
+  );
+
+  // Exported field_instance: 'node-shop_product-field_player_jerseys'.
+  $field_instances['node-shop_product-field_player_jerseys'] = array(
+    'bundle' => 'shop_product',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'taxonomy',
+        'settings' => array(),
+        'type' => 'taxonomy_term_reference_link',
+        'weight' => 23,
+      ),
+      'modal_content' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_player_jerseys',
+    'label' => 'Player Jerseys',
+    'required' => 0,
+    'settings' => array(
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'options',
+      'settings' => array(),
+      'type' => 'options_select',
+      'weight' => 2,
     ),
   );
 
@@ -1098,7 +1146,7 @@ function md_product_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 13,
+        'weight' => 30,
       ),
       'product_ajax' => array(
         'label' => 'above',
@@ -1131,7 +1179,7 @@ function md_product_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_select',
-      'weight' => 11,
+      'weight' => 13,
     ),
   );
 
@@ -1158,10 +1206,9 @@ function md_product_field_default_field_instances() {
       ),
       'modal_content' => array(
         'label' => 'above',
-        'module' => 'taxonomy',
         'settings' => array(),
-        'type' => 'taxonomy_term_reference_link',
-        'weight' => 11,
+        'type' => 'hidden',
+        'weight' => 14,
       ),
       'product_ajax' => array(
         'label' => 'above',
@@ -1197,7 +1244,7 @@ function md_product_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_select',
-      'weight' => 10,
+      'weight' => 12,
     ),
   );
 
@@ -1224,7 +1271,7 @@ function md_product_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 14,
+        'weight' => 31,
       ),
       'product_ajax' => array(
         'label' => 'above',
@@ -1260,7 +1307,7 @@ function md_product_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'taxonomy_autocomplete',
-      'weight' => 12,
+      'weight' => 14,
     ),
   );
 
@@ -1307,7 +1354,7 @@ function md_product_field_default_field_instances() {
           'show_single_product_attributes' => 0,
         ),
         'type' => 'commerce_cart_add_to_cart_form',
-        'weight' => 7,
+        'weight' => 8,
       ),
       'product_ajax' => array(
         'label' => 'hidden',
@@ -1426,7 +1473,7 @@ function md_product_field_default_field_instances() {
         'label' => 'hidden',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 2,
+        'weight' => 22,
       ),
       'product_ajax' => array(
         'label' => 'hidden',
@@ -1488,7 +1535,50 @@ function md_product_field_default_field_instances() {
       'module' => 'fivestar',
       'settings' => array(),
       'type' => 'exposed',
-      'weight' => 15,
+      'weight' => 17,
+    ),
+  );
+
+  // Exported field_instance: 'node-shop_product-field_sale'.
+  $field_instances['node-shop_product-field_sale'] = array(
+    'bundle' => 'shop_product',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'taxonomy',
+        'settings' => array(),
+        'type' => 'taxonomy_term_reference_link',
+        'weight' => 22,
+      ),
+      'modal_content' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_sale',
+    'label' => 'Sale',
+    'required' => 0,
+    'settings' => array(
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'options',
+      'settings' => array(),
+      'type' => 'options_select',
+      'weight' => 8,
     ),
   );
 
@@ -1557,7 +1647,7 @@ function md_product_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'taxonomy_autocomplete',
-      'weight' => 14,
+      'weight' => 16,
     ),
   );
 
@@ -1579,7 +1669,7 @@ function md_product_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 0,
+        'weight' => 21,
       ),
       'teaser' => array(
         'label' => 'above',
@@ -1603,7 +1693,7 @@ function md_product_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'taxonomy_autocomplete',
-      'weight' => 13,
+      'weight' => 15,
     ),
   );
 
@@ -1616,19 +1706,21 @@ function md_product_field_default_field_instances() {
   t('Brand');
   t('Category');
   t('Clothing');
-  t('Color');
   t('Description');
   t('Gifts');
   t('Group');
   t('Image');
   t('LookBook');
   t('Match Kits');
+  t('Out of use - Color');
+  t('Out of use - Size');
+  t('Player Jerseys');
   t('Price Old');
   t('Product Images');
   t('Product LookBook');
   t('Product Store');
   t('Rate Five');
-  t('Size');
+  t('Sale');
   t('Special Features');
   t('Subtitle');
   t('Tags');

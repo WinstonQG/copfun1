@@ -98,18 +98,6 @@ function fck_categories_views_default_views() {
   /* Display: All by category - page */
   $handler = $view->new_display('page', 'All by category - page', 'page');
   $handler->display->display_options['path'] = 'all-by-category/%';
-  $translatables['fck_all_by_category'] = array(
-    t('Master'),
-    t('more'),
-    t('Apply'),
-    t('Reset'),
-    t('Sort by'),
-    t('Asc'),
-    t('Desc'),
-    t('term'),
-    t('All'),
-    t('All by category - page'),
-  );
   $export['fck_all_by_category'] = $view;
 
   $view = new view();
@@ -154,6 +142,15 @@ function fck_categories_views_default_views() {
   $handler->display->display_options['fields']['name']['alter']['word_boundary'] = FALSE;
   $handler->display->display_options['fields']['name']['alter']['ellipsis'] = FALSE;
   $handler->display->display_options['fields']['name']['element_label_colon'] = FALSE;
+  /* Field: Taxonomy term: Name (translated) */
+  $handler->display->display_options['fields']['name_i18n']['id'] = 'name_i18n';
+  $handler->display->display_options['fields']['name_i18n']['table'] = 'taxonomy_term_data';
+  $handler->display->display_options['fields']['name_i18n']['field'] = 'name_i18n';
+  $handler->display->display_options['fields']['name_i18n']['label'] = '';
+  $handler->display->display_options['fields']['name_i18n']['alter']['make_link'] = TRUE;
+  $handler->display->display_options['fields']['name_i18n']['alter']['path'] = 'categories/player_jerseys/[tid]';
+  $handler->display->display_options['fields']['name_i18n']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['name_i18n']['link_to_taxonomy'] = TRUE;
   /* Filter criterion: Taxonomy vocabulary: Machine name */
   $handler->display->display_options['filters']['machine_name']['id'] = 'machine_name';
   $handler->display->display_options['filters']['machine_name']['table'] = 'taxonomy_vocabulary';
@@ -176,16 +173,15 @@ function fck_categories_views_default_views() {
   $handler->display->display_options['fields']['tid']['element_type'] = '0';
   $handler->display->display_options['fields']['tid']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['tid']['element_default_classes'] = FALSE;
-  /* Field: Taxonomy term: Name */
-  $handler->display->display_options['fields']['name']['id'] = 'name';
-  $handler->display->display_options['fields']['name']['table'] = 'taxonomy_term_data';
-  $handler->display->display_options['fields']['name']['field'] = 'name';
-  $handler->display->display_options['fields']['name']['label'] = '';
-  $handler->display->display_options['fields']['name']['alter']['make_link'] = TRUE;
-  $handler->display->display_options['fields']['name']['alter']['path'] = 'categories/clothing/[tid]';
-  $handler->display->display_options['fields']['name']['alter']['word_boundary'] = FALSE;
-  $handler->display->display_options['fields']['name']['alter']['ellipsis'] = FALSE;
-  $handler->display->display_options['fields']['name']['element_label_colon'] = FALSE;
+  /* Field: Taxonomy term: Name (translated) */
+  $handler->display->display_options['fields']['name_i18n']['id'] = 'name_i18n';
+  $handler->display->display_options['fields']['name_i18n']['table'] = 'taxonomy_term_data';
+  $handler->display->display_options['fields']['name_i18n']['field'] = 'name_i18n';
+  $handler->display->display_options['fields']['name_i18n']['label'] = '';
+  $handler->display->display_options['fields']['name_i18n']['alter']['make_link'] = TRUE;
+  $handler->display->display_options['fields']['name_i18n']['alter']['path'] = 'categories/clothing/[tid]';
+  $handler->display->display_options['fields']['name_i18n']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['name_i18n']['link_to_taxonomy'] = TRUE;
   $handler->display->display_options['defaults']['filter_groups'] = FALSE;
   $handler->display->display_options['defaults']['filters'] = FALSE;
   /* Filter criterion: Taxonomy vocabulary: Machine name */
@@ -210,16 +206,14 @@ function fck_categories_views_default_views() {
   $handler->display->display_options['fields']['tid']['element_type'] = '0';
   $handler->display->display_options['fields']['tid']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['tid']['element_default_classes'] = FALSE;
-  /* Field: Taxonomy term: Name */
-  $handler->display->display_options['fields']['name']['id'] = 'name';
-  $handler->display->display_options['fields']['name']['table'] = 'taxonomy_term_data';
-  $handler->display->display_options['fields']['name']['field'] = 'name';
-  $handler->display->display_options['fields']['name']['label'] = '';
-  $handler->display->display_options['fields']['name']['alter']['make_link'] = TRUE;
-  $handler->display->display_options['fields']['name']['alter']['path'] = 'categories/accessories/[tid]';
-  $handler->display->display_options['fields']['name']['alter']['word_boundary'] = FALSE;
-  $handler->display->display_options['fields']['name']['alter']['ellipsis'] = FALSE;
-  $handler->display->display_options['fields']['name']['element_label_colon'] = FALSE;
+  /* Field: Taxonomy term: Name (translated) */
+  $handler->display->display_options['fields']['name_i18n']['id'] = 'name_i18n';
+  $handler->display->display_options['fields']['name_i18n']['table'] = 'taxonomy_term_data';
+  $handler->display->display_options['fields']['name_i18n']['field'] = 'name_i18n';
+  $handler->display->display_options['fields']['name_i18n']['label'] = '';
+  $handler->display->display_options['fields']['name_i18n']['alter']['make_link'] = TRUE;
+  $handler->display->display_options['fields']['name_i18n']['alter']['path'] = 'categories/accessories/[tid]';
+  $handler->display->display_options['fields']['name_i18n']['element_label_colon'] = FALSE;
   $handler->display->display_options['defaults']['filter_groups'] = FALSE;
   $handler->display->display_options['defaults']['filters'] = FALSE;
   /* Filter criterion: Taxonomy vocabulary: Machine name */
@@ -244,16 +238,14 @@ function fck_categories_views_default_views() {
   $handler->display->display_options['fields']['tid']['element_type'] = '0';
   $handler->display->display_options['fields']['tid']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['tid']['element_default_classes'] = FALSE;
-  /* Field: Taxonomy term: Name */
-  $handler->display->display_options['fields']['name']['id'] = 'name';
-  $handler->display->display_options['fields']['name']['table'] = 'taxonomy_term_data';
-  $handler->display->display_options['fields']['name']['field'] = 'name';
-  $handler->display->display_options['fields']['name']['label'] = '';
-  $handler->display->display_options['fields']['name']['alter']['make_link'] = TRUE;
-  $handler->display->display_options['fields']['name']['alter']['path'] = 'categories/match-kits/[tid]';
-  $handler->display->display_options['fields']['name']['alter']['word_boundary'] = FALSE;
-  $handler->display->display_options['fields']['name']['alter']['ellipsis'] = FALSE;
-  $handler->display->display_options['fields']['name']['element_label_colon'] = FALSE;
+  /* Field: Taxonomy term: Name (translated) */
+  $handler->display->display_options['fields']['name_i18n']['id'] = 'name_i18n';
+  $handler->display->display_options['fields']['name_i18n']['table'] = 'taxonomy_term_data';
+  $handler->display->display_options['fields']['name_i18n']['field'] = 'name_i18n';
+  $handler->display->display_options['fields']['name_i18n']['label'] = '';
+  $handler->display->display_options['fields']['name_i18n']['alter']['make_link'] = TRUE;
+  $handler->display->display_options['fields']['name_i18n']['alter']['path'] = 'categories/match-kits/[tid]';
+  $handler->display->display_options['fields']['name_i18n']['element_label_colon'] = FALSE;
   $handler->display->display_options['defaults']['filter_groups'] = FALSE;
   $handler->display->display_options['defaults']['filters'] = FALSE;
   /* Filter criterion: Taxonomy vocabulary: Machine name */
@@ -278,16 +270,14 @@ function fck_categories_views_default_views() {
   $handler->display->display_options['fields']['tid']['element_type'] = '0';
   $handler->display->display_options['fields']['tid']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['tid']['element_default_classes'] = FALSE;
-  /* Field: Taxonomy term: Name */
-  $handler->display->display_options['fields']['name']['id'] = 'name';
-  $handler->display->display_options['fields']['name']['table'] = 'taxonomy_term_data';
-  $handler->display->display_options['fields']['name']['field'] = 'name';
-  $handler->display->display_options['fields']['name']['label'] = '';
-  $handler->display->display_options['fields']['name']['alter']['make_link'] = TRUE;
-  $handler->display->display_options['fields']['name']['alter']['path'] = 'categories/baby/[tid]';
-  $handler->display->display_options['fields']['name']['alter']['word_boundary'] = FALSE;
-  $handler->display->display_options['fields']['name']['alter']['ellipsis'] = FALSE;
-  $handler->display->display_options['fields']['name']['element_label_colon'] = FALSE;
+  /* Field: Taxonomy term: Name (translated) */
+  $handler->display->display_options['fields']['name_i18n']['id'] = 'name_i18n';
+  $handler->display->display_options['fields']['name_i18n']['table'] = 'taxonomy_term_data';
+  $handler->display->display_options['fields']['name_i18n']['field'] = 'name_i18n';
+  $handler->display->display_options['fields']['name_i18n']['label'] = '';
+  $handler->display->display_options['fields']['name_i18n']['alter']['make_link'] = TRUE;
+  $handler->display->display_options['fields']['name_i18n']['alter']['path'] = 'categories/baby/[tid]';
+  $handler->display->display_options['fields']['name_i18n']['element_label_colon'] = FALSE;
   $handler->display->display_options['defaults']['filter_groups'] = FALSE;
   $handler->display->display_options['defaults']['filters'] = FALSE;
   /* Filter criterion: Taxonomy vocabulary: Machine name */
@@ -312,16 +302,14 @@ function fck_categories_views_default_views() {
   $handler->display->display_options['fields']['tid']['element_type'] = '0';
   $handler->display->display_options['fields']['tid']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['tid']['element_default_classes'] = FALSE;
-  /* Field: Taxonomy term: Name */
-  $handler->display->display_options['fields']['name']['id'] = 'name';
-  $handler->display->display_options['fields']['name']['table'] = 'taxonomy_term_data';
-  $handler->display->display_options['fields']['name']['field'] = 'name';
-  $handler->display->display_options['fields']['name']['label'] = '';
-  $handler->display->display_options['fields']['name']['alter']['make_link'] = TRUE;
-  $handler->display->display_options['fields']['name']['alter']['path'] = 'categories/gifts/[tid]';
-  $handler->display->display_options['fields']['name']['alter']['word_boundary'] = FALSE;
-  $handler->display->display_options['fields']['name']['alter']['ellipsis'] = FALSE;
-  $handler->display->display_options['fields']['name']['element_label_colon'] = FALSE;
+  /* Field: Taxonomy term: Name (translated) */
+  $handler->display->display_options['fields']['name_i18n']['id'] = 'name_i18n';
+  $handler->display->display_options['fields']['name_i18n']['table'] = 'taxonomy_term_data';
+  $handler->display->display_options['fields']['name_i18n']['field'] = 'name_i18n';
+  $handler->display->display_options['fields']['name_i18n']['label'] = '';
+  $handler->display->display_options['fields']['name_i18n']['alter']['make_link'] = TRUE;
+  $handler->display->display_options['fields']['name_i18n']['alter']['path'] = 'categories/gifts/[tid]';
+  $handler->display->display_options['fields']['name_i18n']['element_label_colon'] = FALSE;
   $handler->display->display_options['defaults']['filter_groups'] = FALSE;
   $handler->display->display_options['defaults']['filters'] = FALSE;
   /* Filter criterion: Taxonomy vocabulary: Machine name */
@@ -334,6 +322,25 @@ function fck_categories_views_default_views() {
 
   /* Display: Player Jerseys Block */
   $handler = $view->new_display('block', 'Player Jerseys Block', 'player_jerseys_block');
+  $handler->display->display_options['defaults']['fields'] = FALSE;
+  /* Field: Taxonomy term: Term ID */
+  $handler->display->display_options['fields']['tid']['id'] = 'tid';
+  $handler->display->display_options['fields']['tid']['table'] = 'taxonomy_term_data';
+  $handler->display->display_options['fields']['tid']['field'] = 'tid';
+  $handler->display->display_options['fields']['tid']['label'] = '';
+  $handler->display->display_options['fields']['tid']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['tid']['element_type'] = '0';
+  $handler->display->display_options['fields']['tid']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['tid']['element_default_classes'] = FALSE;
+  /* Field: Taxonomy term: Name (translated) */
+  $handler->display->display_options['fields']['name_i18n']['id'] = 'name_i18n';
+  $handler->display->display_options['fields']['name_i18n']['table'] = 'taxonomy_term_data';
+  $handler->display->display_options['fields']['name_i18n']['field'] = 'name_i18n';
+  $handler->display->display_options['fields']['name_i18n']['label'] = '';
+  $handler->display->display_options['fields']['name_i18n']['alter']['make_link'] = TRUE;
+  $handler->display->display_options['fields']['name_i18n']['alter']['path'] = 'categories/player_jerseys/[tid]';
+  $handler->display->display_options['fields']['name_i18n']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['name_i18n']['link_to_taxonomy'] = TRUE;
 
   /* Display: Sale Block */
   $handler = $view->new_display('block', 'Sale Block', 'sale_block');
@@ -367,31 +374,6 @@ function fck_categories_views_default_views() {
   $handler->display->display_options['filters']['machine_name']['field'] = 'machine_name';
   $handler->display->display_options['filters']['machine_name']['value'] = array(
     'sale' => 'sale',
-  );
-  $translatables['fck_categories'] = array(
-    t('Master'),
-    t('Player Jerseys'),
-    t('more'),
-    t('Apply'),
-    t('Reset'),
-    t('Sort by'),
-    t('Asc'),
-    t('Desc'),
-    t('.'),
-    t(','),
-    t('Clothing Block'),
-    t('Clothing'),
-    t('Accessories Block'),
-    t('Accessories'),
-    t('Match Kits Block'),
-    t('Match Kits'),
-    t('Baby Block'),
-    t('Baby'),
-    t('Gifts Block'),
-    t('Gifts'),
-    t('Player Jerseys Block'),
-    t('Sale Block'),
-    t('Sale'),
   );
   $export['fck_categories'] = $view;
 

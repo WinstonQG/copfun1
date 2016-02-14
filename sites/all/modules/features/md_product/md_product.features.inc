@@ -39,10 +39,10 @@ function md_product_flag_default_flags() {
     'types' => array(
       0 => 'shop_product',
     ),
-    'flag_short' => 'Wishlist',
+    'flag_short' => 'Add Wishlist',
     'flag_long' => '',
     'flag_message' => '',
-    'unflag_short' => 'No In Wishlist',
+    'unflag_short' => 'Remove Wishlist',
     'unflag_long' => '',
     'unflag_message' => '',
     'unflag_denied_text' => '',
@@ -54,6 +54,10 @@ function md_product_flag_default_flags() {
       'rss' => 0,
       'search_index' => 0,
       'search_result' => 0,
+      'modal_content' => 0,
+      'email_plain' => 0,
+      'email_html' => 0,
+      'email_textalt' => 0,
       'token' => 0,
     ),
     'show_as_field' => 1,
@@ -171,13 +175,14 @@ function md_product_image_default_styles() {
   $styles['product_full'] = array(
     'label' => 'Product Full(555x580)',
     'effects' => array(
-      1 => array(
-        'name' => 'image_scale_and_crop',
+      7 => array(
+        'name' => 'image_scale',
         'data' => array(
           'width' => 555,
           'height' => 580,
+          'upscale' => 0,
         ),
-        'weight' => 1,
+        'weight' => 2,
       ),
     ),
   );
@@ -186,13 +191,14 @@ function md_product_image_default_styles() {
   $styles['product_list_small'] = array(
     'label' => 'Product List Small (216x300)',
     'effects' => array(
-      1 => array(
-        'name' => 'image_scale_and_crop',
+      17 => array(
+        'name' => 'image_scale',
         'data' => array(
           'width' => 216,
-          'height' => 300,
+          'height' => '',
+          'upscale' => 0,
         ),
-        'weight' => 1,
+        'weight' => 2,
       ),
     ),
   );
@@ -201,13 +207,14 @@ function md_product_image_default_styles() {
   $styles['product_modal'] = array(
     'label' => 'Product Modal (270x380)',
     'effects' => array(
-      6 => array(
-        'name' => 'image_scale_and_crop',
+      11 => array(
+        'name' => 'image_scale',
         'data' => array(
           'width' => 270,
           'height' => 380,
+          'upscale' => 0,
         ),
-        'weight' => 1,
+        'weight' => 2,
       ),
     ),
   );
@@ -216,13 +223,14 @@ function md_product_image_default_styles() {
   $styles['product_modal_slider'] = array(
     'label' => 'Product Modal Slider (370x560)',
     'effects' => array(
-      2 => array(
-        'name' => 'image_scale_and_crop',
+      13 => array(
+        'name' => 'image_scale',
         'data' => array(
           'width' => 370,
           'height' => 560,
+          'upscale' => 0,
         ),
-        'weight' => 1,
+        'weight' => 2,
       ),
     ),
   );
@@ -231,13 +239,14 @@ function md_product_image_default_styles() {
   $styles['product_slider_thumbnail'] = array(
     'label' => 'Product Slider Thumbnail',
     'effects' => array(
-      3 => array(
-        'name' => 'image_scale_and_crop',
+      9 => array(
+        'name' => 'image_scale',
         'data' => array(
           'width' => 128,
           'height' => 146,
+          'upscale' => 0,
         ),
-        'weight' => 1,
+        'weight' => 2,
       ),
     ),
   );
@@ -246,13 +255,14 @@ function md_product_image_default_styles() {
   $styles['product_teaser'] = array(
     'label' => 'Product Teaser (270x380)',
     'effects' => array(
-      1 => array(
-        'name' => 'image_scale_and_crop',
+      15 => array(
+        'name' => 'image_scale',
         'data' => array(
           'width' => 270,
           'height' => 380,
+          'upscale' => 0,
         ),
-        'weight' => 1,
+        'weight' => 2,
       ),
     ),
   );
