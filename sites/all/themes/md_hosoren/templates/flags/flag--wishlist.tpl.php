@@ -49,9 +49,15 @@
  */
 // $flag_wrapper_classes
 ?>
+
 <?php if ($link_href): ?>
   <a href="<?php print $link_href; ?>" title="<?php print $link_text; ?>" class="awe-button product-quick-whistlist <?php (strpos($flag_classes, 'unflag-action') !== FALSE) ? print 'has_wishlist' : print 'no_wishlist'; ?>" data-toggle="tooltip" data-original-title="<?php print $link_text; ?>">
-    <?php (strpos($flag_classes, 'unflag-action') !== FALSE) ? print '<i class="icon icon-star"></i>' : print '<i class="icon icon-star-empty"></i>'; ?>
+    <span class="wishlist-text"><?php print $link_text; ?></span>
+    <?php if (strpos($flag_classes, 'unflag-action') !== FALSE) : ?>			
+			<i class="icon icon-star"></i>
+		<?php else : ?>
+			<i class="icon icon-star-empty"></i>
+		<?php endif; ?>     
   </a><span class="flag-throbber" style="display:none;">&nbsp;</span>
 <?php else: ?>
   <span class="<?php print $flag_classes ?>"><?php print $link_text; ?></span>

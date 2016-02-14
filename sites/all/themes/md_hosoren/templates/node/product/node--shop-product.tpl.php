@@ -130,7 +130,8 @@
       <?php if (isset($content['product:field_price_old'][0]['#markup'])): ?>
         <span class="product-label sale"><span><?php print t("SALE") ?></span></span>
       <?php elseif(isset($content['field_group']['#items'][0]['value'])): ?>
-        <span class="product-label <?php print render($content['field_group']['#items'][0]['value']) ?>"><span><?php print render($content['field_group'][0]['#markup']) ?></span></span>
+        <?php $output = 'Ny'; ?>
+        <span class="product-label <?php print render($content['field_group']['#items'][0]['value']) ?>"><span><?php print $output; ?></span></span>
       <?php endif; ?> 
       <!-- /.product-media -->
     </div>
@@ -215,7 +216,8 @@
       <?php if (isset($content['product:field_price_old'][0]['#markup'])): ?>
         <span class="product-label sale"><span><?php print t("SALE") ?></span></span>
       <?php elseif(isset($content['field_group']['#items'][0]['value'])): ?>
-        <span class="product-label <?php print render($content['field_group']['#items'][0]['value']) ?>"><span><?php print render($content['field_group'][0]['#markup']) ?></span></span>
+        <?php $output = 'Ny'; ?>
+        <span class="product-label <?php print render($content['field_group']['#items'][0]['value']) ?>"><span><?php print $output; ?></span></span>
       <?php endif; ?> 
       <!-- /.product-media -->
 

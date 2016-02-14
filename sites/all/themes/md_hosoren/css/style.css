@@ -12176,6 +12176,7 @@ h2.entry-title {
   background-color: #D75B51;
 }
 .product-label.new {
+  width: 62px;
   background-color: #43C872;
 }
 .product-label.sale {
@@ -16603,20 +16604,39 @@ input[type="submit"] + input[type="submit"] {
 .node-teaser .commerce-product-field-commerce-price {
   font-size: 30px;
 }
+.wishlist-text {
+  display: none;
+}
 /* Button Wishlist */
 .logged-in .product-quickview-popup a.product-quick-whistlist,
 .logged-in .shop_teaser a.product-quick-whistlist,
 .logged-in .product_full a.product-quick-whistlist {
-  text-indent: -99999px;
+  /*text-indent: -99999px;
   background: url("img/wishlist.png") no-repeat;
   height: 38px;
   width: 167px;
-  display: block;
+  display: block;*/
+}
+.logged-in .product-quickview-popup a.product-quick-whistlist .wishlist-text,
+.logged-in .shop_teaser a.product-quick-whistlist .wishlist-text,
+.logged-in .product_full a.product-quick-whistlist .wishlist-text {
+  display: inline-block;
+  padding: 10px 15px;
+  font-size: 13px;
+  letter-spacing: 1px;
+  background: #333333;
+  color: #ffffff;
+  text-transform: uppercase;
+}
+.logged-in .product-quickview-popup a.product-quick-whistlist .icon,
+.logged-in .shop_teaser a.product-quick-whistlist .icon,
+.logged-in .product_full a.product-quick-whistlist .icon {
+  display: none;
 }
 .logged-in .product-quickview-popup a.has_wishlist,
 .logged-in .shop_teaser a.has_wishlist,
 .logged-in .product_full a.has_wishlist {
-  background: url("img/no_wishlist.png") no-repeat;
+  /*background: url("img/no_wishlist.png") no-repeat;*/
 }
 .product-quickview-popup .tooltip,
 .logged-in .shop_teaser .tooltip,
