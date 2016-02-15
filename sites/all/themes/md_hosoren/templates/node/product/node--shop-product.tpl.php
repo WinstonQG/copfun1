@@ -109,8 +109,8 @@
       </div>
       <?php if (isset($content['field_product_store'][0]['quantity'])):?>
         <div class="product-hover">
-          <div class="product-actions">
-                <a href="#" class="awe-button product-add-cart" data-node-cart="product-<?php print $node->nid; ?>" data-toggle="tooltip" title="Add to cart">
+          <div class="product-actions">                
+                <a href="#" class="awe-button product-add-cart" data-node-cart="product-<?php print $node->nid; ?>" data-toggle="tooltip" title="<?php print t('Add to cart'); ?>">
                     <i class="icon icon-basket"></i>
                 </a>
                 <?php if(user_is_logged_in()) : ?>
@@ -120,7 +120,7 @@
                 <?php else : ?>
                   <a href="<?php print base_path().'user'; ?>"  class="awe-button product-quick-whistlist" data-toggle="tooltip" title="Add to whistlist"><i class="icon icon-star"></i></a>
                 <?php endif; ?>                
-                <a href="#" class="awe-button quick-view-product" data-node-modal="product-<?php print $node->nid; ?>" data-toggle="tooltip" title="Quickview">
+                <a href="#" class="awe-button quick-view-product" data-node-modal="product-<?php print $node->nid; ?>" data-toggle="tooltip" title="<?php print t('Quickview'); ?>">
                     <i class="icon icon-eye"></i>
                 </a>
           </div>

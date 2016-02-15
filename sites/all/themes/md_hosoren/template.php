@@ -4,6 +4,38 @@ include_once './' . drupal_get_path('theme', 'md_hosoren') . '/theme_setting/fro
 include_once './' . drupal_get_path('theme', 'md_hosoren') . '/theme_setting/front/page.preprocess.inc';
 include_once './' . drupal_get_path('theme', 'md_hosoren') . '/theme_setting/front/function.theme.inc';
 
+/**
+ * Just use the theme function to translate order total
+ */
+function md_hosoren_commerce_price_formatted_components($variables) {
+  // Override default commerce Order total title
+  $variables['components']['commerce_price_formatted_amount']['title'] = t('Order total');
+
+  // Add the CSS styling to the table.
+  drupal_add_css(drupal_get_path('module', 'commerce_price') . '/theme/commerce_price.theme.css');
+
+  // Build table rows out of the components.
+  $rows = array();
+
+  foreach ($variables['components'] as $name => $component) {
+    $rows[] = array(
+      'data' => array(
+        array(
+          'data' => $component['title'],
+          'class' => array('component-title'),
+        ),
+        array(
+          'data' => $component['formatted_price'],
+          'class' => array('component-total'),
+        ),
+      ),
+      'class' => array(drupal_html_class('component-type-' . $name)),
+    );
+  }
+
+  return theme('table', array('rows' => $rows, 'attributes' => array('class' => array('commerce-price-formatted-components'))));
+}
+
 function md_hosoren_facetapi_title($variables) {
   return t('@title', array('@title' => $variables['title']));
 }

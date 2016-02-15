@@ -1,0 +1,6 @@
+name = FCK Custom
+description = Provide FCK Custom functionality for FCK project.
+package = FCK
+core = 7.x
+; Files
+dependencies[] = commerce

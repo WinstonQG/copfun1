@@ -1,0 +1,10 @@
+<?php
+
+/**
+ * Implements hook_commerce_checkout_pane_info_alter().
+ */
+function fck_custom_commerce_checkout_pane_info_alter(&$panes) {
+  foreach($panes as $key => $pane) {
+    $panes[$key]['title'] = t($panes[$key]['title']);
+  }
+}
