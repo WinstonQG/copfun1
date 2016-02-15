@@ -5,7 +5,7 @@ include_once './' . drupal_get_path('theme', 'md_hosoren') . '/theme_setting/fro
 include_once './' . drupal_get_path('theme', 'md_hosoren') . '/theme_setting/front/function.theme.inc';
 
 function md_hosoren_facetapi_title($variables) {
-  return t('@title', array('@title' => drupal_strtolower($variables['title'])));
+  return t('@title', array('@title' => $variables['title']));
 }
 
 function md_hosoren_facetapi_count($variables) {
