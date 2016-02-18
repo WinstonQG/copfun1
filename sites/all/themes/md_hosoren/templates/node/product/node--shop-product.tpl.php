@@ -113,12 +113,8 @@
                 <a href="#" class="awe-button product-add-cart" data-node-cart="product-<?php print $node->nid; ?>" data-toggle="tooltip" title="<?php print t('Add to cart'); ?>">
                     <i class="icon icon-basket"></i>
                 </a>
-                <?php if(user_is_logged_in()) : ?>
-                  <?php if (isset($content['flag_wishlist']['#markup'])): ?>
-                    <?php print render($content['flag_wishlist']['#markup']); ?>
-                  <?php endif; ?>
-                <?php else : ?>
-                  <a href="<?php print base_path().'user'; ?>"  class="awe-button product-quick-whistlist" data-toggle="tooltip" title="Add to whistlist"><i class="icon icon-star"></i></a>
+                <?php if (isset($content['flag_wishlist']['#markup'])): ?>
+                  <?php print render($content['flag_wishlist']['#markup']); ?>
                 <?php endif; ?>                
                 <a href="#" class="awe-button quick-view-product" data-node-modal="product-<?php print $node->nid; ?>" data-toggle="tooltip" title="<?php print t('Quickview'); ?>">
                     <i class="icon icon-eye"></i>
@@ -172,12 +168,8 @@
 
                       <div class="product-list-actions-wrapper">
                           <?php print render($content['field_product_store']); ?>
-                          <?php if (user_is_logged_in()) : ?>
-                            <?php if (isset($content['flag_wishlist']['#markup'])): ?>
-                              <?php print render($content['flag_wishlist']['#markup']); ?>
-                            <?php endif; ?>
-                          <?php else : ?>
-                            <a href="<?php print base_path().'user'; ?>" class="btn btn-lg btn-dark btn-outline"><?php print t("Add to WishList") ?></a>
+                          <?php if (isset($content['flag_wishlist']['#markup'])): ?>
+                            <?php print render($content['flag_wishlist']['#markup']); ?>
                           <?php endif; ?>
                       </div>
                       <!-- /.product-actions-wrapper -->
@@ -242,12 +234,8 @@
             <?php unset($content['field_product_store'][0]['attributes']['field_color']); ?>
             <?php print render($content['field_product_store']); ?>
           <?php endif; ?>
-          <?php if(user_is_logged_in()) : ?>
-            <?php if (isset($content['flag_wishlist']['#markup'])): ?>
-              <?php print render($content['flag_wishlist']['#markup']); ?>
-            <?php endif; ?>
-          <?php else : ?>
-            <a href="<?php print base_path().'user'; ?>" class="btn btn-lg btn-dark btn-outline"><?php print t("Add to WishList") ?></a>
+          <?php if (isset($content['flag_wishlist']['#markup'])): ?>
+            <?php print render($content['flag_wishlist']['#markup']); ?>
           <?php endif; ?>
         </div>
     </div>
