@@ -7,9 +7,7 @@
  * @ingroup views_templates
  */
 ?>
-<?php if (!empty($title)): ?>
-  <h3><?php print $title; ?></h3>
-<?php endif; ?><ul>
+<ul>
 <?php foreach ($rows as $id => $row): ?>
       <?php print $row; ?>
 <?php endforeach; ?></ul>

@@ -38,7 +38,7 @@
     <div class="row">
         <?php if ($exposed): ?>
           <div class="col-md-2 col-sm-12">
-              <strong class="upper">Fillter product</strong>
+              <strong class="upper"><?php print t('Filter product'); ?></strong>
 
               <div class="toggle-bars" data-toggle="toggle" data-target=".views-exposed-form">
                   <button type="button" class="btn btn-dark btn-outline btn-sm">

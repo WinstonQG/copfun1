@@ -56,7 +56,7 @@ $date_month = explode('-', $date_format);
             <span>-</span>
             <span class="entry-category"><?php print $fields['field_category_blog']->content?>  </span>
             <span>-</span>
-            <span class="entry-comment-count"><a href="#" title=""><?php print $fields['comment_count']->content?> Comments</a></span>
+            <span class="entry-comment-count"><a href="#" title=""><?php print $fields['comment_count']->content?> <?php print t('Comments'); ?></a></span>
         </div>
         <!-- /.entry-meta -->
     </div>
