@@ -24,7 +24,8 @@
  * @ingroup views_templates
  */
 $comment = comment_load($row->cid);
-$date = date('F d, Y',$row->comment_created );
+$date = format_date($row->comment_created, 'custom', 'F d, Y');
+//$date = date('F d, Y',$row->comment_created );
 ?>
 <li>
   <div class="widget-comment">

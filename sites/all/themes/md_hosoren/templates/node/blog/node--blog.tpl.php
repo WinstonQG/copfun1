@@ -79,7 +79,7 @@
  *
  * @ingroup themeable
  */
-$date_format = date('d-M',$node->created);
+$date_format = format_date($node->created, 'custom', 'd-F');
 $date_month = explode('-', $date_format);
 
 ?>

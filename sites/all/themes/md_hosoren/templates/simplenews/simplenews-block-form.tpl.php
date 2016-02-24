@@ -1,7 +1,7 @@
 <?php
 	unset($form['mail']['#theme_wrappers']);
-	$form['submit']['#value'] = 'Subscribe Email';
-	//$form['mail']['#atrributes']['placeholder'] = t('Enter your email address');
+	$form['submit']['#value'] = t('Subscribe Email');
+	$form['mail']['#atrributes']['placeholder'] = t('Enter your email address');
   $form['#atrributes']['class'][] = 'subscible-form';
   $form['mail']['#title'] = t('Enter your email address');
   $form['#prefix'] = '<div class="subscible-form">';

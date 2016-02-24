@@ -23,7 +23,8 @@
  *
  * @ingroup views_templates
  */
-$date_format = date('d-M',$row->node_created);
+//$date_format = date('d-M',$row->node_created);
+$date_format = format_date($row->node_created, 'custom', 'd-M');
 $date_month = explode('-', $date_format);
 ?>
 <article class="post">
