@@ -39,10 +39,17 @@ if (isset($wrapper->commerce_product->field_jersey_print)) {
 	$jersey_print_data = $wrapper->commerce_product->field_jersey_print->value()['set_details'];
 
 	if ($jersey_print_values['field_superliga_badge']) {
-	// superliga badge option
-	$option = $jersey_print_data['field_superliga_badge']['options'][1];
-	$price = commerce_currency_format($option['price'], $option['currency_code']);
-	$jersey_print_prices['field_superliga_badge'] = $jersey_print_values['field_superliga_badge'] ? $price : '';
+		// superliga badge option
+		$option = $jersey_print_data['field_superliga_badge']['options'][1];
+		$price = commerce_currency_format($option['price'], $option['currency_code']);
+		$jersey_print_prices['field_superliga_badge'] = $jersey_print_values['field_superliga_badge'] ? $price : '';
+	}
+
+	if ($jersey_print_values['field_autograph']) {
+		// autograph option
+		$option = $jersey_print_data['field_autograph']['options'][1];
+		$price = commerce_currency_format($option['price'], $option['currency_code']);
+		$jersey_print_prices['field_autograph'] = $jersey_print_values['field_autograph'] ? $price : '';
 	}
 
 	if (!is_null($jersey_print_values['field_players'])) {
@@ -75,6 +82,13 @@ if (isset($wrapper->commerce_product->field_jersey_print)) {
 		<span class="jp-label"><?php print t('Superliga badge'); ?>:</span>
 		<span class="jp-value">Ja</span>
 		<span class="jp-price"> +<?php print $jersey_print_prices['field_superliga_badge']; ?></span>
+	</div>
+<?php endif; ?>
+<?php if ($jersey_print_values && $jersey_print_values['field_autograph']) : ?>
+	<div class="fck-attribute">
+		<span class="jp-label"><?php print t('Autograph'); ?>:</span>
+		<span class="jp-value">Ja</span>
+		<span class="jp-price"> +<?php print $jersey_print_prices['field_autograph']; ?></span>
 	</div>
 <?php endif; ?>
 <?php if ($jersey_print_values && !is_null($jersey_print_values['field_text_label'])) : ?>

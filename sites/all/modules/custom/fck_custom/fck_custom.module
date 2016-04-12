@@ -98,6 +98,19 @@ function fck_custom_commerce_cart_attributes_refresh_alter(&$commands, $form, $f
 	    array($price)
 	  );
 	}
+	// badge data
+  $autograph_options = $option_data['field_autograph']['options'];
+  // update Badge info if it's filled
+  $autograph_value = $option_values->field_autograph['und'][0]['value'];
+	if ($autograph_value) {
+		$price = commerce_currency_format($autograph_options[$autograph_value]['price'], $autograph_options[$autograph_value]['currency_code']);
+		$price = '+'.$price;
+			$commands[] = ajax_command_invoke(
+	    '.e-autograph-value', 
+	    'text', 
+	    array($price)
+	  );
+	}
 	// players data
   $players_options = $option_data['field_players']['options'];
   if (isset($option_values->field_players['und'][0])) {
@@ -156,8 +169,10 @@ function fck_custom_form_alter(&$form, &$form_state, $form_id) {
   	drupal_add_css(drupal_get_path('module', 'fck_custom') . '/jersey_print_preview.css');  	  	
 
   	$field_badge = &$form['field_jersey_print'][0]['field_superliga_badge']['und'];
+  	$field_autograph = &$form['field_jersey_print'][0]['field_autograph']['und'];
   	$field_players = &$form['field_jersey_print'][0]['field_players']['und'];
   	$field_badge['#suffix'] = "<div class='e-badge-value e-attribute-price-preview'></div>";
+  	$field_autograph['#suffix'] = "<div class='e-autograph-value e-attribute-price-preview'></div>";
   	$field_players['#suffix'] = "<div class='e-players-value e-attribute-price-preview'></div>";
 
     // By default textfield pricing attributes don't refresh 
@@ -237,6 +252,24 @@ function fck_custom_commerce_pricing_attributes_refresh_prepare_alter(&$commands
 
   	$commands[] = ajax_command_invoke(
       '.e-badge-value', 
+      'text', 
+      array($value)
+    );
+
+  } elseif (strpos($form_state['triggering_element']['#name'], 'field_autograph') !== FALSE) {   
+  	// setup Preview Price for Badge      	 
+  	$value = $form_state['triggering_element']['#value'];
+  	$autograph_options = $form_state['triggering_element']['#entity']->set_details['field_autograph']['options'][1];
+  	$price = commerce_currency_format($autograph_options['price'], $autograph_options['currency_code']);
+
+  	if ($value) {
+  		$value = '+'.$price;
+  	} else {
+  		$value = '';
+  	}
+
+  	$commands[] = ajax_command_invoke(
+      '.e-autograph-value', 
       'text', 
       array($value)
     );
