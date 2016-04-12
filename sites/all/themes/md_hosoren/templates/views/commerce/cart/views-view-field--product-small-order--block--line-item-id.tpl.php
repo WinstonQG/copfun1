@@ -27,7 +27,7 @@ $wrapper = entity_metadata_wrapper('commerce_line_item', $line_item);
 
 
 $title = $wrapper->commerce_product->title->value();
-$commerce_price_data = $wrapper->commerce_product->commerce_price->value();
+$commerce_price_data = $wrapper->commerce_total->value();
 $price = commerce_currency_format(
 	$commerce_price_data['amount'], 
 	$commerce_price_data['currency_code']

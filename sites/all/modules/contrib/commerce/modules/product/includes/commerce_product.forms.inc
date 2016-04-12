@@ -72,7 +72,7 @@ function commerce_product_product_form($form, &$form_state, $product) {
     '#title' => t('Change history'),
     '#collapsible' => TRUE,
     '#collapsed' => empty($product->product_id) || empty($product_type['revision']),
-    '#weight' => 350,
+    '#weight' => 50,
   );
   if (!empty($product->product_id)) {
     $form['change_history']['revision'] = array(

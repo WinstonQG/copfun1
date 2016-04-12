@@ -207,10 +207,10 @@ function md_product_image_default_styles() {
   $styles['product_modal'] = array(
     'label' => 'Product Modal (270x380)',
     'effects' => array(
-      11 => array(
+      19 => array(
         'name' => 'image_scale',
         'data' => array(
-          'width' => 270,
+          'width' => 364,
           'height' => 380,
           'upscale' => 0,
         ),

@@ -421,8 +421,7 @@ function commerce_price_field_formatter_settings_summary($field, $instance, $vie
  */
 function commerce_price_field_formatter_prepare_view($entity_type, $entities, $field, $instances, $langcode, &$items, $displays) {
   // TODO: Loop over the instances and pass them to this hook individually so we
-  // can enforce prices displaying with components as not being altered.
-
+  // can enforce prices displaying with components as not being altered.  
   // Allow other modules to prepare the item values prior to formatting.
   foreach(module_implements('commerce_price_field_formatter_prepare_view') as $module) {
     $function = $module . '_commerce_price_field_formatter_prepare_view';
@@ -436,8 +435,7 @@ function commerce_price_field_formatter_prepare_view($entity_type, $entities, $f
 function commerce_price_field_formatter_view($entity_type, $entity, $field, $instance, $langcode, $items, $display) {
   $translated_instance = commerce_i18n_object('field_instance', $instance);
 
-  $element = array();
-
+  $element = array();  
   // Loop through each price value in this field.
   foreach ($items as $delta => $item) {
     // Do not render a price if the amount is NULL (i.e. non-zero empty value).
@@ -506,8 +504,7 @@ function commerce_price_field_formatter_view($entity_type, $entity, $field, $ins
             $component['price']['currency_code'],
             $entity
           );
-        }
-
+        }        
         $element[$delta] = array(
           '#markup' => theme('commerce_price_formatted_components', array('components' => $components, 'price' => $item)),
         );
@@ -529,8 +526,7 @@ function theme_commerce_price_formatted_components($variables) {
   drupal_add_css(drupal_get_path('module', 'commerce_price') . '/theme/commerce_price.theme.css');
 
   // Build table rows out of the components.
-  $rows = array();
-
+  $rows = array();  
   foreach ($variables['components'] as $name => $component) {
     $rows[] = array(
       'data' => array(

@@ -17,6 +17,7 @@ class MediaYouTubeStreamWrapper extends MediaReadOnlyStreamWrapper {
   }
 
   function getOriginalThumbnailPath() {
+    return '';
     $parts = $this->get_parameters();
     $uri = file_stream_wrapper_uri_normalize('youtube://v/' . check_plain($parts['v']));
     $external_url = file_create_url($uri);

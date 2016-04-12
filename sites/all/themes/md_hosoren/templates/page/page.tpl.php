@@ -296,6 +296,8 @@ global $base_url;
         </div>
       </div>
   
+  
+
   <?php print theme('md_hosoren_categories_list', 
   array('page' => $page)); ?>
 

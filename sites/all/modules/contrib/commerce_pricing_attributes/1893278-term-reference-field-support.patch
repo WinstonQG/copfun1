@@ -1,0 +1,87 @@
+diff --git a/commerce_pricing_attributes.admin.inc b/commerce_pricing_attributes.admin.inc
+index 3f1a9f2..043f4cd 100644
+--- a/commerce_pricing_attributes.admin.inc
++++ b/commerce_pricing_attributes.admin.inc
+@@ -10,7 +10,7 @@ function commerce_pricing_attributes_default_setting_form($form, &$form_state){
+ 
+   $defaults = isset($field_instance['settings']['commerce_pricing_attributes'])?$field_instance['settings']['commerce_pricing_attributes']:array();
+ 
+-  $options = list_allowed_values($field_info, $field_instance);
++  $options = commerce_pricing_attributes_get_allowed_values($field_info, $field_instance);
+   $options = array('_none' => t('- Select -')) + $options;
+ 
+   $form['#tree'] = TRUE;
+diff --git a/commerce_pricing_attributes.module b/commerce_pricing_attributes.module
+index 6110277..fb163e6 100644
+--- a/commerce_pricing_attributes.module
++++ b/commerce_pricing_attributes.module
+@@ -417,7 +417,7 @@ function commerce_pricing_attributes_field_widget_form(&$form, &$form_state, $fi
+         );
+ 
+         // If field type is list, we need to enable option selection.
+-        if($option_field['module'] == 'list'){
++        if($option_field['module'] == 'list' || $option_field['module'] == 'taxonomy'){
+           // Get the default settings for this field.
+           $defaults = $option_field_instance['settings']['commerce_pricing_attributes'];
+ 
+@@ -449,7 +449,7 @@ function commerce_pricing_attributes_field_widget_form(&$form, &$form_state, $fi
+           $element['set_details'][$option_field_name]['options']['#theme'] = 'commerce_pricing_attributes_details';
+ 
+           // Get the field options.
+-          $options = list_allowed_values($option_field, $option_field_instance);
++          $options = commerce_pricing_attributes_get_allowed_values($option_field, $option_field_instance);
+ 
+           // Add default value.
+           $options = array('_none' => t('- Select -')) + $options;
+@@ -1346,10 +1346,34 @@ function commerce_pricing_attributes_menu(){
+ function commerce_pricing_attributes_default_setting_access($access, $entity, $field_instance){
+   if(user_access($access)){
+     $field_info = field_info_field($field_instance['field_name']);
+-    if($field_info['module'] == 'list'){
+-      $options = list_allowed_values($field_info, $field_instance);
++    if($field_info['module'] == 'list' || $field_info['module'] == 'taxonomy') {
++      $options = commerce_pricing_attributes_get_allowed_values($field_info, $field_instance);
+       return (!empty($options));
+     }
+   }
+   return FALSE;
+ }
++
++function commerce_pricing_attributes_get_allowed_values($option_field, $option_field_instance) {
++  if($option_field['module'] == 'taxonomy') {
++      $vocabulary_name = $option_field['settings']['allowed_values'][0]['vocabulary'];
++      $vocabulary_id = null;
++
++      //Find the vid for the vocabulary
++      $vocabs = taxonomy_get_vocabularies(null);
++      foreach($vocabs as $object) {
++        if($object->machine_name == $vocabulary_name)
++            $vocabulary_id = $object->vid;
++      }
++      // Get the field options for taxonomy reference field.
++      $terms = taxonomy_get_tree($vocabulary_id);      
++      //Lets get our terms to resemble an array returned by the list field
++      foreach($terms as $term) {
++        $options[$term->tid] = $term->name;
++      }
++    }
++    else {
++      $options = list_allowed_values($option_field, $option_field_instance);
++    }
++  return $options;
++}
+diff --git a/commerce_pricing_attributes.rules.inc b/commerce_pricing_attributes.rules.inc
+index 8c8f738..0346370 100644
+--- a/commerce_pricing_attributes.rules.inc
++++ b/commerce_pricing_attributes.rules.inc
+@@ -65,6 +65,10 @@ function commerce_pricing_attributes_calculate_adjusment($line_item_wrapper){
+ 
+           // If selected option is not empty and field type support options.
+           if(!empty($selected_option) and isset($attribute['set_details'][$field_name]['options'])){
++
++            //Taxonomy comes back as object, list as regular array. Make it play nice.
++            if(is_object($selected_option))
++                $selected_option = $selected_option->tid;
+             $selected_options = is_array($selected_option)?$selected_option:array($selected_option);
+ 
+             // Iterate through selected attributes.

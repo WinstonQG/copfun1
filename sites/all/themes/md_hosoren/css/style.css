@@ -12393,7 +12393,6 @@ h2.entry-title {
 .product-slider-thumbs img {
   cursor: pointer;
   border: solid 2px transparent;
-  width: 80px;
 }
 @media (max-width: 991px) {
   .product-slider-thumbs {
@@ -12434,9 +12433,6 @@ h2.entry-title {
 }
 .thumbs-bottom .product-slider-thumbs .swiper-slide {
   width: 25%;
-}
-.thumbs-bottom .product-slider-thumbs .swiper-slide img {
-  width: 100%;
 }
 .view-icons {
   display: inline-block;
@@ -16584,9 +16580,7 @@ input[type="submit"] + input[type="submit"] {
   .productcart_inline .commerce-add-to-cart .form-item {
     width: 33.3333%;
     min-height: 1px;
-    margin: 0;
     padding-right: 30px;
-    float: left;
   }
   .productcart_inline .commerce-add-to-cart {
     overflow: hidden;
@@ -18699,4 +18693,13 @@ ul li {
 .page-user .profile table th,
 .page-user .profile table td {
   padding: 8px;
+}
+#fckJerseyPrintPreview {
+  display: inline-block;
+  padding: 10px 15px;
+  font-size: 13px;
+  letter-spacing: 1px;
+  background: #333333;
+  color: #ffffff;
+  text-transform: uppercase;
 }

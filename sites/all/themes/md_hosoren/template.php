@@ -139,6 +139,16 @@ function md_hosoren_preprocess_node(&$vars) {
 
   // Content type Product
   if ($content_type === 'shop_product') {
+    if ($vars['view_mode'] == 'full') {
+      $vars['theme_hook_suggestions'][] = 'node__shop_product';
+    }
+    /*if ($vars['view_mode'] == 'teaser') {
+      $vars['theme_hook_suggestions'][] = 'node__' . $vars['node']->type . '__teaser';
+    } elseif ($vars['view_mode'] == 'full') {
+      $vars['theme_hook_suggestions'][] = 'node__' . $vars['node']->type . '__full';
+    } elseif ($vars['view_mode'] == 'modal_content') {
+      $vars['theme_hook_suggestions'][] = 'node__' . $vars['node']->type . '__modal_content';         
+    }*/
 
     //field categories
     $categories_content = '';

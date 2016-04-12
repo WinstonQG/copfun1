@@ -244,8 +244,7 @@
   </div>
 
 <?php else: ?>
-  <div id="node-<?php print $node->nid; ?>" class="product_full <?php print $classes; ?> clearfix"<?php print $attributes; ?>>
-    
+  <div id="node-<?php print $node->nid; ?>" class="product_full <?php print $classes; ?> clearfix"<?php print $attributes; ?>>    
     <div class="row">
       <div class="col-md-6">
         <?php if (isset($content['product:field_product_images'])): ?>
@@ -267,7 +266,7 @@
 
         <div class="product-details-wrapper productcart_inline">
           <h2 class="product-name"><?php print $title; ?></h2>
-                    
+          
           <div class="product-status">
             <?php if (isset($content['field_product_store'][0]['quantity'])):?>
                 <span><?php print t('In Stock') ?></span><span>-</span><div class="small inline"><?php print render($content['product:sku']); ?></div>
@@ -282,7 +281,7 @@
             <?php print render($content['field_rate_five']); ?>
           </div>
           <?php endif; ?>
-          <!-- /.product-stars -->          
+          <!-- /.product-stars -->    
           <span class="product-price"><?php print render($content['product:commerce_price']); ?><?php print render($content['product:field_price_old']); ?></span>
           <!-- /.product-price -->
 
@@ -300,7 +299,8 @@
             <div class="product-actions-wrapper">
                 <?php print render($content['field_product_store']); ?>
             </div>
-          <?php endif; ?>
+          <?php endif; ?>                  
+
           <!-- /.product-actions-wrapper -->
                     
           <?php if (isset($content['flag_wishlist']['#markup'])): ?>

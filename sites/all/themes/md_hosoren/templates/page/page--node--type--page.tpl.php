@@ -298,6 +298,10 @@ global $base_url;
         <?php endif; ?>
 
     </div>
+
+    <?php if ($page['bottom']): ?>
+      <?php print render($page['bottom']); ?>
+    <?php endif;?>
   
   <?php print theme('md_hosoren_categories_list', 
   array('page' => $page)); ?>

@@ -1,10 +1,367 @@
 <?php
 
 /**
+ * Increase module weight to be bigger than Commerce Pricing Attributes * module. It will allow to have an access to corresponding fields from
+ * our module.
+ */
+
+/**
+ * Implements hook_init().
+ */
+function fck_custom_init() {
+  
+}
+
+function fck_custom_update_7001() {     
+  db_update('system')->fields(array(
+    'weight' => 100
+  ))
+  ->condition('name', 'fck_custom')
+  ->execute();
+}
+
+/**
+ * Implements hook_menu().
+ */
+function fck_custom_menu() {  
+  $items['fck_preview/%/%/%'] = array(
+    'title' => 'Preview title',
+    'page callback' => 'fck_preview_page',
+    'page arguments' => array(1,2,3),
+    'access arguments' => array('access content'),
+    'type' => MENU_CALLBACK,    
+  );
+
+  return $items;
+}
+
+function fck_preview_page($fid, $label_text, $number_text) {
+	$page = array();
+	
+	drupal_add_css(drupal_get_path('module', 'fck_custom') . '/jersey_print_preview.css');	
+	$js_path = drupal_get_path('module', 'fck_custom') . '/jersey_print_preview.js';
+
+	$file = file_load($fid);
+	$uri = $file->uri;
+	$url = file_create_url($uri);
+	$output = '';
+	$image = theme('image', array('path' => $url));		
+	$page['result']['#markup'] = '
+		<div class="work_container" data-label-text="'.$label_text.'" data-number-text="'.$number_text.'"><div class="img_outer">
+      <div class="img_container">
+        '.$image.'
+      </div>
+      <div class="name_wrapper">
+        <div id="name_inscription"></div>
+      </div>
+      <div id="number_inscription"></div>
+      
+    </div></div>';
+
+	return $page;
+}
+
+/**
  * Implements hook_commerce_checkout_pane_info_alter().
  */
 function fck_custom_commerce_checkout_pane_info_alter(&$panes) {
   foreach($panes as $key => $pane) {
     $panes[$key]['title'] = t($panes[$key]['title']);
   }
+}
+
+/**
+ * Implements hook_commerce_cart_attributes_refresh_alter().
+ */
+function fck_custom_commerce_cart_attributes_refresh_alter(&$commands, $form, $form_state) {
+  
+  $refresh_commands = commerce_pricing_attributes_add_to_cart_form_attributes_refresh($form, $form_state);  
+  $commands[] = $refresh_commands['#commands'][0];
+  
+  // options data (option prices, currencies)
+  $option_data = $form_state['default_product']->field_jersey_print['und'][0]['set_details'];  
+  // players data
+  $players_options = $option_data['field_players']['options'];
+  // states of form fields
+  $option_values = $form_state['commerce_option']['field_jersey_print'][0]['option'];    
+
+  // badge data
+  $badge_options = $option_data['field_superliga_badge']['options'];
+  // update Badge info if it's filled
+  $badge_value = $option_values->field_superliga_badge['und'][0]['value'];
+	if ($badge_value) {
+		$price = commerce_currency_format($badge_options[$badge_value]['price'], $badge_options[$badge_value]['currency_code']);
+		$price = '+'.$price;
+			$commands[] = ajax_command_invoke(
+	    '.e-badge-value', 
+	    'text', 
+	    array($price)
+	  );
+	}
+	// players data
+  $players_options = $option_data['field_players']['options'];
+  if (isset($option_values->field_players['und'][0])) {
+	  // update Players info if it's filled
+	  $players_value = $option_values->field_players['und'][0]['tid'];
+		if ($players_value) {
+			$price = commerce_currency_format($players_options[$players_value]['price'], $players_options[$players_value]['currency_code']);
+			$price = '+'.$price;
+				$commands[] = ajax_command_invoke(
+		    '.e-players-value', 
+		    'text', 
+		    array($price)
+		  );
+		}
+	}
+	// Text Label data
+	if (isset($option_data['field_text_label']['options'])) {		
+	  $text_label_options = $option_data['field_text_label']['options'];
+	  // update Text Label info if it's filled
+	  $text_label_value = $option_values->field_text_label['und'][0]['value'];
+		if ($text_label_value) {
+			$price = fck_custom_get_custom_price($text_label_value, 'label');
+			$price = '+'.$price;
+				$commands[] = ajax_command_invoke(
+		    '.e-text-label-value', 
+		    'text', 
+		    array($price)
+		  );
+		}
+	}		
+	// Text Number data
+	if (isset($option_data['field_text_number']['options'])) {
+	  $text_number_options = $option_data['field_text_number']['options'];
+	  // update Text Number info if it's filled
+	  $text_number_value = $option_values->field_text_number['und'][0]['value'];
+		if ($text_number_value) {
+			$price = fck_custom_get_custom_price($text_number_value, 'number');
+			$price = '+'.$price;
+				$commands[] = ajax_command_invoke(
+		    '.e-text-number-value', 
+		    'text', 
+		    array($price)
+		  );
+		}	  
+	}
+}
+
+/**
+ * Implements hook_form_alter().
+ */
+function fck_custom_form_alter(&$form, &$form_state, $form_id) { 
+  if (isset($form_state['build_info']['base_form_id']) && 
+    $form_state['build_info']['base_form_id'] == 'commerce_cart_add_to_cart_form') { 
+
+  	drupal_add_js(drupal_get_path('module', 'fck_custom') . '/jersey_print_preview.js');
+  	drupal_add_css(drupal_get_path('module', 'fck_custom') . '/jersey_print_preview.css');  	  	
+
+  	$field_badge = &$form['field_jersey_print'][0]['field_superliga_badge']['und'];
+  	$field_players = &$form['field_jersey_print'][0]['field_players']['und'];
+  	$field_badge['#suffix'] = "<div class='e-badge-value e-attribute-price-preview'></div>";
+  	$field_players['#suffix'] = "<div class='e-players-value e-attribute-price-preview'></div>";
+
+    // By default textfield pricing attributes don't refresh 
+    // price during texting.. so the code below fix this problem
+    if (isset($form['field_jersey_print'][0]['field_text_number']['und'])) {
+      $field_text_number = &$form['field_jersey_print'][0]['field_text_number']['und'];
+      $field_text_number[0]['value']['#ajax'] = $field_text_number['#ajax'];
+      $field_text_number[0]['value']['#ajax']['event'] = 'finishedinput'; // 'change'
+      $field_text_number[0]['value']['#attached']['js'] = array(
+        drupal_get_path('module', 'fck_custom').'/field_text_number.js',
+      );      
+      $preview_fid = '';
+      if (isset($form_state['default_product']->field_text_preview_image['und'])) {
+      	$preview_fid = $form_state['default_product']->field_text_preview_image['und'][0]['fid'];
+      	$preview_fid = empty($preview_fid) ? '-' : $preview_fid;
+    	}
+
+    	$label_text = '-';
+    	$number_text = '-';
+
+    	if (!empty($form_state['input'])) {
+    		$label_input_value = $form_state['input']['field_jersey_print'][0]['field_text_label']['und'][0]['value'];
+    		if (!empty($label_input_value)) {
+    			$label_text = $label_input_value;
+    		}
+    		$number_input_value = $form_state['input']['field_jersey_print'][0]['field_text_number']['und'][0]['value'];
+    		if (!empty($number_input_value)) {
+    			$number_text = $number_input_value;
+    		}
+    	}
+
+      $field_text_number[0]['value']['#suffix'] = "<div class='e-text-number-value e-attribute-price-preview'></div><a  id='fckJerseyPrintPreview' class='twitter_bootstrap_modal tb_modal bs_modal' href='/fck_preview/$preview_fid/$label_text/$number_text'>".t('Preview')."</a>";
+
+      $field_text_number[0]['value']['#attributes'] = $field_text_number['#attributes'];
+      unset($field_text_number['#ajax']);
+      unset($field_text_number['#attributes']);    
+    }
+    //
+    if (isset($form['field_jersey_print'][0]['field_text_label']['und'])) {
+      $field_text_label = &$form['field_jersey_print'][0]['field_text_label']['und'];
+      $field_text_label[0]['value']['#suffix'] = "<div class='e-text-label-value e-attribute-price-preview'></div>";
+      $field_text_label[0]['value']['#ajax'] = $field_text_label['#ajax'];
+      $field_text_label[0]['value']['#ajax']['event'] = 'finishedinput'; // 'change'
+      $field_text_label[0]['value']['#attached']['js'] = array(
+        drupal_get_path('module', 'fck_custom').'/field_text_label.js',
+      );
+      $field_text_label[0]['value']['#attributes'] = $field_text_label['#attributes'];
+      unset($field_text_label['#ajax']);
+      unset($field_text_label['#attributes']);    
+    }
+  }
+}
+
+/**
+ * Implements hook_commerce_pricing_attributes_refresh_prepare_alter().
+ */
+function fck_custom_commerce_pricing_attributes_refresh_prepare_alter(&$commands, &$commerce_option_list, $form, $form_state) {
+  // There's a logic between reseting Player field and Label/Number
+  // during AJAX execution including Price reset. If Player field is selected 
+  // and Label/Number fields are edited - the Player field should be reset. 
+  // And when Label/Number fields are having some values and Player field is 
+  // selected - first ones should be reset.  
+  $product = &$form_state['default_product'];
+  if (!isset($form_state['triggering_element']['#name'])) {
+    return;
+  } elseif (strpos($form_state['triggering_element']['#name'], 'field_superliga_badge') !== FALSE) {   
+  	// setup Preview Price for Badge      	 
+  	$value = $form_state['triggering_element']['#value'];
+  	$badge_options = $form_state['triggering_element']['#entity']->set_details['field_superliga_badge']['options'][1];
+  	$price = commerce_currency_format($badge_options['price'], $badge_options['currency_code']);
+
+  	if ($value) {
+  		$value = '+'.$price;
+  	} else {
+  		$value = '';
+  	}
+
+  	$commands[] = ajax_command_invoke(
+      '.e-badge-value', 
+      'text', 
+      array($value)
+    );
+
+  } elseif (strpos($form_state['triggering_element']['#name'], 'field_players') !== FALSE) {                  
+  	// reset custom Label/Number and Preview Link
+    $commerce_option_list[0]
+      ->field_text_number['und'][0]['value'] = '';   
+    $commerce_option_list[0]
+      ->field_text_label['und'][0]['value'] = ''; 
+    $commands[] = ajax_command_invoke(
+      'input[id*="field-text-number"]', 
+      'val', 
+      array('')
+    ); 
+    $commands[] = ajax_command_invoke(
+      '.e-text-label-value', 
+      'text', 
+      array('')
+    );
+    $commands[] = ajax_command_invoke(
+      'input[id*="field-text-label"]', 
+      'val', 
+      array('')
+    );
+    $commands[] = ajax_command_invoke(
+      '.e-text-number-value', 
+      'text', 
+      array('')
+    );
+    // generate popup preview link
+    $commands[] = _jerseyprint_preview_link_command($product, $commerce_option_list);
+    // show Price for Players        
+    $value = $form_state['triggering_element']['#value'];
+  	$players_options = $form_state['triggering_element']['#entity']->set_details['field_players']['options'];
+  	// get first taxonomy element. TODO: check if it's not _none
+  	$players_options = $players_options[key($players_options)];
+  	$price = commerce_currency_format($players_options['price'], $players_options['currency_code']);
+
+  	if ($value !== '_none') {
+  		$value = '+'.$price;
+  	} else {
+  		$value = '';
+  	}
+
+  	$commands[] = ajax_command_invoke(
+      '.e-players-value', 
+      'text', 
+      array($value)
+    );
+
+  } elseif (strpos($form_state['triggering_element']['#name'], 'field_text_label') !== FALSE) {  	
+  	$value = $form_state['triggering_element']['#value']; 
+  	if ($value) {
+  		$value = '+'.fck_custom_get_custom_price($value, 'label');
+  	}
+  	$commands[] = ajax_command_invoke(
+      '.e-text-label-value', 
+      'text', 
+      array($value)
+    );
+  }
+  elseif (strpos($form_state['triggering_element']['#name'], 'field_text_number') !== FALSE) {  	
+  	$value = $form_state['triggering_element']['#value'];
+  	if ($value) {
+  		$value = '+'.fck_custom_get_custom_price($value, 'number');
+  	}
+  	$commands[] = ajax_command_invoke(
+      '.e-text-number-value', 
+      'text', 
+      array($value)
+    );
+  }  
+  // reset players field if custom Label/Number field are edited
+  if (strpos($form_state['triggering_element']['#name'], 'field_text_number') !== FALSE ||
+    strpos($form_state['triggering_element']['#name'], 'field_text_label') !== FALSE) {                  
+    $commerce_option_list[0]
+      ->field_players['und'][0]['tid'] = '_none';    
+    $commands[] = ajax_command_invoke(
+      'select[id*="field-players"]', 
+      'val', 
+      array('_none')
+    ); 
+    $commands[] = ajax_command_invoke(
+      '.e-players-value', 
+      'text', 
+      array('')
+    );    
+    
+    $commands[] = _jerseyprint_preview_link_command($product, $commerce_option_list);
+    
+  }  
+}
+
+/**
+ * Generate a path of preview link depending on values of Text Number/Text Label field 
+ */
+function _jerseyprint_preview_link_command(&$product, &$commerce_option_list) {
+	$fck_fid = $product->field_text_preview_image['und'][0]['fid'];
+
+	$fck_label = isset($commerce_option_list[0]
+    ->field_text_label['und'][0]) ? $commerce_option_list[0]
+    ->field_text_label['und'][0]['value'] : '-';
+  $fck_label = empty($fck_label) ? '-' : $fck_label;
+
+  $fck_number = isset($commerce_option_list[0]
+    ->field_text_number['und'][0]) ? $commerce_option_list[0]
+    ->field_text_number['und'][0]['value'] : '-';
+  $fck_number = empty($fck_number) ? '-' : $fck_number;  
+  return ajax_command_invoke(
+    '#fckJerseyPrintPreview', 
+    'attr', 
+    array('href', drupal_encode_path('/jquery_ajax_load/get/fck_preview/'. $fck_fid.'/'.$fck_label.'/'.$fck_number))
+  );  
+}
+
+function fck_custom_get_custom_price($text, $type = 'label') {
+	$coef = '';
+	if ($type == 'label') {
+		$coef = variable_get('fck_label_coef', 2000);
+	} elseif ($type == 'number') {
+		$coef = variable_get('fck_number_coef', 3500);
+	}
+	$currency_code = variable_get('commerce_default_currency', 'DKK');
+	$price = commerce_currency_format($coef * strlen($text), $currency_code);
+
+	return $price; 
 }

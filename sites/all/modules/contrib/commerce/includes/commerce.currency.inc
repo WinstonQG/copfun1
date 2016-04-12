@@ -239,7 +239,6 @@ function commerce_commerce_currency_info() {
       'name' => t('Swiss Franc'),
       'rounding_step' => '0.05',
       'numeric_code' => '756',
-      'thousands_separator' => "'",
       'minor_unit' => t('Rappen'),
       'major_unit' => t('Franc'),
     ),
@@ -553,9 +552,8 @@ function commerce_commerce_currency_info() {
     ),
     'IRR' => array(
       'code' => 'IRR',
-      'symbol' => 'ریال',
+      'symbol' => '﷼',
       'name' => t('Iranian Rial'),
-      'decimals' => 0,
       'numeric_code' => '364',
       'symbol_placement' => 'after',
       'code_placement' => 'hidden',

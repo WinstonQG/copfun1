@@ -1403,6 +1403,7 @@ function md_product_field_default_field_instances() {
     'settings' => array(
       'field_injection' => 1,
       'referenceable_types' => array(
+        'jersey_print' => 'jersey_print',
         'outwear_adult_custom' => 0,
         'outwear_adult_regular' => 0,
         'outwear_baby_regular' => 0,
