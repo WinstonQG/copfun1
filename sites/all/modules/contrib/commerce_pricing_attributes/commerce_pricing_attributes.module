@@ -598,7 +598,7 @@ function commerce_pricing_attributes_field_widget_form(&$form, &$form_state, $fi
               '#type' => 'item',
               '#input' => TRUE,
               '#delta' => 100,
-              '#default_value' => isset($items[$delta]['set_details'][$option_field_name]['options'][$option_value]['weight'])?$items[$delta]['set_details'][$option_field_name]['options'][$option_value]['weight']:0,
+              '#default_value' => isset($items[$delta]['set_details'][$option_field_name]['options'][$option_value]['weight'])?$items[$delta]['set_details'][$option_field_name]['options'][$option_value]['weight']:$option_fields[$option_field_name]['settings']['commerce_pricing_attributes'][$option_value]['weight'],
               '#process' => array('form_process_weight'),
               '#attributes' => array(
                 'class' => array('commerce-pricing-attributes-set-details-options-weight'),
