@@ -105,6 +105,14 @@ function fck_custom_commerce_checkout_pane_info_alter(&$panes) {
  * Implements hook_commerce_cart_attributes_refresh_alter().
  */
 function fck_custom_commerce_cart_attributes_refresh_alter(&$commands, $form, $form_state) {
+	// ------------------------------------------
+	// hold "Jersey print" price labels on places after switching between options of
+	// Size attribute (AJAX callback)
+	// ------------------------------------------
+	// should work only for "node_full" view mode
+	if ($form_state['build_info']['args'][2]['view_mode'] != 'node_full') {
+		return;
+	}	
   
   $refresh_commands = commerce_pricing_attributes_add_to_cart_form_attributes_refresh($form, $form_state);  
   $commands[] = $refresh_commands['#commands'][0];
