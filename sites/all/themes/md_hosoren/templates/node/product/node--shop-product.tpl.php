@@ -231,7 +231,9 @@
         <div class="product-list-actions">
           <?php if (isset($content['field_product_store'][0]['quantity'])): ?>
             <?php unset($content['field_product_store'][0]['attributes']['field_size']); ?>
-            <?php unset($content['field_product_store'][0]['attributes']['field_color']); ?>
+            <?php //unset($content['field_product_store'][0]['attributes']['field_color']); ?>
+            <?php //watchdog('name', '<pre>'.print_r($content['field_product_store'][0]['field_jersey_print'], TRUE).'</pre>'); ?>
+            <?php unset($content['field_product_store'][0]['field_jersey_print']); ?>
             <?php print render($content['field_product_store']); ?>
           <?php endif; ?>
           <?php if (isset($content['flag_wishlist']['#markup'])): ?>
@@ -282,7 +284,11 @@
           </div>
           <?php endif; ?>
           <!-- /.product-stars -->    
-          <span class="product-price"><?php print render($content['product:commerce_price']); ?><?php print render($content['product:field_price_old']); ?></span>
+          <span class="product-price"><?php print render($content['product:commerce_price']); ?>
+            <?php if (isset($content['product:field_price_old'])) : ?>
+              <?php print render($content['product:field_price_old']); ?>
+            <?php endif; ?>
+          </span>
           <!-- /.product-price -->
 
           <?php if(!empty($content['body']['#items'][0]['summary'])): ?>

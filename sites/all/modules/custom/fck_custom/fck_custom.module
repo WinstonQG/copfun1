@@ -21,9 +21,35 @@ function fck_custom_update_7001() {
 }
 
 /**
+ * Implements hook_form_jersey_print_form_alter().
+ */
+function fck_custom_form_jersey_print_form_alter(&$form, &$form_state) {
+  $form['#theme'] = 'jersey_print_form';  
+} 
+
+/**
+ * Implements hook_theme().
+ */
+function fck_custom_theme($existing, $type, $theme, $path) {	
+	return array(    
+    'jersey_print_form' => array(
+      'render element' => 'form',
+      'template' => 'jersey-print-form',
+    ),
+  );
+}
+
+/**
  * Implements hook_menu().
  */
 function fck_custom_menu() {  
+  $items['fck_preview/%'] = array(
+    'title' => 'Preview title',
+    'page callback' => 'fck_preview_page',
+    'page arguments' => array(1),
+    'access arguments' => array('access content'),
+    'type' => MENU_CALLBACK,    
+  );
   $items['fck_preview/%/%/%'] = array(
     'title' => 'Preview title',
     'page callback' => 'fck_preview_page',
@@ -35,17 +61,22 @@ function fck_custom_menu() {
   return $items;
 }
 
-function fck_preview_page($fid, $label_text, $number_text) {
+function fck_preview_page($fid, $label_text = '', $number_text = '') {
 	$page = array();
 	
-	drupal_add_css(drupal_get_path('module', 'fck_custom') . '/jersey_print_preview.css');	
-	$js_path = drupal_get_path('module', 'fck_custom') . '/jersey_print_preview.js';
+	drupal_add_css(drupal_get_path('module', 'fck_custom') . '/jersey_print_preview.css');		
 
 	$file = file_load($fid);
 	$uri = $file->uri;
 	$url = file_create_url($uri);
 	$output = '';
 	$image = theme('image', array('path' => $url));		
+
+	if (empty($label_text) && empty($number_text)) {
+		$page['result']['#markup'] = $image;
+		return $page;
+	}
+
 	$page['result']['#markup'] = '
 		<div class="work_container" data-label-text="'.$label_text.'" data-number-text="'.$number_text.'"><div class="img_outer">
       <div class="img_container">
@@ -125,12 +156,13 @@ function fck_custom_commerce_cart_attributes_refresh_alter(&$commands, $form, $f
 		    array($price)
 		  );
 		}
-	}
+	}	
+	
 	// Text Label data
-	if (isset($option_data['field_text_label']['options'])) {		
-	  $text_label_options = $option_data['field_text_label']['options'];
+	if (isset($option_data['field_text_label'])) {	  
 	  // update Text Label info if it's filled
 	  $text_label_value = $option_values->field_text_label['und'][0]['value'];
+
 		if ($text_label_value) {
 			$price = fck_custom_get_custom_price($text_label_value, 'label');
 			$price = '+'.$price;
@@ -142,8 +174,8 @@ function fck_custom_commerce_cart_attributes_refresh_alter(&$commands, $form, $f
 		}
 	}		
 	// Text Number data
-	if (isset($option_data['field_text_number']['options'])) {
-	  $text_number_options = $option_data['field_text_number']['options'];
+	if (isset($option_data['field_text_number'])) {
+	  //$text_number_options = $option_values['field_text_number']['options'];
 	  // update Text Number info if it's filled
 	  $text_number_value = $option_values->field_text_number['und'][0]['value'];
 		if ($text_number_value) {
@@ -158,12 +190,63 @@ function fck_custom_commerce_cart_attributes_refresh_alter(&$commands, $form, $f
 	}
 }
 
+function fck_custom_preprocess_jersey_print_form(&$variables) {   
+  $form = &$variables['form'];  
+  $preview_text_fid = $form['preview_text_fid']['#value'];
+  $preview_badge_fid = $form['preview_badge_fid']['#value'];
+  $preview_autograph_fid = $form['preview_autograph_fid']['#value'];
+
+  //<a id='jerseyPrintTextPreview' class='twitter_bootstrap_modal tb_modal bs_modal' href='/fck_preview/$preview_text_fid'>".t('Preview')."</a>
+  $variables['preview_text_button'] = "<a id='jerseyPrintTextPreview' class='fck_jersey_print_preview twitter_bootstrap_modal tb_modal bs_modal pull-right' href='/fck_preview/$preview_text_fid'>".t('Preview Text')."</a>";
+  $variables['preview_badge_button'] = "<a id='jerseyPrintBadgePreview' class='fck_jersey_print_preview twitter_bootstrap_modal tb_modal bs_modal pull-right' href='/fck_preview/$preview_badge_fid'>".t('Preview Badge')."</a>";
+  $variables['preview_autograph_button'] = "<a id='jerseyPrintAutographPreview' class='fck_jersey_print_preview twitter_bootstrap_modal tb_modal bs_modal pull-right' href='/fck_preview/$preview_autograph_fid'>".t('Preview Autograph')."</a>";
+
+}
+
 /**
  * Implements hook_form_alter().
  */
 function fck_custom_form_alter(&$form, &$form_state, $form_id) { 
   if (isset($form_state['build_info']['base_form_id']) && 
-    $form_state['build_info']['base_form_id'] == 'commerce_cart_add_to_cart_form') { 
+    $form_state['build_info']['base_form_id'] == 'commerce_cart_add_to_cart_form' &&
+    isset($form['field_jersey_print'])) {   
+
+  	// hide Jersey print attributes for Teaser and Modal view modes. Override handler  
+  	// of 'Add to cart' button - it should redirect to full node page instead of 
+  	// adding product to cart.
+  	if ($form_state['build_info']['args'][2]['view_mode'] == 'node_teaser' ||
+  		$form_state['build_info']['args'][2]['view_mode'] == 'node_modal_content') {
+  		if (isset($form['field_jersey_print'])) {
+  			unset($form['field_jersey_print']);
+
+  			$form['submit']['#value'] = t('Add Prints');
+  			$form['#submit'][0] = 'fck_custom_jersey_print_redirect';
+  			return;
+  		}
+  	}
+
+  	$form['#theme'] = 'jersey_print_form';
+  	// get Text fid (link is generated in template)
+  	$preview_text_fid = '';
+  	if (isset($form_state['default_product']->field_text_preview_image['und'])) {
+	  	$preview_text_fid = $form_state['default_product']->field_text_preview_image['und'][0]['fid'];
+	  	$preview_text_fid = empty($preview_text_fid) ? '-' : $preview_text_fid;
+		}
+  	$form['preview_text_fid'] = array('#value' => $preview_text_fid);
+  	// get Badge preview fid (link is generated in template)
+  	$preview_badge_fid = '';
+  	if (isset($form_state['default_product']->field_badge_preview_image['und'])) {
+	  	$preview_badge_fid = $form_state['default_product']->field_badge_preview_image['und'][0]['fid'];
+	  	$preview_badge_fid = empty($preview_badge_fid) ? '-' : $preview_badge_fid;
+		}
+  	$form['preview_badge_fid'] = array('#value' => $preview_badge_fid);
+  	// get Autograph preview fid (link is generated in template)
+  	$preview_autograph_fid = '';
+  	if (isset($form_state['default_product']->field_autograph_preview_image['und'])) {
+	  	$preview_autograph_fid = $form_state['default_product']->field_autograph_preview_image['und'][0]['fid'];
+	  	$preview_autograph_fid = empty($preview_autograph_fid) ? '-' : $preview_autograph_fid;
+		}
+  	$form['preview_autograph_fid'] = array('#value' => $preview_autograph_fid);
 
   	drupal_add_js(drupal_get_path('module', 'fck_custom') . '/jersey_print_preview.js');
   	drupal_add_css(drupal_get_path('module', 'fck_custom') . '/jersey_print_preview.css');  	  	
@@ -171,9 +254,9 @@ function fck_custom_form_alter(&$form, &$form_state, $form_id) {
   	$field_badge = &$form['field_jersey_print'][0]['field_superliga_badge']['und'];
   	$field_autograph = &$form['field_jersey_print'][0]['field_autograph']['und'];
   	$field_players = &$form['field_jersey_print'][0]['field_players']['und'];
-  	$field_badge['#suffix'] = "<div class='e-badge-value e-attribute-price-preview'></div>";
-  	$field_autograph['#suffix'] = "<div class='e-autograph-value e-attribute-price-preview'></div>";
-  	$field_players['#suffix'] = "<div class='e-players-value e-attribute-price-preview'></div>";
+  	$field_badge['#suffix'] = "";
+  	$field_autograph['#suffix'] = "";
+  	$field_players['#suffix'] = "";
 
     // By default textfield pricing attributes don't refresh 
     // price during texting.. so the code below fix this problem
@@ -184,11 +267,7 @@ function fck_custom_form_alter(&$form, &$form_state, $form_id) {
       $field_text_number[0]['value']['#attached']['js'] = array(
         drupal_get_path('module', 'fck_custom').'/field_text_number.js',
       );      
-      $preview_fid = '';
-      if (isset($form_state['default_product']->field_text_preview_image['und'])) {
-      	$preview_fid = $form_state['default_product']->field_text_preview_image['und'][0]['fid'];
-      	$preview_fid = empty($preview_fid) ? '-' : $preview_fid;
-    	}
+      
 
     	$label_text = '-';
     	$number_text = '-';
@@ -202,9 +281,7 @@ function fck_custom_form_alter(&$form, &$form_state, $form_id) {
     		if (!empty($number_input_value)) {
     			$number_text = $number_input_value;
     		}
-    	}
-
-      $field_text_number[0]['value']['#suffix'] = "<div class='e-text-number-value e-attribute-price-preview'></div><a  id='fckJerseyPrintPreview' class='twitter_bootstrap_modal tb_modal bs_modal' href='/fck_preview/$preview_fid/$label_text/$number_text'>".t('Preview')."</a>";
+    	}      
 
       $field_text_number[0]['value']['#attributes'] = $field_text_number['#attributes'];
       unset($field_text_number['#ajax']);
@@ -213,7 +290,7 @@ function fck_custom_form_alter(&$form, &$form_state, $form_id) {
     //
     if (isset($form['field_jersey_print'][0]['field_text_label']['und'])) {
       $field_text_label = &$form['field_jersey_print'][0]['field_text_label']['und'];
-      $field_text_label[0]['value']['#suffix'] = "<div class='e-text-label-value e-attribute-price-preview'></div>";
+      $field_text_label[0]['value']['#suffix'] = "";
       $field_text_label[0]['value']['#ajax'] = $field_text_label['#ajax'];
       $field_text_label[0]['value']['#ajax']['event'] = 'finishedinput'; // 'change'
       $field_text_label[0]['value']['#attached']['js'] = array(
@@ -224,6 +301,14 @@ function fck_custom_form_alter(&$form, &$form_state, $form_id) {
       unset($field_text_label['#attributes']);    
     }
   }
+}
+
+/**
+ * Redirect user to Jersey print node after clicking on "Add to cart" button (renamed * to Add print). Supposed to work only for NodeTeaser and NodeModal view modes.
+ */
+function fck_custom_jersey_print_redirect($form, &$form_state) {	
+	$nid = $form_state['context']['entity_id'];
+	drupal_goto('node/'.$nid);
 }
 
 /**
@@ -301,11 +386,12 @@ function fck_custom_commerce_pricing_attributes_refresh_prepare_alter(&$commands
       array('')
     );
     // generate popup preview link
-    $commands[] = _jerseyprint_preview_link_command($product, $commerce_option_list);
+    //$commands[] = _jerseyprint_preview_link_command($product, $commerce_option_list);
     // show Price for Players        
     $value = $form_state['triggering_element']['#value'];
   	$players_options = $form_state['triggering_element']['#entity']->set_details['field_players']['options'];
   	// get first taxonomy element. TODO: check if it's not _none
+  	unset($players_options['_none']);
   	$players_options = $players_options[key($players_options)];
   	$price = commerce_currency_format($players_options['price'], $players_options['currency_code']);
 
@@ -359,7 +445,7 @@ function fck_custom_commerce_pricing_attributes_refresh_prepare_alter(&$commands
       array('')
     );    
     
-    $commands[] = _jerseyprint_preview_link_command($product, $commerce_option_list);
+    //$commands[] = _jerseyprint_preview_link_command($product, $commerce_option_list);
     
   }  
 }
@@ -380,7 +466,7 @@ function _jerseyprint_preview_link_command(&$product, &$commerce_option_list) {
     ->field_text_number['und'][0]['value'] : '-';
   $fck_number = empty($fck_number) ? '-' : $fck_number;  
   return ajax_command_invoke(
-    '#fckJerseyPrintPreview', 
+    '#jerseyPrintTextPreview', 
     'attr', 
     array('href', drupal_encode_path('/jquery_ajax_load/get/fck_preview/'. $fck_fid.'/'.$fck_label.'/'.$fck_number))
   );  

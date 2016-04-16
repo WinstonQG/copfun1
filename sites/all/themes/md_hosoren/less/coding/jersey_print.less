@@ -1,9 +1,50 @@
-#fckJerseyPrintPreview {
-	display: inline-block;
-    padding: 10px 15px;
-    font-size: 13px;
-    letter-spacing: 1px;
-    background: #333333;
-    color: #ffffff;
-    text-transform: uppercase;
+.commerce-product-field-empty {
+	display: none;
+}
+
+.product_full {
+
+	h4 {
+		color: @active_color;
+	}
+
+	.e-group {
+		margin-top: 5px;
+	}
+
+	.fck_jersey_print_preview {
+		display: inline-block;
+	    padding: 4px 7px 4px 7px;
+	    font-size: 13px;
+	    letter-spacing: 1px;
+	    background: #333333;
+	    color: #ffffff;
+	    text-transform: uppercase;
+
+	    &:before {
+	    	content: '';
+	    	display: inline-block;
+	    	background: url('../images/jersey_preview.png');
+	    	width: 25px;
+	    	height: 25px;
+	    	margin-right: 7px;
+	    	vertical-align: middle;
+	    }
+	}
+
+	.e-attribute-price-preview {
+	    vertical-align: top;
+	    line-height: 5px;
+	}
+
+	.e-text-label-field {
+
+	}
+
+	.e-text-number-field {
+		
+		input {
+			width: 80px !important;
+		}
+	}
 }
