@@ -65,6 +65,7 @@ function fck_search_default_search_api_index() {
         "field_player_jerseys:vocabulary:machine_name" : { "type" : "string" },
         "field_product_store" : { "type" : "list\\u003Cinteger\\u003E", "entity_type" : "commerce_product" },
         "field_product_store:commerce_price:amount_decimal" : { "type" : "list\\u003Cdecimal\\u003E" },
+        "field_product_store:commerce_stock" : { "type" : "list\\u003Cinteger\\u003E" },
         "field_product_store:field_foot_size" : { "type" : "list\\u003Cinteger\\u003E", "entity_type" : "taxonomy_term" },
         "field_product_store:field_outwear_adult_size" : { "type" : "list\\u003Cinteger\\u003E", "entity_type" : "taxonomy_term" },
         "field_product_store:field_outwear_baby_size" : { "type" : "list\\u003Cinteger\\u003E", "entity_type" : "taxonomy_term" },
@@ -75,6 +76,7 @@ function fck_search_default_search_api_index() {
         "field_sale:tid" : { "type" : "integer" },
         "nid" : { "type" : "integer" },
         "search_api_language" : { "type" : "string" },
+        "status" : { "type" : "integer" },
         "title" : { "type" : "text" },
         "type" : { "type" : "string" }
       },
@@ -548,6 +550,18 @@ function fck_search_default_search_api_server() {
           "field_player_jerseys:tid" : {
             "table" : "search_api_db_shop_product",
             "column" : "field_player_jerseys_tid",
+            "type" : "integer",
+            "boost" : "1.0"
+          },
+          "field_product_store:commerce_stock" : {
+            "table" : "search_api_db_shop_product_field_product_store_commerce_stock",
+            "column" : "value",
+            "type" : "list\\u003Cinteger\\u003E",
+            "boost" : "1.0"
+          },
+          "status" : {
+            "table" : "search_api_db_shop_product",
+            "column" : "status",
             "type" : "integer",
             "boost" : "1.0"
           }

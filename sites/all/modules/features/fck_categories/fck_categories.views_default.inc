@@ -181,7 +181,6 @@ function fck_categories_views_default_views() {
   $handler->display->display_options['fields']['name_i18n']['alter']['make_link'] = TRUE;
   $handler->display->display_options['fields']['name_i18n']['alter']['path'] = 'categories/clothing/[tid]';
   $handler->display->display_options['fields']['name_i18n']['element_label_colon'] = FALSE;
-  $handler->display->display_options['fields']['name_i18n']['link_to_taxonomy'] = TRUE;
   $handler->display->display_options['defaults']['filter_groups'] = FALSE;
   $handler->display->display_options['defaults']['filters'] = FALSE;
   /* Filter criterion: Taxonomy vocabulary: Machine name */
@@ -340,7 +339,6 @@ function fck_categories_views_default_views() {
   $handler->display->display_options['fields']['name_i18n']['alter']['make_link'] = TRUE;
   $handler->display->display_options['fields']['name_i18n']['alter']['path'] = 'categories/player_jerseys/[tid]';
   $handler->display->display_options['fields']['name_i18n']['element_label_colon'] = FALSE;
-  $handler->display->display_options['fields']['name_i18n']['link_to_taxonomy'] = TRUE;
 
   /* Display: Sale Block */
   $handler = $view->new_display('block', 'Sale Block', 'sale_block');

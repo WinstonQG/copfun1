@@ -32,7 +32,7 @@ function fck_search_facetapi_default_facet_settings() {
     'individual_parent' => 0,
     'query_type' => 'term',
     'limit_active_items' => 0,
-    'default_true' => TRUE,
+    'default_true' => '1',
     'facet_search_ids' => array(),
     'exclude' => 0,
   );
@@ -60,7 +60,7 @@ function fck_search_facetapi_default_facet_settings() {
     'individual_parent' => '0',
     'query_type' => 'term',
     'limit_active_items' => 0,
-    'default_true' => TRUE,
+    'default_true' => '1',
     'facet_search_ids' => array(),
     'exclude' => 0,
   );
@@ -88,7 +88,7 @@ function fck_search_facetapi_default_facet_settings() {
     'individual_parent' => '0',
     'query_type' => 'term',
     'limit_active_items' => 0,
-    'default_true' => TRUE,
+    'default_true' => '1',
     'facet_search_ids' => array(),
     'exclude' => 0,
   );
@@ -108,6 +108,7 @@ function fck_search_facetapi_default_facet_settings() {
     'dependencies' => array(
       'bundle' => 'none',
       'bundle_selected' => array(),
+      'roles' => array(),
     ),
     'facet_mincount' => '1',
     'facet_missing' => '0',
@@ -115,7 +116,7 @@ function fck_search_facetapi_default_facet_settings() {
     'individual_parent' => '0',
     'query_type' => 'term',
     'limit_active_items' => 0,
-    'default_true' => TRUE,
+    'default_true' => '1',
     'facet_search_ids' => array(),
     'exclude' => 0,
   );
@@ -867,7 +868,7 @@ function fck_search_facetapi_default_facet_settings() {
     'facet_more_text' => 'Show more',
     'facet_fewer_text' => 'Show fewer',
     'title_override' => 1,
-    'title' => 'Price',
+    'title' => 'Pris',
     'soft_limit' => '20',
     'nofollow' => 1,
     'show_expanded' => 0,
@@ -922,7 +923,7 @@ function fck_search_facetapi_default_facet_settings() {
     'facet_more_text' => 'Show more',
     'facet_fewer_text' => 'Show fewer',
     'title_override' => 1,
-    'title' => 'Shoes | Stocking',
+    'title' => 'SKO | STRØMPER',
     'soft_limit' => '20',
     'nofollow' => 1,
     'show_expanded' => 0,
@@ -977,7 +978,7 @@ function fck_search_facetapi_default_facet_settings() {
     'facet_more_text' => 'Show more',
     'facet_fewer_text' => 'Show fewer',
     'title_override' => 1,
-    'title' => 'Size - Adult ',
+    'title' => 'STØRRELSE - VOKSEN',
     'soft_limit' => '20',
     'nofollow' => 0,
     'show_expanded' => 0,
@@ -1008,7 +1009,7 @@ function fck_search_facetapi_default_facet_settings() {
   $facet->enabled = TRUE;
   $facet->settings = array(
     'weight' => 0,
-    'widget' => 'facetapi_links',
+    'widget' => 'facetapi_checkbox_links',
     'filters' => array(),
     'active_sorts' => array(
       'active' => 'active',
@@ -1032,7 +1033,7 @@ function fck_search_facetapi_default_facet_settings() {
     'facet_more_text' => 'Show more',
     'facet_fewer_text' => 'Show fewer',
     'title_override' => 1,
-    'title' => 'Size - Baby',
+    'title' => 'STØRRELSE - BABY',
     'soft_limit' => '20',
     'nofollow' => 1,
     'show_expanded' => 0,
@@ -1087,7 +1088,7 @@ function fck_search_facetapi_default_facet_settings() {
     'facet_more_text' => 'Show more',
     'facet_fewer_text' => 'Show fewer',
     'title_override' => 1,
-    'title' => 'Size - Child',
+    'title' => 'SKO | STRØMPER',
     'soft_limit' => '20',
     'nofollow' => 0,
     'show_expanded' => 0,

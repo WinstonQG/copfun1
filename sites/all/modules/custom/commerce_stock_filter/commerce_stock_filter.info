@@ -1,0 +1,5 @@
+name = Commerce Stock Filter
+description = Allow to filter the product displays and product variations that are out of stock.
+package = FCK
+core = 7.x
+; Files

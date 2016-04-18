@@ -56,23 +56,16 @@ function fck_search_views_default_views() {
   $handler->display->display_options['filters']['field_baby_vocabulary_machine_name']['table'] = 'search_api_index_shop_product';
   $handler->display->display_options['filters']['field_baby_vocabulary_machine_name']['field'] = 'field_baby_vocabulary_machine_name';
   $handler->display->display_options['filters']['field_baby_vocabulary_machine_name']['value'] = 'baby';
+  /* Filter criterion: Indexed Node: Status */
+  $handler->display->display_options['filters']['status']['id'] = 'status';
+  $handler->display->display_options['filters']['status']['table'] = 'search_api_index_shop_product';
+  $handler->display->display_options['filters']['status']['field'] = 'status';
+  $handler->display->display_options['filters']['status']['value'] = array(
+    1 => '1',
+  );
 
   /* Display: Clothing */
   $handler = $view->new_display('page', 'Clothing', 'clothing_page');
-  $handler->display->display_options['defaults']['filter_groups'] = FALSE;
-  $handler->display->display_options['defaults']['filters'] = FALSE;
-  /* Filter criterion: Indexed Node: Content type */
-  $handler->display->display_options['filters']['type']['id'] = 'type';
-  $handler->display->display_options['filters']['type']['table'] = 'search_api_index_shop_product';
-  $handler->display->display_options['filters']['type']['field'] = 'type';
-  $handler->display->display_options['filters']['type']['value'] = array(
-    'shop_product' => 'shop_product',
-  );
-  /* Filter criterion: Clothing » Vocabulary: Machine name (indexed) */
-  $handler->display->display_options['filters']['field_clothing_vocabulary_machine_name']['id'] = 'field_clothing_vocabulary_machine_name';
-  $handler->display->display_options['filters']['field_clothing_vocabulary_machine_name']['table'] = 'search_api_index_shop_product';
-  $handler->display->display_options['filters']['field_clothing_vocabulary_machine_name']['field'] = 'field_clothing_vocabulary_machine_name';
-  $handler->display->display_options['filters']['field_clothing_vocabulary_machine_name']['value'] = 'clothing';
   $handler->display->display_options['path'] = 'categories/clothing/%';
 
   /* Display: Accessories */
@@ -102,6 +95,13 @@ function fck_search_views_default_views() {
   $handler->display->display_options['filters']['field_accessories_vocabulary_machine_name']['table'] = 'search_api_index_shop_product';
   $handler->display->display_options['filters']['field_accessories_vocabulary_machine_name']['field'] = 'field_accessories_vocabulary_machine_name';
   $handler->display->display_options['filters']['field_accessories_vocabulary_machine_name']['value'] = 'accessories';
+  /* Filter criterion: Indexed Node: Status */
+  $handler->display->display_options['filters']['status']['id'] = 'status';
+  $handler->display->display_options['filters']['status']['table'] = 'search_api_index_shop_product';
+  $handler->display->display_options['filters']['status']['field'] = 'status';
+  $handler->display->display_options['filters']['status']['value'] = array(
+    1 => '1',
+  );
   $handler->display->display_options['path'] = 'categories/accessories/%';
 
   /* Display: Match Kits */
@@ -131,6 +131,13 @@ function fck_search_views_default_views() {
   $handler->display->display_options['filters']['field_match_kits_vocabulary_machine_name']['table'] = 'search_api_index_shop_product';
   $handler->display->display_options['filters']['field_match_kits_vocabulary_machine_name']['field'] = 'field_match_kits_vocabulary_machine_name';
   $handler->display->display_options['filters']['field_match_kits_vocabulary_machine_name']['value'] = 'match_kits';
+  /* Filter criterion: Indexed Node: Status */
+  $handler->display->display_options['filters']['status']['id'] = 'status';
+  $handler->display->display_options['filters']['status']['table'] = 'search_api_index_shop_product';
+  $handler->display->display_options['filters']['status']['field'] = 'status';
+  $handler->display->display_options['filters']['status']['value'] = array(
+    1 => '1',
+  );
   $handler->display->display_options['path'] = 'categories/match-kits/%';
 
   /* Display: Baby */
@@ -175,6 +182,13 @@ function fck_search_views_default_views() {
   $handler->display->display_options['filters']['field_gifts_vocabulary_machine_name']['table'] = 'search_api_index_shop_product';
   $handler->display->display_options['filters']['field_gifts_vocabulary_machine_name']['field'] = 'field_gifts_vocabulary_machine_name';
   $handler->display->display_options['filters']['field_gifts_vocabulary_machine_name']['value'] = 'gifts';
+  /* Filter criterion: Indexed Node: Status */
+  $handler->display->display_options['filters']['status']['id'] = 'status';
+  $handler->display->display_options['filters']['status']['table'] = 'search_api_index_shop_product';
+  $handler->display->display_options['filters']['status']['field'] = 'status';
+  $handler->display->display_options['filters']['status']['value'] = array(
+    1 => '1',
+  );
   $handler->display->display_options['path'] = 'categories/gifts/%';
 
   /* Display: Standard search */
@@ -204,6 +218,13 @@ function fck_search_views_default_views() {
   $handler->display->display_options['filters']['type']['value'] = array(
     'shop_product' => 'shop_product',
   );
+  /* Filter criterion: Indexed Node: Status */
+  $handler->display->display_options['filters']['status']['id'] = 'status';
+  $handler->display->display_options['filters']['status']['table'] = 'search_api_index_shop_product';
+  $handler->display->display_options['filters']['status']['field'] = 'status';
+  $handler->display->display_options['filters']['status']['value'] = array(
+    1 => '1',
+  );
   $handler->display->display_options['path'] = 'st-search/%';
 
   /* Display: New Products */
@@ -224,6 +245,13 @@ function fck_search_views_default_views() {
   $handler->display->display_options['filters']['field_group']['field'] = 'field_group';
   $handler->display->display_options['filters']['field_group']['value'] = array(
     'new' => 'new',
+  );
+  /* Filter criterion: Indexed Node: Status */
+  $handler->display->display_options['filters']['status']['id'] = 'status';
+  $handler->display->display_options['filters']['status']['table'] = 'search_api_index_shop_product';
+  $handler->display->display_options['filters']['status']['field'] = 'status';
+  $handler->display->display_options['filters']['status']['value'] = array(
+    1 => '1',
   );
   $handler->display->display_options['path'] = 'new-products';
 
@@ -250,6 +278,13 @@ function fck_search_views_default_views() {
   $handler->display->display_options['filters']['type']['value'] = array(
     'shop_product' => 'shop_product',
   );
+  /* Filter criterion: Indexed Node: Status */
+  $handler->display->display_options['filters']['status']['id'] = 'status';
+  $handler->display->display_options['filters']['status']['table'] = 'search_api_index_shop_product';
+  $handler->display->display_options['filters']['status']['field'] = 'status';
+  $handler->display->display_options['filters']['status']['value'] = array(
+    1 => '1',
+  );
   $handler->display->display_options['path'] = 'categories/sale/%';
 
   /* Display: Player Jerseys */
@@ -270,31 +305,14 @@ function fck_search_views_default_views() {
   $handler->display->display_options['filters']['field_player_jerseys_vocabulary_machine_name']['table'] = 'search_api_index_shop_product';
   $handler->display->display_options['filters']['field_player_jerseys_vocabulary_machine_name']['field'] = 'field_player_jerseys_vocabulary_machine_name';
   $handler->display->display_options['filters']['field_player_jerseys_vocabulary_machine_name']['value'] = 'player_jerseys';
-  $handler->display->display_options['path'] = 'categories/player_jerseys/%';
-  $translatables['fck_search_pages'] = array(
-    t('Master'),
-    t('New'),
-    t('more'),
-    t('Apply'),
-    t('Reset'),
-    t('Sort by'),
-    t('Asc'),
-    t('Desc'),
-    t('Node ID'),
-    t('.'),
-    t(','),
-    t('All'),
-    t('Clothing'),
-    t('Accessories'),
-    t('Match Kits'),
-    t('Baby'),
-    t('Gifts'),
-    t('Standard search'),
-    t('Search'),
-    t('New Products'),
-    t('Sale'),
-    t('Player Jerseys'),
+  /* Filter criterion: Indexed Node: Status */
+  $handler->display->display_options['filters']['status']['id'] = 'status';
+  $handler->display->display_options['filters']['status']['table'] = 'search_api_index_shop_product';
+  $handler->display->display_options['filters']['status']['field'] = 'status';
+  $handler->display->display_options['filters']['status']['value'] = array(
+    1 => '1',
   );
+  $handler->display->display_options['path'] = 'categories/player_jerseys/%';
   $export['fck_search_pages'] = $view;
 
   return $export;

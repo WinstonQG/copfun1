@@ -1,0 +1,57 @@
+<?php
+
+/**
+ * Implement hook_node_presave()
+ */
+function commerce_stock_filter_node_presave($node) {
+	if ($node->type == 'shop_product') {
+		// ignore this hook if product display updates 
+		// from Commerce Stock Filter rules actions
+		if (isset($node->csf_ignore)) {
+			unset($node->csf_ignore);
+			return;
+		}
+
+		$wrapper = entity_metadata_wrapper('node', $node);
+		// calculate a stock of all product variantions
+		$total_stock = 0;
+		foreach ($wrapper->field_product_store as $product) {
+			$total_stock += $product->commerce_stock->value();
+		}		
+		// if total stock > 0 and product display is unpublished -
+		// publish a product display		
+		if ($total_stock && !$node->status) {
+			$node->status = TRUE;
+		} 
+		// if total stock = 0 and product display is published -
+		// unpublish a product display
+		elseif (!$total_stock && $node->status) {
+			$node->status = FALSE;
+		}
+	}	
+}
+ 
+/**
+ * Get product display id by product variation id
+ */
+function csf_get_referencing_node_id($product) {
+  global $language;
+
+  // Itterate thhrough fields which refer to products.
+  foreach (commerce_info_fields('commerce_product_reference') as $field['field_name']) {
+    // Build query.
+    $query = new EntityFieldQuery;
+    $query->entityCondition('entity_type', 'node', '=')
+      ->fieldCondition($field['field_name'], 'product_id', $product->product_id, '=')
+      ->propertyCondition('language', $language->language, '=')
+      ->range(0, 1);
+
+    if ($result = $query->execute()) {
+      // Return node id.
+      $nid = array_keys($result['node']);
+      return array_shift($nid);
+    }
+  }
+
+  return FALSE;
+}	
