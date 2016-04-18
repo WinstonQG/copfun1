@@ -198,9 +198,11 @@
     <div class="product-media">
       <?php if (isset($content['product:field_product_images'])) : ?>
       <div class="product-thumbnail">
-        <a href="<?php print $node_url; ?>">
-          <img src="<?php print image_style_url('product_teaser',$content['product:field_product_images']['#items'][0]['uri'])?>" alt="<?php print render($content['product:field_product_images']['#items'][0]['alt']); ?>">
-        </a>
+        <?php if (isset($content['product:field_product_images']['#items'])) : ?>
+          <a href="<?php print $node_url; ?>">
+            <img src="<?php print image_style_url('product_teaser',$content['product:field_product_images']['#items'][0]['uri'])?>" alt="<?php print render($content['product:field_product_images']['#items'][0]['alt']); ?>">
+          </a>
+        <?php endif; ?>
       </div>
       <?php endif; ?>
       <!-- /.product-thumbnail -->
