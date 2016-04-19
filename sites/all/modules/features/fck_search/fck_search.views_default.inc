@@ -75,11 +75,13 @@ function fck_search_views_default_views() {
   $handler->display->display_options['filters']['type']['value'] = array(
     'shop_product' => 'shop_product',
   );
-  /* Filter criterion: Baby » Vocabulary: Machine name (indexed) */
-  $handler->display->display_options['filters']['field_baby_vocabulary_machine_name']['id'] = 'field_baby_vocabulary_machine_name';
-  $handler->display->display_options['filters']['field_baby_vocabulary_machine_name']['table'] = 'search_api_index_shop_product';
-  $handler->display->display_options['filters']['field_baby_vocabulary_machine_name']['field'] = 'field_baby_vocabulary_machine_name';
-  $handler->display->display_options['filters']['field_baby_vocabulary_machine_name']['value'] = 'clothing';
+  $handler->display->display_options['filters']['type']['group'] = 1;
+  /* Filter criterion: Clothing » Vocabulary: Machine name (indexed) */
+  $handler->display->display_options['filters']['field_clothing_vocabulary_machine_name']['id'] = 'field_clothing_vocabulary_machine_name';
+  $handler->display->display_options['filters']['field_clothing_vocabulary_machine_name']['table'] = 'search_api_index_shop_product';
+  $handler->display->display_options['filters']['field_clothing_vocabulary_machine_name']['field'] = 'field_clothing_vocabulary_machine_name';
+  $handler->display->display_options['filters']['field_clothing_vocabulary_machine_name']['value'] = 'clothing';
+  $handler->display->display_options['filters']['field_clothing_vocabulary_machine_name']['group'] = 1;
   /* Filter criterion: Indexed Node: Status */
   $handler->display->display_options['filters']['status']['id'] = 'status';
   $handler->display->display_options['filters']['status']['table'] = 'search_api_index_shop_product';
@@ -87,6 +89,7 @@ function fck_search_views_default_views() {
   $handler->display->display_options['filters']['status']['value'] = array(
     1 => '1',
   );
+  $handler->display->display_options['filters']['status']['group'] = 1;
   $handler->display->display_options['path'] = 'categories/clothing/%';
 
   /* Display: Accessories */
