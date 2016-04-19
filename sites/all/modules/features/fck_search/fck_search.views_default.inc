@@ -66,6 +66,27 @@ function fck_search_views_default_views() {
 
   /* Display: Clothing */
   $handler = $view->new_display('page', 'Clothing', 'clothing_page');
+  $handler->display->display_options['defaults']['filter_groups'] = FALSE;
+  $handler->display->display_options['defaults']['filters'] = FALSE;
+  /* Filter criterion: Indexed Node: Content type */
+  $handler->display->display_options['filters']['type']['id'] = 'type';
+  $handler->display->display_options['filters']['type']['table'] = 'search_api_index_shop_product';
+  $handler->display->display_options['filters']['type']['field'] = 'type';
+  $handler->display->display_options['filters']['type']['value'] = array(
+    'shop_product' => 'shop_product',
+  );
+  /* Filter criterion: Baby » Vocabulary: Machine name (indexed) */
+  $handler->display->display_options['filters']['field_baby_vocabulary_machine_name']['id'] = 'field_baby_vocabulary_machine_name';
+  $handler->display->display_options['filters']['field_baby_vocabulary_machine_name']['table'] = 'search_api_index_shop_product';
+  $handler->display->display_options['filters']['field_baby_vocabulary_machine_name']['field'] = 'field_baby_vocabulary_machine_name';
+  $handler->display->display_options['filters']['field_baby_vocabulary_machine_name']['value'] = 'clothing';
+  /* Filter criterion: Indexed Node: Status */
+  $handler->display->display_options['filters']['status']['id'] = 'status';
+  $handler->display->display_options['filters']['status']['table'] = 'search_api_index_shop_product';
+  $handler->display->display_options['filters']['status']['field'] = 'status';
+  $handler->display->display_options['filters']['status']['value'] = array(
+    1 => '1',
+  );
   $handler->display->display_options['path'] = 'categories/clothing/%';
 
   /* Display: Accessories */
