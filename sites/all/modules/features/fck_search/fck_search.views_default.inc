@@ -66,6 +66,15 @@ function fck_search_views_default_views() {
 
   /* Display: Clothing */
   $handler = $view->new_display('page', 'Clothing', 'clothing_page');
+  $handler->display->display_options['defaults']['arguments'] = FALSE;
+  /* Contextual filter: Clothing: Term ID (indexed) */
+  $handler->display->display_options['arguments']['field_clothing_tid']['id'] = 'field_clothing_tid';
+  $handler->display->display_options['arguments']['field_clothing_tid']['table'] = 'search_api_index_shop_product';
+  $handler->display->display_options['arguments']['field_clothing_tid']['field'] = 'field_clothing_tid';
+  $handler->display->display_options['arguments']['field_clothing_tid']['default_argument_type'] = 'fixed';
+  $handler->display->display_options['arguments']['field_clothing_tid']['summary']['format'] = 'default_summary';
+  $handler->display->display_options['arguments']['field_clothing_tid']['break_phrase'] = 0;
+  $handler->display->display_options['arguments']['field_clothing_tid']['not'] = 0;
   $handler->display->display_options['defaults']['filter_groups'] = FALSE;
   $handler->display->display_options['defaults']['filters'] = FALSE;
   /* Filter criterion: Indexed Node: Content type */
