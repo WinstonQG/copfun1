@@ -12070,9 +12070,6 @@ h2.entry-title {
 .product-media:hover .product-hover {
   opacity: 1;
 }
-.product-thumbnail img {
-  width: 100% !important;
-}
 .product-soldout {
   position: absolute;
   top: 0;
@@ -18735,7 +18732,7 @@ ul li {
 .view-product-slider .views-row-even .product-thumbnail a img,
 .view-product-slider .views-row-odd .product-thumbnail a img {
   height: 100%;
-  padding: 20px 0;
+  padding: 14px 0;
 }
 .view-product-slider .views-row-odd .product-thumbnail a {
   background: rgba(0, 0, 0, 0.4);
