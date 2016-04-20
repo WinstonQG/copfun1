@@ -18725,6 +18725,9 @@ ul li {
 .product_full .e-text-number-field input {
   width: 80px !important;
 }
+.product_full .field-name-field-superliga-badge .form-item {
+  width: 250px;
+}
 .view-product-slider .views-row-even .product-thumbnail a,
 .view-product-slider .views-row-odd .product-thumbnail a {
   height: 310px;

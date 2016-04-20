@@ -266,6 +266,9 @@ function fck_custom_form_alter(&$form, &$form_state, $form_id) {
   	$field_autograph['#suffix'] = "";
   	$field_players['#suffix'] = "";
 
+    // make "- None -" option translatable
+    $field_players['#options']['_none'] = t($field_players['#options']['_none']);
+
     // By default textfield pricing attributes don't refresh 
     // price during texting.. so the code below fix this problem
     if (isset($form['field_jersey_print'][0]['field_text_number']['und'])) {
