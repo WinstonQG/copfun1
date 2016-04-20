@@ -577,7 +577,7 @@ function fck_jersey_print_field_default_field_instances() {
     'commerce_cart_settings' => array(
       'attribute_field' => 1,
       'attribute_widget' => 'select',
-      'attribute_widget_title' => 'Size',
+      'attribute_widget_title' => 'Størrelse',
     ),
     'default_value' => NULL,
     'deleted' => 0,
@@ -632,7 +632,7 @@ function fck_jersey_print_field_default_field_instances() {
     'commerce_cart_settings' => array(
       'attribute_field' => 1,
       'attribute_widget' => 'select',
-      'attribute_widget_title' => 'Size',
+      'attribute_widget_title' => 'Størrelse',
     ),
     'default_value' => NULL,
     'deleted' => 0,
@@ -687,7 +687,7 @@ function fck_jersey_print_field_default_field_instances() {
     'commerce_cart_settings' => array(
       'attribute_field' => 1,
       'attribute_widget' => 'select',
-      'attribute_widget_title' => 'Size',
+      'attribute_widget_title' => 'Størrelse',
     ),
     'default_value' => NULL,
     'deleted' => 0,
