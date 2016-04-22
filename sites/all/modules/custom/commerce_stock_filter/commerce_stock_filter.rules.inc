@@ -43,16 +43,16 @@ function commerce_stock_filter_rules_action_info() {
 function commerce_stock_filter_rules_publish_product_display($product) {	
 	// don't launch on node add/edit forms 
 	// (supposed product display forms)
-	$a0 = arg(0); 
+	$a0 = arg(0);
+	$a1 = arg(1); 
 	$a2 = arg(2);
-	if ($a0 == 'node' && ($a2 == 'add' || $a2 == 'edit')) {
+	if ($a0 == 'node' && ($a1 == 'add' || $a2 == 'edit')) {
 		return;
 	}
 	// get product display id by product variation id
 	$nid = csf_get_referencing_node_id($product);	
 	$product_display = entity_load_single('node', $nid);	
-	// publish product display
-	dsm('pub');
+	// publish product display	
 	$product_display = node_load($nid);	
 	$product_display->csf_ignore = TRUE;
 	$product_display->status = TRUE;	
@@ -78,8 +78,7 @@ function commerce_stock_filter_rules_unpublish_product_display($product) {
 	$total_stock = 0;
 	foreach ($wrapper->field_product_store as $product) {
 		$total_stock += $product->commerce_stock->value();
-	}
-	dsm('unbub'. $total_stock);
+	}	
 	// if total stock = 0 - unpublish product display		
 	if (!$total_stock) {
 		$product_display = node_load($nid);	
