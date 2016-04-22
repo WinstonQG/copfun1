@@ -74,6 +74,7 @@ function fck_search_default_search_api_index() {
         "field_product_store_commerce_price_amount_decimal_desc" : { "type" : "decimal" },
         "field_sale" : { "type" : "integer", "entity_type" : "taxonomy_term" },
         "field_sale:tid" : { "type" : "integer" },
+        "field_weight_clothing" : { "type" : "integer" },
         "nid" : { "type" : "integer" },
         "search_api_language" : { "type" : "string" },
         "status" : { "type" : "integer" },
@@ -562,6 +563,12 @@ function fck_search_default_search_api_server() {
           "status" : {
             "table" : "search_api_db_shop_product",
             "column" : "status",
+            "type" : "integer",
+            "boost" : "1.0"
+          },
+          "field_weight_clothing" : {
+            "table" : "search_api_db_shop_product",
+            "column" : "field_weight_clothing",
             "type" : "integer",
             "boost" : "1.0"
           }

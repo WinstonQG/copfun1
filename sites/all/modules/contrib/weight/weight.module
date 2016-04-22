@@ -151,7 +151,7 @@ function weight_preprocess_views_view_table(&$variables) {
     $table_id = 'weight-table-' . $variables['id'];
     $variables['attributes_array']['id'] = $table_id;
 
-    drupal_add_tabledrag($table_id, 'order', 'sibling', 'weight-selector');
+    drupal_add_tabledrag($table_id, 'order', 'sibling', 'weight-selector', NULL, NULL, TRUE);
   }
 }
 

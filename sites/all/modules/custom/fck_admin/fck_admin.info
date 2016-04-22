@@ -1,0 +1,5 @@
+name = FCK Admin
+description = Provide a set of admin pages for FCK project as config global variables, sorting content of different types etc.
+package = FCK
+core = 7.x
+; Files

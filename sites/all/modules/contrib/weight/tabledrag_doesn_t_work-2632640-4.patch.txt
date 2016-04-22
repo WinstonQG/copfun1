@@ -1,0 +1,45 @@
+diff --git a/views/views_handler_weight_selector.inc b/views/views_handler_weight_selector.inc
+index 0e6be2c..b0982ab 100644
+--- a/views/views_handler_weight_selector.inc
++++ b/views/views_handler_weight_selector.inc
+@@ -36,6 +36,10 @@ class views_handler_weight_selector extends views_handler_field {
+     return '<!--form-item-' . $this->options['id'] . '--' . $this->view->row_index . '-->';
+   }
+ 
++  function access() {
++    return user_access('assign node weight');
++  }
++
+   function views_form(&$form, &$form_state) {
+     // The view is empty, abort.
+     if (empty($this->view->result)) {
+@@ -59,7 +63,6 @@ class views_handler_weight_selector extends views_handler_field {
+         '#options' =>  $options,
+         '#default_value' => $this->get_value($row),
+         '#attributes' => array('class' => array('weight-selector')),
+-        '#access' => user_access('assign node weight'),
+       );
+ 
+       $form[$this->options['id']][$row_index]['entity'] = array(
+diff --git a/weight.module b/weight.module
+index dffe019..3ee047e 100644
+--- a/weight.module
++++ b/weight.module
+@@ -6,6 +6,17 @@
+  */
+ 
+ /**
++* Implements hook_permission().
++*/
++function weight_permission() {
++  return array(
++    'assign node weight' => array(
++      'title' => t('Assign node weight')
++    ),
++  );
++}
++
++/**
+  * Implements hook_field_info().
+  */
+ function weight_field_info() {

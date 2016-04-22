@@ -68,8 +68,8 @@ function commerce_pricing_attributes_calculate_fck_fields($line_item_wrapper){
       $fck_label = $data['jersey_print']['field_text_label'];
     }
     
-    $symbol_label = strlen($fck_label)  * variable_get('fck_label_coef', 2000);
-    $symbol_number = strlen($fck_number)  * variable_get('fck_text_coef', 3500);
+    $symbol_label = strlen($fck_label)  * variable_get('fck_price_per_letter', 2000);
+    $symbol_number = strlen($fck_number)  * variable_get('fck_price_per_digit', 3500);
     
     $fck_textfields_sum = $symbol_label + $symbol_number;
   }

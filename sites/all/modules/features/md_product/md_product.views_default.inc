@@ -1909,7 +1909,6 @@ function md_product_views_default_views() {
   $handler->display->display_options['pager']['options']['offset'] = '0';
   $handler->display->display_options['style_plugin'] = 'md_list';
   $handler->display->display_options['style_options']['default_row_class'] = FALSE;
-  $handler->display->display_options['style_options']['row_class_special'] = FALSE;
   $handler->display->display_options['style_options']['wrapper_class'] = 'products owl-carousel';
   $handler->display->display_options['row_plugin'] = 'node';
   $handler->display->display_options['row_options']['view_mode'] = 'modal_content';
@@ -1920,12 +1919,10 @@ function md_product_views_default_views() {
   $handler->display->display_options['fields']['title']['label'] = '';
   $handler->display->display_options['fields']['title']['alter']['word_boundary'] = FALSE;
   $handler->display->display_options['fields']['title']['alter']['ellipsis'] = FALSE;
-  /* Sort criterion: Content: Post date */
-  $handler->display->display_options['sorts']['created']['id'] = 'created';
-  $handler->display->display_options['sorts']['created']['table'] = 'node';
-  $handler->display->display_options['sorts']['created']['field'] = 'created';
-  $handler->display->display_options['sorts']['created']['order'] = 'DESC';
-  $handler->display->display_options['sorts']['created']['expose']['label'] = 'Lastest';
+  /* Sort criterion: Content: Weight New (field_weight_new) */
+  $handler->display->display_options['sorts']['field_weight_new_value']['id'] = 'field_weight_new_value';
+  $handler->display->display_options['sorts']['field_weight_new_value']['table'] = 'field_data_field_weight_new';
+  $handler->display->display_options['sorts']['field_weight_new_value']['field'] = 'field_weight_new_value';
   /* Filter criterion: Content: Published */
   $handler->display->display_options['filters']['status']['id'] = 'status';
   $handler->display->display_options['filters']['status']['table'] = 'node';
@@ -2077,6 +2074,72 @@ function md_product_views_default_views() {
   $handler->display->display_options['filters']['field_group_value']['field'] = 'field_group_value';
   $handler->display->display_options['filters']['field_group_value']['value'] = array(
     'new' => 'new',
+  );
+
+  /* Display: Hot Products */
+  $handler = $view->new_display('block', 'Hot Products', 'block_3');
+  $handler->display->display_options['defaults']['title'] = FALSE;
+  $handler->display->display_options['defaults']['filter_groups'] = FALSE;
+  $handler->display->display_options['defaults']['filters'] = FALSE;
+  /* Filter criterion: Content: Published */
+  $handler->display->display_options['filters']['status']['id'] = 'status';
+  $handler->display->display_options['filters']['status']['table'] = 'node';
+  $handler->display->display_options['filters']['status']['field'] = 'status';
+  $handler->display->display_options['filters']['status']['value'] = 1;
+  $handler->display->display_options['filters']['status']['group'] = 1;
+  $handler->display->display_options['filters']['status']['expose']['operator'] = FALSE;
+  /* Filter criterion: Content: Type */
+  $handler->display->display_options['filters']['type']['id'] = 'type';
+  $handler->display->display_options['filters']['type']['table'] = 'node';
+  $handler->display->display_options['filters']['type']['field'] = 'type';
+  $handler->display->display_options['filters']['type']['value'] = array(
+    'shop_product' => 'shop_product',
+  );
+  $handler->display->display_options['filters']['type']['group'] = 1;
+  /* Filter criterion: Content: Product Store (field_product_store:delta) */
+  $handler->display->display_options['filters']['delta']['id'] = 'delta';
+  $handler->display->display_options['filters']['delta']['table'] = 'field_data_field_product_store';
+  $handler->display->display_options['filters']['delta']['field'] = 'delta';
+  $handler->display->display_options['filters']['delta']['value']['value'] = '0';
+  /* Filter criterion: Content: Group (field_group) */
+  $handler->display->display_options['filters']['field_group_value']['id'] = 'field_group_value';
+  $handler->display->display_options['filters']['field_group_value']['table'] = 'field_data_field_group';
+  $handler->display->display_options['filters']['field_group_value']['field'] = 'field_group_value';
+  $handler->display->display_options['filters']['field_group_value']['value'] = array(
+    'hot' => 'hot',
+  );
+
+  /* Display: Featured Products */
+  $handler = $view->new_display('block', 'Featured Products', 'block_4');
+  $handler->display->display_options['defaults']['title'] = FALSE;
+  $handler->display->display_options['defaults']['filter_groups'] = FALSE;
+  $handler->display->display_options['defaults']['filters'] = FALSE;
+  /* Filter criterion: Content: Published */
+  $handler->display->display_options['filters']['status']['id'] = 'status';
+  $handler->display->display_options['filters']['status']['table'] = 'node';
+  $handler->display->display_options['filters']['status']['field'] = 'status';
+  $handler->display->display_options['filters']['status']['value'] = 1;
+  $handler->display->display_options['filters']['status']['group'] = 1;
+  $handler->display->display_options['filters']['status']['expose']['operator'] = FALSE;
+  /* Filter criterion: Content: Type */
+  $handler->display->display_options['filters']['type']['id'] = 'type';
+  $handler->display->display_options['filters']['type']['table'] = 'node';
+  $handler->display->display_options['filters']['type']['field'] = 'type';
+  $handler->display->display_options['filters']['type']['value'] = array(
+    'shop_product' => 'shop_product',
+  );
+  $handler->display->display_options['filters']['type']['group'] = 1;
+  /* Filter criterion: Content: Product Store (field_product_store:delta) */
+  $handler->display->display_options['filters']['delta']['id'] = 'delta';
+  $handler->display->display_options['filters']['delta']['table'] = 'field_data_field_product_store';
+  $handler->display->display_options['filters']['delta']['field'] = 'delta';
+  $handler->display->display_options['filters']['delta']['value']['value'] = '0';
+  /* Filter criterion: Content: Group (field_group) */
+  $handler->display->display_options['filters']['field_group_value']['id'] = 'field_group_value';
+  $handler->display->display_options['filters']['field_group_value']['table'] = 'field_data_field_group';
+  $handler->display->display_options['filters']['field_group_value']['field'] = 'field_group_value';
+  $handler->display->display_options['filters']['field_group_value']['value'] = array(
+    'featured' => 'featured',
   );
   $export['product_slider'] = $view;
 

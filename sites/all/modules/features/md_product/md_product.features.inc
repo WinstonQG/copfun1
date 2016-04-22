@@ -5,6 +5,29 @@
  */
 
 /**
+ * Implements hook_commerce_product_default_types().
+ */
+function md_product_commerce_product_default_types() {
+  $items = array(
+    'jersey_print' => array(
+      'type' => 'jersey_print',
+      'name' => 'Jersey print',
+      'description' => '',
+      'help' => '',
+      'revision' => 1,
+    ),
+    'product' => array(
+      'type' => 'product',
+      'name' => 'Product',
+      'description' => 'A basic product type.',
+      'help' => '',
+      'revision' => 1,
+    ),
+  );
+  return $items;
+}
+
+/**
  * Implements hook_ctools_plugin_api().
  */
 function md_product_ctools_plugin_api($module = NULL, $api = NULL) {
@@ -207,7 +230,7 @@ function md_product_image_default_styles() {
   $styles['product_modal'] = array(
     'label' => 'Product Modal (270x380)',
     'effects' => array(
-      19 => array(
+      11 => array(
         'name' => 'image_scale',
         'data' => array(
           'width' => 364,

@@ -65,10 +65,7 @@ if (isset($wrapper->commerce_product->field_jersey_print)) {
 	}
 	// Number text option
 	$text_number = $jersey_print_values['field_text_number'];
-	if (!empty($text_number)) {
-		/*$coef = variable_get('fck_number_coef', 3500);
-		$currency_code = variable_get('commerce_default_currency', 'USD');
-		$price = commerce_currency_format($coef * strlen($text_number), $currency_code);*/	
+	if (!empty($text_number)) {			
 		$jersey_print_prices['field_text_number'] = fck_custom_get_custom_price($text_number, 'number');
 	}
 }

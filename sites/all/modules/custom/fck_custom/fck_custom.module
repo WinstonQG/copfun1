@@ -486,9 +486,9 @@ function _jerseyprint_preview_link_command(&$product, &$commerce_option_list) {
 function fck_custom_get_custom_price($text, $type = 'label') {
 	$coef = '';
 	if ($type == 'label') {
-		$coef = variable_get('fck_label_coef', 2000);
+		$coef = variable_get('fck_price_per_letter', 2000);
 	} elseif ($type == 'number') {
-		$coef = variable_get('fck_number_coef', 3500);
+		$coef = variable_get('fck_price_per_digit', 3500);
 	}
 	$currency_code = variable_get('commerce_default_currency', 'DKK');
 	$price = commerce_currency_format($coef * strlen($text), $currency_code);

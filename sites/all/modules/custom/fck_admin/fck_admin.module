@@ -1,0 +1,50 @@
+<?php
+
+/**
+ * Implements hook_menu().
+ */
+function fck_admin_menu() {  
+  $items['admin/fck'] = array(
+    'title' => 'FCK',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('fck_admin_settings_form'),
+    'access arguments' => array('administer fck admin'),
+    'type' => MENU_NORMAL_ITEM,
+    'file' => 'fck_admin.settings.inc',
+  );
+  
+  $items['admin/fck/settings'] = array(
+    'title' => 'Settings',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('fck_admin_settings_form'),
+    'access arguments' => array('administer fck admin'),
+    'type' => MENU_DEFAULT_LOCAL_TASK,  
+    'file' => 'fck_admin.settings.inc',
+    'weight' => 0,
+  );
+  
+  return $items;
+}
+
+/**
+ * Implements hook_permission().
+ */
+function fck_admin_permission() {
+  return array(    
+    'administer fck admin' =>  array(
+      'title' => t('Administer FCK Admin'),
+      'description ' => t('Perform administration tasks for FCK Admin'),
+    ),
+  );
+}
+
+/**
+ * Implements hook_admin_paths().
+ */
+function fck_admin_admin_paths() {
+  $paths = array(
+    'admin/fck/*' => TRUE,
+  );
+  
+  return $paths;   
+}	

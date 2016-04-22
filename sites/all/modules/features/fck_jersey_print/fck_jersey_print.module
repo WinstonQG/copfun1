@@ -1,7 +1,0 @@
-<?php
-/**
- * @file
- * Code for the FCK Jersey Print feature.
- */
-
-include_once 'fck_jersey_print.features.inc';
