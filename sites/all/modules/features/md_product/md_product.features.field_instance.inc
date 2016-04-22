@@ -3149,6 +3149,116 @@ function md_product_field_default_field_instances() {
     ),
   );
 
+  // Exported field_instance: 'node-shop_product-field_weight_accessories'.
+  $field_instances['node-shop_product-field_weight_accessories'] = array(
+    'bundle' => 'shop_product',
+    'default_value' => array(
+      0 => array(
+        'value' => 0,
+      ),
+    ),
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'number',
+        'settings' => array(
+          'decimal_separator' => '.',
+          'prefix_suffix' => TRUE,
+          'scale' => 0,
+          'thousand_separator' => '',
+        ),
+        'type' => 'number_integer',
+        'weight' => 28,
+      ),
+      'modal_content' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_weight_accessories',
+    'label' => 'Weight Accessories',
+    'required' => 0,
+    'settings' => array(
+      'range' => 20,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'weight',
+      'settings' => array(
+        'range' => 100,
+      ),
+      'type' => 'weight_selector',
+      'weight' => 25,
+    ),
+  );
+
+  // Exported field_instance: 'node-shop_product-field_weight_baby'.
+  $field_instances['node-shop_product-field_weight_baby'] = array(
+    'bundle' => 'shop_product',
+    'default_value' => array(
+      0 => array(
+        'value' => 0,
+      ),
+    ),
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'number',
+        'settings' => array(
+          'decimal_separator' => '.',
+          'prefix_suffix' => TRUE,
+          'scale' => 0,
+          'thousand_separator' => '',
+        ),
+        'type' => 'number_integer',
+        'weight' => 31,
+      ),
+      'modal_content' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_weight_baby',
+    'label' => 'Weight Baby',
+    'required' => 0,
+    'settings' => array(
+      'range' => 20,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'weight',
+      'settings' => array(
+        'range' => 100,
+      ),
+      'type' => 'weight_selector',
+      'weight' => 28,
+    ),
+  );
+
   // Exported field_instance: 'node-shop_product-field_weight_clothing'.
   $field_instances['node-shop_product-field_weight_clothing'] = array(
     'bundle' => 'shop_product',
@@ -3200,7 +3310,117 @@ function md_product_field_default_field_instances() {
         'range' => 100,
       ),
       'type' => 'weight_selector',
+      'weight' => 23,
+    ),
+  );
+
+  // Exported field_instance: 'node-shop_product-field_weight_featured'.
+  $field_instances['node-shop_product-field_weight_featured'] = array(
+    'bundle' => 'shop_product',
+    'default_value' => array(
+      0 => array(
+        'value' => 0,
+      ),
+    ),
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'number',
+        'settings' => array(
+          'decimal_separator' => '.',
+          'prefix_suffix' => TRUE,
+          'scale' => 0,
+          'thousand_separator' => '',
+        ),
+        'type' => 'number_integer',
+        'weight' => 33,
+      ),
+      'modal_content' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_weight_featured',
+    'label' => 'Weight Featured',
+    'required' => 0,
+    'settings' => array(
+      'range' => 20,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'weight',
+      'settings' => array(
+        'range' => 100,
+      ),
+      'type' => 'weight_selector',
       'weight' => 22,
+    ),
+  );
+
+  // Exported field_instance: 'node-shop_product-field_weight_gifts'.
+  $field_instances['node-shop_product-field_weight_gifts'] = array(
+    'bundle' => 'shop_product',
+    'default_value' => array(
+      0 => array(
+        'value' => 0,
+      ),
+    ),
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'number',
+        'settings' => array(
+          'decimal_separator' => '.',
+          'prefix_suffix' => TRUE,
+          'scale' => 0,
+          'thousand_separator' => '',
+        ),
+        'type' => 'number_integer',
+        'weight' => 30,
+      ),
+      'modal_content' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_weight_gifts',
+    'label' => 'Weight Gifts',
+    'required' => 0,
+    'settings' => array(
+      'range' => 20,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'weight',
+      'settings' => array(
+        'range' => 100,
+      ),
+      'type' => 'weight_selector',
+      'weight' => 27,
     ),
   );
 
@@ -3259,6 +3479,116 @@ function md_product_field_default_field_instances() {
     ),
   );
 
+  // Exported field_instance: 'node-shop_product-field_weight_jersey'.
+  $field_instances['node-shop_product-field_weight_jersey'] = array(
+    'bundle' => 'shop_product',
+    'default_value' => array(
+      0 => array(
+        'value' => 0,
+      ),
+    ),
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'number',
+        'settings' => array(
+          'decimal_separator' => '.',
+          'prefix_suffix' => TRUE,
+          'scale' => 0,
+          'thousand_separator' => '',
+        ),
+        'type' => 'number_integer',
+        'weight' => 27,
+      ),
+      'modal_content' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_weight_jersey',
+    'label' => 'Weight Jersey',
+    'required' => 0,
+    'settings' => array(
+      'range' => 20,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'weight',
+      'settings' => array(
+        'range' => 100,
+      ),
+      'type' => 'weight_selector',
+      'weight' => 24,
+    ),
+  );
+
+  // Exported field_instance: 'node-shop_product-field_weight_match_kits'.
+  $field_instances['node-shop_product-field_weight_match_kits'] = array(
+    'bundle' => 'shop_product',
+    'default_value' => array(
+      0 => array(
+        'value' => 0,
+      ),
+    ),
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'number',
+        'settings' => array(
+          'decimal_separator' => '.',
+          'prefix_suffix' => TRUE,
+          'scale' => 0,
+          'thousand_separator' => '',
+        ),
+        'type' => 'number_integer',
+        'weight' => 29,
+      ),
+      'modal_content' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_weight_match_kits',
+    'label' => 'Weight Match Kits',
+    'required' => 0,
+    'settings' => array(
+      'range' => 20,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'weight',
+      'settings' => array(
+        'range' => 100,
+      ),
+      'type' => 'weight_selector',
+      'weight' => 26,
+    ),
+  );
+
   // Exported field_instance: 'node-shop_product-field_weight_new'.
   $field_instances['node-shop_product-field_weight_new'] = array(
     'bundle' => 'shop_product',
@@ -3314,6 +3644,61 @@ function md_product_field_default_field_instances() {
     ),
   );
 
+  // Exported field_instance: 'node-shop_product-field_weight_sale'.
+  $field_instances['node-shop_product-field_weight_sale'] = array(
+    'bundle' => 'shop_product',
+    'default_value' => array(
+      0 => array(
+        'value' => 0,
+      ),
+    ),
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'number',
+        'settings' => array(
+          'decimal_separator' => '.',
+          'prefix_suffix' => TRUE,
+          'scale' => 0,
+          'thousand_separator' => '',
+        ),
+        'type' => 'number_integer',
+        'weight' => 32,
+      ),
+      'modal_content' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_weight_sale',
+    'label' => 'Weight Sale',
+    'required' => 0,
+    'settings' => array(
+      'range' => 20,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'weight',
+      'settings' => array(
+        'range' => 100,
+      ),
+      'type' => 'weight_selector',
+      'weight' => 29,
+    ),
+  );
+
   // Translatables
   // Included for use with string extractors like potx.
   t('Accessories');
@@ -3353,9 +3738,16 @@ function md_product_field_default_field_instances() {
   t('Text Preview Image');
   t('Thumbnail');
   t('Trending');
+  t('Weight Accessories');
+  t('Weight Baby');
   t('Weight Clothing');
+  t('Weight Featured');
+  t('Weight Gifts');
   t('Weight Hot');
+  t('Weight Jersey');
+  t('Weight Match Kits');
   t('Weight New');
+  t('Weight Sale');
   t('Your Rating');
 
   return $field_instances;

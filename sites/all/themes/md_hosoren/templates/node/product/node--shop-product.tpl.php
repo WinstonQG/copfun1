@@ -86,7 +86,7 @@
     
     <div class="product-media">
       <div class="product-thumbnail">
-        <?php if (isset($content['product:field_product_images'])): ?>
+        <?php if (isset($content['product:field_product_images']['#items'])): ?>
           <a href="<?php print $node_url; ?>">
             <?php if (isset($content['product:field_product_images']['#items'][1]['uri'])): ?>
               <img src="<?php print image_style_url('product_modal',$content['product:field_product_images']['#items'][0]['uri']); ?>" alt="product" class="current">

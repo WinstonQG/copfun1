@@ -47,6 +47,10 @@ function fck_search_views_default_views() {
   $handler->display->display_options['fields']['nid']['id'] = 'nid';
   $handler->display->display_options['fields']['nid']['table'] = 'search_api_index_shop_product';
   $handler->display->display_options['fields']['nid']['field'] = 'nid';
+  /* Sort criterion: Indexed Node: Weight Jersey */
+  $handler->display->display_options['sorts']['field_weight_jersey']['id'] = 'field_weight_jersey';
+  $handler->display->display_options['sorts']['field_weight_jersey']['table'] = 'search_api_index_shop_product';
+  $handler->display->display_options['sorts']['field_weight_jersey']['field'] = 'field_weight_jersey';
   /* Contextual filter: Player Jerseys: Term ID (indexed) */
   $handler->display->display_options['arguments']['field_player_jerseys_tid']['id'] = 'field_player_jerseys_tid';
   $handler->display->display_options['arguments']['field_player_jerseys_tid']['table'] = 'search_api_index_shop_product';
@@ -123,6 +127,11 @@ function fck_search_views_default_views() {
   $handler = $view->new_display('page', 'Accessories', 'accessories_page');
   $handler->display->display_options['defaults']['title'] = FALSE;
   $handler->display->display_options['title'] = 'Accessories';
+  $handler->display->display_options['defaults']['sorts'] = FALSE;
+  /* Sort criterion: Indexed Node: Weight Accessories */
+  $handler->display->display_options['sorts']['field_weight_accessories']['id'] = 'field_weight_accessories';
+  $handler->display->display_options['sorts']['field_weight_accessories']['table'] = 'search_api_index_shop_product';
+  $handler->display->display_options['sorts']['field_weight_accessories']['field'] = 'field_weight_accessories';
   $handler->display->display_options['defaults']['arguments'] = FALSE;
   /* Contextual filter: Accessories: Term ID (indexed) */
   $handler->display->display_options['arguments']['field_accessories_tid']['id'] = 'field_accessories_tid';
@@ -159,6 +168,11 @@ function fck_search_views_default_views() {
   $handler = $view->new_display('page', 'Match Kits', 'match_kits_page');
   $handler->display->display_options['defaults']['title'] = FALSE;
   $handler->display->display_options['title'] = 'Match Kits';
+  $handler->display->display_options['defaults']['sorts'] = FALSE;
+  /* Sort criterion: Indexed Node: Weight Match Kits */
+  $handler->display->display_options['sorts']['field_weight_match_kits']['id'] = 'field_weight_match_kits';
+  $handler->display->display_options['sorts']['field_weight_match_kits']['table'] = 'search_api_index_shop_product';
+  $handler->display->display_options['sorts']['field_weight_match_kits']['field'] = 'field_weight_match_kits';
   $handler->display->display_options['defaults']['arguments'] = FALSE;
   /* Contextual filter: Match Kits: Term ID (indexed) */
   $handler->display->display_options['arguments']['field_match_kits_tid']['id'] = 'field_match_kits_tid';
@@ -195,6 +209,11 @@ function fck_search_views_default_views() {
   $handler = $view->new_display('page', 'Baby', 'baby_page');
   $handler->display->display_options['defaults']['title'] = FALSE;
   $handler->display->display_options['title'] = 'Baby';
+  $handler->display->display_options['defaults']['sorts'] = FALSE;
+  /* Sort criterion: Indexed Node: Weight Baby */
+  $handler->display->display_options['sorts']['field_weight_baby']['id'] = 'field_weight_baby';
+  $handler->display->display_options['sorts']['field_weight_baby']['table'] = 'search_api_index_shop_product';
+  $handler->display->display_options['sorts']['field_weight_baby']['field'] = 'field_weight_baby';
   $handler->display->display_options['defaults']['arguments'] = FALSE;
   /* Contextual filter: Baby: Term ID (indexed) */
   $handler->display->display_options['arguments']['field_baby_tid']['id'] = 'field_baby_tid';
@@ -210,6 +229,11 @@ function fck_search_views_default_views() {
   $handler = $view->new_display('page', 'Gifts', 'gifts_page');
   $handler->display->display_options['defaults']['title'] = FALSE;
   $handler->display->display_options['title'] = 'Gifts';
+  $handler->display->display_options['defaults']['sorts'] = FALSE;
+  /* Sort criterion: Indexed Node: Weight Gifts */
+  $handler->display->display_options['sorts']['field_weight_gifts']['id'] = 'field_weight_gifts';
+  $handler->display->display_options['sorts']['field_weight_gifts']['table'] = 'search_api_index_shop_product';
+  $handler->display->display_options['sorts']['field_weight_gifts']['field'] = 'field_weight_gifts';
   $handler->display->display_options['defaults']['arguments'] = FALSE;
   /* Contextual filter: Gifts: Term ID (indexed) */
   $handler->display->display_options['arguments']['field_gifts_tid']['id'] = 'field_gifts_tid';
@@ -246,6 +270,7 @@ function fck_search_views_default_views() {
   $handler = $view->new_display('page', 'Standard search', 'standard_search');
   $handler->display->display_options['defaults']['title'] = FALSE;
   $handler->display->display_options['title'] = 'Search';
+  $handler->display->display_options['defaults']['sorts'] = FALSE;
   $handler->display->display_options['defaults']['arguments'] = FALSE;
   /* Contextual filter: Search: Fulltext search */
   $handler->display->display_options['arguments']['search_api_views_fulltext']['id'] = 'search_api_views_fulltext';
@@ -280,6 +305,11 @@ function fck_search_views_default_views() {
 
   /* Display: New Products */
   $handler = $view->new_display('page', 'New Products', 'news_page');
+  $handler->display->display_options['defaults']['sorts'] = FALSE;
+  /* Sort criterion: Indexed Node: Weight New */
+  $handler->display->display_options['sorts']['field_weight_new']['id'] = 'field_weight_new';
+  $handler->display->display_options['sorts']['field_weight_new']['table'] = 'search_api_index_shop_product';
+  $handler->display->display_options['sorts']['field_weight_new']['field'] = 'field_weight_new';
   $handler->display->display_options['defaults']['arguments'] = FALSE;
   $handler->display->display_options['defaults']['filter_groups'] = FALSE;
   $handler->display->display_options['defaults']['filters'] = FALSE;
@@ -310,6 +340,11 @@ function fck_search_views_default_views() {
   $handler = $view->new_display('page', 'Sale', 'sale_page');
   $handler->display->display_options['defaults']['title'] = FALSE;
   $handler->display->display_options['title'] = 'Sale';
+  $handler->display->display_options['defaults']['sorts'] = FALSE;
+  /* Sort criterion: Indexed Node: Weight Sale */
+  $handler->display->display_options['sorts']['field_weight_sale']['id'] = 'field_weight_sale';
+  $handler->display->display_options['sorts']['field_weight_sale']['table'] = 'search_api_index_shop_product';
+  $handler->display->display_options['sorts']['field_weight_sale']['field'] = 'field_weight_sale';
   $handler->display->display_options['defaults']['arguments'] = FALSE;
   /* Contextual filter: Sale: Term ID (indexed) */
   $handler->display->display_options['arguments']['field_sale_tid']['id'] = 'field_sale_tid';
@@ -342,6 +377,11 @@ function fck_search_views_default_views() {
   $handler = $view->new_display('page', 'Player Jerseys', 'player_jerseys_page');
   $handler->display->display_options['defaults']['title'] = FALSE;
   $handler->display->display_options['title'] = 'Player Jerseys';
+  $handler->display->display_options['defaults']['sorts'] = FALSE;
+  /* Sort criterion: Indexed Node: Weight Jersey */
+  $handler->display->display_options['sorts']['field_weight_jersey']['id'] = 'field_weight_jersey';
+  $handler->display->display_options['sorts']['field_weight_jersey']['table'] = 'search_api_index_shop_product';
+  $handler->display->display_options['sorts']['field_weight_jersey']['field'] = 'field_weight_jersey';
   $handler->display->display_options['defaults']['filter_groups'] = FALSE;
   $handler->display->display_options['defaults']['filters'] = FALSE;
   /* Filter criterion: Indexed Node: Content type */

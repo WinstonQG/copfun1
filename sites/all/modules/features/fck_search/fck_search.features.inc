@@ -74,7 +74,14 @@ function fck_search_default_search_api_index() {
         "field_product_store_commerce_price_amount_decimal_desc" : { "type" : "decimal" },
         "field_sale" : { "type" : "integer", "entity_type" : "taxonomy_term" },
         "field_sale:tid" : { "type" : "integer" },
+        "field_weight_accessories" : { "type" : "integer" },
+        "field_weight_baby" : { "type" : "integer" },
         "field_weight_clothing" : { "type" : "integer" },
+        "field_weight_gifts" : { "type" : "integer" },
+        "field_weight_jersey" : { "type" : "integer" },
+        "field_weight_match_kits" : { "type" : "integer" },
+        "field_weight_new" : { "type" : "integer" },
+        "field_weight_sale" : { "type" : "integer" },
         "nid" : { "type" : "integer" },
         "search_api_language" : { "type" : "string" },
         "status" : { "type" : "integer" },
@@ -569,6 +576,48 @@ function fck_search_default_search_api_server() {
           "field_weight_clothing" : {
             "table" : "search_api_db_shop_product",
             "column" : "field_weight_clothing",
+            "type" : "integer",
+            "boost" : "1.0"
+          },
+          "field_weight_new" : {
+            "table" : "search_api_db_shop_product",
+            "column" : "field_weight_new",
+            "type" : "integer",
+            "boost" : "1.0"
+          },
+          "field_weight_jersey" : {
+            "table" : "search_api_db_shop_product",
+            "column" : "field_weight_jersey",
+            "type" : "integer",
+            "boost" : "1.0"
+          },
+          "field_weight_accessories" : {
+            "table" : "search_api_db_shop_product",
+            "column" : "field_weight_accessories",
+            "type" : "integer",
+            "boost" : "1.0"
+          },
+          "field_weight_match_kits" : {
+            "table" : "search_api_db_shop_product",
+            "column" : "field_weight_match_kits",
+            "type" : "integer",
+            "boost" : "1.0"
+          },
+          "field_weight_gifts" : {
+            "table" : "search_api_db_shop_product",
+            "column" : "field_weight_gifts",
+            "type" : "integer",
+            "boost" : "1.0"
+          },
+          "field_weight_baby" : {
+            "table" : "search_api_db_shop_product",
+            "column" : "field_weight_baby",
+            "type" : "integer",
+            "boost" : "1.0"
+          },
+          "field_weight_sale" : {
+            "table" : "search_api_db_shop_product",
+            "column" : "field_weight_sale",
             "type" : "integer",
             "boost" : "1.0"
           }

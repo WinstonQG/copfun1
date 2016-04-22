@@ -435,6 +435,44 @@ function md_product_field_default_field_bases() {
     'type' => 'image',
   );
 
+  // Exported field_base: 'field_weight_accessories'.
+  $field_bases['field_weight_accessories'] = array(
+    'active' => 1,
+    'cardinality' => 1,
+    'deleted' => 0,
+    'entity_types' => array(),
+    'field_name' => 'field_weight_accessories',
+    'indexes' => array(
+      'value' => array(
+        0 => 'value',
+      ),
+    ),
+    'locked' => 0,
+    'module' => 'weight',
+    'settings' => array(),
+    'translatable' => 0,
+    'type' => 'weight',
+  );
+
+  // Exported field_base: 'field_weight_baby'.
+  $field_bases['field_weight_baby'] = array(
+    'active' => 1,
+    'cardinality' => 1,
+    'deleted' => 0,
+    'entity_types' => array(),
+    'field_name' => 'field_weight_baby',
+    'indexes' => array(
+      'value' => array(
+        0 => 'value',
+      ),
+    ),
+    'locked' => 0,
+    'module' => 'weight',
+    'settings' => array(),
+    'translatable' => 0,
+    'type' => 'weight',
+  );
+
   // Exported field_base: 'field_weight_clothing'.
   $field_bases['field_weight_clothing'] = array(
     'active' => 1,
@@ -442,6 +480,44 @@ function md_product_field_default_field_bases() {
     'deleted' => 0,
     'entity_types' => array(),
     'field_name' => 'field_weight_clothing',
+    'indexes' => array(
+      'value' => array(
+        0 => 'value',
+      ),
+    ),
+    'locked' => 0,
+    'module' => 'weight',
+    'settings' => array(),
+    'translatable' => 0,
+    'type' => 'weight',
+  );
+
+  // Exported field_base: 'field_weight_featured'.
+  $field_bases['field_weight_featured'] = array(
+    'active' => 1,
+    'cardinality' => 1,
+    'deleted' => 0,
+    'entity_types' => array(),
+    'field_name' => 'field_weight_featured',
+    'indexes' => array(
+      'value' => array(
+        0 => 'value',
+      ),
+    ),
+    'locked' => 0,
+    'module' => 'weight',
+    'settings' => array(),
+    'translatable' => 0,
+    'type' => 'weight',
+  );
+
+  // Exported field_base: 'field_weight_gifts'.
+  $field_bases['field_weight_gifts'] = array(
+    'active' => 1,
+    'cardinality' => 1,
+    'deleted' => 0,
+    'entity_types' => array(),
+    'field_name' => 'field_weight_gifts',
     'indexes' => array(
       'value' => array(
         0 => 'value',
@@ -473,6 +549,44 @@ function md_product_field_default_field_bases() {
     'type' => 'weight',
   );
 
+  // Exported field_base: 'field_weight_jersey'.
+  $field_bases['field_weight_jersey'] = array(
+    'active' => 1,
+    'cardinality' => 1,
+    'deleted' => 0,
+    'entity_types' => array(),
+    'field_name' => 'field_weight_jersey',
+    'indexes' => array(
+      'value' => array(
+        0 => 'value',
+      ),
+    ),
+    'locked' => 0,
+    'module' => 'weight',
+    'settings' => array(),
+    'translatable' => 0,
+    'type' => 'weight',
+  );
+
+  // Exported field_base: 'field_weight_match_kits'.
+  $field_bases['field_weight_match_kits'] = array(
+    'active' => 1,
+    'cardinality' => 1,
+    'deleted' => 0,
+    'entity_types' => array(),
+    'field_name' => 'field_weight_match_kits',
+    'indexes' => array(
+      'value' => array(
+        0 => 'value',
+      ),
+    ),
+    'locked' => 0,
+    'module' => 'weight',
+    'settings' => array(),
+    'translatable' => 0,
+    'type' => 'weight',
+  );
+
   // Exported field_base: 'field_weight_new'.
   $field_bases['field_weight_new'] = array(
     'active' => 1,
@@ -480,6 +594,25 @@ function md_product_field_default_field_bases() {
     'deleted' => 0,
     'entity_types' => array(),
     'field_name' => 'field_weight_new',
+    'indexes' => array(
+      'value' => array(
+        0 => 'value',
+      ),
+    ),
+    'locked' => 0,
+    'module' => 'weight',
+    'settings' => array(),
+    'translatable' => 0,
+    'type' => 'weight',
+  );
+
+  // Exported field_base: 'field_weight_sale'.
+  $field_bases['field_weight_sale'] = array(
+    'active' => 1,
+    'cardinality' => 1,
+    'deleted' => 0,
+    'entity_types' => array(),
+    'field_name' => 'field_weight_sale',
     'indexes' => array(
       'value' => array(
         0 => 'value',
