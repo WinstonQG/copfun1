@@ -48,3 +48,22 @@ function fck_admin_admin_paths() {
   
   return $paths;   
 }	
+
+/**
+ * Implements hook_form_alter().
+ */
+function fck_admin_form_alter(&$form, &$form_state, $form_id) {
+  if ($form_id == 'shop_product_node_form') {
+    //dsm($form);
+    $form['field_weight_hot']['#access'] = FALSE;
+    $form['field_weight_new']['#access'] = FALSE;
+    $form['field_weight_featured']['#access'] = FALSE;
+    $form['field_weight_clothing']['#access'] = FALSE;
+    $form['field_weight_jersey']['#access'] = FALSE;
+    $form['field_weight_accessories']['#access'] = FALSE;
+    $form['field_weight_match_kits']['#access'] = FALSE;
+    $form['field_weight_gifts']['#access'] = FALSE;
+    $form['field_weight_baby']['#access'] = FALSE;
+    $form['field_weight_sale']['#access'] = FALSE;
+  }
+}
