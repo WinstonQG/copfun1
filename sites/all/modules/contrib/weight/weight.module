@@ -6,6 +6,17 @@
  */
 
 /**
+* Implements hook_permission().
+*/
+function weight_permission() {
+  return array(
+    'assign node weight' => array(
+      'title' => t('Assign node weight')
+    ),
+  );
+}
+
+/**
  * Implements hook_field_info().
  */
 function weight_field_info() {
