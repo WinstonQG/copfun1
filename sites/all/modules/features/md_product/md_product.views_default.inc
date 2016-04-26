@@ -1089,7 +1089,7 @@ function md_product_views_default_views() {
   /* Display: LookBook */
   $handler = $view->new_display('block', 'LookBook', 'block_2');
   $handler->display->display_options['defaults']['arguments'] = FALSE;
-  /* Contextual filter: Content: Product LookBook (field_product_lookbook) */
+  /* Contextual filter: Content: LookBook (field_product_lookbook) */
   $handler->display->display_options['arguments']['field_product_lookbook_tid']['id'] = 'field_product_lookbook_tid';
   $handler->display->display_options['arguments']['field_product_lookbook_tid']['table'] = 'field_data_field_product_lookbook';
   $handler->display->display_options['arguments']['field_product_lookbook_tid']['field'] = 'field_product_lookbook_tid';
@@ -1558,7 +1558,7 @@ function md_product_views_default_views() {
   $handler->display->display_options['fields']['field_subtitle']['field'] = 'field_subtitle';
   $handler->display->display_options['fields']['field_subtitle']['label'] = '';
   $handler->display->display_options['fields']['field_subtitle']['element_label_colon'] = FALSE;
-  /* Field: Content: Product LookBook */
+  /* Field: Content: LookBook */
   $handler->display->display_options['fields']['field_product_lookbook']['id'] = 'field_product_lookbook';
   $handler->display->display_options['fields']['field_product_lookbook']['table'] = 'field_data_field_product_lookbook';
   $handler->display->display_options['fields']['field_product_lookbook']['field'] = 'field_product_lookbook';
@@ -2079,6 +2079,11 @@ function md_product_views_default_views() {
   /* Display: Hot Products */
   $handler = $view->new_display('block', 'Hot Products', 'block_3');
   $handler->display->display_options['defaults']['title'] = FALSE;
+  $handler->display->display_options['defaults']['sorts'] = FALSE;
+  /* Sort criterion: Content: Weight Hot (field_weight_hot) */
+  $handler->display->display_options['sorts']['field_weight_hot_value']['id'] = 'field_weight_hot_value';
+  $handler->display->display_options['sorts']['field_weight_hot_value']['table'] = 'field_data_field_weight_hot';
+  $handler->display->display_options['sorts']['field_weight_hot_value']['field'] = 'field_weight_hot_value';
   $handler->display->display_options['defaults']['filter_groups'] = FALSE;
   $handler->display->display_options['defaults']['filters'] = FALSE;
   /* Filter criterion: Content: Published */
@@ -2112,6 +2117,11 @@ function md_product_views_default_views() {
   /* Display: Featured Products */
   $handler = $view->new_display('block', 'Featured Products', 'block_4');
   $handler->display->display_options['defaults']['title'] = FALSE;
+  $handler->display->display_options['defaults']['sorts'] = FALSE;
+  /* Sort criterion: Content: Weight Featured (field_weight_featured) */
+  $handler->display->display_options['sorts']['field_weight_featured_value']['id'] = 'field_weight_featured_value';
+  $handler->display->display_options['sorts']['field_weight_featured_value']['table'] = 'field_data_field_weight_featured';
+  $handler->display->display_options['sorts']['field_weight_featured_value']['field'] = 'field_weight_featured_value';
   $handler->display->display_options['defaults']['filter_groups'] = FALSE;
   $handler->display->display_options['defaults']['filters'] = FALSE;
   /* Filter criterion: Content: Published */

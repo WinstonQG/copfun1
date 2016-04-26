@@ -18752,3 +18752,29 @@ ul li {
 .view-fck-search-pages .views-row-even .product-thumbnail a {
   background: rgba(0, 80, 158, 0.4);
 }
+.awe_service .awe-service-item .icon {
+  display: inline-block;
+  width: 36px;
+  height: 36px;
+}
+.awe_service .awe-service-item .icon.icon-glyph-48:before,
+.awe_service .awe-service-item .icon.icon-glyph-4:before,
+.awe_service .awe-service-item .icon.icon-brush:before,
+.awe_service .awe-service-item .icon.icon-glyph-3:before {
+  content: '';
+  display: block;
+  width: 36px;
+  height: 36px;
+}
+.awe_service .awe-service-item .icon.icon-glyph-48:before {
+  background: url('../images/icons/fck.png') !important;
+}
+.awe_service .awe-service-item .icon.icon-glyph-4:before {
+  background: url('../images/icons/kundeservice.png');
+}
+.awe_service .awe-service-item .icon.icon-brush:before {
+  background: url('../images/icons/shirt.png');
+}
+.awe_service .awe-service-item .icon.icon-glyph-3:before {
+  background: url('../images/icons/transport.png');
+}
