@@ -5,7 +5,9 @@
 		.icon {				
 			display: inline-block;
 			width: 36px;
-			height: 36px;		
+			height: 36px;	
+
+			margin-top: 5px;	
 			
 			&.icon-glyph-48:before,
 			&.icon-glyph-4:before,
@@ -29,8 +31,12 @@
 				background: url('../images/icons/shirt.png');
 			}
 
-			&.icon-glyph-3:before {
-				background: url('../images/icons/transport.png');
+			&.icon-glyph-3 {
+				margin-top: 2px !important;
+				
+				&:before {
+					background: url('../images/icons/transport.png');				
+				}
 			}
 		}
 	}

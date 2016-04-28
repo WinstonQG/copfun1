@@ -18756,6 +18756,7 @@ ul li {
   display: inline-block;
   width: 36px;
   height: 36px;
+  margin-top: 5px;
 }
 .awe_service .awe-service-item .icon.icon-glyph-48:before,
 .awe_service .awe-service-item .icon.icon-glyph-4:before,
@@ -18774,6 +18775,9 @@ ul li {
 }
 .awe_service .awe-service-item .icon.icon-brush:before {
   background: url('../images/icons/shirt.png');
+}
+.awe_service .awe-service-item .icon.icon-glyph-3 {
+  margin-top: 2px !important;
 }
 .awe_service .awe-service-item .icon.icon-glyph-3:before {
   background: url('../images/icons/transport.png');
