@@ -33,24 +33,18 @@
     <?php print $title; ?>
   <?php endif; ?>
   <?php print render($title_suffix); ?>
-
-  <div class="product-header-actions">
-    <div class="row">
-      <?php if ($header): ?>
-        <div class="col-md-5">        
-          <?php print $header; ?>
-        </div>
-      <?php endif; ?>
-
-      <?php if ($exposed): ?>
-        <div class="col-md-7 col-xs-12 label-inline clearfix">
-          <div class="form-show-sort">
-            <?php print $exposed; ?>
-          </div>
-        </div>
-      <?php endif; ?>
+  <div class="product-header-actions"><div class="row">
+  <?php if ($header): ?>
+    <div class="view-header col-md-5">
+      <?php print $header; ?>
     </div>
-  </div>
+  <?php endif; ?>
+  </div></div>
+  <?php if ($exposed): ?>
+    <div class="view-filters">
+      <?php print $exposed; ?>
+    </div>
+  <?php endif; ?>
 
   <?php if ($attachment_before): ?>
     <div class="attachment attachment-before">
@@ -59,7 +53,7 @@
   <?php endif; ?>
 
   <?php if ($rows): ?>
-    <div class="row">
+    <div class="view-content row">
       <?php print $rows; ?>
     </div>
   <?php elseif ($empty): ?>
