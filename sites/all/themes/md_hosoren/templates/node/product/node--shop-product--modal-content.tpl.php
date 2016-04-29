@@ -116,9 +116,15 @@
                 <?php if (isset($content['flag_wishlist']['#markup'])): ?>
                   <?php print render($content['flag_wishlist']['#markup']); ?>
                 <?php endif; ?>                
-                <a href="#" class="awe-button quick-view-product" data-node-modal="product-<?php print $node->nid; ?>" data-toggle="tooltip" title="<?php print t('Quickview'); ?>">
-                    <i class="icon icon-eye"></i>
-                </a>
+                <?php if (arg(0) == 'categories') : ?>
+                  <a href="<?php print url('node/'.$node->nid); ?>" class="awe-button quick-view-product" data-toggle="tooltip" title="<?php print t('Quickview'); ?>">
+                      <i class="icon icon-eye"></i>
+                  </a>
+                <?php else : ?>
+                  <a href="#1" class="awe-button quick-view-product" data-node-modal="product-<?php print $node->nid; ?>" data-toggle="tooltip" title="<?php print t('Quickview'); ?>">
+                      <i class="icon icon-eye"></i>
+                  </a>
+                <?php endif; ?>
           </div>
         </div>
       <?php endif; ?>
