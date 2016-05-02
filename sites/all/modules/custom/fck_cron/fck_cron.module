@@ -60,16 +60,17 @@ function fck_cron_new_product_update() {
 		    if ($new_key !== -1) {
 		    	unset($node->field_group['und'][$new_key]);
 		    	node_save($node);
+		    	watchdog('nPu', '<pre>'.print_r('saved', TRUE).'</pre>');
 		    }
-		    //watchdog('nPu', '<pre>'.print_r($node, TRUE).'</pre>');
+		    watchdog('nPu', '<pre>'.print_r($node, TRUE).'</pre>');
 		  } else {
-		  	//watchdog('nPu', '<pre>'.print_r('noWh', TRUE).'</pre>');
+		  	watchdog('nPu', '<pre>'.print_r('noWh', TRUE).'</pre>');
 		  }
 
 	    
 	  }
 	} else {
-		//watchdog('nPu', '<pre>'.print_r('noM', TRUE).'</pre>');
+		watchdog('nPu', '<pre>'.print_r('noM', TRUE).'</pre>');
 	}
 
   return TRUE;
