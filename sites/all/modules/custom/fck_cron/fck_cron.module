@@ -1,0 +1,76 @@
+<?php
+
+/**
+ * Implements hook_menu().
+ */
+function fck_cron_menu() {  
+  $items['fck_cron/form'] = array(
+    'title' => '',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('fck_cron_form'),
+    'access arguments' => array('admin content'),
+    'type' => MENU_CALLBACK,    
+  );
+  
+  return $items;
+}	
+
+function fck_cron_form($form_state) {
+	$form = array();
+
+	$form['submit'] = array(
+		'#type' => 'submit',
+		'#value' => 'Execute',  
+	);
+
+	return $form;
+}
+
+function fck_cron_form_submit($form, &$form_state) {
+	drupal_set_message('dddd');
+	fck_cron_new_product_update();
+}
+
+function fck_cron_new_product_update() {
+	$query = new EntityFieldQuery();
+  $query->entityCondition('entity_type', 'node')
+  			->entityCondition('bundle', 'shop_product')
+  			->propertyCondition('status', NODE_PUBLISHED)
+  			->fieldCondition('field_group', 'value', 'new', '=');
+  $results = $query->execute();
+  $count = 0;  
+
+	watchdog('wk', '<pre>'.print_r('init', TRUE).'</pre>');
+
+	if (isset($results['node'])) {
+	  foreach ($results['node'] as $item) {
+	    $new_key = -1;
+	    $node = node_load($item->nid);
+	    $now = time();
+	    $created = $node->created;
+	    $expiration = variable_get('fck_new_product_expiration', 120);
+
+	    if (($now - $created) > $expiration) {
+		    foreach ($node->field_group['und'] as $key => $data) {
+		    	if ($data['value'] == 'new') {
+		    		$new_key = $key;
+		    		break;
+		    	}
+		    }
+		    if ($new_key !== -1) {
+		    	unset($node->field_group['und'][$new_key]);
+		    	node_save($node);
+		    }
+		    watchdog('nPu', '<pre>'.print_r($node, TRUE).'</pre>');
+		  } else {
+		  	watchdog('nPu', '<pre>'.print_r('noWh', TRUE).'</pre>');
+		  }
+
+	    
+	  }
+	} else {
+		watchdog('nPu', '<pre>'.print_r('noM', TRUE).'</pre>');
+	}
+
+  return '';
+}

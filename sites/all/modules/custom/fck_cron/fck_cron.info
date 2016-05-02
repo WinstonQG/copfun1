@@ -1,0 +1,5 @@
+name = FCK Cron
+description = Provide cron tasks for FCK project
+package = FCK
+core = 7.x
+; Files
