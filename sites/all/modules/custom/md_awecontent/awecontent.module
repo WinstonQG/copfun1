@@ -942,11 +942,11 @@ function awecontent_node_update($node) {
     //Unset message error because node already exists
     $old_msg = drupal_get_messages();
     unset($old_msg['error']);
-    db_update('node')
+    /*db_update('node')
       ->fields(array('created' => $node->changed))
-      ->execute();
+      ->execute();*/
     variable_del("ac_temp_layout_{$node->type}");
-    $node->created = $node->changed;
+    //$node->created = $node->changed;
 
     // save node need change status message
     $reset_msg_nodes = variable_get('awe_reset_msg_nodes', array());

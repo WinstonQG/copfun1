@@ -40,6 +40,11 @@ function fck_cron_new_product_update() {
   $results = $query->execute();
   $count = 0;  
 
+  $node = node_load(155);
+  node_save($node);
+
+  return;
+
 	watchdog('wk', '<pre>'.print_r('init', TRUE).'</pre>');
 
 	if (isset($results['node'])) {
