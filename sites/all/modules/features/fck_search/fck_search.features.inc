@@ -55,7 +55,7 @@ function fck_search_default_search_api_index() {
         "field_gifts" : { "type" : "integer", "entity_type" : "taxonomy_term" },
         "field_gifts:tid" : { "type" : "integer" },
         "field_gifts:vocabulary:machine_name" : { "type" : "string" },
-        "field_group" : { "type" : "string" },
+        "field_group" : { "type" : "list\\u003Cstring\\u003E" },
         "field_match_kits" : { "type" : "integer", "entity_type" : "taxonomy_term" },
         "field_match_kits:tid" : { "type" : "integer" },
         "field_match_kits:vocabulary:machine_name" : { "type" : "string" },
@@ -520,9 +520,9 @@ function fck_search_default_search_api_server() {
             "boost" : "1.0"
           },
           "field_group" : {
-            "table" : "search_api_db_shop_product",
+            "table" : "search_api_db_shop_product_field_group",
             "column" : "field_group",
-            "type" : "string",
+            "type" : "list\\u003Cstring\\u003E",
             "boost" : "1.0"
           },
           "field_sale" : {

@@ -28,6 +28,8 @@ regions[footer_third] 	= Region Footer third
 regions[footer_fourth] 	= Region Footer fourth
 regions[footer_bottom] 	= Footer bottom
 
+stylesheets[print][] = css/print.css
+
 ;settings
 awecontent = 1
 

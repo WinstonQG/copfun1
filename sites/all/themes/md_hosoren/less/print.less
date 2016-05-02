@@ -1,0 +1,24 @@
+.l-categories-list, .footer, .awemenu, #toolbar,
+.awe-menubar-search, .header-top, .breadcrumb,
+.wishlist-share-container {
+	display: none !important;
+}
+
+.shop_table {
+	th:last-child, td:last-child {
+		display: none !important;
+	}
+}
+
+@media print {
+    .noprint {display:none !important;}
+    a:link:after, a:visited:after {  
+      display: none;
+      content: "";    
+    }
+}
+
+@page {
+    size: auto;  
+    margin: 0;  
+}

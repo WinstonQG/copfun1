@@ -1089,7 +1089,7 @@ function md_product_views_default_views() {
   /* Display: LookBook */
   $handler = $view->new_display('block', 'LookBook', 'block_2');
   $handler->display->display_options['defaults']['arguments'] = FALSE;
-  /* Contextual filter: Content: LookBook (field_product_lookbook) */
+  /* Contextual filter: Content: Product LookBook (field_product_lookbook) */
   $handler->display->display_options['arguments']['field_product_lookbook_tid']['id'] = 'field_product_lookbook_tid';
   $handler->display->display_options['arguments']['field_product_lookbook_tid']['table'] = 'field_data_field_product_lookbook';
   $handler->display->display_options['arguments']['field_product_lookbook_tid']['field'] = 'field_product_lookbook_tid';
@@ -1558,7 +1558,7 @@ function md_product_views_default_views() {
   $handler->display->display_options['fields']['field_subtitle']['field'] = 'field_subtitle';
   $handler->display->display_options['fields']['field_subtitle']['label'] = '';
   $handler->display->display_options['fields']['field_subtitle']['element_label_colon'] = FALSE;
-  /* Field: Content: LookBook */
+  /* Field: Content: Product LookBook */
   $handler->display->display_options['fields']['field_product_lookbook']['id'] = 'field_product_lookbook';
   $handler->display->display_options['fields']['field_product_lookbook']['table'] = 'field_data_field_product_lookbook';
   $handler->display->display_options['fields']['field_product_lookbook']['field'] = 'field_product_lookbook';
@@ -2494,6 +2494,29 @@ function md_product_views_default_views() {
   $handler->display->display_options['exposed_form']['type'] = 'basic';
   $handler->display->display_options['pager']['type'] = 'none';
   $handler->display->display_options['style_plugin'] = 'table';
+  /* Header: Global: Text area */
+  $handler->display->display_options['header']['area']['id'] = 'area';
+  $handler->display->display_options['header']['area']['table'] = 'views';
+  $handler->display->display_options['header']['area']['field'] = 'area';
+  $handler->display->display_options['header']['area']['content'] = '<?php 
+$uid = arg(1); 
+if (empty($uid)) {
+  global $user;
+  $uid = $user->uid;
+}
+?>
+<?php $path = url(\'wishlist/\'.$uid, array(\'absolute\' => TRUE)); ?>
+<div class="wishlist-share-container">
+<span><?php print t(\'Share link:\'); ?></span>: <strong><?php print $path; ?></strong>
+<div class="print-page"><a href="javascript:window.print();">Print</a></div>
+
+<?php print theme(\'sharethis\', array(
+      \'data_options\' => sharethis_get_options_array(),
+      \'m_title\' => t(\'Wishlist\'),
+      \'m_path\' => $path,
+    )); ?>
+</div>';
+  $handler->display->display_options['header']['area']['format'] = 'php_code';
   /* No results behavior: Global: Text area */
   $handler->display->display_options['empty']['area']['id'] = 'area';
   $handler->display->display_options['empty']['area']['table'] = 'views';
@@ -2506,6 +2529,7 @@ function md_product_views_default_views() {
   $handler->display->display_options['relationships']['flag_content_rel']['table'] = 'node';
   $handler->display->display_options['relationships']['flag_content_rel']['field'] = 'flag_content_rel';
   $handler->display->display_options['relationships']['flag_content_rel']['flag'] = 'wishlist';
+  $handler->display->display_options['relationships']['flag_content_rel']['user_scope'] = 'any';
   /* Relationship: Flags: User */
   $handler->display->display_options['relationships']['uid']['id'] = 'uid';
   $handler->display->display_options['relationships']['uid']['table'] = 'flagging';
@@ -2550,6 +2574,16 @@ function md_product_views_default_views() {
   $handler->display->display_options['sorts']['created']['table'] = 'node';
   $handler->display->display_options['sorts']['created']['field'] = 'created';
   $handler->display->display_options['sorts']['created']['order'] = 'DESC';
+  /* Contextual filter: Flags: User uid */
+  $handler->display->display_options['arguments']['uid']['id'] = 'uid';
+  $handler->display->display_options['arguments']['uid']['table'] = 'flagging';
+  $handler->display->display_options['arguments']['uid']['field'] = 'uid';
+  $handler->display->display_options['arguments']['uid']['relationship'] = 'flag_content_rel';
+  $handler->display->display_options['arguments']['uid']['default_action'] = 'default';
+  $handler->display->display_options['arguments']['uid']['default_argument_type'] = 'current_user';
+  $handler->display->display_options['arguments']['uid']['summary']['number_of_records'] = '0';
+  $handler->display->display_options['arguments']['uid']['summary']['format'] = 'default_summary';
+  $handler->display->display_options['arguments']['uid']['summary_options']['items_per_page'] = '25';
   /* Filter criterion: Content: Published */
   $handler->display->display_options['filters']['status']['id'] = 'status';
   $handler->display->display_options['filters']['status']['table'] = 'node';
