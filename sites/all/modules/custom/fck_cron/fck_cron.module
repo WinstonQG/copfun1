@@ -32,6 +32,7 @@ function fck_cron_form_submit($form, &$form_state) {
 }
 
 function fck_cron_new_product_update() {
+	return;
 	$query = new EntityFieldQuery();
   $query->entityCondition('entity_type', 'node')
   			->entityCondition('bundle', 'shop_product')
