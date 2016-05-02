@@ -50,6 +50,12 @@ function fck_cron_new_product_update() {
 	    $created = $node->created;
 	    $expiration = variable_get('fck_new_product_expiration', 120);
 
+	    watchdog('now', '<pre>'.print_r($now, TRUE).'</pre>');
+	    watchdog('cr', '<pre>'.print_r($created, TRUE).'</pre>');
+	    watchdog('ex', '<pre>'.print_r($expiration, TRUE).'</pre>');
+
+	    watchdog('nPu', '<pre>'.print_r($node, TRUE).'</pre>');
+
 	    if (($now - $created) > $expiration) {
 		    foreach ($node->field_group['und'] as $key => $data) {
 		    	if ($data['value'] == 'new') {
@@ -62,7 +68,7 @@ function fck_cron_new_product_update() {
 		    	node_save($node);
 		    	watchdog('nPu', '<pre>'.print_r('saved', TRUE).'</pre>');
 		    }
-		    watchdog('nPu', '<pre>'.print_r($node, TRUE).'</pre>');
+		    
 		  } else {
 		  	watchdog('nPu', '<pre>'.print_r('noWh', TRUE).'</pre>');
 		  }
