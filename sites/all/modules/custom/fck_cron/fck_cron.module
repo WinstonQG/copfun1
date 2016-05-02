@@ -40,11 +40,6 @@ function fck_cron_new_product_update() {
   $results = $query->execute();
   $count = 0;  
 
-  $node = node_load(155);
-  node_save($node);
-
-  return;
-
 	watchdog('wk', '<pre>'.print_r('init', TRUE).'</pre>');
 
 	if (isset($results['node'])) {
@@ -55,12 +50,6 @@ function fck_cron_new_product_update() {
 	    $created = $node->created;
 	    $expiration = variable_get('fck_new_product_expiration', 120);
 
-	    watchdog('nid', '<pre>'.print_r($node->nid, TRUE).'</pre>');
-	    watchdog('now', '<pre>'.print_r($now - $created, TRUE).'</pre>');	    
-	    watchdog('ex', '<pre>'.print_r($expiration, TRUE).'</pre>');
-
-	    watchdog('nPu', '<pre>'.print_r($node, TRUE).'</pre>');
-
 	    if (($now - $created) > $expiration) {
 		    foreach ($node->field_group['und'] as $key => $data) {
 		    	if ($data['value'] == 'new') {
@@ -70,18 +59,17 @@ function fck_cron_new_product_update() {
 		    }
 		    if ($new_key !== -1) {
 		    	unset($node->field_group['und'][$new_key]);
-		    	node_save($node);
-		    	watchdog('nPu', '<pre>'.print_r('saved', TRUE).'</pre>');
+		    	node_save($node);		    	
 		    }
 		    
 		  } else {
-		  	watchdog('nPu', '<pre>'.print_r('noWh', TRUE).'</pre>');
+		  	//watchdog('nPu', '<pre>'.print_r('noWh', TRUE).'</pre>');
 		  }
 
 	    
 	  }
 	} else {
-		watchdog('nPu', '<pre>'.print_r('noM', TRUE).'</pre>');
+		//watchdog('nPu', '<pre>'.print_r('noM', TRUE).'</pre>');
 	}
 
   return TRUE;
