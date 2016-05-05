@@ -20,6 +20,15 @@ function fck_custom_update_7001() {
   ->execute();
 }
 
+function fck_custom_preprocess_flag(&$vars) {    
+  if ($vars['link']['query']['destination'] == 'system/ajax') {
+    $nid = csf_get_referencing_node_id((object)array('product_id' => $vars['entity_id']));
+    $vars['link']['query']['destination'] = 'node/'.$nid;
+    $vars['link_href'] = str_replace('system/ajax', 'node/'.$nid, $vars['link_href']);
+    //watchdog('fff', '<pre>'.print_r($vars, TRUE).'</pre>');  
+  }
+}
+
 /**
  * Implements hook_form_jersey_print_form_alter().
  */
@@ -216,6 +225,16 @@ function fck_custom_preprocess_jersey_print_form(&$variables) {
  */
 function fck_custom_form_alter(&$form, &$form_state, $form_id) { 
   if (isset($form_state['build_info']['base_form_id']) && 
+    $form_state['build_info']['base_form_id'] == 'commerce_cart_add_to_cart_form') {
+    //dsm($form);
+    /*$product_id = $form['product_id']['#value'];
+    $flag_link = flag_create_link('wishlist_product', $product_id);
+    $form['wishlist_product'] = array(
+      '#markup' => $flag_link,
+    );*/
+  }
+
+  if (isset($form_state['build_info']['base_form_id']) && 
     $form_state['build_info']['base_form_id'] == 'commerce_cart_add_to_cart_form' &&
     isset($form['field_jersey_print'])) {   
 
@@ -231,9 +250,9 @@ function fck_custom_form_alter(&$form, &$form_state, $form_id) {
   			$form['#submit'][0] = 'fck_custom_jersey_print_redirect';
   			return;
   		}
-  	}
-
+  	}    
   	$form['#theme'] = 'jersey_print_form';
+    $form['#submit'][] = 'fck_custom_recalculate_sellprice_submit';
   	// get Text fid (link is generated in template)
   	$preview_text_fid = '';
   	if (isset($form_state['default_product']->field_text_preview_image['und'])) {
@@ -279,7 +298,6 @@ function fck_custom_form_alter(&$form, &$form_state, $form_id) {
         drupal_get_path('module', 'fck_custom').'/field_text_number.js',
       );      
       
-
     	$label_text = '-';
     	$number_text = '-';
 
@@ -312,6 +330,22 @@ function fck_custom_form_alter(&$form, &$form_state, $form_id) {
       unset($field_text_label['#attributes']);    
     }
   }
+}
+
+/**
+ * Recalculate cart(order) prices after clicking Add to cart button.
+ * Used for JerseyPrint products because by default Cart popup has wrong 
+ * price calculations (without including attributes prices)
+ */
+function fck_custom_recalculate_sellprice_submit($form, &$form_state) {  
+  global $user;
+  // Get order cart entity
+  $order = commerce_cart_order_load($user->uid);  
+  // Recalculate prices for each line item of the cart
+  commerce_cart_order_refresh($order);  
+  // update order total price
+  $order = commerce_order_status_update($order, 'cart', TRUE);  
+  commerce_order_save($order);  
 }
 
 /**
