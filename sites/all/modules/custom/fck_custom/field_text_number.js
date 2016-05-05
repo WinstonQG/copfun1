@@ -7,7 +7,8 @@
 
 	    	$('input[id*="field-text-number"]').on('keyup', function (e) {
 			  	if (e.which == 46 || e.which == 8 || 
-	    			(e.which <= 90 && e.which >= 48)) {
+	    			(e.which <= 90 && e.which >= 48) || 
+	    			(e.keyCode >= 96 && e.keyCode <= 105)) {
 					clearTimeout(typingTimer);
 					if ($(this).val) {
 						var trigid = $(this);
