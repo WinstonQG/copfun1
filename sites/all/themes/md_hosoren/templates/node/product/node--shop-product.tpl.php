@@ -127,14 +127,11 @@
                 <?php endif; ?>
           </div>
         </div>
+      <?php endif; ?>            
+      <?php if (isset($content['field_label']) && isset($content['field_label']['#items'][0]['value'])): ?>
+        <span class="product-label"><span><?php print $content['field_label']['#items'][0]['value']; ?></span></span>
       <?php endif; ?>
 
-      <?php if (isset($content['product:field_price_old'][0]['#markup'])): ?>
-        <span class="product-label sale"><span><?php print t("SALE") ?></span></span>
-      <?php elseif(isset($content['field_group']['#items'][0]['value'])): ?>
-        <?php $output = 'Ny'; ?>
-        <span class="product-label <?php print render($content['field_group']['#items'][0]['value']) ?>"><span><?php print $output; ?></span></span>
-      <?php endif; ?> 
       <!-- /.product-media -->
     </div>
 
@@ -253,7 +250,7 @@
 
   </div>
 
-<?php else: ?>
+<?php else: ?>  
   <div id="node-<?php print $node->nid; ?>" class="product_full <?php print $classes; ?> clearfix"<?php print $attributes; ?>>    
     <div class="row">
       <div class="col-md-6">
@@ -315,8 +312,8 @@
             </div>
           <?php endif; ?>                  
 
-          <!-- /.product-actions-wrapper -->
-                    
+          <!-- /.product-actions-wrapper -->                              
+
           <?php if (isset($content['flag_wishlist']['#markup'])): ?>
             <?php print render($content['flag_wishlist']['#markup']); ?>
           <?php endif; ?>
