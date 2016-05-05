@@ -127,8 +127,14 @@
                 <?php endif; ?>
           </div>
         </div>
+<<<<<<< HEAD
       <?php endif; ?>            
       <?php if (isset($content['field_label']) && isset($content['field_label']['#items'][0]['value'])): ?>
+=======
+      <?php endif; ?>      
+      <?php watchdog('lll', '<pre>'.print_r($content, TRUE).'</pre>'); ?>
+      <?php if (isset($content['field_label']['#items'][0]['value'])): ?>
+>>>>>>> 7103d863e00ce792f74d857c969adfb8014ff018
         <span class="product-label"><span><?php print $content['field_label']['#items'][0]['value']; ?></span></span>
       <?php endif; ?>
 
