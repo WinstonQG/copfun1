@@ -113,98 +113,103 @@ function fck_custom_commerce_checkout_pane_info_alter(&$panes) {
 /**
  * Implements hook_commerce_cart_attributes_refresh_alter().
  */
-function fck_custom_commerce_cart_attributes_refresh_alter(&$commands, $form, $form_state) {
-	// ------------------------------------------
-	// hold "Jersey print" price labels on places after switching between options of
-	// Size attribute (AJAX callback)
-	// ------------------------------------------
+function fck_custom_commerce_cart_attributes_refresh_alter(&$commands, $form, $form_state) {	
 	// should work only for "node_full" view mode
 	if ($form_state['build_info']['args'][2]['view_mode'] != 'node_full') {
 		return;
 	}	
-  
+  // save current form states after switching Size select list. Otherwise all fields will be refreshed: prices, pricing attributes etc.
   $refresh_commands = commerce_pricing_attributes_add_to_cart_form_attributes_refresh($form, $form_state);  
   $commands[] = $refresh_commands['#commands'][0];
   
-  // options data (option prices, currencies)
-  $option_data = $form_state['default_product']->field_jersey_print['und'][0]['set_details'];  
-  // players data
-  $players_options = $option_data['field_players']['options'];
-  // states of form fields
-  $option_values = $form_state['commerce_option']['field_jersey_print'][0]['option'];    
 
-  // badge data
-  $badge_options = $option_data['field_superliga_badge']['options'];
-  // update Badge info if it's filled
-  $badge_value = $option_values->field_superliga_badge['und'][0]['value'];
-	if ($badge_value) {
-		$price = commerce_currency_format($badge_options[$badge_value]['price'], $badge_options[$badge_value]['currency_code']);
-		$price = '+'.$price;
-			$commands[] = ajax_command_invoke(
-	    '.e-badge-value', 
-	    'text', 
-	    array($price)
-	  );
-	}
-	// badge data
-  $autograph_options = $option_data['field_autograph']['options'];
-  // update Badge info if it's filled
-  $autograph_value = $option_values->field_autograph['und'][0]['value'];
-	if ($autograph_value) {
-		$price = commerce_currency_format($autograph_options[$autograph_value]['price'], $autograph_options[$autograph_value]['currency_code']);
-		$price = '+'.$price;
-			$commands[] = ajax_command_invoke(
-	    '.e-autograph-value', 
-	    'text', 
-	    array($price)
-	  );
-	}
-	// players data
-  $players_options = $option_data['field_players']['options'];
-  if (isset($option_values->field_players['und'][0])) {
-	  // update Players info if it's filled
-	  $players_value = $option_values->field_players['und'][0]['tid'];
-		if ($players_value) {
-			$price = commerce_currency_format($players_options[$players_value]['price'], $players_options[$players_value]['currency_code']);
-			$price = '+'.$price;
-				$commands[] = ajax_command_invoke(
-		    '.e-players-value', 
-		    'text', 
-		    array($price)
-		  );
-		}
-	}	
-	
-	// Text Label data
-	if (isset($option_data['field_text_label'])) {	  
-	  // update Text Label info if it's filled
-	  $text_label_value = $option_values->field_text_label['und'][0]['value'];
 
-		if ($text_label_value) {
-			$price = fck_custom_get_custom_price($text_label_value, 'label');
-			$price = '+'.$price;
-				$commands[] = ajax_command_invoke(
-		    '.e-text-label-value', 
-		    'text', 
-		    array($price)
-		  );
-		}
-	}		
-	// Text Number data
-	if (isset($option_data['field_text_number'])) {
-	  //$text_number_options = $option_values['field_text_number']['options'];
-	  // update Text Number info if it's filled
-	  $text_number_value = $option_values->field_text_number['und'][0]['value'];
-		if ($text_number_value) {
-			$price = fck_custom_get_custom_price($text_number_value, 'number');
-			$price = '+'.$price;
-				$commands[] = ajax_command_invoke(
-		    '.e-text-number-value', 
-		    'text', 
-		    array($price)
-		  );
-		}	  
-	}
+  // ------------------------------------------
+  // hold "Jersey print" price labels on places after switching between options of
+  // Size attribute (AJAX callback)
+  // ------------------------------------------
+  if (isset($form_state['commerce_option'])) {
+    // options data (option prices, currencies)
+    $option_data = $form_state['default_product']->field_jersey_print['und'][0]['set_details'];    
+    // states of form fields
+    $option_values = $form_state['commerce_option']['field_jersey_print'][0]['option'];    
+
+    // badge data
+    $badge_options = $option_data['field_superliga_badge']['options'];
+    // update Badge info if it's filled
+    $badge_value = $option_values->field_superliga_badge['und'][0]['value'];
+  	if ($badge_value) {
+  		$price = commerce_currency_format($badge_options[$badge_value]['price'], $badge_options[$badge_value]['currency_code']);
+  		$price = '+'.$price;
+  			$commands[] = ajax_command_invoke(
+  	    '.e-badge-value', 
+  	    'text', 
+  	    array($price)
+  	  );
+  	}
+  	// badge data
+    $autograph_options = $option_data['field_autograph']['options'];
+    // update Badge info if it's filled
+    $autograph_value = $option_values->field_autograph['und'][0]['value'];
+  	if ($autograph_value) {
+  		$price = commerce_currency_format($autograph_options[$autograph_value]['price'], $autograph_options[$autograph_value]['currency_code']);
+  		$price = '+'.$price;
+  			$commands[] = ajax_command_invoke(
+  	    '.e-autograph-value', 
+  	    'text', 
+  	    array($price)
+  	  );
+  	}
+  	// players data
+    $players_options = $option_data['field_players']['options'];
+    if (isset($option_data['field_players']) && 
+      isset($option_values->field_players['und'][0])) {
+  	  // update Players info if it's filled
+  	  $players_value = $option_values->field_players['und'][0]['tid'];
+  		if ($players_value) {
+  			$price = commerce_currency_format($players_options[$players_value]['price'], $players_options[$players_value]['currency_code']);
+  			$price = '+'.$price;
+  				$commands[] = ajax_command_invoke(
+  		    '.e-players-value', 
+  		    'text', 
+  		    array($price)
+  		  );
+  		}
+  	}	
+  	
+  	// Text Label data
+  	if (isset($option_data['field_text_label']) &&
+      isset($option_values->field_text_label['und'][0])) {	  
+  	  // update Text Label info if it's filled
+  	  $text_label_value = $option_values->field_text_label['und'][0]['value'];
+
+  		if ($text_label_value) {
+  			$price = fck_custom_get_custom_price($text_label_value, 'label');
+  			$price = '+'.$price;
+  				$commands[] = ajax_command_invoke(
+  		    '.e-text-label-value', 
+  		    'text', 
+  		    array($price)
+  		  );
+  		}
+  	}		
+  	// Text Number data
+  	if (isset($option_data['field_text_number']) &&
+      isset($option_values->field_text_number['und'][0])) {
+  	  //$text_number_options = $option_values['field_text_number']['options'];
+  	  // update Text Number info if it's filled
+  	  $text_number_value = $option_values->field_text_number['und'][0]['value'];
+  		if ($text_number_value) {
+  			$price = fck_custom_get_custom_price($text_number_value, 'number');
+  			$price = '+'.$price;
+  				$commands[] = ajax_command_invoke(
+  		    '.e-text-number-value', 
+  		    'text', 
+  		    array($price)
+  		  );
+  		}	  
+  	}
+  }
 }
 
 function fck_custom_preprocess_jersey_print_form(&$variables) {   
