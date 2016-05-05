@@ -1110,19 +1110,19 @@ function md_product_field_default_field_instances() {
           'calculation' => 'calculated_sell_price',
         ),
         'type' => 'commerce_price_formatted_amount',
-        'weight' => 0,
+        'weight' => 2,
       ),
       'full' => array(
         'label' => 'hidden',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 2,
+        'weight' => 3,
       ),
       'line_item' => array(
         'label' => 'hidden',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 0,
+        'weight' => 9,
       ),
       'node_modal_content' => array(
         'label' => 'hidden',
@@ -1190,19 +1190,19 @@ function md_product_field_default_field_instances() {
           'thousand_separator' => '',
         ),
         'type' => 'number_decimal',
-        'weight' => 14,
+        'weight' => 11,
       ),
       'full' => array(
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 10,
+        'weight' => 12,
       ),
       'line_item' => array(
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 0,
+        'weight' => 4,
       ),
       'node_modal_content' => array(
         'label' => 'above',
@@ -1259,13 +1259,13 @@ function md_product_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 6,
+        'weight' => 8,
       ),
       'line_item' => array(
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 0,
+        'weight' => 8,
       ),
       'node_full' => array(
         'label' => 'above',
@@ -1320,19 +1320,19 @@ function md_product_field_default_field_instances() {
         'module' => 'taxonomy',
         'settings' => array(),
         'type' => 'taxonomy_term_reference_link',
-        'weight' => 15,
+        'weight' => 12,
       ),
       'full' => array(
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 11,
+        'weight' => 13,
       ),
       'line_item' => array(
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 0,
+        'weight' => 6,
       ),
       'node_modal_content' => array(
         'label' => 'above',
@@ -1381,19 +1381,19 @@ function md_product_field_default_field_instances() {
         'module' => 'taxonomy',
         'settings' => array(),
         'type' => 'taxonomy_term_reference_link',
-        'weight' => 11,
+        'weight' => 8,
       ),
       'full' => array(
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 7,
+        'weight' => 9,
       ),
       'line_item' => array(
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 0,
+        'weight' => 11,
       ),
       'node_modal_content' => array(
         'label' => 'above',
@@ -1442,19 +1442,19 @@ function md_product_field_default_field_instances() {
         'module' => 'taxonomy',
         'settings' => array(),
         'type' => 'taxonomy_term_reference_link',
-        'weight' => 13,
+        'weight' => 10,
       ),
       'full' => array(
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 9,
+        'weight' => 11,
       ),
       'line_item' => array(
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 0,
+        'weight' => 5,
       ),
       'node_modal_content' => array(
         'label' => 'above',
@@ -1503,19 +1503,19 @@ function md_product_field_default_field_instances() {
         'module' => 'taxonomy',
         'settings' => array(),
         'type' => 'taxonomy_term_reference_link',
-        'weight' => 12,
+        'weight' => 9,
       ),
       'full' => array(
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 8,
+        'weight' => 10,
       ),
       'line_item' => array(
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 0,
+        'weight' => 7,
       ),
       'node_modal_content' => array(
         'label' => 'above',
@@ -1560,19 +1560,19 @@ function md_product_field_default_field_instances() {
           'calculation' => FALSE,
         ),
         'type' => 'commerce_price_formatted_amount',
-        'weight' => 2,
+        'weight' => 3,
       ),
       'full' => array(
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 3,
+        'weight' => 5,
       ),
       'line_item' => array(
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 5,
+        'weight' => 13,
       ),
       'node_full' => array(
         'label' => 'above',
@@ -1757,13 +1757,13 @@ function md_product_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 5,
+        'weight' => 7,
       ),
       'line_item' => array(
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 0,
+        'weight' => 10,
       ),
       'node_full' => array(
         'label' => 'above',
@@ -2049,7 +2049,7 @@ function md_product_field_default_field_instances() {
         'module' => 'text',
         'settings' => array(),
         'type' => 'text_default',
-        'weight' => 8,
+        'weight' => 13,
       ),
       'full' => array(
         'label' => 'hidden',
@@ -2065,7 +2065,7 @@ function md_product_field_default_field_instances() {
           'trim_length' => 600,
         ),
         'type' => 'text_summary_or_trimmed',
-        'weight' => 9,
+        'weight' => 10,
       ),
       'product_ajax' => array(
         'label' => 'hidden',
@@ -2124,13 +2124,13 @@ function md_product_field_default_field_instances() {
         'module' => 'taxonomy',
         'settings' => array(),
         'type' => 'taxonomy_term_reference_link',
-        'weight' => 17,
+        'weight' => 26,
       ),
       'modal_content' => array(
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 16,
+        'weight' => 34,
       ),
       'teaser' => array(
         'label' => 'above',
@@ -2167,7 +2167,7 @@ function md_product_field_default_field_instances() {
         'module' => 'text',
         'settings' => array(),
         'type' => 'text_default',
-        'weight' => 10,
+        'weight' => 18,
       ),
       'full' => array(
         'label' => 'above',
@@ -2180,7 +2180,7 @@ function md_product_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 29,
+        'weight' => 47,
       ),
       'product_ajax' => array(
         'label' => 'above',
@@ -2236,13 +2236,13 @@ function md_product_field_default_field_instances() {
         'module' => 'taxonomy',
         'settings' => array(),
         'type' => 'taxonomy_term_reference_link',
-        'weight' => 20,
+        'weight' => 29,
       ),
       'modal_content' => array(
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 18,
+        'weight' => 36,
       ),
       'teaser' => array(
         'label' => 'above',
@@ -2279,13 +2279,13 @@ function md_product_field_default_field_instances() {
         'module' => 'taxonomy',
         'settings' => array(),
         'type' => 'taxonomy_term_reference_link',
-        'weight' => 18,
+        'weight' => 27,
       ),
       'modal_content' => array(
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 20,
+        'weight' => 38,
       ),
       'teaser' => array(
         'label' => 'above',
@@ -2322,7 +2322,7 @@ function md_product_field_default_field_instances() {
         'module' => 'text',
         'settings' => array(),
         'type' => 'text_default',
-        'weight' => 9,
+        'weight' => 14,
       ),
       'full' => array(
         'label' => 'above',
@@ -2335,7 +2335,7 @@ function md_product_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 27,
+        'weight' => 45,
       ),
       'product_ajax' => array(
         'label' => 'above',
@@ -2391,13 +2391,13 @@ function md_product_field_default_field_instances() {
         'module' => 'taxonomy',
         'settings' => array(),
         'type' => 'taxonomy_term_reference_link',
-        'weight' => 21,
+        'weight' => 30,
       ),
       'modal_content' => array(
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 19,
+        'weight' => 37,
       ),
       'teaser' => array(
         'label' => 'above',
@@ -2434,7 +2434,7 @@ function md_product_field_default_field_instances() {
         'module' => 'list',
         'settings' => array(),
         'type' => 'list_default',
-        'weight' => 15,
+        'weight' => 24,
       ),
       'full' => array(
         'label' => 'above',
@@ -2448,7 +2448,7 @@ function md_product_field_default_field_instances() {
         'module' => 'list',
         'settings' => array(),
         'type' => 'list_default',
-        'weight' => 13,
+        'weight' => 18,
       ),
       'product_ajax' => array(
         'label' => 'above',
@@ -2488,6 +2488,50 @@ function md_product_field_default_field_instances() {
     ),
   );
 
+  // Exported field_instance: 'node-shop_product-field_label'.
+  $field_instances['node-shop_product-field_label'] = array(
+    'bundle' => 'shop_product',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'list',
+        'settings' => array(),
+        'type' => 'list_default',
+        'weight' => 45,
+      ),
+      'modal_content' => array(
+        'label' => 'hidden',
+        'module' => 'list',
+        'settings' => array(),
+        'type' => 'list_key',
+        'weight' => 19,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_label',
+    'label' => 'Label',
+    'required' => 0,
+    'settings' => array(
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'options',
+      'settings' => array(),
+      'type' => 'options_select',
+      'weight' => 20,
+    ),
+  );
+
   // Exported field_instance: 'node-shop_product-field_match_kits'.
   $field_instances['node-shop_product-field_match_kits'] = array(
     'bundle' => 'shop_product',
@@ -2500,13 +2544,13 @@ function md_product_field_default_field_instances() {
         'module' => 'taxonomy',
         'settings' => array(),
         'type' => 'taxonomy_term_reference_link',
-        'weight' => 19,
+        'weight' => 28,
       ),
       'modal_content' => array(
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 17,
+        'weight' => 35,
       ),
       'teaser' => array(
         'label' => 'above',
@@ -2543,13 +2587,13 @@ function md_product_field_default_field_instances() {
         'module' => 'taxonomy',
         'settings' => array(),
         'type' => 'taxonomy_term_reference_link',
-        'weight' => 23,
+        'weight' => 32,
       ),
       'modal_content' => array(
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 0,
+        'weight' => 24,
       ),
       'teaser' => array(
         'label' => 'above',
@@ -2585,7 +2629,7 @@ function md_product_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 13,
+        'weight' => 43,
       ),
       'full' => array(
         'label' => 'above',
@@ -2597,7 +2641,7 @@ function md_product_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 30,
+        'weight' => 48,
       ),
       'product_ajax' => array(
         'label' => 'above',
@@ -2646,7 +2690,7 @@ function md_product_field_default_field_instances() {
         'module' => 'taxonomy',
         'settings' => array(),
         'type' => 'taxonomy_term_reference_link',
-        'weight' => 11,
+        'weight' => 20,
       ),
       'full' => array(
         'label' => 'above',
@@ -2659,7 +2703,7 @@ function md_product_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 14,
+        'weight' => 32,
       ),
       'product_ajax' => array(
         'label' => 'above',
@@ -2710,7 +2754,7 @@ function md_product_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 14,
+        'weight' => 44,
       ),
       'full' => array(
         'label' => 'above',
@@ -2722,7 +2766,7 @@ function md_product_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 31,
+        'weight' => 49,
       ),
       'product_ajax' => array(
         'label' => 'above',
@@ -2779,7 +2823,7 @@ function md_product_field_default_field_instances() {
           'show_single_product_attributes' => 0,
         ),
         'type' => 'commerce_cart_add_to_cart_form',
-        'weight' => 7,
+        'weight' => 12,
       ),
       'full' => array(
         'label' => 'hidden',
@@ -2905,7 +2949,7 @@ function md_product_field_default_field_instances() {
           ),
         ),
         'type' => 'fivestar_formatter_default',
-        'weight' => 2,
+        'weight' => 1,
       ),
       'full' => array(
         'label' => 'hidden',
@@ -2925,7 +2969,7 @@ function md_product_field_default_field_instances() {
         'label' => 'hidden',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 22,
+        'weight' => 40,
       ),
       'product_ajax' => array(
         'label' => 'hidden',
@@ -3003,13 +3047,13 @@ function md_product_field_default_field_instances() {
         'module' => 'taxonomy',
         'settings' => array(),
         'type' => 'taxonomy_term_reference_link',
-        'weight' => 22,
+        'weight' => 31,
       ),
       'modal_content' => array(
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 0,
+        'weight' => 30,
       ),
       'teaser' => array(
         'label' => 'above',
@@ -3046,7 +3090,7 @@ function md_product_field_default_field_instances() {
         'module' => 'taxonomy',
         'settings' => array(),
         'type' => 'taxonomy_term_reference_link',
-        'weight' => 12,
+        'weight' => 22,
       ),
       'full' => array(
         'label' => 'above',
@@ -3060,7 +3104,7 @@ function md_product_field_default_field_instances() {
         'module' => 'taxonomy',
         'settings' => array(),
         'type' => 'taxonomy_term_reference_link',
-        'weight' => 12,
+        'weight' => 17,
       ),
       'product_ajax' => array(
         'label' => 'above',
@@ -3115,13 +3159,13 @@ function md_product_field_default_field_instances() {
         'module' => 'taxonomy',
         'settings' => array(),
         'type' => 'taxonomy_term_reference_link',
-        'weight' => 16,
+        'weight' => 25,
       ),
       'modal_content' => array(
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 21,
+        'weight' => 39,
       ),
       'teaser' => array(
         'label' => 'above',
@@ -3162,21 +3206,16 @@ function md_product_field_default_field_instances() {
     'display' => array(
       'default' => array(
         'label' => 'above',
-        'module' => 'number',
-        'settings' => array(
-          'decimal_separator' => '.',
-          'prefix_suffix' => TRUE,
-          'scale' => 0,
-          'thousand_separator' => '',
-        ),
-        'type' => 'number_integer',
-        'weight' => 28,
+        'module' => 'weight',
+        'settings' => array(),
+        'type' => 'weight_integer',
+        'weight' => 37,
       ),
       'modal_content' => array(
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 0,
+        'weight' => 20,
       ),
       'teaser' => array(
         'label' => 'above',
@@ -3200,7 +3239,7 @@ function md_product_field_default_field_instances() {
         'range' => 100,
       ),
       'type' => 'weight_selector',
-      'weight' => 25,
+      'weight' => 26,
     ),
   );
 
@@ -3217,21 +3256,16 @@ function md_product_field_default_field_instances() {
     'display' => array(
       'default' => array(
         'label' => 'above',
-        'module' => 'number',
-        'settings' => array(
-          'decimal_separator' => '.',
-          'prefix_suffix' => TRUE,
-          'scale' => 0,
-          'thousand_separator' => '',
-        ),
-        'type' => 'number_integer',
-        'weight' => 31,
+        'module' => 'weight',
+        'settings' => array(),
+        'type' => 'weight_integer',
+        'weight' => 40,
       ),
       'modal_content' => array(
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 0,
+        'weight' => 21,
       ),
       'teaser' => array(
         'label' => 'above',
@@ -3255,7 +3289,7 @@ function md_product_field_default_field_instances() {
         'range' => 100,
       ),
       'type' => 'weight_selector',
-      'weight' => 28,
+      'weight' => 29,
     ),
   );
 
@@ -3272,21 +3306,16 @@ function md_product_field_default_field_instances() {
     'display' => array(
       'default' => array(
         'label' => 'above',
-        'module' => 'number',
-        'settings' => array(
-          'decimal_separator' => '.',
-          'prefix_suffix' => TRUE,
-          'scale' => 0,
-          'thousand_separator' => '',
-        ),
-        'type' => 'number_integer',
-        'weight' => 26,
+        'module' => 'weight',
+        'settings' => array(),
+        'type' => 'weight_integer',
+        'weight' => 35,
       ),
       'modal_content' => array(
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 0,
+        'weight' => 23,
       ),
       'teaser' => array(
         'label' => 'above',
@@ -3310,7 +3339,7 @@ function md_product_field_default_field_instances() {
         'range' => 100,
       ),
       'type' => 'weight_selector',
-      'weight' => 23,
+      'weight' => 24,
     ),
   );
 
@@ -3327,21 +3356,16 @@ function md_product_field_default_field_instances() {
     'display' => array(
       'default' => array(
         'label' => 'above',
-        'module' => 'number',
-        'settings' => array(
-          'decimal_separator' => '.',
-          'prefix_suffix' => TRUE,
-          'scale' => 0,
-          'thousand_separator' => '',
-        ),
-        'type' => 'number_integer',
-        'weight' => 33,
+        'module' => 'weight',
+        'settings' => array(),
+        'type' => 'weight_integer',
+        'weight' => 42,
       ),
       'modal_content' => array(
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 0,
+        'weight' => 25,
       ),
       'teaser' => array(
         'label' => 'above',
@@ -3365,7 +3389,7 @@ function md_product_field_default_field_instances() {
         'range' => 100,
       ),
       'type' => 'weight_selector',
-      'weight' => 22,
+      'weight' => 23,
     ),
   );
 
@@ -3382,21 +3406,16 @@ function md_product_field_default_field_instances() {
     'display' => array(
       'default' => array(
         'label' => 'above',
-        'module' => 'number',
-        'settings' => array(
-          'decimal_separator' => '.',
-          'prefix_suffix' => TRUE,
-          'scale' => 0,
-          'thousand_separator' => '',
-        ),
-        'type' => 'number_integer',
-        'weight' => 30,
+        'module' => 'weight',
+        'settings' => array(),
+        'type' => 'weight_integer',
+        'weight' => 39,
       ),
       'modal_content' => array(
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 0,
+        'weight' => 26,
       ),
       'teaser' => array(
         'label' => 'above',
@@ -3420,7 +3439,7 @@ function md_product_field_default_field_instances() {
         'range' => 100,
       ),
       'type' => 'weight_selector',
-      'weight' => 27,
+      'weight' => 28,
     ),
   );
 
@@ -3437,21 +3456,16 @@ function md_product_field_default_field_instances() {
     'display' => array(
       'default' => array(
         'label' => 'above',
-        'module' => 'number',
-        'settings' => array(
-          'decimal_separator' => '.',
-          'prefix_suffix' => TRUE,
-          'scale' => 0,
-          'thousand_separator' => '',
-        ),
-        'type' => 'number_integer',
-        'weight' => 24,
+        'module' => 'weight',
+        'settings' => array(),
+        'type' => 'weight_integer',
+        'weight' => 33,
       ),
       'modal_content' => array(
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 0,
+        'weight' => 31,
       ),
       'teaser' => array(
         'label' => 'above',
@@ -3475,7 +3489,7 @@ function md_product_field_default_field_instances() {
         'range' => 20,
       ),
       'type' => 'weight_selector',
-      'weight' => 20,
+      'weight' => 21,
     ),
   );
 
@@ -3492,21 +3506,16 @@ function md_product_field_default_field_instances() {
     'display' => array(
       'default' => array(
         'label' => 'above',
-        'module' => 'number',
-        'settings' => array(
-          'decimal_separator' => '.',
-          'prefix_suffix' => TRUE,
-          'scale' => 0,
-          'thousand_separator' => '',
-        ),
-        'type' => 'number_integer',
-        'weight' => 27,
+        'module' => 'weight',
+        'settings' => array(),
+        'type' => 'weight_integer',
+        'weight' => 36,
       ),
       'modal_content' => array(
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 0,
+        'weight' => 29,
       ),
       'teaser' => array(
         'label' => 'above',
@@ -3530,7 +3539,7 @@ function md_product_field_default_field_instances() {
         'range' => 100,
       ),
       'type' => 'weight_selector',
-      'weight' => 24,
+      'weight' => 25,
     ),
   );
 
@@ -3547,21 +3556,16 @@ function md_product_field_default_field_instances() {
     'display' => array(
       'default' => array(
         'label' => 'above',
-        'module' => 'number',
-        'settings' => array(
-          'decimal_separator' => '.',
-          'prefix_suffix' => TRUE,
-          'scale' => 0,
-          'thousand_separator' => '',
-        ),
-        'type' => 'number_integer',
-        'weight' => 29,
+        'module' => 'weight',
+        'settings' => array(),
+        'type' => 'weight_integer',
+        'weight' => 38,
       ),
       'modal_content' => array(
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 0,
+        'weight' => 28,
       ),
       'teaser' => array(
         'label' => 'above',
@@ -3585,7 +3589,7 @@ function md_product_field_default_field_instances() {
         'range' => 100,
       ),
       'type' => 'weight_selector',
-      'weight' => 26,
+      'weight' => 27,
     ),
   );
 
@@ -3602,21 +3606,16 @@ function md_product_field_default_field_instances() {
     'display' => array(
       'default' => array(
         'label' => 'above',
-        'module' => 'number',
-        'settings' => array(
-          'decimal_separator' => '.',
-          'prefix_suffix' => TRUE,
-          'scale' => 0,
-          'thousand_separator' => '',
-        ),
-        'type' => 'number_integer',
-        'weight' => 25,
+        'module' => 'weight',
+        'settings' => array(),
+        'type' => 'weight_integer',
+        'weight' => 34,
       ),
       'modal_content' => array(
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 0,
+        'weight' => 22,
       ),
       'teaser' => array(
         'label' => 'above',
@@ -3640,7 +3639,7 @@ function md_product_field_default_field_instances() {
         'range' => 20,
       ),
       'type' => 'weight_selector',
-      'weight' => 21,
+      'weight' => 22,
     ),
   );
 
@@ -3657,21 +3656,16 @@ function md_product_field_default_field_instances() {
     'display' => array(
       'default' => array(
         'label' => 'above',
-        'module' => 'number',
-        'settings' => array(
-          'decimal_separator' => '.',
-          'prefix_suffix' => TRUE,
-          'scale' => 0,
-          'thousand_separator' => '',
-        ),
-        'type' => 'number_integer',
-        'weight' => 32,
+        'module' => 'weight',
+        'settings' => array(),
+        'type' => 'weight_integer',
+        'weight' => 41,
       ),
       'modal_content' => array(
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 0,
+        'weight' => 27,
       ),
       'teaser' => array(
         'label' => 'above',
@@ -3695,7 +3689,7 @@ function md_product_field_default_field_instances() {
         'range' => 100,
       ),
       'type' => 'weight_selector',
-      'weight' => 29,
+      'weight' => 30,
     ),
   );
 
@@ -3716,6 +3710,7 @@ function md_product_field_default_field_instances() {
   t('Group');
   t('Image');
   t('Jersey print');
+  t('Label');
   t('LookBook');
   t('Match Kits');
   t('Out of use - Color');
