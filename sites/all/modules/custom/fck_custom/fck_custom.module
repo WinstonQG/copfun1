@@ -20,6 +20,9 @@ function fck_custom_update_7001() {
   ->execute();
 }
 
+/**
+ * Implements hook_preprocess_flag() 
+ */
 function fck_custom_preprocess_flag(&$vars) {    
   if ($vars['link']['query']['destination'] == 'system/ajax') {
     $nid = csf_get_referencing_node_id((object)array('product_id' => $vars['entity_id']));
@@ -68,37 +71,6 @@ function fck_custom_menu() {
   );
 
   return $items;
-}
-
-function fck_preview_page($fid, $label_text = '', $number_text = '') {
-	$page = array();
-	
-	drupal_add_css(drupal_get_path('module', 'fck_custom') . '/jersey_print_preview.css');		
-
-	$file = file_load($fid);
-	$uri = $file->uri;
-	$url = file_create_url($uri);
-	$output = '';
-	$image = theme('image', array('path' => $url));		
-
-	if (empty($label_text) && empty($number_text)) {
-		$page['result']['#markup'] = $image;
-		return $page;
-	}
-
-	$page['result']['#markup'] = '
-		<div class="work_container" data-label-text="'.$label_text.'" data-number-text="'.$number_text.'"><div class="img_outer">
-      <div class="img_container">
-        '.$image.'
-      </div>
-      <div class="name_wrapper">
-        <div id="name_inscription"></div>
-      </div>
-      <div id="number_inscription"></div>
-      
-    </div></div>';
-
-	return $page;
 }
 
 /**
@@ -212,13 +184,15 @@ function fck_custom_commerce_cart_attributes_refresh_alter(&$commands, $form, $f
   }
 }
 
+/**
+ * Implements hook_preprocess_jersey_print_form() 
+ */
 function fck_custom_preprocess_jersey_print_form(&$variables) {   
   $form = &$variables['form'];  
   $preview_text_fid = $form['preview_text_fid']['#value'];
   $preview_badge_fid = $form['preview_badge_fid']['#value'];
   $preview_autograph_fid = $form['preview_autograph_fid']['#value'];
 
-  //<a id='jerseyPrintTextPreview' class='twitter_bootstrap_modal tb_modal bs_modal' href='/fck_preview/$preview_text_fid'>".t('Preview')."</a>
   $variables['preview_text_button'] = "<a id='jerseyPrintTextPreview' class='fck_jersey_print_preview twitter_bootstrap_modal tb_modal bs_modal pull-right' href='/fck_preview/$preview_text_fid'>".t('Preview Text')."</a>";
   $variables['preview_badge_button'] = "<a id='jerseyPrintBadgePreview' class='fck_jersey_print_preview twitter_bootstrap_modal tb_modal bs_modal pull-right' href='/fck_preview/$preview_badge_fid'>".t('Preview Badge')."</a>";
   $variables['preview_autograph_button'] = "<a id='jerseyPrintAutographPreview' class='fck_jersey_print_preview twitter_bootstrap_modal tb_modal bs_modal pull-right' href='/fck_preview/$preview_autograph_fid'>".t('Preview Autograph')."</a>";
@@ -231,7 +205,37 @@ function fck_custom_preprocess_jersey_print_form(&$variables) {
 function fck_custom_form_alter(&$form, &$form_state, $form_id) { 
   if (isset($form_state['build_info']['base_form_id']) && 
     $form_state['build_info']['base_form_id'] == 'commerce_cart_add_to_cart_form') {
-    //dsm($form);
+    // if product_id is passed - select proper product variant.
+    // Only works for node_full view mode.
+    if ($form_state['build_info']['args'][2]['view_mode'] == 'node_full') {      
+      if (isset($_GET['size'])) {
+        // get size attribute field name
+        $size_attribute = fck_product_form_get_size_attribute($form);
+        // get dom id from size attribute field name
+        $size_attribute_dom_id = '#edit-attributes-' . str_replace('_', '-', $size_attribute);
+
+        // force AJAX refreshing all product attributes
+        drupal_add_js('jQuery(document).ready(function () { $("'.$size_attribute_dom_id.'").trigger("change"); });', 'inline');
+
+        $product_id = $_GET['size'];
+        // setup product id for hidden field
+        $form['product_id']['#value'] = $product_id;              
+        // setup product id for select list (to make it visible on form).
+        // in Commerce select list has different row of ids than product id.
+        // they = 100, 101, 102, etc. To make proper order we need to parse
+        // form_id value that contain row of product variants in proper order..
+        // f.x. commerce_cart_add_to_cart_form_352_351 where [352_351] product ids 
+        // and in this case select list has 100, 101 values.
+        $product_ids = str_replace('commerce_cart_add_to_cart_form_', '', $form['form_id']['#value']);        
+        $product_ids = explode('_', $product_ids);
+        $product_key = array_search($product_id, $product_ids);
+        $option_ids = array_keys($form['attributes'][$size_attribute]['#options']);
+        $option_key = $option_ids[$product_key];
+        // change value in attribute select list
+        $form['attributes'][$size_attribute]['#default_value'] = $option_key;
+        $form['unchanged_attributes'][$size_attribute]['#value'] = $option_key;        
+      }
+    }
     /*$product_id = $form['product_id']['#value'];
     $flag_link = flag_create_link('wishlist_product', $product_id);
     $form['wishlist_product'] = array(
@@ -288,7 +292,20 @@ function fck_custom_form_alter(&$form, &$form_state, $form_id) {
   	$field_players = &$form['field_jersey_print'][0]['field_players']['und'];
   	$field_badge['#suffix'] = "";
   	$field_autograph['#suffix'] = "";
-  	$field_players['#suffix'] = "";
+  	$field_players['#suffix'] = "";    
+
+    // Superliga badge autoselect (used with wishlist links)
+    if (isset($_GET['badge'])) {
+      $field_badge['#default_value'] = TRUE;
+    }
+    // Autograph autoselect (used with wishlist links)
+    if (isset($_GET['autograph'])) {
+      $field_autograph['#default_value'] = TRUE;
+    }
+    // Players autoselect (used with wishlist links)
+    if (isset($_GET['player'])) {
+      $field_players['#default_value'] = $_GET['player'];
+    }
 
     // make "- None -" option translatable
     //$field_players['#options']['_none'] = t($field_players['#options']['_none']);
@@ -319,7 +336,12 @@ function fck_custom_form_alter(&$form, &$form_state, $form_id) {
 
       $field_text_number[0]['value']['#attributes'] = $field_text_number['#attributes'];
       unset($field_text_number['#ajax']);
-      unset($field_text_number['#attributes']);    
+      unset($field_text_number['#attributes']);
+
+      // Text Number autoselect (used with wishlist links)
+      if (isset($_GET['number'])) {
+        $field_text_number[0]['value']['#default_value'] = $_GET['number'];
+      }
     }
     //
     if (isset($form['field_jersey_print'][0]['field_text_label']['und'])) {
@@ -333,32 +355,13 @@ function fck_custom_form_alter(&$form, &$form_state, $form_id) {
       $field_text_label[0]['value']['#attributes'] = $field_text_label['#attributes'];
       unset($field_text_label['#ajax']);
       unset($field_text_label['#attributes']);    
-    }
+      
+      // Text Label autoselect (used with wishlist links)
+      if (isset($_GET['label'])) {
+        $field_text_label[0]['value']['#default_value'] = $_GET['label'];
+      }
+    }        
   }
-}
-
-/**
- * Recalculate cart(order) prices after clicking Add to cart button.
- * Used for JerseyPrint products because by default Cart popup has wrong 
- * price calculations (without including attributes prices)
- */
-function fck_custom_recalculate_sellprice_submit($form, &$form_state) {  
-  global $user;
-  // Get order cart entity
-  $order = commerce_cart_order_load($user->uid);  
-  // Recalculate prices for each line item of the cart
-  commerce_cart_order_refresh($order);  
-  // update order total price
-  $order = commerce_order_status_update($order, 'cart', TRUE);  
-  commerce_order_save($order);  
-}
-
-/**
- * Redirect user to Jersey print node after clicking on "Add to cart" button (renamed * to Add print). Supposed to work only for NodeTeaser and NodeModal view modes.
- */
-function fck_custom_jersey_print_redirect($form, &$form_state) {	
-	$nid = $form_state['context']['entity_id'];
-	drupal_goto('node/'.$nid);
 }
 
 /**
@@ -495,8 +498,7 @@ function fck_custom_commerce_pricing_attributes_refresh_prepare_alter(&$commands
       array('')
     );    
     
-    //$commands[] = _jerseyprint_preview_link_command($product, $commerce_option_list);
-    
+    //$commands[] = _jerseyprint_preview_link_command($product, $commerce_option_list);    
   }  
 }
 
@@ -533,4 +535,81 @@ function fck_custom_get_custom_price($text, $type = 'label') {
 	$price = commerce_currency_format($coef * strlen($text), $currency_code);
 
 	return $price; 
+}
+
+/**
+ * Bootstrap modal page - provide image preview 
+ * modal on Jersey Print  
+ */
+function fck_preview_page($fid, $label_text = '', $number_text = '') {
+  $page = array();
+  
+  drupal_add_css(drupal_get_path('module', 'fck_custom') . '/jersey_print_preview.css');    
+
+  $file = file_load($fid);
+  $uri = $file->uri;
+  $url = file_create_url($uri);
+  $output = '';
+  $image = theme('image', array('path' => $url));   
+
+  if (empty($label_text) && empty($number_text)) {
+    $page['result']['#markup'] = $image;
+    return $page;
+  }
+
+  $page['result']['#markup'] = '
+    <div class="work_container" data-label-text="'.$label_text.'" data-number-text="'.$number_text.'"><div class="img_outer">
+      <div class="img_container">
+        '.$image.'
+      </div>
+      <div class="name_wrapper">
+        <div id="name_inscription"></div>
+      </div>
+      <div id="number_inscription"></div>
+      
+    </div></div>';
+
+  return $page;
+}
+
+/**
+ * Redirect user to Jersey print node after clicking on "Add to cart" button (renamed * to Add print). Supposed to work only for NodeTeaser and NodeModal view modes.
+ */
+function fck_custom_jersey_print_redirect($form, &$form_state) {  
+  $nid = $form_state['context']['entity_id'];
+  drupal_goto('node/'.$nid);
+}
+
+/**
+ * Recalculate cart(order) prices after clicking Add to cart button.
+ * Used for JerseyPrint products because by default Cart popup has wrong 
+ * price calculations (without including attributes prices)
+ */
+function fck_custom_recalculate_sellprice_submit($form, &$form_state) {  
+  global $user;
+  // Get order cart entity
+  $order = commerce_cart_order_load($user->uid);  
+  // Recalculate prices for each line item of the cart
+  commerce_cart_order_refresh($order);  
+  // update order total price
+  $order = commerce_order_status_update($order, 'cart', TRUE);  
+  commerce_order_save($order);  
+}
+
+/**
+ * Get attribute size name from display product form (supposed that 
+ * one of size attributes is setup otherwises first attributes will 
+ * be return)
+ */
+function fck_product_form_get_size_attribute($form) {
+  if (isset($form['attributes']['field_outwear_adult_size'])) {
+    return 'field_outwear_adult_size';
+  } elseif (isset($form['attributes']['field_outwear_children_size'])) {
+    return 'field_outwear_children_size';
+  } elseif (isset($form['attributes']['field_outwear_baby_size'])) {
+    return 'field_outwear_baby_size';
+  } elseif (isset($form['attributes']['field_foot_size'])) {
+    return 'field_foot_size';
+  }
+  return '';
 }
