@@ -15656,6 +15656,9 @@ h2.entry-title {
 .subscible-wrapper.subscible-block .wpcf7-response-output {
   top: 0 !important;
 }
+.subscible-wrapper {
+  margin-bottom: 45px !important;
+}
 /*# sourceMappingURL=maps/main.css.map */
 .elements-section {
   padding: 120px 0;
@@ -18579,15 +18582,9 @@ ul li {
     float: left;
   }
 }
-.modal-dialog {
-  z-index: 1630;
-}
 .ctools-modal-dialog .modal-body {
   width: 100% !important;
   overflow: auto;
-}
-.modal-backdrop {
-  z-index: 1610;
 }
 .modal-body {
   padding-top: 0px !important;
