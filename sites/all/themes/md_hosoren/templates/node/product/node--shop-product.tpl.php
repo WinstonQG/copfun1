@@ -79,9 +79,79 @@
  *
  * @ingroup themeable
  */
-
 ?>
-<?php if ($view_mode == 'modal_content'): ?>
+
+<?php if ($view_mode == 'modal_product_detail'): ?>  
+  <div class="product product-grid modal-product-detail <?php print $classes; ?> node-<?php print $node->nid; ?> clearfix"<?php print $attributes; ?>>    
+  <?php if (isset($content['field_product_store'])):?>                              
+    <div class="container-fluid"><div class="row">
+      <div class="col-sm-6">  
+        <div id="fck-modal-carousel" class="carousel slide" data-ride="carousel">
+          <?php if (sizeof($content['product:field_product_images']['#items']) > 1) : ?>
+          <ol class="carousel-indicators">
+            <?php $active_class = "active"; ?>            
+            <?php for ($i=0; $i< sizeof($content['product:field_product_images']['#items']); $i++) : ?>
+              <li data-target="#fck-modal-carousel" data-slide-to="<?php print $i; ?>" class="<?php print $active_class; ?>"></li> 
+              <?php if (!empty($active_class)) { $active_class = ""; } ?>
+            <?php endfor; ?>
+          </ol>
+          <?php endif; ?>
+          <div class="carousel-inner" role="listbox">
+            <?php $active_class = "active"; ?>
+            <?php foreach ($content['product:field_product_images']['#items'] as $item) : ?>
+              <?php $url = image_style_url('product_modal_slider', $item['uri']); ?>
+              <div class="item <?php print $active_class; ?>">
+                <img data-src="holder.js/900x500/auto/#777:#555/text:First slide" alt="First slide [900x500]" src="<?php print $url; ?>" data-holder-rendered="true">
+              </div>
+              <?php if (!empty($active_class)) { $active_class = ""; } ?>
+            <?php endforeach; ?>        
+          </div>
+          <?php if (sizeof($content['product:field_product_images']['#items']) > 1) : ?>
+          <a target="_blank" class="left carousel-control" href="#fck-modal-carousel" role="button" data-slide="prev">
+            <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+            <span class="sr-only">Previous</span>
+          </a>
+          <a target="_blank" class="right carousel-control" href="#fck-modal-carousel" role="button" data-slide="next">
+            <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+            <span class="sr-only">Next</span>
+          </a>
+          <?php endif; ?>
+        </div>                 
+      </div>
+      <div class="col-sm-6">
+        <div class="product-body">
+          <h2 class="product-name"><a href="<?php print $node_url; ?>"><?php print $title; ?></a></h2>
+          
+          <div class="product-status">
+            <?php if (isset($content['field_product_store'][0]['quantity'])):?>
+                <span><?php print t('In Stock') ?></span><span>-</span><div class="small inline"><?php print render($content['product:sku']); ?></div>
+            <?php else: ?>
+                <h5><?php print t('SOLD OUT')?></h5>
+            <?php endif; ?>
+          </div>                      
+          <!-- /.product-status -->
+
+          <div class="product-price"><?php print render($content['product:commerce_price']); ?></div>
+          <div class="product-description">
+            <p><?php print render($content['body']['#items'][0]['summary']); ?></p>
+          </div>
+
+          <div class="product-list-actions-wrapper">
+            <?php print render($content['field_product_store']); ?>              
+          </div>
+          <!-- /.product-actions-wrapper -->
+          <?php if (0) : ?>
+          <div class="product-meta"><span class="product-category"><span><?php print render($content['field_product_category']['#title']); ?>:</span><?php print $categories_list; ?></span><span> - </span><span class="product-tags"><span>Tags:</span><?php print render($content['field_tags']); ?></span></div>
+          <?php endif; ?>
+          <!-- /.product-meta -->
+          </div>
+        </div>
+      </div>
+    </div>                                
+  <?php endif; ?>
+
+  </div>
+<?php elseif ($view_mode == 'modal_content'): ?>  
   <div class="product product-grid <?php print $classes; ?> node-<?php print $node->nid; ?> clearfix"<?php print $attributes; ?>>
     
     <div class="product-media">
@@ -115,16 +185,8 @@
                 </a>
                 <?php if (isset($content['flag_wishlist']['#markup'])): ?>
                   <?php print render($content['flag_wishlist']['#markup']); ?>
-                <?php endif; ?>      
-                <?php if (arg(0) == 'categories') : ?>
-                  <a href="<?php print url('node/'.$node->nid); ?>" class="awe-button" data-toggle="tooltip" title="<?php print t('Quickview'); ?>">
-                      <i class="icon icon-eye"></i>
-                  </a>
-                <?php else : ?>          
-                <a href="#" class="awe-button quick-view-product" data-node-modal="product-<?php print $node->nid; ?>" data-toggle="tooltip" title="<?php print t('Quickview'); ?>">
-                    <i class="icon icon-eye"></i>
-                </a>
-                <?php endif; ?>
+                <?php endif; ?>                      
+                  <?php print ctools_modal_text_button('<i class="icon icon-eye"></i>', 'fck_modals/nojs/product/'.$node->nid, t('Quickview'), 'awe-button quick-view-product'); ?>                                  
           </div>
         </div>
       <?php endif; ?>            
@@ -143,58 +205,10 @@
     </div>    
     <!-- Modal -->
       <?php if (isset($content['field_product_store'])):?>
-        <div class="mfp-wrap modal-product product-<?php print $node->nid; ?>">
-          <div class="mfp-container mfp-ajax-holder mfp-s-ready">
-            <div class="mfp-content">
-              <div class="white-popup product-quickview-popup">
-                <div class="product productcart_inline">
-                    <?php if (isset($content['product:field_product_images'])): ?>
-                      <div class="product-media">
-                        <?php print render($content['product:field_product_images']); ?>
-                      </div>
-                    <?php endif; ?>
-                    <div class="product-body">
-                      <h2 class="product-name"><a href="<?php print $node_url; ?>"><?php print $title; ?></a></h2>
-                      
-                      <div class="product-status">
-                        <?php if (isset($content['field_product_store'][0]['quantity'])):?>
-                            <span><?php print t('In Stock') ?></span><span>-</span><div class="small inline"><?php print render($content['product:sku']); ?></div>
-                        <?php else: ?>
-                            <h5><?php print t('SOLD OUT')?></h5>
-                        <?php endif; ?>
-                      </div>                      
-                      <!-- /.product-status -->
-
-                      <div class="product-price"><?php print render($content['product:commerce_price']); ?></div>
-                      <div class="product-description">
-                        <p><?php print render($content['body']['#items'][0]['summary']); ?></p>
-                      </div>
-
-                      <div class="product-list-actions-wrapper">
-                          <?php print render($content['field_product_store']); ?>
-                          <?php if (isset($content['flag_wishlist']['#markup'])): ?>
-                            <?php print render($content['flag_wishlist']['#markup']); ?>
-                          <?php endif; ?>
-                      </div>
-                      <!-- /.product-actions-wrapper -->
-                      <?php if (0) : ?>
-                      <div class="product-meta"><span class="product-category"><span><?php print render($content['field_product_category']['#title']); ?>:</span><?php print $categories_list; ?></span><span> - </span><span class="product-tags"><span>Tags:</span><?php print render($content['field_tags']); ?></span></div>
-                      <?php endif; ?>
-                      <!-- /.product-meta -->
-                    
-                    </div>  
-                </div>
-                <button title="Close" type="button" class="mfp-close">×</button>
-              </div>
-            </div>
-          </div>
-        </div>
+        
       <?php endif; ?>
 
   </div>
-
- 
-
 
 <?php elseif ($view_mode == 'teaser'): ?>
   <div class="product product-list <?php print $classes; ?> node-<?php print $node->nid; ?> shop_teaser clearfix"<?php print $attributes; ?>>
@@ -238,7 +252,7 @@
           <?php if (isset($content['field_product_store'][0]['quantity'])): ?>
             <?php unset($content['field_product_store'][0]['attributes']['field_size']); ?>
             <?php //unset($content['field_product_store'][0]['attributes']['field_color']); ?>
-            <?php //watchdog('name', '<pre>'.print_r($content['field_product_store'][0]['field_jersey_print'], TRUE).'</pre>'); ?>
+           
             <?php unset($content['field_product_store'][0]['field_jersey_print']); ?>
             <?php print render($content['field_product_store']); ?>
           <?php endif; ?>
@@ -326,6 +340,7 @@
         </div>
       </div>
     </div>  
+
     <?php if(isset($content['sharethis'])): ?>
         <div class="product-socials">
           <?php print render($content['sharethis']); ?>

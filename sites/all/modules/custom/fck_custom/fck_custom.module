@@ -6,12 +6,18 @@
  */
 
 /**
- * Implements hook_init().
+ * Implements hook_entity_info_alter().
  */
-function fck_custom_init() {
-  
+function fck_custom_entity_info_alter(&$entity_info) {
+  $entity_info['node']['view modes']['modal_product_detail'] = array(
+    'label' => t('Modal Product Detail'),
+    'custom settings' => FALSE,
+  );
 }
 
+/**
+ * Implements hook_update_7001().
+ */
 function fck_custom_update_7001() {     
   db_update('system')->fields(array(
     'weight' => 100
@@ -49,6 +55,14 @@ function fck_custom_theme($existing, $type, $theme, $path) {
       'template' => 'jersey-print-form',
     ),
   );
+}
+
+/**
+ * Implements hook_init().
+ */
+function fck_custom_init() {
+  ctools_include('ajax');
+  ctools_include('modal');
 }
 
 /**
@@ -94,8 +108,6 @@ function fck_custom_commerce_cart_attributes_refresh_alter(&$commands, $form, $f
   $refresh_commands = commerce_pricing_attributes_add_to_cart_form_attributes_refresh($form, $form_state);  
   $commands[] = $refresh_commands['#commands'][0];
   
-
-
   // ------------------------------------------
   // hold "Jersey print" price labels on places after switching between options of
   // Size attribute (AJAX callback)
@@ -105,7 +117,6 @@ function fck_custom_commerce_cart_attributes_refresh_alter(&$commands, $form, $f
     $option_data = $form_state['default_product']->field_jersey_print['und'][0]['set_details'];    
     // states of form fields
     $option_values = $form_state['commerce_option']['field_jersey_print'][0]['option'];    
-
     // badge data
     $badge_options = $option_data['field_superliga_badge']['options'];
     // update Badge info if it's filled
@@ -207,7 +218,29 @@ function fck_custom_form_alter(&$form, &$form_state, $form_id) {
     $form_state['build_info']['base_form_id'] == 'commerce_cart_add_to_cart_form') {
     // if product_id is passed - select proper product variant.
     // Only works for node_full view mode.
-    if ($form_state['build_info']['args'][2]['view_mode'] == 'node_full') {      
+    if ($form_state['build_info']['args'][2]['view_mode'] == 'node_modal_product_detail') {
+      global $user;     
+      $form['submit']['#ajax'] = array(
+        'callback' => 'fck_close_modal_callback',
+      );
+      // show wishlist button only for authenticated users
+      if (user_is_logged_in()) {
+        $form['wishlist'] = array(
+          '#type' => 'submit',        
+          '#submit' => array('fck_wishlist_modal_submit'),
+          '#ajax' => array(
+            'callback' => 'fck_close_modal_callback',
+          ),
+        );
+      }
+      //$product_id = $form['product_id']['#value'];
+      $product_nid = $form_state['context']['entity_id'];
+      $flag = flag_get_flag('wishlist');      
+      $is_flagged = $flag->is_flagged($product_nid, $user->uid);
+      $form['wishlist']['#value'] = $is_flagged ? t('Remove Wishlist') : t('Add Wishlist');
+    }
+
+    if ($form_state['build_info']['args'][2]['view_mode'] == 'node_full') {    
       if (isset($_GET['size'])) {
         // get size attribute field name
         $size_attribute = fck_product_form_get_size_attribute($form);
@@ -250,8 +283,7 @@ function fck_custom_form_alter(&$form, &$form_state, $form_id) {
   	// hide Jersey print attributes for Teaser and Modal view modes. Override handler  
   	// of 'Add to cart' button - it should redirect to full node page instead of 
   	// adding product to cart.
-  	if ($form_state['build_info']['args'][2]['view_mode'] == 'node_teaser' ||
-  		$form_state['build_info']['args'][2]['view_mode'] == 'node_modal_content') {
+  	if ($form_state['build_info']['args'][2]['view_mode'] == 'node_modal_product_detail') {
   		if (isset($form['field_jersey_print'])) {
   			unset($form['field_jersey_print']);
 
@@ -576,8 +608,47 @@ function fck_preview_page($fid, $label_text = '', $number_text = '') {
  * Redirect user to Jersey print node after clicking on "Add to cart" button (renamed * to Add print). Supposed to work only for NodeTeaser and NodeModal view modes.
  */
 function fck_custom_jersey_print_redirect($form, &$form_state) {  
-  $nid = $form_state['context']['entity_id'];
-  drupal_goto('node/'.$nid);
+  $product_id = $form_state['values']['product_id'];
+  $product_nid = $form_state['context']['entity_id'];  
+  // generate product link to pick Size attribute
+  $url = url('node/'.$product_nid, 
+    array(
+      'query' => array('size' => $product_id),
+      'absolute' => TRUE,
+    )
+  );
+  // redirect to product node and close modal window
+  $commands[] = ctools_ajax_command_redirect($url);
+  $commands[] = ctools_modal_command_dismiss();
+
+  print ajax_render($commands);
+  exit;
+}
+
+/**
+ * Close ctools modal window nad reload a page.
+ */
+function fck_close_modal_callback($form, $form_state) {  
+  $commands[] = ctools_ajax_command_reload();
+  $commands[] = ctools_modal_command_dismiss();
+
+  print ajax_render($commands);
+  exit;
+}
+
+/**
+ * Flag/Unflag product by form submit.
+ */
+function fck_wishlist_modal_submit($form, $form_state) {
+  //$product_id = $form_state['values']['product_id'];
+  $product_nid = $form_state['context']['entity_id'];  
+  $flag = flag_get_flag('wishlist');
+  $is_flagged = $flag->is_flagged($product_nid, $user->uid);
+  if (!$is_flagged) {
+    $flag->flag('flag', $product_nid);
+  } else {
+    $flag->flag('unflag', $product_nid);    
+  }
 }
 
 /**

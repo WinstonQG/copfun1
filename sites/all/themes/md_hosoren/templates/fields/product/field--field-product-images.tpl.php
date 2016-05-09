@@ -46,7 +46,8 @@
  //print render($items);
 // dsm($element['#view_mode'])
 ?>
-<?php if($element['#view_mode']=='node_modal_content'): ?>
+<?php if($element['#view_mode']=='node_modal_content' || 
+	$element['#view_mode']=='node_modal_product_detail'): ?>
 		<div class="product-quickview-slider owl-carousel owl-carousel-inset">
 			<?php foreach ($items as $delta => $item): ?>
 				<div>
@@ -71,7 +72,7 @@
 
 <?php else: ?>
     
-	<?php if(count($items) == 1):?>
+	<?php if(count($items) == 1) :?>
 		<div class="swiper-container product-slider-main">
       <div class="swiper-wrapper">
 				<div class="easyzoom easyzoom--overlay">

@@ -1,0 +1,7 @@
+name = FCK Modals
+description = Provide cTools Modals for FCK project.
+package = FCK
+core = 7.x
+dependencies[] = commerce
+dependencies[] = ctools
+

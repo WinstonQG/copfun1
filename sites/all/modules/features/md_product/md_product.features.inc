@@ -94,6 +94,53 @@ function md_product_flag_default_flags() {
     ),
     'api_version' => 3,
   );
+  // Exported flag: "Wishlist Product".
+  $flags['wishlist_product'] = array(
+    'entity_type' => 'commerce_product',
+    'title' => 'Wishlist Product',
+    'global' => 0,
+    'types' => array(
+      0 => 'jersey_print',
+      1 => 'product',
+    ),
+    'flag_short' => 'Add wishlist',
+    'flag_long' => '',
+    'flag_message' => '',
+    'unflag_short' => 'Remove wishlist',
+    'unflag_long' => '',
+    'unflag_message' => '',
+    'unflag_denied_text' => '',
+    'link_type' => 'normal',
+    'weight' => 0,
+    'show_in_links' => array(
+      'full' => 'full',
+      'attribute_view' => 0,
+      'token' => 0,
+      'line_item' => 0,
+      'commerce_line_item_display' => 0,
+      'commerce_line_item_token' => 0,
+      'node_full' => 0,
+      'node_teaser' => 0,
+      'node_rss' => 0,
+      'node_search_index' => 0,
+      'node_search_result' => 0,
+      'node_modal_content' => 0,
+      'node_email_plain' => 0,
+      'node_email_html' => 0,
+      'node_email_textalt' => 0,
+      'node_token' => 0,
+      'commerce_discount_offer_token' => 0,
+    ),
+    'show_as_field' => 1,
+    'show_on_form' => 0,
+    'access_author' => '',
+    'show_contextual_link' => 0,
+    'api_version' => 3,
+    'module' => 'md_product',
+    'locked' => array(
+      0 => 'name',
+    ),
+  );
   return $flags;
 
 }

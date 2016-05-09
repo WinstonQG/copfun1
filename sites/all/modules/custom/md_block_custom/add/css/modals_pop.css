@@ -7,6 +7,7 @@
     border: 0px!important;
     padding: 0px!important;
 }
+/*
 .modal-content .form-submit{
     width: 100%;
 }
@@ -15,7 +16,7 @@
     min-height: 310px;
     width: 100%!important;
     height: auto!important;
-    padding-top: 30px!important;
+    padding-top: 30px;
 }
 .ctools-modal-content{
     max-width: 430px;
@@ -23,7 +24,7 @@
     margin: 0px!important;
     height: auto!important;
 }
-
+*/
 div#modalBackdrop{
     background: #0b0b0b!important;
     opacity: .8!important;
@@ -38,9 +39,9 @@ div#modalBackdrop{
 }
 #modal-content .container.messages-content .alert{margin-bottom: 0px;}
 #modal-content form{
-    margin-top: 10px;
+    /*margin-top: 10px;
     padding:30px;
-    padding-top: 10px;
+    padding-top: 10px;*/
 }
 div#modal-content ul.nav.nav-tabs {
     position: absolute;

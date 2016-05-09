@@ -658,6 +658,7 @@ input[type="submit"] + input[type="submit"]{
   }
 
 /* Button Wishlist */
+.logged-in .modal-product-detail a.product-quick-whistlist,
 .logged-in .product-quickview-popup a.product-quick-whistlist, 
 .logged-in .shop_teaser a.product-quick-whistlist,
 .logged-in .product_full a.product-quick-whistlist {
@@ -693,7 +694,9 @@ input[type="submit"] + input[type="submit"]{
 .logged-in .product_full .tooltip {
   display: none !important;
 }
-.logged-in .product-quickview-popup a.product-quick-whistlist:hover, 
+
+.logged-in .modal-product-detail a.product-quick-whistlist:hover,
+.logged-in .product-quickview-popup a.product-quick-whistlist:hover,
 .logged-in .shop_teaser a.product-quick-whistlist:hover,
 .logged-in .product_full a.product-quick-whistlist:hover {
   opacity: 0.9;

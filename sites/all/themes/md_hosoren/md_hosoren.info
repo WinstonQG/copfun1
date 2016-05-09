@@ -29,6 +29,8 @@ regions[footer_fourth] 	= Region Footer fourth
 regions[footer_bottom] 	= Footer bottom
 
 stylesheets[print][] = css/print.css
+scripts[] = js/ctools/modal.js
+
 
 ;settings
 awecontent = 1

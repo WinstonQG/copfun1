@@ -1161,14 +1161,16 @@ function commerce_pricing_attributes_add_to_cart_form_attributes_refresh($form, 
     $product = $form_state['default_product'];    
 
     $commerce_option_list = array();
-    foreach($form_state['commerce_option'] as $field_name => $field){
-      foreach($field as $delta => $item){
-        $option = $item['option'];
-        field_attach_submit('commerce_option', $option, $form[$field_name][$delta], $form_state);
-        $option->field_name = $field_name;
-        $option->field_delta = $delta;
-        $option->product_id = $product->product_id;
-        $commerce_option_list[] = $option;
+    if (isset($form_state['commerce_option'])) {
+      foreach ($form_state['commerce_option'] as $field_name => $field) {
+        foreach ($field as $delta => $item){
+          $option = $item['option'];
+          field_attach_submit('commerce_option', $option, $form[$field_name][$delta], $form_state);
+          $option->field_name = $field_name;
+          $option->field_delta = $delta;
+          $option->product_id = $product->product_id;
+          $commerce_option_list[] = $option;
+        }
       }
     }
 

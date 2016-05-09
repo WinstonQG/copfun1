@@ -12,8 +12,8 @@ global $base_url;
   ctools_modal_add_js();
   ctools_add_js('modal_forms_pop', 'md_block_custom');
 if (function_exists('ctools_modal_text_button')) {
-  $login_pop = ctools_modal_text_button(t('Login'), 'user-form/nojs/login', t('Login'), 'mycoolmodulemodal login-link');
-  $register_pop = ctools_modal_text_button(t('Register'), 'user-form/nojs/register', t('Register'), 'mycoolmodulemodal register-link');
+  $login_pop = ctools_modal_text_button(t('Login'), 'fck_modals/nojs/login', t('Login'), 'mycoolmodulemodal login-link');
+  $register_pop = ctools_modal_text_button(t('Register'), 'fck_modals/nojs/register', t('Register'), 'mycoolmodulemodal register-link');
 }else{
   $login_pop= l(t('Login'), $base_url . '/user/login/', array('attributes' => array('class' => 'login-link'))) ;
   $register_pop = l(t('Register'), $base_url . '/user/register/', array('attributes' => array('class' => 'register-link'))) ;

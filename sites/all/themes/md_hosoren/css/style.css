@@ -6074,7 +6074,6 @@ button.close {
 }
 .modal-dialog {
   position: relative;
-  width: auto;
   margin: 10px;
 }
 .modal-content {
@@ -6152,8 +6151,7 @@ button.close {
 }
 @media (min-width: 768px) {
   .modal-dialog {
-    width: 600px;
-    margin: 30px auto;
+    margin: 60px auto;
   }
   .modal-content {
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
@@ -12024,7 +12022,7 @@ h2.entry-title {
   font-size: 12px;
 }
 .product {
-  margin-bottom: 50px;
+  margin-bottom: 20px;
 }
 .product-name {
   font-size: 14px;
@@ -16611,6 +16609,7 @@ input[type="submit"] + input[type="submit"] {
   display: none;
 }
 /* Button Wishlist */
+.logged-in .modal-product-detail a.product-quick-whistlist,
 .logged-in .product-quickview-popup a.product-quick-whistlist,
 .logged-in .shop_teaser a.product-quick-whistlist,
 .logged-in .product_full a.product-quick-whistlist {
@@ -16620,6 +16619,7 @@ input[type="submit"] + input[type="submit"] {
   width: 167px;
   display: block;*/
 }
+.logged-in .modal-product-detail a.product-quick-whistlist .wishlist-text,
 .logged-in .product-quickview-popup a.product-quick-whistlist .wishlist-text,
 .logged-in .shop_teaser a.product-quick-whistlist .wishlist-text,
 .logged-in .product_full a.product-quick-whistlist .wishlist-text {
@@ -16631,6 +16631,7 @@ input[type="submit"] + input[type="submit"] {
   color: #ffffff;
   text-transform: uppercase;
 }
+.logged-in .modal-product-detail a.product-quick-whistlist .icon,
 .logged-in .product-quickview-popup a.product-quick-whistlist .icon,
 .logged-in .shop_teaser a.product-quick-whistlist .icon,
 .logged-in .product_full a.product-quick-whistlist .icon {
@@ -16646,6 +16647,7 @@ input[type="submit"] + input[type="submit"] {
 .logged-in .product_full .tooltip {
   display: none !important;
 }
+.logged-in .modal-product-detail a.product-quick-whistlist:hover,
 .logged-in .product-quickview-popup a.product-quick-whistlist:hover,
 .logged-in .shop_teaser a.product-quick-whistlist:hover,
 .logged-in .product_full a.product-quick-whistlist:hover {
@@ -18576,6 +18578,42 @@ ul li {
     width: 20%;
     float: left;
   }
+}
+.modal-dialog {
+  z-index: 1630;
+}
+.ctools-modal-dialog .modal-body {
+  width: 100% !important;
+  overflow: auto;
+}
+.modal-backdrop {
+  z-index: 1610;
+}
+.modal-body {
+  padding-top: 0px !important;
+}
+@media (min-width: 768px) {
+  .modal-dialog {
+    width: 500px;
+  }
+  .modal-dialog.fck-product-detail {
+    width: 800px;
+  }
+  .modal-dialog.product-quickview-popup {
+    min-width: auto;
+  }
+  .modal-dialog #modal-content {
+    max-width: 100%;
+  }
+}
+.carousel-inner > .item > img {
+  margin: 0 auto;
+}
+.modal-product-detail form select {
+  width: 120px;
+}
+.modal-product-detail form input {
+  margin-bottom: 10px;
 }
 .btn-primary,
 .fdsfds a {
