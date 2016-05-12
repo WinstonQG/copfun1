@@ -27,14 +27,45 @@ function fck_custom_update_7001() {
 }
 
 /**
+ * Implements hook_flag_flag() 
+ */
+function fck_custom_flag_flag($flag, $entity_id, $account, $flagging) {
+  //watchdog('flag', '<pre>'.print_r($flagging, TRUE).'</pre>');
+  if ($flagging->entity_type == 'commerce_product') {
+    $wrapper = entity_metadata_wrapper($flagging->entity_type, 
+                                       $flagging->entity_id);
+    $bundle = $wrapper->getBundle();
+    if ($bundle == 'jersey_print') {
+      watchdog('flag', '<pre>'.print_r('yes', TRUE).'</pre>');
+    }
+  }
+}
+
+/**
+ * Implements hook_flag_unflag() 
+ */
+function fck_custom_flag_unflag($flag, $entity_id, $account, $flagging) {
+  //watchdog('unflag', '<pre>'.print_r($flagging, TRUE).'</pre>');
+  if ($flagging->entity_type == 'commerce_product') {
+    $wrapper = entity_metadata_wrapper($flagging->entity_type, 
+                                       $flagging->entity_id);
+    $bundle = $wrapper->getBundle();
+    if ($bundle == 'jersey_print') {
+      watchdog('unflag', '<pre>'.print_r('yes', TRUE).'</pre>');
+    }
+  }
+}
+
+/**
  * Implements hook_preprocess_flag() 
  */
 function fck_custom_preprocess_flag(&$vars) {    
   if ($vars['link']['query']['destination'] == 'system/ajax') {
-    $nid = csf_get_referencing_node_id((object)array('product_id' => $vars['entity_id']));
+    /*$nid = csf_get_referencing_node_id((object)array('product_id' => $vars['entity_id']));
     $vars['link']['query']['destination'] = 'node/'.$nid;
     $vars['link_href'] = str_replace('system/ajax', 'node/'.$nid, $vars['link_href']);
     //watchdog('fff', '<pre>'.print_r($vars, TRUE).'</pre>');  
+    */
   }
 }
 
@@ -211,35 +242,72 @@ function fck_custom_preprocess_jersey_print_form(&$variables) {
 }
 
 /**
+ * Save wishlists order handler. 
+ */
+function fck_save_flags_submit($form, &$form_state) {  
+  $product_weight = array();
+  // get weight by product_id
+  foreach ($form_state['values']['field_wishlist_weight_selector'] as $item) {
+    $product_id = key($item['entity']);
+    $product_weight[$product_id] = $item['weight'];    
+  }
+  // save flags manually because Views module provide Commerce 
+  // product entity as main (need to be Flagging but it's unavailable 
+  // in Views)
+  global $user;
+  $query = new EntityFieldQuery();
+  $query->entityCondition('entity_type', 'flagging')
+  ->entityCondition('bundle', 'wishlist_product')
+  ->propertyCondition('uid', $user->uid);
+  $results = $query->execute();
+  foreach ($results['flagging'] as $fid => $item) {
+    $flag = entity_load_single('flagging', $fid);
+    $wrapper = entity_metadata_wrapper('flagging', $flag);
+    $wrapper->field_wishlist_weight->set($product_weight[$flag->entity_id]);
+    $wrapper->save();    
+  }  
+  drupal_set_message(t('The changes have been haved'));
+}
+
+/**
  * Implements hook_form_alter().
  */
 function fck_custom_form_alter(&$form, &$form_state, $form_id) { 
-  if (isset($form_state['build_info']['base_form_id']) && 
+  if ($form_id == 'views_form_wishlist_product_page') {
+    watchdog('ffss3', '<pre>'.print_r($form, TRUE).'</pre>');
+    $form['#submit'][] = 'fck_save_flags_submit';
+  }
+  elseif (isset($form_state['build_info']['base_form_id']) && 
     $form_state['build_info']['base_form_id'] == 'commerce_cart_add_to_cart_form') {
-    // if product_id is passed - select proper product variant.
-    // Only works for node_full view mode.
-    if ($form_state['build_info']['args'][2]['view_mode'] == 'node_modal_product_detail') {
-      global $user;     
+    global $user;
+    // show wishlist button only for authenticated users
+    if (user_is_logged_in()) {
+      $form['wishlist'] = array(
+        '#type' => 'submit',        
+        '#submit' => array('fck_wishlist_modal_submit'),        
+        '#attributes' => array('class' => array('awe-button', 'product-quick-whistlist', 'has_wishlist')),
+      );
+      $product_id = $form['product_id']['#value'];
+      //$product_nid = $form_state['context']['entity_id'];
+      $flag = flag_get_flag('wishlist_product');      
+      $is_flagged = $flag->is_flagged($product_id, $user->uid);
+      $form['wishlist']['#value'] = $is_flagged ? t('Remove Wishlist') : t('Add Wishlist');
+    }    
+    
+    // add AJAX modal close handlers for "Add to cart" & "Wishlist" buttons
+    if ($form_state['build_info']['args'][2]['view_mode'] == 'node_modal_product_detail') { 
+      //          
       $form['submit']['#ajax'] = array(
         'callback' => 'fck_close_modal_callback',
       );
-      // show wishlist button only for authenticated users
+
       if (user_is_logged_in()) {
-        $form['wishlist'] = array(
-          '#type' => 'submit',        
-          '#submit' => array('fck_wishlist_modal_submit'),
-          '#ajax' => array(
-            'callback' => 'fck_close_modal_callback',
-          ),
-        );
-      }
-      //$product_id = $form['product_id']['#value'];
-      $product_nid = $form_state['context']['entity_id'];
-      $flag = flag_get_flag('wishlist');      
-      $is_flagged = $flag->is_flagged($product_nid, $user->uid);
-      $form['wishlist']['#value'] = $is_flagged ? t('Remove Wishlist') : t('Add Wishlist');
+        $form['wishlist']['#ajax']['callback'] = 'fck_close_modal_callback';
+      }      
     }
 
+    // if product_id is passed - select proper product variant.
+    // Only works for node_full view mode.
     if ($form_state['build_info']['args'][2]['view_mode'] == 'node_full') {    
       if (isset($_GET['size'])) {
         // get size attribute field name
@@ -268,12 +336,14 @@ function fck_custom_form_alter(&$form, &$form_state, $form_id) {
         $form['attributes'][$size_attribute]['#default_value'] = $option_key;
         $form['unchanged_attributes'][$size_attribute]['#value'] = $option_key;        
       }
-    }
-    /*$product_id = $form['product_id']['#value'];
+    }    
+    /*
+    $product_id = $form['product_id']['#value'];
     $flag_link = flag_create_link('wishlist_product', $product_id);
     $form['wishlist_product'] = array(
       '#markup' => $flag_link,
-    );*/
+    );
+    */
   }
 
   if (isset($form_state['build_info']['base_form_id']) && 
@@ -640,15 +710,73 @@ function fck_close_modal_callback($form, $form_state) {
  * Flag/Unflag product by form submit.
  */
 function fck_wishlist_modal_submit($form, $form_state) {
-  //$product_id = $form_state['values']['product_id'];
+  global $user;
+  $product_id = $form_state['values']['product_id'];
   $product_nid = $form_state['context']['entity_id'];  
-  $flag = flag_get_flag('wishlist');
-  $is_flagged = $flag->is_flagged($product_nid, $user->uid);
+  $flag = flag_get_flag('wishlist_product');
+  $is_flagged = $flag->is_flagged($product_id, $user->uid);
   if (!$is_flagged) {
-    $flag->flag('flag', $product_nid);
+    $flag->flag('flag', $product_id);
   } else {
-    $flag->flag('unflag', $product_nid);    
+    $flag->flag('unflag', $product_id);    
   }
+
+  $autograph = FALSE;
+  $badge = FALSE;
+  $player = ''; 
+  $label = ''; 
+  $number = '';
+
+  if (isset($form_state['values']['field_jersey_print'])) {
+    $jersey_print = &$form_state['values']['field_jersey_print'][0];
+    $autograph    = $jersey_print['field_autograph']['und'][0]['value'];
+    $badge        = $jersey_print['field_superliga_badge']['und'][0]['value'];
+    $player       = $jersey_print['field_players']['und'][0]['tid'];     
+    $label        = $jersey_print['field_text_label']['und'][0]['value']; 
+    $number       = $jersey_print['field_text_number']['und'][0]['value'];    
+  }  
+  //
+  $url = fck_generate_product_url(
+    $product_nid, 
+    $product_id, 
+    $autograph, 
+    $badge, 
+    $player, 
+    $label, 
+    $number
+  );
+  drupal_goto($url);
+}
+
+/**
+ * Generate product url with parameters like size, jersey print 
+ * (autograph, badge etc). Passed parameters will be picked automatically.
+ * Used with Wishlist buttons and on wishlist page.
+ */
+function fck_generate_product_url($product_nid, $product_id, $autograph = FALSE, $badge = FALSE, $player = '', $label = '', $number = '') {  
+  $params['size'] = $product_id;  
+  if ($autograph) {
+    $params['autograph'] = $autograph;
+  }
+  if ($badge) {
+    $params['badge'] = $badge;
+  }
+  if (!empty($player)) {
+    $params['player'] = $player;
+  }
+  if ($label) {
+    $params['label'] = $label;
+  }
+  if ($number) {
+    $params['number'] = $number;
+  }
+
+  return url('node/'.$product_nid, 
+    array(
+      'query' => $params,
+      'absolute' => TRUE,
+    )
+  );
 }
 
 /**

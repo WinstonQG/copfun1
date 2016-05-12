@@ -40,7 +40,7 @@ function fck_cron_new_product_update() {
   $results = $query->execute();
   $count = 0;  
 
-	watchdog('wk', '<pre>'.print_r('init', TRUE).'</pre>');
+	//watchdog('wk', '<pre>'.print_r('init', TRUE).'</pre>');
 
 	if (isset($results['node'])) {
 	  foreach ($results['node'] as $item) {
@@ -62,14 +62,8 @@ function fck_cron_new_product_update() {
 		    	node_save($node);		    	
 		    }
 		    
-		  } else {
-		  	//watchdog('nPu', '<pre>'.print_r('noWh', TRUE).'</pre>');
 		  }
-
-	    
 	  }
-	} else {
-		//watchdog('nPu', '<pre>'.print_r('noM', TRUE).'</pre>');
 	}
 
   return TRUE;
