@@ -1,0 +1,56 @@
+<?php
+
+/**
+ * Add "Jersey print" product with attirbutes info to wishlist
+ * @param  $product_id 
+ * @param  $uid        
+ * @param  $player_tid 
+ * @param  $label      
+ * @param  $number     
+ * @param  $badge      
+ * @param  $autograph  
+ */
+function fck_jp_add_wishlist($product_id, 
+	$uid, 
+	$player_tid, 
+	$label, 
+	$number, 
+	$badge, 
+	$autograph) {
+	$params = array(
+		'product_id' => $product_id,
+		'uid' => $uid,
+	);
+	if (!empty($label)) {
+		$params['label'] = $label;
+	}
+	if (!empty($number)) {
+		$params['number'] = $number;
+	}
+	if (!empty($player_tid)) {
+		$params['player_tid'] = $player_tid;
+	}	
+	if ($badge) {
+		$params['badge'] = $badge;
+	}
+	if ($autograph) {
+		$params['autograph'] = $autograph;
+	}
+
+
+	db_insert('fck_jp_wishlist')
+  ->fields($params)
+  ->execute();
+}
+ 
+/**
+ * Remove "Jersey print" product with attirbutes info from wishlist
+ * @param  $product_id
+ * @param  $uid
+ */
+function fck_jp_remove_wishlist($product_id, $uid) {
+	db_delete('fck_jp_wishlist')
+  ->condition('product_id', $product_id)
+  ->condition('uid', $uid)  
+  ->execute();
+}

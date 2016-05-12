@@ -1,0 +1,5 @@
+name = FCK Jersey Print
+description = Provide Jersey print functionality for FCK Fun project
+package = FCK
+core = 7.x
+; Files

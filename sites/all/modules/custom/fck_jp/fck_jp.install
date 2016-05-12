@@ -1,0 +1,73 @@
+<?php
+
+/**
+ * Implementation of hook_schema().
+ */
+function fck_jp_schema() {
+  $schema['fck_jp_wishlist'] = array(
+    'description' => 'Stores "Jersey print" attributes to restore wishlist state',
+    'fields' => array(
+      'product_id' => array(
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+        'default' => 0,
+        'description' => 'Product Id',        
+      ),
+      'uid' => array(
+        'description' => 'User Id',
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+        'default' => 0,
+      ),
+      'player_tid' => array(
+        'description' => 'Player attribute',
+        'type' => 'int',        
+        'not null' => TRUE,
+        'default' => 0,
+      ),
+      'label' => array(
+        'description' => 'Label attribute',
+        'type' => 'varchar',
+        'length' => 32,
+        'not null' => TRUE,
+        'default' => '',
+      ),
+      'number' => array(
+        'description' => 'Number attribute',
+        'type' => 'varchar',
+        'length' => 16,
+        'not null' => TRUE,
+        'default' => '',
+      ),
+      'badge' => array(
+        'description' => 'Badge attribute',
+        'type' => 'int',
+        'size' => 'tiny',
+        'not null' => TRUE,
+        'default' => 0,
+      ),
+      'autograph' => array(
+        'description' => 'Autograph attribute',
+        'type' => 'int',
+        'size' => 'tiny',
+        'not null' => TRUE,
+        'default' => 0,
+      ),          
+    ),
+    'primary key' => array('product_id', 'uid'),
+    'indexes' => array(
+      'product_id__uid' => array('product_id', 'uid'),      
+    ),    
+  );
+
+  return $schema;
+}
+
+/**
+* Implementation of hook_uninstall().
+*/
+function fck_jp_uninstall() {
+  
+}
