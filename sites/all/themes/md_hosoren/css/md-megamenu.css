@@ -152,7 +152,7 @@ and open the template in the editor.
 
 /*Main*/
 .md-megamenu .awemenu-item-title{
-    padding: 10px 11px !important;
+    padding: 10px 9px !important;
 }
 .md-megamenu .awemenu-item-level-1 a.awemenu-item-link{
     line-height: 80px;
