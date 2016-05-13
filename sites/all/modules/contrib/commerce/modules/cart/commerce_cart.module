@@ -2661,6 +2661,40 @@ function commerce_cart_field_attach_view_alter(&$output, $context) {
   }
 }
 
+
+/**
+ * Add a product to the cart.
+ *
+ * @param $product_id
+ *   product ID of product to be added.
+ * @param $quantity
+ *   Quantity to be added; default to 1.
+ * @param $uid
+ *   UID of the user's cart to be modified. Defaults to currently logged in
+ *   user.
+ *
+ * @return
+ *   The modified line item, or FALSE on failure.
+ */
+function commerce_cart_add_product_to_cart($product_id, $quantity = 1, $uid = NULL) {
+  $product = commerce_product_load($product_id);
+  if (empty($product)) {
+    return FALSE;
+  }
+  
+  $line_item = commerce_product_line_item_new($product, $quantity);
+  
+  drupal_alter('commerce_product_calculate_sell_price_line_item', $line_item);
+  rules_invoke_event('commerce_product_calculate_sell_price', $line_item);
+  
+  if ($uid === NULL) {
+    $uid = $GLOBALS['user']->uid;
+  }
+
+  $result = commerce_cart_product_add($uid, $line_item);
+  return $result;
+}
+
 /**
  * Returns an array of product IDs used for building an Add to Cart form from
  * the context information in a line item's data array.

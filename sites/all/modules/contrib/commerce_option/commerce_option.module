@@ -218,9 +218,14 @@ function commerce_option_permission() {
  */
 function commerce_option_entity_delete($entity, $type) {
   if ($type == 'commerce_line_item') {
-    db_delete('commerce_option')
-    ->condition('line_item_id', $entity->line_item_id)
-    ->execute();
+    //db_delete('commerce_option')
+    //->condition('line_item_id', $entity->line_item_id)
+    //->execute();
+    $options = commerce_option_load_by_line_item($entity->line_item_id);
+    $options_ids = array_keys($options);
+    if ($options_ids) {
+      entity_delete_multiple('commerce_option', $options_ids);
+    }
   }
 }
 
