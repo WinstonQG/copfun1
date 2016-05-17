@@ -15,7 +15,7 @@ function md_components_taxonomy_default_vocabularies() {
       'description' => '',
       'hierarchy' => 0,
       'module' => 'taxonomy',
-      'weight' => 2,
+      'weight' => -3,
       'language' => 'und',
       'i18n_mode' => 1,
       'rdf_mapping' => array(
@@ -40,7 +40,7 @@ function md_components_taxonomy_default_vocabularies() {
       'description' => 'Categories for Portfolio',
       'hierarchy' => 0,
       'module' => 'taxonomy',
-      'weight' => 3,
+      'weight' => -1,
       'language' => 'und',
       'i18n_mode' => 0,
       'rdf_mapping' => array(
@@ -65,7 +65,7 @@ function md_components_taxonomy_default_vocabularies() {
       'description' => '',
       'hierarchy' => 1,
       'module' => 'taxonomy',
-      'weight' => 4,
+      'weight' => 0,
       'language' => 'und',
       'i18n_mode' => 0,
       'rdf_mapping' => array(
@@ -90,7 +90,7 @@ function md_components_taxonomy_default_vocabularies() {
       'description' => '',
       'hierarchy' => 1,
       'module' => 'taxonomy',
-      'weight' => 5,
+      'weight' => 1,
       'language' => 'und',
       'i18n_mode' => 0,
       'rdf_mapping' => array(
@@ -115,7 +115,7 @@ function md_components_taxonomy_default_vocabularies() {
       'description' => '',
       'hierarchy' => 0,
       'module' => 'taxonomy',
-      'weight' => 6,
+      'weight' => 2,
       'language' => 'und',
       'i18n_mode' => 0,
       'rdf_mapping' => array(
@@ -140,7 +140,7 @@ function md_components_taxonomy_default_vocabularies() {
       'description' => '',
       'hierarchy' => 0,
       'module' => 'taxonomy',
-      'weight' => 7,
+      'weight' => 3,
       'language' => 'und',
       'i18n_mode' => 0,
       'rdf_mapping' => array(
@@ -165,7 +165,7 @@ function md_components_taxonomy_default_vocabularies() {
       'description' => '',
       'hierarchy' => 0,
       'module' => 'taxonomy',
-      'weight' => 8,
+      'weight' => 4,
       'language' => 'und',
       'i18n_mode' => 0,
       'rdf_mapping' => array(
@@ -190,7 +190,7 @@ function md_components_taxonomy_default_vocabularies() {
       'description' => '',
       'hierarchy' => 0,
       'module' => 'taxonomy',
-      'weight' => 9,
+      'weight' => 5,
       'language' => 'und',
       'i18n_mode' => 0,
       'rdf_mapping' => array(
@@ -215,7 +215,7 @@ function md_components_taxonomy_default_vocabularies() {
       'description' => 'Use tags to group articles on similar topics into categories.',
       'hierarchy' => 0,
       'module' => 'taxonomy',
-      'weight' => 10,
+      'weight' => 7,
       'language' => 'und',
       'i18n_mode' => 0,
       'rdf_mapping' => array(
@@ -240,7 +240,7 @@ function md_components_taxonomy_default_vocabularies() {
       'description' => 'Use tags to group articles on similar topics into categories.',
       'hierarchy' => 0,
       'module' => 'taxonomy',
-      'weight' => 10,
+      'weight' => 8,
       'language' => 'und',
       'i18n_mode' => 0,
       'rdf_mapping' => array(

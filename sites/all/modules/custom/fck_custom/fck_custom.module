@@ -27,21 +27,6 @@ function fck_custom_update_7001() {
 }
 
 /**
- * Implements hook_flag_flag() 
- */
-function fck_custom_flag_flag($flag, $entity_id, $account, $flagging) {
-  //watchdog('flag', '<pre>'.print_r($flagging, TRUE).'</pre>');
-  if ($flagging->entity_type == 'commerce_product') {
-    $wrapper = entity_metadata_wrapper($flagging->entity_type, 
-                                       $flagging->entity_id);
-    $bundle = $wrapper->getBundle();
-    if ($bundle == 'jersey_print') {
-      watchdog('flag', '<pre>'.print_r('yes', TRUE).'</pre>');
-    }
-  }
-}
-
-/**
  * Implements hook_flag_unflag() 
  */
 function fck_custom_flag_unflag($flag, $entity_id, $account, $flagging) {
@@ -53,19 +38,6 @@ function fck_custom_flag_unflag($flag, $entity_id, $account, $flagging) {
     if ($bundle == 'jersey_print') {
       watchdog('unflag', '<pre>'.print_r('yes', TRUE).'</pre>');
     }
-  }
-}
-
-/**
- * Implements hook_preprocess_flag() 
- */
-function fck_custom_preprocess_flag(&$vars) {    
-  if ($vars['link']['query']['destination'] == 'system/ajax') {
-    /*$nid = csf_get_referencing_node_id((object)array('product_id' => $vars['entity_id']));
-    $vars['link']['query']['destination'] = 'node/'.$nid;
-    $vars['link_href'] = str_replace('system/ajax', 'node/'.$nid, $vars['link_href']);
-    //watchdog('fff', '<pre>'.print_r($vars, TRUE).'</pre>');  
-    */
   }
 }
 
@@ -270,21 +242,59 @@ function fck_save_flags_submit($form, &$form_state) {
 }
 
 /**
+ * Override commerce_stock_add_to_cart_validate() to work only for Add to cart button (block wishlists buttons)
+ */
+function fck_stock_add_to_cart_validate($form, &$form_state) {
+  //watchdog('name', '<pre>'.print_r($form_state['clicked_button']['#parents'][0], TRUE).'</pre>');
+  if ($form_state['submitted'] && $form_state['clicked_button']['#parents'][0] == 'submit') {
+    // Get product and quantity.
+    $qty = $form_state['values']['quantity'];
+    $product_id = $form_state['values']['product_id'];
+    $product = commerce_product_load($product_id);
+    $qty_ordered = commerce_stock_check_cart_product_level($product_id);
+    // Check using rules.
+    commerce_stock_check_product_rule($product, $qty, $qty_ordered, $stock_state, $message);
+    // Action.
+    if ($stock_state == 1) {
+      form_set_error("stock_error", $message);
+      // emulate Size change event
+      // get size attribute field name
+      $size_attribute = fck_product_form_get_size_attribute($form);
+      // get dom id from size attribute field name
+      $size_attribute_dom_id = '#edit-attributes-' . str_replace('_', '-', $size_attribute);
+
+      // force AJAX refreshing all product attributes
+      drupal_add_js('jQuery(document).ready(function () { $("'.$size_attribute_dom_id.'").trigger("change"); });', 'inline');
+    }
+    elseif ($stock_state == 2) {
+      $form_state['values']['quantity'] = $qty;
+      drupal_set_message($message);
+    }
+  }
+}
+
+/**
  * Implements hook_form_alter().
  */
 function fck_custom_form_alter(&$form, &$form_state, $form_id) { 
-  if ($form_id == 'views_form_wishlist_product_page') {
-    watchdog('ffss3', '<pre>'.print_r($form, TRUE).'</pre>');
+  if ($form_id == 'views_form_wishlist_product_page') {    
     $form['#submit'][] = 'fck_save_flags_submit';
   }
   elseif (isset($form_state['build_info']['base_form_id']) && 
     $form_state['build_info']['base_form_id'] == 'commerce_cart_add_to_cart_form') {
+    //dsm($form);
+
+    // override default stock validation handler because it works even if click on Add/Remove Wishlist buttons
+    if (isset($form['#validate'][1]) && $form['#validate'][1] == 'commerce_stock_add_to_cart_validate') {
+      $form['#validate'][1] = 'fck_stock_add_to_cart_validate';
+    }
+
     global $user;
     // show wishlist button only for authenticated users
     if (user_is_logged_in()) {
       $form['wishlist'] = array(
         '#type' => 'submit',        
-        '#submit' => array('fck_wishlist_modal_submit'),        
+        '#submit' => array('fck_wishlist_modal_submit'),            
         '#attributes' => array('class' => array('awe-button', 'product-quick-whistlist', 'has_wishlist')),
       );
       $product_id = $form['product_id']['#value'];
@@ -336,14 +346,7 @@ function fck_custom_form_alter(&$form, &$form_state, $form_id) {
         $form['attributes'][$size_attribute]['#default_value'] = $option_key;
         $form['unchanged_attributes'][$size_attribute]['#value'] = $option_key;        
       }
-    }    
-    /*
-    $product_id = $form['product_id']['#value'];
-    $flag_link = flag_create_link('wishlist_product', $product_id);
-    $form['wishlist_product'] = array(
-      '#markup' => $flag_link,
-    );
-    */
+    }       
   }
 
   if (isset($form_state['build_info']['base_form_id']) && 
@@ -363,7 +366,7 @@ function fck_custom_form_alter(&$form, &$form_state, $form_id) {
   		}
   	}    
   	$form['#theme'] = 'jersey_print_form';
-    $form['#submit'][] = 'fck_custom_recalculate_sellprice_submit';
+    //$form['#submit'][] = 'fck_custom_recalculate_sellprice_submit';
   	// get Text fid (link is generated in template)
   	$preview_text_fid = '';
   	if (isset($form_state['default_product']->field_text_preview_image['und'])) {
@@ -712,14 +715,7 @@ function fck_close_modal_callback($form, $form_state) {
 function fck_wishlist_modal_submit($form, $form_state) {
   global $user;
   $product_id = $form_state['values']['product_id'];
-  $product_nid = $form_state['context']['entity_id'];  
-  $flag = flag_get_flag('wishlist_product');
-  $is_flagged = $flag->is_flagged($product_id, $user->uid);
-  if (!$is_flagged) {
-    $flag->flag('flag', $product_id);
-  } else {
-    $flag->flag('unflag', $product_id);    
-  }
+  $product_nid = $form_state['context']['entity_id'];
 
   $autograph = FALSE;
   $badge = FALSE;
@@ -727,14 +723,40 @@ function fck_wishlist_modal_submit($form, $form_state) {
   $label = ''; 
   $number = '';
 
+  watchdog('jpo', '<pre>'.print_r($form_state['values'], TRUE).'</pre>');
+  $jersey_print = '';
   if (isset($form_state['values']['field_jersey_print'])) {
-    $jersey_print = &$form_state['values']['field_jersey_print'][0];
-    $autograph    = $jersey_print['field_autograph']['und'][0]['value'];
-    $badge        = $jersey_print['field_superliga_badge']['und'][0]['value'];
+    $jersey_print = &$form_state['values']['field_jersey_print'][0];    
     $player       = $jersey_print['field_players']['und'][0]['tid'];     
     $label        = $jersey_print['field_text_label']['und'][0]['value']; 
-    $number       = $jersey_print['field_text_number']['und'][0]['value'];    
-  }  
+    $number       = $jersey_print['field_text_number']['und'][0]['value'];
+    $badge        = $jersey_print['field_superliga_badge']['und'][0]['value'];
+    $autograph    = $jersey_print['field_autograph']['und'][0]['value'];
+  }
+
+  $flag = flag_get_flag('wishlist_product');
+  $is_flagged = $flag->is_flagged($product_id, $user->uid);
+  if (!$is_flagged) {
+    $flag->flag('flag', $product_id);
+    //
+    if (!empty($jersey_print)) {
+      fck_jp_add_wishlist($product_id, 
+        $user->uid, 
+        $player, 
+        $label, 
+        $number, 
+        $badge, 
+        $autograph
+      );
+    }
+  } else {
+    $flag->flag('unflag', $product_id);
+    //
+    if (!empty($jersey_print)) {
+      fck_jp_remove_wishlist($product_id, $user->uid);
+    }
+  }
+  
   //
   $url = fck_generate_product_url(
     $product_nid, 
@@ -812,3 +834,52 @@ function fck_product_form_get_size_attribute($form) {
   }
   return '';
 }
+
+/**
+ * Get user name by user id
+ */
+function fck_get_username($uid) {
+  return db_select("users", "u")
+  ->fields("u", array("name"))
+  ->condition("uid", $uid)
+  ->execute()
+  ->fetchField();
+}
+
+/**
+ * Get product display id by product variation id
+ */
+function fck_get_node_id($product) { //fck_get_node_id
+  global $language;
+
+  if (is_object($product)) {
+    $product = $product->product_id;
+  }  
+
+  // get static data
+  $data = &drupal_static(__FUNCTION__);
+  if (isset($data[$product]) && !empty($data[$product])) {
+    return $data[$product];
+  }
+
+  // Itterate thhrough fields which refer to products.
+  foreach (commerce_info_fields('commerce_product_reference') as $field['field_name']) {
+    // Build query.
+    $query = new EntityFieldQuery;
+    $query->entityCondition('entity_type', 'node', '=')
+      ->fieldCondition($field['field_name'], 'product_id', $product, '=')      
+      ->range(0, 1);
+
+      
+      $result = $query->execute();      
+    if ($result) {
+      // Return node id.      
+      $nid = array_keys($result['node']);      
+      return array_shift($nid);
+      $data[$product] = array_shift($nid);
+      return $data[$product];
+    }
+  }
+
+  return FALSE;
+} 

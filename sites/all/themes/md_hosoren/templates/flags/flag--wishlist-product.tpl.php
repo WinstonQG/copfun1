@@ -51,7 +51,7 @@
 ?>
 
 <?php if ($link_href): ?>
-  <a href="<?php print $link_href; ?>" title="<?php print $link_text; ?>" class="awe-button product-quick-whistlist <?php (strpos($flag_classes, 'unflag-action') !== FALSE) ? print 'has_wishlist' : print 'no_wishlist'; ?>" data-toggle="tooltip" data-original-title="<?php print $link_text; ?>">
+  <a href="<?php print $link_href; ?>" title="<?php print $link_text; ?>" class="awe-button product-quick-whistlist <?php (strpos($flag_classes, 'unflag-action') !== FALSE) ? print 'has_wishlist' : print 'no_wishlist'; ?>">
     <span class="wishlist-text"><?php print $link_text; ?></span>
     <?php if (strpos($flag_classes, 'unflag-action') !== FALSE) : ?>			
 			<i class="icon icon-star"></i>

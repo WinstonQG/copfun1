@@ -18,6 +18,15 @@ function fck_modals_menu() {
     'access arguments' => array('access content'),
     'type' => MENU_CALLBACK,    
   );
+
+  $items['fck_modals/add/%'] = array(
+    'title' => '',
+    'page callback' => 'fck_add_to_cart_product_link',
+    'page arguments' => array(2),
+    'access arguments' => array('access content'),
+    'type' => MENU_CALLBACK,    
+  );
+
   $items['fck_modals/%ctools_js/register'] = array(
     'title' => '',
     'page callback' => 'fck_modals_register',
@@ -42,6 +51,16 @@ function fck_modals_menu() {
   
   return $items;
 }	
+
+/**
+ * Add product to cart througth product Id 
+ */
+function fck_add_to_cart_product_link($product_id) {
+  commerce_cart_add_product_to_cart($product_id);
+  if (isset($_GET['destination'])) {
+    drupal_goto($_GET['destination']);   
+  }   
+}
 
 /*
 function _md_themesite_modal_content_product_pcb($nid) {

@@ -1159,7 +1159,7 @@ function commerce_pricing_attributes_add_to_cart_form_attributes_refresh($form, 
 
   if(!empty($form_state['default_product']) and !empty($form_state['context'])){
     $product = $form_state['default_product'];    
-
+    
     $commerce_option_list = array();
     if (isset($form_state['commerce_option'])) {
       foreach ($form_state['commerce_option'] as $field_name => $field) {
@@ -1174,8 +1174,7 @@ function commerce_pricing_attributes_add_to_cart_form_attributes_refresh($form, 
       }
     }
 
-    drupal_alter('commerce_pricing_attributes_refresh_prepare', $commands, $commerce_option_list, $form, $form_state);
-
+    drupal_alter('commerce_pricing_attributes_refresh_prepare', $commands, $commerce_option_list, $form, $form_state);    
     // First create a pseudo product line item that we will pass to Rules.
     $line_item = commerce_product_line_item_new($product);
     $line_item->data['commerce_option_list'] = $commerce_option_list;

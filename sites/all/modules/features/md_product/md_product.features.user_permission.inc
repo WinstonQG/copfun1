@@ -21,6 +21,17 @@ function md_product_user_default_permissions() {
     'module' => 'commerce_checkout',
   );
 
+  // Exported permission: 'assign node weight'.
+  $permissions['assign node weight'] = array(
+    'name' => 'assign node weight',
+    'roles' => array(
+      'administrator' => 'administrator',
+      'authenticated user' => 'authenticated user',
+      'merchandiser' => 'merchandiser',
+    ),
+    'module' => 'weight',
+  );
+
   // Exported permission: 'view any commerce_product entity of bundle product'.
   $permissions['view any commerce_product entity of bundle product'] = array(
     'name' => 'view any commerce_product entity of bundle product',

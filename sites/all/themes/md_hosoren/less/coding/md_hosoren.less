@@ -629,7 +629,7 @@ input[type="submit"] + input[type="submit"]{
     .productcart_inline .commerce-add-to-cart .form-submit {
         clear: both;
         float: left;
-        margin: 25px 0;
+        margin: 10px 0;
     }
 }
 
@@ -661,7 +661,8 @@ input[type="submit"] + input[type="submit"]{
 .logged-in .modal-product-detail a.product-quick-whistlist,
 .logged-in .product-quickview-popup a.product-quick-whistlist, 
 .logged-in .shop_teaser a.product-quick-whistlist,
-.logged-in .product_full a.product-quick-whistlist {
+.logged-in .product_full a.product-quick-whistlist,
+.view-wishlist-product a.product-quick-whistlist {
   /*text-indent: -99999px;
   background: url("img/wishlist.png") no-repeat;
   height: 38px;
@@ -698,7 +699,8 @@ input[type="submit"] + input[type="submit"]{
 .logged-in .modal-product-detail a.product-quick-whistlist:hover,
 .logged-in .product-quickview-popup a.product-quick-whistlist:hover,
 .logged-in .shop_teaser a.product-quick-whistlist:hover,
-.logged-in .product_full a.product-quick-whistlist:hover {
+.logged-in .product_full a.product-quick-whistlist:hover,
+.view-wishlist-product a.product-quick-whistlist:hover {
   opacity: 0.9;
 }
 
@@ -781,30 +783,32 @@ input[type="submit"] + input[type="submit"]{
 
 
 /* Wishlist */
-.shop_table a.btn-wishlist{
+table a.btn-wishlist{
     display: inline-block;
     height: 20px;
     width: 20px;
     overflow: hidden;
 }
-.shop_table img {
+table img {
     margin-left: 0;
     max-width: 100px;
 }
-.table th {
+table th {
     text-transform: uppercase;
 }
-.table>tbody>tr>td, .table>thead>tr>td{
+table>tbody>tr>td, table>thead>tr>td{
     vertical-align: middle;
 }
-.table > thead > tr > th{
+table > thead > tr > th{
     border-bottom-width: 1px;
     font-weight: normal;
 }
-.table tr.even, .shop_table tr.odd{
-    background: none;
+table {
+    tr.even, tr.odd {
+        background: none;
+    }
 }
-.table a {
+table a {
     color: #319db5;
 }
 

@@ -38,27 +38,8 @@ if (empty($uid)) {
 	$uid = $user->uid;
 }
 $product_id = $row->product_id;
-$product_nid = fck_get_node_id($product_id);
-$jersey_print = fck_jp_get_wishlist_data($product_id, $uid, TRUE);
-
-$autograph = $jersey_print['field_autograph'];
-$badge = $jersey_print['field_superliga_badge'];
-$player = is_object($jersey_print['field_players']) ? $jersey_print['field_players']->tid : 0;
-$label = $jersey_print['field_text_label'];
-$number = $jersey_print['field_text_number'];
-
-$url = fck_generate_product_url($product_nid, $product_id, $autograph, $badge, $player, $label, $number);
-
-$title = l($output, $url);
-
-$jersey_print_output = '';
-if (!empty($jersey_print)) {	
-	//
-	$product = commerce_product_load($product_id);
-	$jersey_print_data = $product->field_jersey_print['und'][0]['set_details'];
-	$jersey_print_values = $jersey_print;
-	$jersey_print_output = theme('fck_jp_attributes', array('jersey_print_values' => $jersey_print_values, 'jersey_print_data' => $jersey_print_data));	
-}
+$jersey_print = fck_jp_get_wishlist_data($product_id, $uid);
+$price = !empty($jersey_print) ? fck_jp_get_wishlist_price($product_id, $uid, $jersey_print) : $output;
 ?>
-<?php print $title; ?>
-<?php print $jersey_print_output; ?>
+<?php print $price; ?>
+

@@ -120,7 +120,7 @@ function md_product_field_default_field_instances() {
         'label' => 'hidden',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 2,
+        'weight' => 8,
       ),
       'node_email_html' => array(
         'label' => 'hidden',
@@ -281,7 +281,7 @@ function md_product_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 10,
+        'weight' => 14,
       ),
       'node_modal_content' => array(
         'label' => 'above',
@@ -354,7 +354,7 @@ function md_product_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 0,
+        'weight' => 6,
       ),
       'node_modal_content' => array(
         'label' => 'above',
@@ -446,7 +446,7 @@ function md_product_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 0,
+        'weight' => 5,
       ),
       'node_modal_content' => array(
         'label' => 'above',
@@ -641,7 +641,7 @@ function md_product_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 5,
+        'weight' => 9,
       ),
       'node_modal_content' => array(
         'label' => 'above',
@@ -708,7 +708,7 @@ function md_product_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 9,
+        'weight' => 13,
       ),
       'node_modal_content' => array(
         'label' => 'above',
@@ -775,7 +775,7 @@ function md_product_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 6,
+        'weight' => 10,
       ),
       'node_modal_content' => array(
         'label' => 'above',
@@ -842,7 +842,7 @@ function md_product_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 7,
+        'weight' => 11,
       ),
       'node_modal_content' => array(
         'label' => 'above',
@@ -905,7 +905,7 @@ function md_product_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 8,
+        'weight' => 12,
       ),
       'node_modal_content' => array(
         'label' => 'above',
@@ -1095,7 +1095,7 @@ function md_product_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 0,
+        'weight' => 7,
       ),
       'node_modal_content' => array(
         'label' => 'above',

@@ -50,7 +50,7 @@ function commerce_stock_filter_rules_publish_product_display($product) {
 		return;
 	}
 	// get product display id by product variation id
-	$nid = csf_get_referencing_node_id($product);	
+	$nid = fck_get_node_id($product);	
 	$product_display = entity_load_single('node', $nid);	
 	// publish product display	
 	$product_display = node_load($nid);	
@@ -71,7 +71,7 @@ function commerce_stock_filter_rules_unpublish_product_display($product) {
 		return;
 	}
 	// get product display id by product variation id
-	$nid = csf_get_referencing_node_id($product);	
+	$nid = fck_get_node_id($product);	
 	$product_display = entity_load_single('node', $nid);
 	$wrapper = entity_metadata_wrapper('node', $product_display);
 	// calculate a stock of all product variantions

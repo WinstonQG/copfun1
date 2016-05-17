@@ -64,8 +64,10 @@ function commerce_pricing_attributes_calculate_fck_fields($line_item_wrapper){
       }
     } elseif (isset($line_item->commerce_pricing_attributes)) {
       $data = unserialize($line_item->commerce_pricing_attributes);
-      $fck_number = $data['jersey_print']['field_text_number'];
-      $fck_label = $data['jersey_print']['field_text_label'];
+      if (isset($data['jersey_print'])) {
+        $fck_number = $data['jersey_print']['field_text_number'];
+        $fck_label = $data['jersey_print']['field_text_label'];
+      }
     }
     
     $symbol_label = strlen($fck_label)  * variable_get('fck_price_per_letter', 2000);

@@ -2398,6 +2398,71 @@ function md_product_views_default_views() {
   $export['product_small_wishlist'] = $view;
 
   $view = new view();
+  $view->name = 'product_small_wishlist_product';
+  $view->description = '';
+  $view->tag = 'default';
+  $view->base_table = 'commerce_product';
+  $view->human_name = 'Product Small Wishlist Product';
+  $view->core = 7;
+  $view->api_version = '3.0';
+  $view->disabled = FALSE; /* Edit this to true to make a default view disabled initially */
+
+  /* Display: Master */
+  $handler = $view->new_display('default', 'Master', 'default');
+  $handler->display->display_options['use_more'] = TRUE;
+  $handler->display->display_options['use_more_always'] = TRUE;
+  $handler->display->display_options['use_more_text'] = 'View Wishlist';
+  $handler->display->display_options['link_display'] = 'custom_url';
+  $handler->display->display_options['access']['type'] = 'perm';
+  $handler->display->display_options['cache']['type'] = 'none';
+  $handler->display->display_options['query']['type'] = 'views_query';
+  $handler->display->display_options['exposed_form']['type'] = 'basic';
+  $handler->display->display_options['pager']['type'] = 'none';
+  $handler->display->display_options['style_plugin'] = 'list';
+  $handler->display->display_options['style_options']['default_row_class'] = FALSE;
+  $handler->display->display_options['style_options']['row_class_special'] = FALSE;
+  $handler->display->display_options['style_options']['class'] = 'whishlist';
+  $handler->display->display_options['style_options']['wrapper_class'] = '';
+  $handler->display->display_options['row_plugin'] = 'fields';
+  /* No results behavior: Global: Text area */
+  $handler->display->display_options['empty']['area']['id'] = 'area';
+  $handler->display->display_options['empty']['area']['table'] = 'views';
+  $handler->display->display_options['empty']['area']['field'] = 'area';
+  $handler->display->display_options['empty']['area']['empty'] = TRUE;
+  $handler->display->display_options['empty']['area']['content'] = '<span class="text-muted"><?php print "Wishlist is empty"; ?></span>';
+  $handler->display->display_options['empty']['area']['format'] = 'php_code';
+  /* Relationship: Flags: wishlist_product */
+  $handler->display->display_options['relationships']['flag_content_rel']['id'] = 'flag_content_rel';
+  $handler->display->display_options['relationships']['flag_content_rel']['table'] = 'commerce_product';
+  $handler->display->display_options['relationships']['flag_content_rel']['field'] = 'flag_content_rel';
+  $handler->display->display_options['relationships']['flag_content_rel']['flag'] = 'wishlist_product';
+  /* Field: Commerce Product: Product ID */
+  $handler->display->display_options['fields']['product_id']['id'] = 'product_id';
+  $handler->display->display_options['fields']['product_id']['table'] = 'commerce_product';
+  $handler->display->display_options['fields']['product_id']['field'] = 'product_id';
+  $handler->display->display_options['fields']['product_id']['label'] = '';
+  $handler->display->display_options['fields']['product_id']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['product_id']['link_to_product'] = 0;
+  /* Sort criterion: Flagging: Wishlist Weight (field_wishlist_weight) */
+  $handler->display->display_options['sorts']['field_wishlist_weight_value']['id'] = 'field_wishlist_weight_value';
+  $handler->display->display_options['sorts']['field_wishlist_weight_value']['table'] = 'field_data_field_wishlist_weight';
+  $handler->display->display_options['sorts']['field_wishlist_weight_value']['field'] = 'field_wishlist_weight_value';
+  $handler->display->display_options['sorts']['field_wishlist_weight_value']['relationship'] = 'flag_content_rel';
+  /* Filter criterion: Commerce Product: Type */
+  $handler->display->display_options['filters']['type']['id'] = 'type';
+  $handler->display->display_options['filters']['type']['table'] = 'commerce_product';
+  $handler->display->display_options['filters']['type']['field'] = 'type';
+  $handler->display->display_options['filters']['type']['value'] = array(
+    'product' => 'product',
+    'jersey_print' => 'jersey_print',
+  );
+
+  /* Display: Block */
+  $handler = $view->new_display('block', 'Block', 'block');
+  $handler->display->display_options['link_url'] = 'wishlist';
+  $export['product_small_wishlist_product'] = $view;
+
+  $view = new view();
   $view->name = 'product_trending';
   $view->description = '';
   $view->tag = 'default';
@@ -2601,8 +2666,287 @@ if (empty($uid)) {
 
   /* Display: Page */
   $handler = $view->new_display('page', 'Page', 'page');
-  $handler->display->display_options['path'] = 'wishlist';
+  $handler->display->display_options['path'] = 'wishlist-node';
   $export['product_wishlist'] = $view;
+
+  $view = new view();
+  $view->name = 'wishlist_product';
+  $view->description = '';
+  $view->tag = 'default';
+  $view->base_table = 'commerce_product';
+  $view->human_name = 'Wishlist Product';
+  $view->core = 7;
+  $view->api_version = '3.0';
+  $view->disabled = FALSE; /* Edit this to true to make a default view disabled initially */
+
+  /* Display: Master */
+  $handler = $view->new_display('default', 'Master', 'default');
+  $handler->display->display_options['title'] = 'Wishlist';
+  $handler->display->display_options['use_more_always'] = FALSE;
+  $handler->display->display_options['access']['type'] = 'none';
+  $handler->display->display_options['cache']['type'] = 'none';
+  $handler->display->display_options['query']['type'] = 'views_query';
+  $handler->display->display_options['exposed_form']['type'] = 'basic';
+  $handler->display->display_options['pager']['type'] = 'some';
+  $handler->display->display_options['pager']['options']['items_per_page'] = '10';
+  $handler->display->display_options['style_plugin'] = 'table';
+  $handler->display->display_options['style_options']['columns'] = array(
+    'field_product_images' => 'field_product_images',
+    'title' => 'title',
+    'product_id' => 'product_id',
+    'commerce_price' => 'commerce_price',
+  );
+  $handler->display->display_options['style_options']['default'] = '-1';
+  $handler->display->display_options['style_options']['info'] = array(
+    'field_product_images' => array(
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'title' => array(
+      'sortable' => 0,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'product_id' => array(
+      'sortable' => 0,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'commerce_price' => array(
+      'sortable' => 0,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+  );
+  /* Header: Global: Text area */
+  $handler->display->display_options['header']['area']['id'] = 'area';
+  $handler->display->display_options['header']['area']['table'] = 'views';
+  $handler->display->display_options['header']['area']['field'] = 'area';
+  $handler->display->display_options['header']['area']['content'] = '<?php 
+$uid = arg(1); 
+if (empty($uid)) {
+  global $user;
+  $uid = $user->uid;
+}
+?>
+<?php $path = url(\'wishlist/\'.$uid, array(\'absolute\' => TRUE)); ?>
+<div class="wishlist-share-container">
+<h2 class="fck-wishlist-title"><?php print t("Wishlist of %name", array(\'%name\' => $uid)); ?></h2>
+<div class="print-page"><a href="javascript:window.print();"><?php print \'Print wishlist\'; ?></a></div>
+<?php print theme(\'sharethis\', array(
+      \'data_options\' => sharethis_get_options_array(),
+      \'m_title\' => t(\'Wishlist\'),
+      \'m_path\' => $path,
+    )); ?>
+<div class="share-link"><span><?php print t(\'Share link\'); ?></span>: <strong><?php print $path; ?></strong></div>
+</div>';
+  $handler->display->display_options['header']['area']['format'] = 'php_code';
+  /* Relationship: Flags: wishlist_product */
+  $handler->display->display_options['relationships']['flag_content_rel']['id'] = 'flag_content_rel';
+  $handler->display->display_options['relationships']['flag_content_rel']['table'] = 'commerce_product';
+  $handler->display->display_options['relationships']['flag_content_rel']['field'] = 'flag_content_rel';
+  $handler->display->display_options['relationships']['flag_content_rel']['flag'] = 'wishlist_product';
+  $handler->display->display_options['relationships']['flag_content_rel']['user_scope'] = 'any';
+  /* Field: Commerce Product: Product ID */
+  $handler->display->display_options['fields']['product_id']['id'] = 'product_id';
+  $handler->display->display_options['fields']['product_id']['table'] = 'commerce_product';
+  $handler->display->display_options['fields']['product_id']['field'] = 'product_id';
+  $handler->display->display_options['fields']['product_id']['label'] = '';
+  $handler->display->display_options['fields']['product_id']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['product_id']['element_type'] = '0';
+  $handler->display->display_options['fields']['product_id']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['product_id']['element_default_classes'] = FALSE;
+  $handler->display->display_options['fields']['product_id']['link_to_product'] = 0;
+  /* Field: Commerce Product: Product Images */
+  $handler->display->display_options['fields']['field_product_images']['id'] = 'field_product_images';
+  $handler->display->display_options['fields']['field_product_images']['table'] = 'field_data_field_product_images';
+  $handler->display->display_options['fields']['field_product_images']['field'] = 'field_product_images';
+  $handler->display->display_options['fields']['field_product_images']['label'] = '';
+  $handler->display->display_options['fields']['field_product_images']['click_sort_column'] = 'fid';
+  $handler->display->display_options['fields']['field_product_images']['type'] = 'image_delta';
+  $handler->display->display_options['fields']['field_product_images']['settings'] = array(
+    'deltas' => '0',
+    'deltas_reversed' => 0,
+    'image_style' => 'product_list_small',
+    'image_link' => '',
+  );
+  $handler->display->display_options['fields']['field_product_images']['delta_offset'] = '0';
+  /* Field: Commerce Product: Title */
+  $handler->display->display_options['fields']['title']['id'] = 'title';
+  $handler->display->display_options['fields']['title']['table'] = 'commerce_product';
+  $handler->display->display_options['fields']['title']['field'] = 'title';
+  $handler->display->display_options['fields']['title']['label'] = 'Product';
+  $handler->display->display_options['fields']['title']['link_to_product'] = 0;
+  /* Field: Commerce Product: Price */
+  $handler->display->display_options['fields']['commerce_price']['id'] = 'commerce_price';
+  $handler->display->display_options['fields']['commerce_price']['table'] = 'field_data_commerce_price';
+  $handler->display->display_options['fields']['commerce_price']['field'] = 'commerce_price';
+  $handler->display->display_options['fields']['commerce_price']['click_sort_column'] = 'amount';
+  $handler->display->display_options['fields']['commerce_price']['settings'] = array(
+    'calculation' => 'calculated_sell_price',
+  );
+  /* Field: Flagging: Wishlist Weight Selector */
+  $handler->display->display_options['fields']['field_wishlist_weight_selector']['id'] = 'field_wishlist_weight_selector';
+  $handler->display->display_options['fields']['field_wishlist_weight_selector']['table'] = 'field_data_field_wishlist_weight';
+  $handler->display->display_options['fields']['field_wishlist_weight_selector']['field'] = 'field_wishlist_weight_selector';
+  $handler->display->display_options['fields']['field_wishlist_weight_selector']['relationship'] = 'flag_content_rel';
+  $handler->display->display_options['fields']['field_wishlist_weight_selector']['label'] = '';
+  $handler->display->display_options['fields']['field_wishlist_weight_selector']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['field_wishlist_weight_selector']['weight_range'] = '20';
+  /* Field: Flags: Flag link */
+  $handler->display->display_options['fields']['ops']['id'] = 'ops';
+  $handler->display->display_options['fields']['ops']['table'] = 'flagging';
+  $handler->display->display_options['fields']['ops']['field'] = 'ops';
+  $handler->display->display_options['fields']['ops']['relationship'] = 'flag_content_rel';
+  $handler->display->display_options['fields']['ops']['label'] = '';
+  /* Sort criterion: Flagging: Wishlist Weight (field_wishlist_weight) */
+  $handler->display->display_options['sorts']['field_wishlist_weight_value']['id'] = 'field_wishlist_weight_value';
+  $handler->display->display_options['sorts']['field_wishlist_weight_value']['table'] = 'field_data_field_wishlist_weight';
+  $handler->display->display_options['sorts']['field_wishlist_weight_value']['field'] = 'field_wishlist_weight_value';
+  $handler->display->display_options['sorts']['field_wishlist_weight_value']['relationship'] = 'flag_content_rel';
+  /* Contextual filter: Flags: User uid */
+  $handler->display->display_options['arguments']['uid']['id'] = 'uid';
+  $handler->display->display_options['arguments']['uid']['table'] = 'flagging';
+  $handler->display->display_options['arguments']['uid']['field'] = 'uid';
+  $handler->display->display_options['arguments']['uid']['relationship'] = 'flag_content_rel';
+  $handler->display->display_options['arguments']['uid']['default_action'] = 'default';
+  $handler->display->display_options['arguments']['uid']['default_argument_type'] = 'current_user';
+  $handler->display->display_options['arguments']['uid']['summary']['number_of_records'] = '0';
+  $handler->display->display_options['arguments']['uid']['summary']['format'] = 'default_summary';
+  $handler->display->display_options['arguments']['uid']['summary_options']['items_per_page'] = '25';
+  /* Filter criterion: Commerce Product: Type */
+  $handler->display->display_options['filters']['type']['id'] = 'type';
+  $handler->display->display_options['filters']['type']['table'] = 'commerce_product';
+  $handler->display->display_options['filters']['type']['field'] = 'type';
+  $handler->display->display_options['filters']['type']['value'] = array(
+    'product' => 'product',
+    'jersey_print' => 'jersey_print',
+  );
+
+  /* Display: Wishlist Own */
+  $handler = $view->new_display('page', 'Wishlist Own', 'page');
+  $handler->display->display_options['defaults']['header'] = FALSE;
+  /* Header: Global: Text area */
+  $handler->display->display_options['header']['area']['id'] = 'area';
+  $handler->display->display_options['header']['area']['table'] = 'views';
+  $handler->display->display_options['header']['area']['field'] = 'area';
+  $handler->display->display_options['header']['area']['content'] = '<?php 
+$uid = arg(1); 
+if (empty($uid)) {
+  global $user;
+  $uid = $user->uid;
+}
+?>
+<?php $path = url(\'wishlist/\'.$uid, array(\'absolute\' => TRUE)); ?>
+<div class="wishlist-share-container">
+<h2 class="fck-wishlist-title"><?php print t("Wishlist"); ?></h2>
+<div class="print-page"><a href="javascript:window.print();"><?php print \'Print wishlist\'; ?></a></div>
+<?php print theme(\'sharethis\', array(
+      \'data_options\' => sharethis_get_options_array(),
+      \'m_title\' => t(\'Wishlist\'),
+      \'m_path\' => $path,
+    )); ?>
+<div class="share-link"><span><?php print t(\'Share link\'); ?></span>: <strong><?php print $path; ?></strong></div>
+</div>';
+  $handler->display->display_options['header']['area']['format'] = 'php_code';
+  $handler->display->display_options['path'] = 'wishlist';
+
+  /* Display: Wishlist UID */
+  $handler = $view->new_display('page', 'Wishlist UID', 'page_1');
+  $handler->display->display_options['defaults']['header'] = FALSE;
+  /* Header: Global: Text area */
+  $handler->display->display_options['header']['area']['id'] = 'area';
+  $handler->display->display_options['header']['area']['table'] = 'views';
+  $handler->display->display_options['header']['area']['field'] = 'area';
+  $handler->display->display_options['header']['area']['content'] = '<?php 
+$uid = arg(1); 
+$username = \'\';
+if (empty($uid)) {
+  global $user;
+  $uid = $user->uid;
+  $username = $user->name;
+} else {
+    $username = fck_get_username($uid);
+}
+?>
+<?php $path = url(\'wishlist/\'.$uid, array(\'absolute\' => TRUE)); ?>
+<div class="wishlist-share-container">
+<h3 class="fck-wishlist-title"><?php print t("Wishlist of %name user", array(\'%name\' => $username)); ?></h3>
+<div class="print-page"><a href="javascript:window.print();"><?php print \'Print wishlist\'; ?></a></div>
+<?php print theme(\'sharethis\', array(
+      \'data_options\' => sharethis_get_options_array(),
+      \'m_title\' => t(\'Wishlist\'),
+      \'m_path\' => $path,
+    )); ?>
+<div class="share-link"><span><?php print t(\'Share link\'); ?></span>: <strong><?php print $path; ?></strong></div>
+</div>';
+  $handler->display->display_options['header']['area']['format'] = 'php_code';
+  $handler->display->display_options['defaults']['fields'] = FALSE;
+  /* Field: Commerce Product: Product ID */
+  $handler->display->display_options['fields']['product_id']['id'] = 'product_id';
+  $handler->display->display_options['fields']['product_id']['table'] = 'commerce_product';
+  $handler->display->display_options['fields']['product_id']['field'] = 'product_id';
+  $handler->display->display_options['fields']['product_id']['label'] = '';
+  $handler->display->display_options['fields']['product_id']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['product_id']['element_type'] = '0';
+  $handler->display->display_options['fields']['product_id']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['product_id']['element_default_classes'] = FALSE;
+  $handler->display->display_options['fields']['product_id']['link_to_product'] = 0;
+  /* Field: Commerce Product: Product Images */
+  $handler->display->display_options['fields']['field_product_images']['id'] = 'field_product_images';
+  $handler->display->display_options['fields']['field_product_images']['table'] = 'field_data_field_product_images';
+  $handler->display->display_options['fields']['field_product_images']['field'] = 'field_product_images';
+  $handler->display->display_options['fields']['field_product_images']['label'] = '';
+  $handler->display->display_options['fields']['field_product_images']['click_sort_column'] = 'fid';
+  $handler->display->display_options['fields']['field_product_images']['type'] = 'image_delta';
+  $handler->display->display_options['fields']['field_product_images']['settings'] = array(
+    'deltas' => '0',
+    'deltas_reversed' => 0,
+    'image_style' => 'product_list_small',
+    'image_link' => '',
+  );
+  $handler->display->display_options['fields']['field_product_images']['delta_offset'] = '0';
+  /* Field: Commerce Product: Title */
+  $handler->display->display_options['fields']['title']['id'] = 'title';
+  $handler->display->display_options['fields']['title']['table'] = 'commerce_product';
+  $handler->display->display_options['fields']['title']['field'] = 'title';
+  $handler->display->display_options['fields']['title']['label'] = 'Product';
+  $handler->display->display_options['fields']['title']['link_to_product'] = 0;
+  /* Field: Commerce Product: Price */
+  $handler->display->display_options['fields']['commerce_price']['id'] = 'commerce_price';
+  $handler->display->display_options['fields']['commerce_price']['table'] = 'field_data_commerce_price';
+  $handler->display->display_options['fields']['commerce_price']['field'] = 'commerce_price';
+  $handler->display->display_options['fields']['commerce_price']['click_sort_column'] = 'amount';
+  $handler->display->display_options['fields']['commerce_price']['settings'] = array(
+    'calculation' => 'calculated_sell_price',
+  );
+  /* Field: Flags: Flag link */
+  $handler->display->display_options['fields']['ops']['id'] = 'ops';
+  $handler->display->display_options['fields']['ops']['table'] = 'flagging';
+  $handler->display->display_options['fields']['ops']['field'] = 'ops';
+  $handler->display->display_options['fields']['ops']['relationship'] = 'flag_content_rel';
+  $handler->display->display_options['fields']['ops']['label'] = '';
+  $handler->display->display_options['defaults']['arguments'] = FALSE;
+  /* Contextual filter: Flags: User uid */
+  $handler->display->display_options['arguments']['uid']['id'] = 'uid';
+  $handler->display->display_options['arguments']['uid']['table'] = 'flagging';
+  $handler->display->display_options['arguments']['uid']['field'] = 'uid';
+  $handler->display->display_options['arguments']['uid']['relationship'] = 'flag_content_rel';
+  $handler->display->display_options['arguments']['uid']['default_action'] = 'default';
+  $handler->display->display_options['arguments']['uid']['default_argument_type'] = 'user';
+  $handler->display->display_options['arguments']['uid']['default_argument_options']['user'] = FALSE;
+  $handler->display->display_options['arguments']['uid']['summary']['number_of_records'] = '0';
+  $handler->display->display_options['arguments']['uid']['summary']['format'] = 'default_summary';
+  $handler->display->display_options['arguments']['uid']['summary_options']['items_per_page'] = '25';
+  $handler->display->display_options['path'] = 'wishlist/%';
+  $export['wishlist_product'] = $view;
 
   return $export;
 }

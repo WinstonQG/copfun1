@@ -395,7 +395,7 @@ function md_components_field_default_field_bases() {
   // Exported field_base: 'field_group'.
   $field_bases['field_group'] = array(
     'active' => 1,
-    'cardinality' => 1,
+    'cardinality' => -1,
     'deleted' => 0,
     'entity_types' => array(),
     'field_name' => 'field_group',
@@ -408,8 +408,9 @@ function md_components_field_default_field_bases() {
     'module' => 'list',
     'settings' => array(
       'allowed_values' => array(
-        'hot' => 'Hot',
-        'new' => 'New',
+        'featured' => 'Feature list top',
+        'hot' => 'Feature list middle',
+        'new' => 'Feature list bottom (New)',
       ),
       'allowed_values_function' => '',
     ),

@@ -1,4 +1,4 @@
-name = FCK Jersey Print
+name = FCK Custom
 description = Provide Jersey Print functionality for FCK project (fck_custom folder name TODO: rename)
 package = FCK
 core = 7.x

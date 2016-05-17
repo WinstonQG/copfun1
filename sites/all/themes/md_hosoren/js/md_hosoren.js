@@ -105,13 +105,7 @@
             var select = $(e.target);
             if (select.is(".mfp-wrap") || select.is(".mfp-container") || select.is(".mfp-content") || select.is(".mfp-close"))
                 $('.modal-product').removeClass("modal-quickview");
-        });
-        $('.product-grid .product-add-cart').click(function () {
-
-            var node = $(this).attr('data-node-cart');
-            $(this).closest('.product-grid').find('.' + node).find('.commerce-add-to-cart .form-submit').trigger('click');
-            return false;
-        });
+        });        
 
         /* Sidebar Accordion */
         if ($('.category_accordion').has('a.active').length > 0) {

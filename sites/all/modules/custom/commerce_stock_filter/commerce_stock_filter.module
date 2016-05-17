@@ -30,28 +30,3 @@ function commerce_stock_filter_node_presave($node) {
 		}
 	}	
 }
- 
-/**
- * Get product display id by product variation id
- */
-function csf_get_referencing_node_id($product) {
-  global $language;
-
-  // Itterate thhrough fields which refer to products.
-  foreach (commerce_info_fields('commerce_product_reference') as $field['field_name']) {
-    // Build query.
-    $query = new EntityFieldQuery;
-    $query->entityCondition('entity_type', 'node', '=')
-      ->fieldCondition($field['field_name'], 'product_id', $product->product_id, '=')
-      ->propertyCondition('language', $language->language, '=')
-      ->range(0, 1);
-
-    if ($result = $query->execute()) {
-      // Return node id.
-      $nid = array_keys($result['node']);
-      return array_shift($nid);
-    }
-  }
-
-  return FALSE;
-}	

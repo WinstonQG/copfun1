@@ -1,0 +1,54 @@
+.view-wishlist-product {
+	
+	.view-header {
+		display: table;
+	    width: 100%;
+	    
+	    margin-bottom: 20px;
+	}
+
+	.tabledrag-toggle-weight-wrapper {
+		display: none;
+	}
+
+	.print-page a, 
+	.st_email_custom:after, 
+	.st_facebook_custom:after, 
+	.share-link {
+		float: left;
+
+		margin-right: 10px;
+	}
+
+	.share-link {
+	    margin-top: 10px;
+	    margin-left: 10px;
+	}
+
+	.print-page a, .st_email_custom:after, .st_facebook_custom:after {	
+		display: inline-block;
+		
+		padding: 10px 15px;
+		
+		background: #333333;
+
+	    font-size: 13px;
+	    font-family: 'FCK';
+	    letter-spacing: 1px;		    
+	    color: #fff;		    		    	        
+	    text-transform: uppercase;
+	    cursor: pointer;	
+	}
+
+	.st_email_custom {
+		&:after {
+			content: 'Send som e-mail';
+		}
+	}
+
+	.st_facebook_custom {
+		&:after {
+			content: 'Del pa facebook';
+		}
+	}
+}

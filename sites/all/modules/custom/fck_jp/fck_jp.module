@@ -1,6 +1,64 @@
 <?php
 
 /**
+ * Implements hook_theme().
+ */
+function fck_jp_theme($existing, $type, $theme, $path) {	
+	return array(    
+    'fck_jp_attributes' => array(
+      'variables' => array(
+      	'jersey_print_values' => NULL, 
+      	'jersey_print_prices' => NULL,
+      	'show_price' => TRUE,
+    	),
+      'template' => 'fck-jersey-print-attributes',
+    ),
+  );
+}
+
+/**
+ * Implements hook_preprocess_fck_jp_attributes() 
+ */
+function fck_jp_preprocess_fck_jp_attributes(&$vars) {
+	$jersey_print_values = $vars['jersey_print_values'];
+	$jersey_print_data = $vars['jersey_print_data'];
+	$jersey_print_prices = array();
+
+	if ($jersey_print_values['field_superliga_badge']) {
+		// superliga badge option
+		$option = $jersey_print_data['field_superliga_badge']['options'][1];
+		$price = commerce_currency_format($option['price'], $option['currency_code']);
+		$jersey_print_prices['field_superliga_badge'] = $jersey_print_values['field_superliga_badge'] ? $price : '';
+	}
+
+	if ($jersey_print_values['field_autograph']) {
+		// autograph option
+		$option = $jersey_print_data['field_autograph']['options'][1];
+		$price = commerce_currency_format($option['price'], $option['currency_code']);
+		$jersey_print_prices['field_autograph'] = $jersey_print_values['field_autograph'] ? $price : '';
+	}
+	
+	if (!empty($jersey_print_values['field_players']) && !is_null($jersey_print_values['field_players'])) {
+		// players option
+		$option = $jersey_print_data['field_players']['options'][$jersey_print_values['field_players']->tid];
+		$price = commerce_currency_format($option['price'], $option['currency_code']);	
+		$jersey_print_prices['field_players'] = $jersey_print_values['field_players'] ? $price : '';
+	}
+	// Label text option
+	$text_label = $jersey_print_values['field_text_label'];
+	if (!empty($text_label)) {		
+		$jersey_print_prices['field_text_label'] = fck_custom_get_custom_price($text_label, 'label');
+	}
+	// Number text option
+	$text_number = $jersey_print_values['field_text_number'];
+	if (!empty($text_number)) {			
+		$jersey_print_prices['field_text_number'] = fck_custom_get_custom_price($text_number, 'number');
+	}
+
+	$vars['jersey_print_prices'] = $jersey_print_prices;
+}
+
+/**
  * Add "Jersey print" product with attirbutes info to wishlist
  * @param  $product_id 
  * @param  $uid        
@@ -53,4 +111,78 @@ function fck_jp_remove_wishlist($product_id, $uid) {
   ->condition('product_id', $product_id)
   ->condition('uid', $uid)  
   ->execute();
+}
+
+/**
+ * Get "Jersey print" data from wishlist
+ * @param  $product_id
+ * @param  $uid
+ */
+function fck_jp_get_wishlist_data($product_id, $uid, $fields_type = FALSE) {	
+	$data = &drupal_static(__FUNCTION__);
+  if (!isset($data[$product_id])) {
+		$data[$product_id] = db_query('SELECT product_id, uid, player_tid, 
+			label, number, badge, autograph
+	    FROM {fck_jp_wishlist}    
+	    WHERE product_id = :product_id     
+	    AND uid = :uid',
+	    array(':product_id' => $product_id, ':uid' => $uid)
+	  )->fetch();
+	}
+
+	if (!empty($data[$product_id]) && $fields_type) {
+		$player = '';
+		//dsm($data[$product_id]);
+		if (!empty($data[$product_id]->player_tid)) {
+			$player = $data[$product_id]->player_tid;
+			$player = taxonomy_term_load($player);			
+		}
+		
+		return array(
+			'field_text_label' => $data[$product_id]->label,
+			'field_text_number' => $data[$product_id]->number,
+			'field_autograph' => $data[$product_id]->autograph,
+			'field_superliga_badge' => $data[$product_id]->badge,
+			'field_players' => $player,
+		);
+	}
+
+  return $data[$product_id];
+}
+
+/**
+ * Generate "Jersey print" price for wishlisted product
+ * @param  $product_id
+ * @param  $uid
+ */
+function fck_jp_get_wishlist_price($product_id, $uid, $jersey_print = NULL) {
+	if (is_null($jersey_print)) {
+		$jersey_print = fck_jp_get_wishlist_data($product_id, $uid);
+	}	
+	if (!empty($jersey_print)) {
+		//
+		$product = commerce_product_load($product_id);
+		//
+		$option = entity_create('commerce_option', array('set_id' => 'jersey_print'));
+		$option->product_id = $product_id;
+		$option->field_name = 'field_jersey_print';
+		$option->field_delta = 0;
+		$option->set_details = $product->field_jersey_print['und'][0]['set_details'];
+		//
+		$option->field_text_number['und'] = !empty($jersey_print->number) ? array(array('value' => $jersey_print->number)) : array();
+		$option->field_text_label['und'] = !empty($jersey_print->label) ? array(array('value' => $jersey_print->label)) : array();
+		$option->field_players['und'] = !empty($jersey_print->player_tid) ? array(array('tid' => $jersey_print->player_tid)) : array();	
+		$option->field_superliga_badge['und'] = !empty($jersey_print->badge) ? array(array('value' => $jersey_print->badge)) : array();
+		$option->field_autograph['und'] = !empty($jersey_print->autograph) ? array(array('value' => $jersey_print->autograph)) : array();	
+
+		$line_item = commerce_product_line_item_new($product);
+	  $line_item->data['commerce_option_list'] = array($option);
+	  // Allow modules to prepare this as necessary.
+	  drupal_alter('commerce_product_calculate_sell_price_line_item', $line_item);
+	  // Pass the line item to Rules.
+	  rules_invoke_event('commerce_product_calculate_sell_price', $line_item);
+	}
+	$wrapper = entity_metadata_wrapper('commerce_line_item', $line_item);
+	
+	return commerce_currency_format($wrapper->commerce_unit_price->amount->value(), $wrapper->commerce_unit_price->currency_code->value());
 }

@@ -189,6 +189,10 @@ function md_product_strongarm() {
             'weight' => '0',
             'visible' => TRUE,
           ),
+          'line_item' => array(
+            'weight' => '1',
+            'visible' => FALSE,
+          ),
         ),
         'title' => array(
           'default' => array(
@@ -206,6 +210,10 @@ function md_product_strongarm() {
           'node_modal_product_detail' => array(
             'weight' => '1',
             'visible' => TRUE,
+          ),
+          'line_item' => array(
+            'weight' => '2',
+            'visible' => FALSE,
           ),
         ),
         'status' => array(
@@ -225,6 +233,10 @@ function md_product_strongarm() {
             'weight' => '5',
             'visible' => TRUE,
           ),
+          'line_item' => array(
+            'weight' => '3',
+            'visible' => FALSE,
+          ),
         ),
         'flag_wishlist_product' => array(
           'default' => array(
@@ -237,6 +249,10 @@ function md_product_strongarm() {
           ),
           'node_modal_product_detail' => array(
             'weight' => '10',
+            'visible' => FALSE,
+          ),
+          'line_item' => array(
+            'weight' => '4',
             'visible' => FALSE,
           ),
         ),

@@ -34,10 +34,16 @@ if (!empty($jersey_print_values)) {
 	$jersey_print_values = $jersey_print_values['jersey_print'];
 }
 
+$jersey_print_output = '';
 $jersey_print_prices = array();
 if (isset($wrapper->commerce_product->field_jersey_print)) {	
 	$jersey_print_data = $wrapper->commerce_product->field_jersey_print->value()['set_details'];
+	//dsm($jersey_print_values);
+	//dsm($jersey_print_data);
 
+	$jersey_print_output = theme('fck_jp_attributes', array('jersey_print_values' => $jersey_print_values, 'jersey_print_data' => $jersey_print_data));
+
+	/*
 	if ($jersey_print_values['field_superliga_badge']) {
 		// superliga badge option
 		$option = $jersey_print_data['field_superliga_badge']['options'][1];
@@ -67,46 +73,10 @@ if (isset($wrapper->commerce_product->field_jersey_print)) {
 	$text_number = $jersey_print_values['field_text_number'];
 	if (!empty($text_number)) {			
 		$jersey_print_prices['field_text_number'] = fck_custom_get_custom_price($text_number, 'number');
-	}
+	}*/
 }
 
 ?>
 
-<div class="fck-cart-attributes">
 <?php print $output; ?>
-<?php if ($jersey_print_values && $jersey_print_values['field_superliga_badge']) : ?>
-	<div class="fck-attribute">
-		<span class="jp-label"><?php print t('Superliga badge'); ?>:</span>
-		<span class="jp-value">Ja</span>
-		<span class="jp-price"> +<?php print $jersey_print_prices['field_superliga_badge']; ?></span>
-	</div>
-<?php endif; ?>
-<?php if ($jersey_print_values && $jersey_print_values['field_autograph']) : ?>
-	<div class="fck-attribute">
-		<span class="jp-label"><?php print t('Autograph'); ?>:</span>
-		<span class="jp-value">Ja</span>
-		<span class="jp-price"> +<?php print $jersey_print_prices['field_autograph']; ?></span>
-	</div>
-<?php endif; ?>
-<?php if ($jersey_print_values && !is_null($jersey_print_values['field_text_label'])) : ?>
-	<div class="fck-attribute">
-		<span class="jp-label"><?php print t('Text Label'); ?>:</span>
-		<span class="jp-value"><?php print $jersey_print_values['field_text_label']; ?></span>
-		<span class="jp-price"> +<?php print $jersey_print_prices['field_text_label']; ?></span>
-	</div>
-<?php endif; ?>
-<?php if ($jersey_print_values && !is_null($jersey_print_values['field_text_number'])) : ?>
-	<div class="fck-attribute">
-		<span class="jp-label"><?php print t('Text Number'); ?>:</span>
-		<span class="jp-value"><?php print $jersey_print_values['field_text_number']; ?></span>
-		<span class="jp-price"> +<?php print $jersey_print_prices['field_text_number']; ?></span>
-	</div>
-<?php endif; ?>
-<?php if ($jersey_print_values && !is_null($jersey_print_values['field_players'])) : ?>
-	<div class="fck-attribute">
-		<span class="jp-label"><?php print t('Player'); ?>:</span>
-		<span class="jp-value">"<?php print $jersey_print_values['field_players']->name; ?>"</span>
-		<span class="jp-price"> +<?php print $jersey_print_prices['field_players']; ?></span>
-	</div>
-<?php endif; ?>
-</div>
+<?php print $jersey_print_output; ?>

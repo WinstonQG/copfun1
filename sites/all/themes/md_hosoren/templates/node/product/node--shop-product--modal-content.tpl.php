@@ -110,7 +110,7 @@
       <?php if (isset($content['field_product_store'][0]['quantity'])):?>
         <div class="product-hover">
           <div class="product-actions">                
-                <a href="#" class="awe-button product-add-cart" data-node-cart="product-<?php print $node->nid; ?>" data-toggle="tooltip" title="<?php print t('Add to cart'); ?>">
+                <a href="#" class="awe-button product-add-cart" data-node-cart="PRODUCT-347" data-toggle="tooltip" title="<?php print t('Add to cart'); ?>">
                     <i class="icon icon-basket"></i>
                 </a>
                 <?php if (isset($content['flag_wishlist']['#markup'])): ?>

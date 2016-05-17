@@ -21,24 +21,13 @@
  * regardless of any changes in the aliasing that might happen if
  * the view is modified.
  */
-/*$node = entity_load_single('node', $output);
-$wrapper = entity_metadata_wrapper('node', $node);
-$commerce_price_data = $wrapper
-	->field_product_store[0]
-	->commerce_price
-	->value();
-$commerce_price = commerce_currency_format(
-	$commerce_price_data['amount'], 
-	$commerce_price_data['currency_code']
-);*/
-
 $uid = arg(1);
 if (empty($uid)) {
 	global $user;
 	$uid = $user->uid;
 }
 $product_id = $row->product_id;
-$product_nid = fck_get_node_id($product_id);
+$product_nid = fck_get_node_id($row->product_id);
 $jersey_print = fck_jp_get_wishlist_data($product_id, $uid, TRUE);
 
 $autograph = $jersey_print['field_autograph'];
@@ -48,17 +37,6 @@ $label = $jersey_print['field_text_label'];
 $number = $jersey_print['field_text_number'];
 
 $url = fck_generate_product_url($product_nid, $product_id, $autograph, $badge, $player, $label, $number);
-
-$title = l($output, $url);
-
-$jersey_print_output = '';
-if (!empty($jersey_print)) {	
-	//
-	$product = commerce_product_load($product_id);
-	$jersey_print_data = $product->field_jersey_print['und'][0]['set_details'];
-	$jersey_print_values = $jersey_print;
-	$jersey_print_output = theme('fck_jp_attributes', array('jersey_print_values' => $jersey_print_values, 'jersey_print_data' => $jersey_print_data));	
-}
 ?>
-<?php print $title; ?>
-<?php print $jersey_print_output; ?>
+
+<?php print l($output, $url, array('html' => TRUE)); ?>

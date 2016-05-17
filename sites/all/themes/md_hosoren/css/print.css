@@ -8,9 +8,12 @@
 .wishlist-share-container {
   display: none !important;
 }
-.shop_table th:last-child,
-.shop_table td:last-child {
+.view-wishlist-product th:last-child,
+.view-wishlist-product td:last-child {
   display: none !important;
+}
+#edit-submit {
+  display: none;
 }
 @media print {
   .noprint {

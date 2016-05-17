@@ -177,16 +177,35 @@
           </div>
         <?php endif; ?>
       </div>
-      <?php if (isset($content['field_product_store'][0]['quantity'])):?>
+      <?php if (isset($content['field_product_store'][0]['quantity'])) : ?>
+        <?php //watchdog('cc', '<pre>'.print_r($content['field_product_store'][0], TRUE).'</pre>');
+        //watchdog('st', '<pre>'.print_r($content['field_product_store']['#items'], TRUE).'</pre>'); ?>
         <div class="product-hover">
           <div class="product-actions">                
-                <a href="#" class="awe-button product-add-cart" data-node-cart="product-<?php print $node->nid; ?>" data-toggle="tooltip" title="<?php print t('Add to cart'); ?>">
-                    <i class="icon icon-basket"></i>
-                </a>
-                <?php if (isset($content['flag_wishlist']['#markup'])): ?>
-                  <?php print render($content['flag_wishlist']['#markup']); ?>
-                <?php endif; ?>                      
-                  <?php print ctools_modal_text_button('<i class="icon icon-eye"></i>', 'fck_modals/nojs/product/'.$node->nid, t('Quickview'), 'awe-button quick-view-product'); ?>                                  
+            <?php if (sizeof($content['field_product_store']['#items']) > 1) : ?>
+              <?php print ctools_modal_text_button('<i class="icon icon-basket"></i>', 'fck_modals/nojs/product/'.$node->nid, t('Add to cart'), 'awe-button product-add-cart'); ?>
+              <?php if (!user_is_anonymous()) : ?>
+                <?php print ctools_modal_text_button('<i class="icon icon-star-empty"></i>', 'fck_modals/nojs/product/'.$node->nid, t('Add to wishlist'), 'awe-button quick-view-product'); ?>
+              <?php endif; ?>           
+              <?php print ctools_modal_text_button('<i class="icon icon-eye"></i>', 'fck_modals/nojs/product/'.$node->nid, t('Quickview'), 'awe-button quick-view-product'); ?>
+            <?php else : ?>
+              <?php $product_id = $content['field_product_store']['#items'][0]['product_id']; ?>
+              <?php print l('<i class="icon icon-basket"></i>', 
+                'fck_modals/add/'.$product_id,
+                array(
+                  'query' => drupal_get_destination(),
+                  'html' => TRUE,
+                  'attributes' => array(
+                    'class' => 'awe-button product-add-cart',                    
+                    'title' => t('Add to cart'),
+                  ),
+                )); 
+              ?>
+                
+              <?php print flag_create_link('wishlist_product', $product_id); ?>
+                                      
+              <?php print ctools_modal_text_button('<i class="icon icon-eye"></i>', 'fck_modals/nojs/product/'.$node->nid, t('Quickview'), 'awe-button quick-view-product'); ?>         
+            <?php endif; ?>                                                
           </div>
         </div>
       <?php endif; ?>            
@@ -202,12 +221,7 @@
         <h2 class="product-name"><a href="<?php print $node_url; ?>"><?php print $title; ?></a></h2>
         <div class="product-category"><span><?php print $categories_list; ?></span></div>
         <div class="product-price"><?php print render($content['product:commerce_price']); ?><?php print render($content['product:field_price_old']); ?></div>
-    </div>    
-    <!-- Modal -->
-      <?php if (isset($content['field_product_store'])):?>
-        
-      <?php endif; ?>
-
+    </div>
   </div>
 
 <?php elseif ($view_mode == 'teaser'): ?>
@@ -325,18 +339,7 @@
             <div class="product-actions-wrapper">
                 <?php print render($content['field_product_store']); ?>
             </div>
-          <?php endif; ?>                  
-
-          <!-- /.product-actions-wrapper -->                              
-
-          <?php if (isset($content['flag_wishlist']['#markup'])): ?>
-            <?php print render($content['flag_wishlist']['#markup']); ?>
-          <?php endif; ?>
-          
-          <?php if (0) : ?>
-          <div class="product-meta"><span class="product-category"><span><?php print render($content['field_product_category']['#title']); ?>:</span><?php print $categories_list; ?></span><span> - </span><span class="product-tags"><span>Tags:</span><?php print render($content['field_tags']); ?></span></div>
-          <?php endif; ?>
-          <!-- /.product-meta -->
+          <?php endif; ?>                            
         </div>
       </div>
     </div>  
