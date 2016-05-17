@@ -26,20 +26,6 @@ function fck_custom_update_7001() {
   ->execute();
 }
 
-/**
- * Implements hook_flag_unflag() 
- */
-function fck_custom_flag_unflag($flag, $entity_id, $account, $flagging) {
-  //watchdog('unflag', '<pre>'.print_r($flagging, TRUE).'</pre>');
-  if ($flagging->entity_type == 'commerce_product') {
-    $wrapper = entity_metadata_wrapper($flagging->entity_type, 
-                                       $flagging->entity_id);
-    $bundle = $wrapper->getBundle();
-    if ($bundle == 'jersey_print') {
-      watchdog('unflag', '<pre>'.print_r('yes', TRUE).'</pre>');
-    }
-  }
-}
 
 /**
  * Implements hook_form_jersey_print_form_alter().
@@ -244,8 +230,7 @@ function fck_save_flags_submit($form, &$form_state) {
 /**
  * Override commerce_stock_add_to_cart_validate() to work only for Add to cart button (block wishlists buttons)
  */
-function fck_stock_add_to_cart_validate($form, &$form_state) {
-  //watchdog('name', '<pre>'.print_r($form_state['clicked_button']['#parents'][0], TRUE).'</pre>');
+function fck_stock_add_to_cart_validate($form, &$form_state) {  
   if ($form_state['submitted'] && $form_state['clicked_button']['#parents'][0] == 'submit') {
     // Get product and quantity.
     $qty = $form_state['values']['quantity'];
@@ -276,13 +261,12 @@ function fck_stock_add_to_cart_validate($form, &$form_state) {
 /**
  * Implements hook_form_alter().
  */
-function fck_custom_form_alter(&$form, &$form_state, $form_id) { 
+function fck_custom_form_alter(&$form, &$form_state, $form_id) {   
   if ($form_id == 'views_form_wishlist_product_page') {    
     $form['#submit'][] = 'fck_save_flags_submit';
   }
   elseif (isset($form_state['build_info']['base_form_id']) && 
-    $form_state['build_info']['base_form_id'] == 'commerce_cart_add_to_cart_form') {
-    //dsm($form);
+    $form_state['build_info']['base_form_id'] == 'commerce_cart_add_to_cart_form') {    
 
     // override default stock validation handler because it works even if click on Add/Remove Wishlist buttons
     if (isset($form['#validate'][1]) && $form['#validate'][1] == 'commerce_stock_add_to_cart_validate') {
@@ -304,21 +288,31 @@ function fck_custom_form_alter(&$form, &$form_state, $form_id) {
       $form['wishlist']['#value'] = $is_flagged ? t('Remove Wishlist') : t('Add Wishlist');
     }    
     
+
+
     // add AJAX modal close handlers for "Add to cart" & "Wishlist" buttons
-    if ($form_state['build_info']['args'][2]['view_mode'] == 'node_modal_product_detail') { 
-      //          
-      $form['submit']['#ajax'] = array(
-        'callback' => 'fck_close_modal_callback',
+    if ($form_state['build_info']['args'][2]['view_mode'] == 'node_modal_product_detail') {       
+      
+      // make a copy of 2 submit buttons: Wishlist and Add to cart and bind ajax callback to them that close modal and reload page. It must be done to avoid ajax system error that cause on Product detail page after user closes modal and switches between sizes.
+
+      //$form['wishlist']['#ajax']['callback'] = 'fck_close_modal_callback';  
+      $form['submit_modal'] = $form['submit'];
+      $form['submit']['#access'] = FALSE;
+      $form['submit_modal']['#ajax'] = array(
+        'callback' => 'fck_close_modal_callback',        
       );
 
-      if (user_is_logged_in()) {
-        $form['wishlist']['#ajax']['callback'] = 'fck_close_modal_callback';
-      }      
-    }
+      if (user_is_logged_in()) {        
+        //$form['wishlist']['#ajax']['callback'] = 'fck_close_modal_callback';                
+        $form['wishlist_modal'] = $form['wishlist'];
+        $form['wishlist']['#access'] = FALSE;        
+        $form['wishlist_modal']['#ajax']['callback'] = 'fck_close_modal_callback';        
+      }          
+    }    
 
     // if product_id is passed - select proper product variant.
     // Only works for node_full view mode.
-    if ($form_state['build_info']['args'][2]['view_mode'] == 'node_full') {    
+    if ($form_state['build_info']['args'][2]['view_mode'] == 'node_full') {           
       if (isset($_GET['size'])) {
         // get size attribute field name
         $size_attribute = fck_product_form_get_size_attribute($form);
@@ -341,10 +335,12 @@ function fck_custom_form_alter(&$form, &$form_state, $form_id) {
         $product_ids = explode('_', $product_ids);
         $product_key = array_search($product_id, $product_ids);
         $option_ids = array_keys($form['attributes'][$size_attribute]['#options']);
-        $option_key = $option_ids[$product_key];
-        // change value in attribute select list
-        $form['attributes'][$size_attribute]['#default_value'] = $option_key;
-        $form['unchanged_attributes'][$size_attribute]['#value'] = $option_key;        
+        if (isset($option_ids[$product_key])) {
+          $option_key = $option_ids[$product_key];
+          // change value in attribute select list
+          $form['attributes'][$size_attribute]['#default_value'] = $option_key;
+          $form['unchanged_attributes'][$size_attribute]['#value'] = $option_key;
+        }
       }
     }       
   }
@@ -362,7 +358,6 @@ function fck_custom_form_alter(&$form, &$form_state, $form_id) {
 
   			$form['submit']['#value'] = t('Add Prints');
   			$form['#submit'][0] = 'fck_custom_jersey_print_redirect';
-  			return;
   		}
   	}    
   	$form['#theme'] = 'jersey_print_form';
@@ -701,7 +696,7 @@ function fck_custom_jersey_print_redirect($form, &$form_state) {
 /**
  * Close ctools modal window nad reload a page.
  */
-function fck_close_modal_callback($form, $form_state) {  
+function fck_close_modal_callback($form, $form_state) {   
   $commands[] = ctools_ajax_command_reload();
   $commands[] = ctools_modal_command_dismiss();
 
@@ -722,8 +717,7 @@ function fck_wishlist_modal_submit($form, $form_state) {
   $player = ''; 
   $label = ''; 
   $number = '';
-
-  watchdog('jpo', '<pre>'.print_r($form_state['values'], TRUE).'</pre>');
+  ;
   $jersey_print = '';
   if (isset($form_state['values']['field_jersey_print'])) {
     $jersey_print = &$form_state['values']['field_jersey_print'][0];    
@@ -758,7 +752,7 @@ function fck_wishlist_modal_submit($form, $form_state) {
   }
   
   //
-  $url = fck_generate_product_url(
+  /*$url = fck_generate_product_url(
     $product_nid, 
     $product_id, 
     $autograph, 
@@ -766,8 +760,8 @@ function fck_wishlist_modal_submit($form, $form_state) {
     $player, 
     $label, 
     $number
-  );
-  drupal_goto($url);
+  );*/
+  //drupal_goto($url);
 }
 
 /**
@@ -849,7 +843,7 @@ function fck_get_username($uid) {
 /**
  * Get product display id by product variation id
  */
-function fck_get_node_id($product) { //fck_get_node_id
+function fck_get_node_id($product) { //csf_get_referencing_node_id
   global $language;
 
   if (is_object($product)) {
