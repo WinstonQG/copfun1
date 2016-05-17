@@ -1953,6 +1953,49 @@ function md_product_field_default_field_instances() {
     ),
   );
 
+  // Exported field_instance: 'flagging-wishlist_product-field_wishlist_weight'.
+  $field_instances['flagging-wishlist_product-field_wishlist_weight'] = array(
+    'bundle' => 'wishlist_product',
+    'default_value' => array(
+      0 => array(
+        'value' => 0,
+      ),
+    ),
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'number',
+        'settings' => array(
+          'decimal_separator' => '.',
+          'prefix_suffix' => TRUE,
+          'scale' => 0,
+          'thousand_separator' => '',
+        ),
+        'type' => 'number_integer',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'flagging',
+    'field_name' => 'field_wishlist_weight',
+    'label' => 'Wishlist Weight',
+    'required' => 0,
+    'settings' => array(
+      'range' => 20,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'weight',
+      'settings' => array(
+        'range' => 20,
+      ),
+      'type' => 'weight_selector',
+      'weight' => 1,
+    ),
+  );
+
   // Exported field_instance: 'node-lookbook-body'.
   $field_instances['node-lookbook-body'] = array(
     'bundle' => 'lookbook',
@@ -4091,6 +4134,7 @@ function md_product_field_default_field_instances() {
   t('Weight Match Kits');
   t('Weight New');
   t('Weight Sale');
+  t('Wishlist Weight');
   t('Your Rating');
 
   return $field_instances;
