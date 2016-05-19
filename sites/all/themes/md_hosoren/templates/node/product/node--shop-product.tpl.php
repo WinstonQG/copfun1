@@ -208,9 +208,13 @@
             <?php endif; ?>                                                
           </div>
         </div>
-      <?php endif; ?>            
+      <?php endif; ?>   
+    
 
-      <?php if (isset($content['field_label']) && isset($content['field_label']['#items'][0]['value'])): ?>
+      
+      <?php if (isset($content['field_group']) && fck_is_has_group($content['field_group']['#items'])) : ?>
+        <span class="product-label"><span><?php print 'Ny'; ?></span></span>            
+      <?php elseif (isset($content['field_label']) && isset($content['field_label']['#items'][0]['value'])): ?>
         <span class="product-label"><span><?php print $content['field_label']['#items'][0]['value']; ?></span></span>
       <?php endif; ?>
 

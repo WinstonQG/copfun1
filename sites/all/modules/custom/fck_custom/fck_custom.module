@@ -876,4 +876,16 @@ function fck_get_node_id($product) { //csf_get_referencing_node_id
   }
 
   return FALSE;
-} 
+}
+
+/**
+ * Check if Product Shop has some group; New group by default
+ */
+function fck_is_has_group($items, $group = 'new') {  
+  foreach ($items as $item) {
+    if ($item['value'] == $group) {
+      return TRUE;
+    }
+  }
+  return FALSE;
+}
