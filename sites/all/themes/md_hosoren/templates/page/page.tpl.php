@@ -215,14 +215,19 @@ global $base_url;
 					<?php endif; ?>
 				</div>
 			</div>  
-		<?php endif; ?>
-
-    
-		<?php if ($page['highlighted']): ?>
-			<?php print render($page['highlighted']); ?>
-    <?php endif;?>
+		<?php endif; ?>    		
 
     <div id="main" class="clearfix">
+
+      <?php if ($page['highlighted']): ?>
+        <div class="container fck-category-top">
+          <div class="row">
+            <div class="col-sm-12">
+              <?php print render($page['highlighted']); ?>
+            </div>
+          </div>
+        </div>
+      <?php endif;?>
 				
       <?php if(($title) && ($has_slider == FALSE) && ($section_type=="one")): ?>
         <?php if ($breadcrumb): ?>
@@ -242,7 +247,7 @@ global $base_url;
 				<?php endif; ?>
       <?php endif; ?>
 
-				<?php print $messages; ?>
+				<?php print $messages; ?>        
 
         <div class="container">
           <div class="row">

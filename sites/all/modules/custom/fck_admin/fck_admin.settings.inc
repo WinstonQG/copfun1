@@ -1,6 +1,32 @@
 <?php
 
-function fck_admin_settings_form($form, &$form_state) {
+function fck_admin_settings_form($form, &$form_state) {  
+  $categories = fck_get_categories();
+  $form['categories'] = array(
+    '#type' => 'fieldset',
+    '#title' => t('Categories'),
+    //'#tree' => TRUE,
+  );  
+  
+  foreach ($categories as $category_id => $category) {    
+    $category_banner_varname = fck_get_category_banner_varname($category_id);
+    $banner = variable_get($category_banner_varname, '');    
+    $form['categories'][$category_banner_varname] = array(       
+      '#type' => 'managed_file',
+      '#name' => $category_banner_varname,
+      '#title' => $category["en_value"].' banner image',          
+      '#upload_location' => 'public://',
+      '#default_value' => variable_get($category_banner_varname, ''),  
+    );
+    
+    $category_desc_varname = fck_get_category_desc_varname($category_id);
+    $form['categories'][$category_desc_varname] = array(
+      '#type' => 'textfield',
+      '#title' => $category["en_value"].' short description (below image)',
+      '#default_value' => variable_get($category_desc_varname, ''),
+    );
+  }
+  
   $form['jerseyprint'] = array(
     '#type' => 'fieldset',
     '#title' => t('Jersey Print'),
@@ -35,6 +61,22 @@ function fck_admin_settings_form($form, &$form_state) {
       2592000 => '30 days',
     ),
   );
+  
+  $form['#submit'][] = 'fck_admin_settings_form_submit';
 
   return system_settings_form($form);
+}
+
+function fck_admin_settings_form_submit($form, &$form_state) {  
+  $categories = fck_get_categories();
+  foreach ($categories as $category_id => $category) {    
+    $category_banner_varname = fck_get_category_banner_varname($category_id);
+    $banner_fid = $form_state['values'][$category_banner_varname];
+    if ($banner_fid) {      
+      $file = file_load($banner_fid);
+      $file->status = FILE_STATUS_PERMANENT;
+      file_save($file);
+      file_usage_add($file, 'fck_admin', 'fck_admin', $banner_fid);
+    }
+  }  
 }

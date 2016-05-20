@@ -14,7 +14,7 @@
     <h3><?php print $title; ?></h3>
   <?php endif; ?>
   <?php print $list_type_prefix; ?>
-    	<li class="fck-see-all"><?php print l(t('See all'), 'categories/match-kits/all'); ?></li>
+    	<li class="fck-see-all"><?php print l(t('See all'), 'categories/match_kits/all'); ?></li>
     <?php foreach ($rows as $id => $row): ?>
       <li class="<?php print $classes_array[$id]; ?>"><?php print $row; ?></li>
     <?php endforeach; ?>

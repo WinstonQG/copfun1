@@ -18630,6 +18630,24 @@ ul li {
   background: #006dbf;
   border-color: #006dbf;
 }
+.category-jumbotron .category-item {
+  position: relative;
+}
+.category-jumbotron .category-item .fck-category-title,
+.category-jumbotron .category-item .fck-category-description {
+  text-align: center;
+}
+.category-jumbotron .category-item .fck-category-title {
+  color: #ffffff;
+  text-transform: uppercase;
+  font-size: 66px;
+  line-height: 270px;
+}
+.category-jumbotron .category-banner {
+  max-width: 100%;
+  height: 282px;
+  background-size: cover;
+}
 .l-categories-list {
   padding-bottom: 45px;
 }

@@ -27,6 +27,34 @@ function fck_admin_menu() {
 }
 
 /**
+ * Implements hook_theme().
+ */
+function fck_admin_theme($existing, $type, $theme, $path) {  
+  return array(    
+    'fck_category_banner' => array(
+      'variables' => array('category_id' => '', 'category_title' => ''),
+      'template' => 'fck-category-banner',
+    ),
+  );
+}
+
+/**
+ * Implements hook_preprocess_fck_category_banner().
+ */
+function fck_admin_preprocess_fck_category_banner(&$vars) {
+  $category_id = $vars['category_id'];
+  $banner_upload_varname = fck_get_category_banner_varname($category_id);
+  $banner_fid = variable_get($banner_upload_varname, '');
+  
+  $file = file_load($banner_fid);
+  $vars['banner_url'] = file_create_url($file->uri);
+  
+  $category_desc_varname = fck_get_category_desc_varname($category_id);
+  $vars['category_desc'] = variable_get($category_desc_varname, '');
+}
+
+
+/**
  * Implements hook_permission().
  */
 function fck_admin_permission() {
@@ -66,4 +94,93 @@ function fck_admin_form_alter(&$form, &$form_state, $form_id) {
     $form['field_weight_baby']['#access'] = FALSE;
     $form['field_weight_sale']['#access'] = FALSE;
   }
+}
+
+/**
+ * Implements hook_block_info().
+ */
+function fck_admin_block_info() {
+  $categories = fck_get_categories();
+  foreach ($categories as $category_id => $category) {
+    // This example comes from node.module.
+    $blocks['fck_'.$category_id.'_banner'] = array(
+      'info' => 'FCK '.$category['en_value'].' Banner',
+      'cache' => DRUPAL_NO_CACHE,
+      'status' => TRUE,
+      'region' => 'highlighted',
+      'visibility' => BLOCK_VISIBILITY_LISTED,
+      'pages' => 'categories/'.$category_id.'/*',
+    );
+  }  
+
+  return $blocks;
+}
+
+/**
+ * Implements hook_block_view().
+ */
+function fck_admin_block_view($delta = '') {
+  // This example is adapted from node.module.
+  $block = array();
+
+  $categories = fck_get_categories();
+  foreach ($categories as $category_id => $category) {
+    $block_name = 'fck_'.$category_id.'_banner';
+    if ($delta == $block_name) {
+      $block['subject'] = '<none>';
+      $block['content'] = array(
+        '#theme' => 'fck_category_banner',
+        '#category_id' => $category_id,
+        '#category_title' => $category['da_value'],
+      );
+    }
+  }
+
+  return $block;
+}
+
+/**
+ * Get a list of content Categories
+ */
+function fck_get_categories() {
+  return array(
+    'clothing' => array(
+      'en_value' => 'Clothing', 
+      'da_value' => t('Clothing'),
+    ),
+    'accessories' => array(
+      'en_value' => 'Accessories', 
+      'da_value' => t('Accessories'),
+    ),
+    'player_jerseys' => array(
+      'en_value' => 'Player Jerseys', 
+      'da_value' => t('Player Jerseys'),
+    ),
+    'baby' => array(
+      'en_value' => 'Baby', 
+      'da_value' => t('Baby'),
+    ),
+    'match_kits' => array(
+      'en_value' => 'Match Kits', 
+      'da_value' => t('Match Kits'),
+    ),
+    'gifts' => array(
+      'en_value' => 'Gifts', 
+      'da_value' => t('Gifts'),
+    ),
+  );
+}
+
+/**
+ * Get - top banner - category banner variable name
+ */
+function fck_get_category_banner_varname($category_id) {
+  return 'fck_'.$category_id.'_banner_upload';
+}
+
+/**
+ * Get - top banner - category description variable name
+ */
+function fck_get_category_desc_varname($category_id) {
+  return 'fck_'.$category_id.'_desc';
 }
