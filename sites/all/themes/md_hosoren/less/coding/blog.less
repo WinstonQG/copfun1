@@ -1,0 +1,121 @@
+#block-views-blog-isotope-list-block-1 {
+	
+	ul {
+		margin: 50px 0;
+		text-align: center;
+		list-style: none;
+
+		li {
+			display: inline-block;
+			margin-right: 5px;
+
+			a {				
+			    display: table;
+			    padding: 10px 20px;			    
+		        
+		        border: 1px solid @dark_grey_color;
+			    
+			    background-color: #fff;
+			    
+			    font-weight: normal;
+			    font-size: 14px;
+			    
+			    color: @dark_grey_color;
+
+			    transition: all 0.4s ease-in-out 0.2s;
+
+			    &.active, &:hover {
+			    	color: #ffffff;
+		    	    background-color: @blue_color;
+		    	    border: 1px solid @blue_color;
+			    }
+			}
+		}
+	}
+}
+
+#block-views-blog-isotope-list-block-2, .view-blog-isotope-list {
+	clear: both;	
+	position: relative;
+
+	h3 {
+		display: none;
+	}
+
+	ul {
+		list-style: none;
+
+		li {
+			margin-left: 0px !important;
+			margin-right: 4px !important;
+			&:last-child {
+				margin-right: 0px;
+			}		
+
+			.views-field-field-preview-image {
+
+				img {
+					width: 100%;
+					max-width: auto;
+				}
+			}
+
+			.views-field-title {
+				//display: none;
+				visibility: hidden;
+				position: absolute;
+			    top: 0px;
+			    left: 0px;
+			    width: 100%;
+			    height: 100%;
+			    background: rgba(0, 80, 158, 0.8);
+
+				opacity:0;  				
+				transition: opacity 300ms ease-in-out;   		    
+			    -webkit-transition: opacity 300ms ease-in-out;
+			    -moz-transition: opacity 300ms ease-in-out;
+			    -o-transition: opacity 300ms ease-in-out;
+			    -ms-transition: opacity 300ms ease-in-out;			
+			    
+			    &>.field-content {
+			    	width: 100%;
+				    display: block;
+
+			    	margin-top: 40%;
+		    	    
+		    	    padding: 0 10px;			    	
+				    
+				    text-align: center;				    
+
+				    a {
+				    	font-size: 26px;
+				    	color: #ffffff;	
+				    }
+			    }			    
+			}
+
+			&:hover {
+				.views-field-title {
+					visibility: visible;
+					opacity:1;
+		    		
+	    		    -webkit-transition: opacity 300ms ease-in-out;
+				    -moz-transition: opacity 300ms ease-in-out;
+				    -o-transition: opacity 300ms ease-in-out;
+				    -ms-transition: opacity 300ms ease-in-out;
+				    transition: opacity 300ms ease-in-out; 
+		    	}
+		    }
+		}
+	}
+}
+
+.isotope-grid-sizer, .isotope-element { width: 24.5%; }
+.isotope-gutter-sizer { width: 0%; }
+
+@media @medium-minus {
+	.isotope-grid-sizer, .isotope-element { width: 49%; }
+	.isotope-gutter-sizer { width: 3%; }
+}
+
+.isotope-element.my-data-value { width: 48%; }

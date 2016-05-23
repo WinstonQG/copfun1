@@ -11,6 +11,9 @@ function md_blog_ctools_plugin_api($module = NULL, $api = NULL) {
   if ($module == "context" && $api == "context") {
     return array("version" => "3");
   }
+  if ($module == "strongarm" && $api == "strongarm") {
+    return array("version" => "1");
+  }
   if ($module == "taxonomy_display" && $api == "taxonomy_display") {
     return array("version" => "1");
   }
@@ -28,6 +31,21 @@ function md_blog_views_api($module = NULL, $api = NULL) {
  */
 function md_blog_image_default_styles() {
   $styles = array();
+
+  // Exported image style: blog_preview_thumbs.
+  $styles['blog_preview_thumbs'] = array(
+    'label' => 'Blog Preview Thumbs',
+    'effects' => array(
+      18 => array(
+        'name' => 'image_scale_and_crop',
+        'data' => array(
+          'width' => 340,
+          'height' => 340,
+        ),
+        'weight' => 1,
+      ),
+    ),
+  );
 
   // Exported image style: news_blog_image_style.
   $styles['news_blog_image_style'] = array(

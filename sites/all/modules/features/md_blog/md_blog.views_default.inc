@@ -150,6 +150,163 @@ function md_blog_views_default_views() {
   $export['blog_classic'] = $view;
 
   $view = new view();
+  $view->name = 'blog_isotope_list';
+  $view->description = '';
+  $view->tag = 'default';
+  $view->base_table = 'node';
+  $view->human_name = 'Blog Isotope List';
+  $view->core = 7;
+  $view->api_version = '3.0';
+  $view->disabled = FALSE; /* Edit this to true to make a default view disabled initially */
+
+  /* Display: Master */
+  $handler = $view->new_display('default', 'Master', 'default');
+  $handler->display->display_options['use_more_always'] = FALSE;
+  $handler->display->display_options['group_by'] = TRUE;
+  $handler->display->display_options['access']['type'] = 'perm';
+  $handler->display->display_options['cache']['type'] = 'none';
+  $handler->display->display_options['query']['type'] = 'views_query';
+  $handler->display->display_options['exposed_form']['type'] = 'basic';
+  $handler->display->display_options['pager']['type'] = 'some';
+  $handler->display->display_options['pager']['options']['items_per_page'] = '8';
+  $handler->display->display_options['pager']['options']['offset'] = '0';
+  $handler->display->display_options['style_plugin'] = 'isotope_grid';
+  $handler->display->display_options['style_options']['data_fields'] = array(
+    'field_category_blog' => 'field_category_blog',
+    'title' => 0,
+    'field_multimedia' => 0,
+    'fid' => 0,
+  );
+  $handler->display->display_options['row_plugin'] = 'fields';
+  /* Field: Content: Title */
+  $handler->display->display_options['fields']['title']['id'] = 'title';
+  $handler->display->display_options['fields']['title']['table'] = 'node';
+  $handler->display->display_options['fields']['title']['field'] = 'title';
+  $handler->display->display_options['fields']['title']['label'] = '';
+  $handler->display->display_options['fields']['title']['alter']['word_boundary'] = FALSE;
+  $handler->display->display_options['fields']['title']['alter']['ellipsis'] = FALSE;
+  /* Field: Content: Multimedia */
+  $handler->display->display_options['fields']['field_multimedia']['id'] = 'field_multimedia';
+  $handler->display->display_options['fields']['field_multimedia']['table'] = 'field_data_field_multimedia';
+  $handler->display->display_options['fields']['field_multimedia']['field'] = 'field_multimedia';
+  $handler->display->display_options['fields']['field_multimedia']['label'] = '';
+  $handler->display->display_options['fields']['field_multimedia']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['field_multimedia']['click_sort_column'] = 'fid';
+  $handler->display->display_options['fields']['field_multimedia']['settings'] = array(
+    'file_view_mode' => 'full',
+  );
+  $handler->display->display_options['fields']['field_multimedia']['delta_offset'] = '0';
+  /* Sort criterion: Content: Post date */
+  $handler->display->display_options['sorts']['created']['id'] = 'created';
+  $handler->display->display_options['sorts']['created']['table'] = 'node';
+  $handler->display->display_options['sorts']['created']['field'] = 'created';
+  /* Filter criterion: Content: Published */
+  $handler->display->display_options['filters']['status']['id'] = 'status';
+  $handler->display->display_options['filters']['status']['table'] = 'node';
+  $handler->display->display_options['filters']['status']['field'] = 'status';
+  $handler->display->display_options['filters']['status']['value'] = 1;
+  $handler->display->display_options['filters']['status']['group'] = 1;
+  $handler->display->display_options['filters']['status']['expose']['operator'] = FALSE;
+  /* Filter criterion: Content: Type */
+  $handler->display->display_options['filters']['type']['id'] = 'type';
+  $handler->display->display_options['filters']['type']['table'] = 'node';
+  $handler->display->display_options['filters']['type']['field'] = 'type';
+  $handler->display->display_options['filters']['type']['value'] = array(
+    'blog' => 'blog',
+  );
+
+  /* Display: Page */
+  $handler = $view->new_display('page', 'Page', 'page');
+  $handler->display->display_options['defaults']['group_by'] = FALSE;
+  $handler->display->display_options['defaults']['relationships'] = FALSE;
+  /* Relationship: File Usage: File */
+  $handler->display->display_options['relationships']['node_to_file']['id'] = 'node_to_file';
+  $handler->display->display_options['relationships']['node_to_file']['table'] = 'file_usage';
+  $handler->display->display_options['relationships']['node_to_file']['field'] = 'node_to_file';
+  $handler->display->display_options['relationships']['node_to_file']['required'] = TRUE;
+  $handler->display->display_options['defaults']['fields'] = FALSE;
+  /* Field: Content: Title */
+  $handler->display->display_options['fields']['title']['id'] = 'title';
+  $handler->display->display_options['fields']['title']['table'] = 'node';
+  $handler->display->display_options['fields']['title']['field'] = 'title';
+  $handler->display->display_options['fields']['title']['label'] = '';
+  $handler->display->display_options['fields']['title']['alter']['word_boundary'] = FALSE;
+  $handler->display->display_options['fields']['title']['alter']['ellipsis'] = FALSE;
+  /* Field: Content: Category Blog */
+  $handler->display->display_options['fields']['field_category_blog']['id'] = 'field_category_blog';
+  $handler->display->display_options['fields']['field_category_blog']['table'] = 'field_data_field_category_blog';
+  $handler->display->display_options['fields']['field_category_blog']['field'] = 'field_category_blog';
+  $handler->display->display_options['fields']['field_category_blog']['label'] = '';
+  $handler->display->display_options['fields']['field_category_blog']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['field_category_blog']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['field_category_blog']['type'] = 'taxonomy_term_reference_plain';
+  /* Field: Content: Preview Image */
+  $handler->display->display_options['fields']['field_preview_image']['id'] = 'field_preview_image';
+  $handler->display->display_options['fields']['field_preview_image']['table'] = 'field_data_field_preview_image';
+  $handler->display->display_options['fields']['field_preview_image']['field'] = 'field_preview_image';
+  $handler->display->display_options['fields']['field_preview_image']['label'] = '';
+  $handler->display->display_options['fields']['field_preview_image']['alter']['alter_text'] = TRUE;
+  $handler->display->display_options['fields']['field_preview_image']['alter']['text'] = '<img src="http://my.cloudways.ua/sites/default/files/styles/blog_preview_thumbs/public/fanshop%20artikel%20billede_0.jpg" />';
+  $handler->display->display_options['fields']['field_preview_image']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['field_preview_image']['click_sort_column'] = 'fid';
+  $handler->display->display_options['fields']['field_preview_image']['settings'] = array(
+    'file_view_mode' => 'default',
+  );
+  $handler->display->display_options['path'] = 'blog-isotope-list';
+
+  /* Display: FCK Isotop Blog Filter */
+  $handler = $view->new_display('block', 'FCK Isotop Blog Filter', 'block_1');
+  $handler->display->display_options['defaults']['style_plugin'] = FALSE;
+  $handler->display->display_options['style_plugin'] = 'isotope_filter';
+  $handler->display->display_options['style_options']['filter_group'] = 'Category';
+  $handler->display->display_options['style_options']['data_fields'] = 'field_category_blog';
+  $handler->display->display_options['defaults']['style_options'] = FALSE;
+  $handler->display->display_options['defaults']['row_plugin'] = FALSE;
+  $handler->display->display_options['row_plugin'] = 'fields';
+  $handler->display->display_options['defaults']['row_options'] = FALSE;
+  $handler->display->display_options['defaults']['fields'] = FALSE;
+  /* Field: Content: Category Blog */
+  $handler->display->display_options['fields']['field_category_blog']['id'] = 'field_category_blog';
+  $handler->display->display_options['fields']['field_category_blog']['table'] = 'field_data_field_category_blog';
+  $handler->display->display_options['fields']['field_category_blog']['field'] = 'field_category_blog';
+  $handler->display->display_options['fields']['field_category_blog']['label'] = '';
+  $handler->display->display_options['fields']['field_category_blog']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['field_category_blog']['type'] = 'taxonomy_term_reference_plain';
+  $handler->display->display_options['defaults']['sorts'] = FALSE;
+
+  /* Display: FCK Isotop Blog Grid */
+  $handler = $view->new_display('block', 'FCK Isotop Blog Grid', 'block_2');
+  $handler->display->display_options['defaults']['group_by'] = FALSE;
+  $handler->display->display_options['defaults']['fields'] = FALSE;
+  /* Field: Content: Title */
+  $handler->display->display_options['fields']['title']['id'] = 'title';
+  $handler->display->display_options['fields']['title']['table'] = 'node';
+  $handler->display->display_options['fields']['title']['field'] = 'title';
+  $handler->display->display_options['fields']['title']['label'] = '';
+  $handler->display->display_options['fields']['title']['alter']['word_boundary'] = FALSE;
+  $handler->display->display_options['fields']['title']['alter']['ellipsis'] = FALSE;
+  /* Field: Content: Category Blog */
+  $handler->display->display_options['fields']['field_category_blog']['id'] = 'field_category_blog';
+  $handler->display->display_options['fields']['field_category_blog']['table'] = 'field_data_field_category_blog';
+  $handler->display->display_options['fields']['field_category_blog']['field'] = 'field_category_blog';
+  $handler->display->display_options['fields']['field_category_blog']['label'] = '';
+  $handler->display->display_options['fields']['field_category_blog']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['field_category_blog']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['field_category_blog']['type'] = 'i18n_taxonomy_term_reference_plain';
+  /* Field: Content: Preview Image */
+  $handler->display->display_options['fields']['field_preview_image']['id'] = 'field_preview_image';
+  $handler->display->display_options['fields']['field_preview_image']['table'] = 'field_data_field_preview_image';
+  $handler->display->display_options['fields']['field_preview_image']['field'] = 'field_preview_image';
+  $handler->display->display_options['fields']['field_preview_image']['label'] = '';
+  $handler->display->display_options['fields']['field_preview_image']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['field_preview_image']['click_sort_column'] = 'fid';
+  $handler->display->display_options['fields']['field_preview_image']['settings'] = array(
+    'image_style' => 'blog_preview_thumbs',
+    'image_link' => '',
+  );
+  $export['blog_isotope_list'] = $view;
+
+  $view = new view();
   $view->name = 'blog_list';
   $view->description = '';
   $view->tag = 'default';
@@ -474,17 +631,15 @@ function md_blog_views_default_views() {
   $handler->display->display_options['style_options']['default_row_class'] = FALSE;
   $handler->display->display_options['style_options']['row_class_special'] = FALSE;
   $handler->display->display_options['row_plugin'] = 'fields';
-  /* Field: Taxonomy term: Name */
-  $handler->display->display_options['fields']['name']['id'] = 'name';
-  $handler->display->display_options['fields']['name']['table'] = 'taxonomy_term_data';
-  $handler->display->display_options['fields']['name']['field'] = 'name';
-  $handler->display->display_options['fields']['name']['label'] = '';
-  $handler->display->display_options['fields']['name']['alter']['word_boundary'] = FALSE;
-  $handler->display->display_options['fields']['name']['alter']['ellipsis'] = FALSE;
-  $handler->display->display_options['fields']['name']['element_type'] = '0';
-  $handler->display->display_options['fields']['name']['element_label_colon'] = FALSE;
-  $handler->display->display_options['fields']['name']['element_wrapper_type'] = '0';
-  $handler->display->display_options['fields']['name']['link_to_taxonomy'] = TRUE;
+  /* Field: Taxonomy term: Name (translated) */
+  $handler->display->display_options['fields']['name_i18n']['id'] = 'name_i18n';
+  $handler->display->display_options['fields']['name_i18n']['table'] = 'taxonomy_term_data';
+  $handler->display->display_options['fields']['name_i18n']['field'] = 'name_i18n';
+  $handler->display->display_options['fields']['name_i18n']['label'] = '';
+  $handler->display->display_options['fields']['name_i18n']['element_type'] = '0';
+  $handler->display->display_options['fields']['name_i18n']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['name_i18n']['element_wrapper_type'] = '0';
+  $handler->display->display_options['fields']['name_i18n']['link_to_taxonomy'] = TRUE;
   /* Sort criterion: Taxonomy term: Weight */
   $handler->display->display_options['sorts']['weight']['id'] = 'weight';
   $handler->display->display_options['sorts']['weight']['table'] = 'taxonomy_term_data';

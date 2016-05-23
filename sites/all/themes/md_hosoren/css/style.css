@@ -1,12 +1,3 @@
-/*@only-mobile:  	~"(min-width: 0px) and (max-width: @{screen-xs})";
-@only-small:  	~"(min-width: @screen-sm) and (max-width: @screen-md)";
-@only-medium:  	~"(min-width: @screen-md) and (max-width: @screen-lg)";
-@only-large:  	~"(min-width: @screen-lg) and (max-width: @screen-lg-max)";
-
-@small-plus:  	~"(min-width: @{screen-sm})";
-@medium-plus:  	~"(min-width: @{screen-md})";
-@large-plus:  	~"(min-width: @{screen-lg})";
-*/
 @font-face {
   font-family: 'FCK';
   src: url('../fonts/FCK-Rg/FCK-Rg.eot');
@@ -18892,4 +18883,114 @@ ul li {
 }
 .view-wishlist-product .st_facebook_custom:after {
   content: 'Del pa facebook';
+}
+#block-views-blog-isotope-list-block-1 ul {
+  margin: 50px 0;
+  text-align: center;
+  list-style: none;
+}
+#block-views-blog-isotope-list-block-1 ul li {
+  display: inline-block;
+  margin-right: 5px;
+}
+#block-views-blog-isotope-list-block-1 ul li a {
+  display: table;
+  padding: 10px 20px;
+  border: 1px solid #4e5a61;
+  background-color: #fff;
+  font-weight: normal;
+  font-size: 14px;
+  color: #4e5a61;
+  transition: all 0.4s ease-in-out 0.2s;
+}
+#block-views-blog-isotope-list-block-1 ul li a.active,
+#block-views-blog-isotope-list-block-1 ul li a:hover {
+  color: #ffffff;
+  background-color: #337ab7;
+  border: 1px solid #337ab7;
+}
+#block-views-blog-isotope-list-block-2,
+.view-blog-isotope-list {
+  clear: both;
+  position: relative;
+}
+#block-views-blog-isotope-list-block-2 h3,
+.view-blog-isotope-list h3 {
+  display: none;
+}
+#block-views-blog-isotope-list-block-2 ul,
+.view-blog-isotope-list ul {
+  list-style: none;
+}
+#block-views-blog-isotope-list-block-2 ul li,
+.view-blog-isotope-list ul li {
+  margin-left: 0px !important;
+  margin-right: 4px !important;
+}
+#block-views-blog-isotope-list-block-2 ul li:last-child,
+.view-blog-isotope-list ul li:last-child {
+  margin-right: 0px;
+}
+#block-views-blog-isotope-list-block-2 ul li .views-field-field-preview-image img,
+.view-blog-isotope-list ul li .views-field-field-preview-image img {
+  width: 100%;
+  max-width: auto;
+}
+#block-views-blog-isotope-list-block-2 ul li .views-field-title,
+.view-blog-isotope-list ul li .views-field-title {
+  visibility: hidden;
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 80, 158, 0.8);
+  opacity: 0;
+  transition: opacity 300ms ease-in-out;
+  -webkit-transition: opacity 300ms ease-in-out;
+  -moz-transition: opacity 300ms ease-in-out;
+  -o-transition: opacity 300ms ease-in-out;
+  -ms-transition: opacity 300ms ease-in-out;
+}
+#block-views-blog-isotope-list-block-2 ul li .views-field-title > .field-content,
+.view-blog-isotope-list ul li .views-field-title > .field-content {
+  width: 100%;
+  display: block;
+  margin-top: 40%;
+  padding: 0 10px;
+  text-align: center;
+}
+#block-views-blog-isotope-list-block-2 ul li .views-field-title > .field-content a,
+.view-blog-isotope-list ul li .views-field-title > .field-content a {
+  font-size: 26px;
+  color: #ffffff;
+}
+#block-views-blog-isotope-list-block-2 ul li:hover .views-field-title,
+.view-blog-isotope-list ul li:hover .views-field-title {
+  visibility: visible;
+  opacity: 1;
+  -webkit-transition: opacity 300ms ease-in-out;
+  -moz-transition: opacity 300ms ease-in-out;
+  -o-transition: opacity 300ms ease-in-out;
+  -ms-transition: opacity 300ms ease-in-out;
+  transition: opacity 300ms ease-in-out;
+}
+.isotope-grid-sizer,
+.isotope-element {
+  width: 24.5%;
+}
+.isotope-gutter-sizer {
+  width: 0%;
+}
+@media (max-width: 960px) {
+  .isotope-grid-sizer,
+  .isotope-element {
+    width: 49%;
+  }
+  .isotope-gutter-sizer {
+    width: 3%;
+  }
+}
+.isotope-element.my-data-value {
+  width: 48%;
 }
