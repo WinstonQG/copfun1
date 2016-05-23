@@ -258,7 +258,6 @@ function md_blog_views_default_views() {
   $handler = $view->new_display('block', 'FCK Isotop Blog Filter', 'block_1');
   $handler->display->display_options['defaults']['style_plugin'] = FALSE;
   $handler->display->display_options['style_plugin'] = 'isotope_filter';
-  $handler->display->display_options['style_options']['filter_group'] = 'Category';
   $handler->display->display_options['style_options']['data_fields'] = 'field_category_blog';
   $handler->display->display_options['defaults']['style_options'] = FALSE;
   $handler->display->display_options['defaults']['row_plugin'] = FALSE;
