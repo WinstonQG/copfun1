@@ -307,10 +307,11 @@ function nodeblock_form_node_form_alter(&$form, &$form_state) {
       '#required' => FALSE,
       '#access' => !empty($overrides['block_title']) && $block_title_field == 'nodeblock',
       '#states' => array(
-        'invisible' => array(
-          ':input[name="nodeblock[custom_block_title]"]' => array('checked' => FALSE),
+        'visible' => array(
+          ':input[name="nodeblock[custom_block_title]"]' => array('checked' => TRUE),
+          ':input[name="nodeblock[enabled]"]' => array('checked' => TRUE),
         ),
-      ) + $states,
+      ),
     );
     if (!empty($overrides['block_title']) && $block_title_field != 'nodeblock' && !empty($overrides['block_title_in_fieldset'])) {
       $form['#pre_render'][] = 'nodeblock_node_form_pre_render';
@@ -336,10 +337,11 @@ function nodeblock_form_node_form_alter(&$form, &$form_state) {
       ),
       '#access' => !empty($overrides['machine_name']),
       '#states' => array(
-        'invisible' => array(
-          ':input[name="nodeblock[custom_machine_name]"]' => array('checked' => FALSE),
+        'visible' => array(
+          ':input[name="nodeblock[custom_machine_name]"]' => array('checked' => TRUE),
+          ':input[name="nodeblock[enabled]"]' => array('checked' => TRUE),
         ),
-      ) + $states,
+      ),
     );
 
     $view_modes = array();
@@ -553,6 +555,8 @@ function nodeblock_node_update($node) {
       ->condition('nid', $node->nid)
       ->fields($values)
       ->execute();
+
+    $node->nodeblock = $values;
   }
   else {
     nodeblock_node_insert($node);
@@ -652,6 +656,8 @@ function nodeblock_node_insert($node) {
         }
       }
     }
+
+    $node->nodeblock = $values;
   }
 }
 
@@ -961,4 +967,23 @@ function _nodeblock_node_languages($node) {
   }
 
   return $langcodes;
+}
+
+/**
+ * Implements hook_features_pipe_COMPONENT_alter().
+ *
+ * Autodetect Nodeblock settings when creating a Feature.
+ */
+function nodeblock_features_pipe_node_alter(&$pipe, $data, $export) {
+  foreach ($data as $type) {
+    if (variable_get('nodeblock_' . $type, 0)) {
+      $pipe['variable'][] = 'nodeblock_' . $type;
+      $pipe['variable'][] = 'nodeblock_comment_link_' . $type;
+      $pipe['variable'][] = 'nodeblock_node_link_' . $type;
+      $pipe['variable'][] = 'nodeblock_view_mode_' . $type;
+      $pipe['variable'][] = 'nodeblock_node_overrides_' . $type;
+      $pipe['variable'][] = 'nodeblock_node_override_block_available_' . $type;
+      $pipe['variable'][] = 'nodeblock_node_override_block_title_field_' . $type;
+    }
+  }
 }
