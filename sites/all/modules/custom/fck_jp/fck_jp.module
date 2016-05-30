@@ -17,6 +17,15 @@ function fck_jp_theme($existing, $type, $theme, $path) {
 }
 
 /**
+ * Implements hook_flag_unflag().
+ */
+function fck_jp_flag_unflag($flag, $entity_id, $account, $flagging) {	
+	if ($flagging->entity_type == 'commerce_product') {
+		fck_jp_remove_wishlist($entity_id, $account->uid);
+	}
+}
+
+/**
  * Implements hook_preprocess_fck_jp_attributes() 
  */
 function fck_jp_preprocess_fck_jp_attributes(&$vars) {

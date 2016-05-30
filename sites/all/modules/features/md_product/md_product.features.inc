@@ -113,7 +113,7 @@ function md_product_flag_default_flags() {
     'link_type' => 'normal',
     'weight' => 0,
     'show_in_links' => array(
-      'full' => 'full',
+      'full' => 0,
       'attribute_view' => 0,
       'token' => 0,
       'line_item' => 0,
@@ -129,6 +129,7 @@ function md_product_flag_default_flags() {
       'node_email_html' => 0,
       'node_email_textalt' => 0,
       'node_token' => 0,
+      'node_modal_product_detail' => 0,
       'commerce_discount_offer_token' => 0,
     ),
     'show_as_field' => 1,

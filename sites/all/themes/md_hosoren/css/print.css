@@ -12,8 +12,10 @@
 .view-wishlist-product td:last-child {
   display: none !important;
 }
-#edit-submit {
-  display: none;
+#edit-submit,
+.alert,
+.messages {
+  display: none !important;
 }
 @media print {
   .noprint {

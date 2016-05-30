@@ -270,7 +270,10 @@ function md_blog_views_default_views() {
   $handler->display->display_options['fields']['field_category_blog']['field'] = 'field_category_blog';
   $handler->display->display_options['fields']['field_category_blog']['label'] = '';
   $handler->display->display_options['fields']['field_category_blog']['element_label_colon'] = FALSE;
-  $handler->display->display_options['fields']['field_category_blog']['type'] = 'taxonomy_term_reference_plain';
+  $handler->display->display_options['fields']['field_category_blog']['type'] = 'i18n_taxonomy_term_reference_plain';
+  $handler->display->display_options['fields']['field_category_blog']['group_columns'] = array(
+    'language' => 'language',
+  );
   $handler->display->display_options['defaults']['sorts'] = FALSE;
 
   /* Display: FCK Isotop Blog Grid */

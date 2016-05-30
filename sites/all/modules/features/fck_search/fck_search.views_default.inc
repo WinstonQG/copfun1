@@ -202,7 +202,7 @@ function fck_search_views_default_views() {
   $handler->display->display_options['filters']['status']['value'] = array(
     1 => '1',
   );
-  $handler->display->display_options['path'] = 'categories/match-kits/%';
+  $handler->display->display_options['path'] = 'categories/match_kits/%';
 
   /* Display: Baby */
   $handler = $view->new_display('page', 'Baby', 'baby_page');

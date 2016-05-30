@@ -352,16 +352,29 @@ function fck_custom_form_alter(&$form, &$form_state, $form_id) {
   	// hide Jersey print attributes for Teaser and Modal view modes. Override handler  
   	// of 'Add to cart' button - it should redirect to full node page instead of 
   	// adding product to cart.
-  	if ($form_state['build_info']['args'][2]['view_mode'] == 'node_modal_product_detail') {
+    $view_mode = $form_state['build_info']['args'][2]['view_mode']; 
+  	//node_full
+
+    if ($view_mode == 'node_modal_product_detail') {
   		if (isset($form['field_jersey_print'])) {
   			unset($form['field_jersey_print']);
 
   			$form['submit']['#value'] = t('Add Prints');
+        if (isset($form['submit_modal'])) {
+          $form['submit_modal']['#value'] = t('Add Prints');
+        }
+
+
   			$form['#submit'][0] = 'fck_custom_jersey_print_redirect';
+        return;
   		}
   	}    
-  	$form['#theme'] = 'jersey_print_form';
-    //$form['#submit'][] = 'fck_custom_recalculate_sellprice_submit';
+
+    $form['#theme'] = 'jersey_print_form';
+  	
+    // fix a bug with wrong prices in Cart popup - force price 
+    // recalculation that happens only after visiting Cart page
+    $form['#submit'][] = 'fck_custom_recalculate_sellprice_submit';
   	// get Text fid (link is generated in template)
   	$preview_text_fid = '';
   	if (isset($form_state['default_product']->field_text_preview_image['und'])) {
@@ -746,9 +759,9 @@ function fck_wishlist_modal_submit($form, $form_state) {
   } else {
     $flag->flag('unflag', $product_id);
     //
-    if (!empty($jersey_print)) {
+    /*if (!empty($jersey_print)) {
       fck_jp_remove_wishlist($product_id, $user->uid);
-    }
+    }*/
   }
   
   //
@@ -769,8 +782,11 @@ function fck_wishlist_modal_submit($form, $form_state) {
  * (autograph, badge etc). Passed parameters will be picked automatically.
  * Used with Wishlist buttons and on wishlist page.
  */
-function fck_generate_product_url($product_nid, $product_id, $autograph = FALSE, $badge = FALSE, $player = '', $label = '', $number = '') {  
-  $params['size'] = $product_id;  
+function fck_generate_product_url($product_nid, $product_id = 0, $autograph = FALSE, $badge = FALSE, $player = '', $label = '', $number = '') {  
+  $params = array();
+  if ($product_id) {
+    $params['size'] = $product_id;  
+  }
   if ($autograph) {
     $params['autograph'] = $autograph;
   }

@@ -25,6 +25,20 @@
 $line_item = entity_load_single('commerce_line_item', $output);
 $wrapper = entity_metadata_wrapper('commerce_line_item', $line_item);
 
+$jersey_print_output = '';
+// check if current product is Jersey print
+if (isset($wrapper->commerce_product->field_jersey_print)) {	
+	// get jersey print values from line item 
+	$jersey_print_values = unserialize($wrapper->commerce_pricing_attributes->value());
+	if (!empty($jersey_print_values)) {	
+		$jersey_print_values = $jersey_print_values['jersey_print'];
+	}
+	// get jersey print common data (info about Price per attribute to show)
+	$jersey_print_data = $wrapper->commerce_product->field_jersey_print->value()['set_details'];	
+
+	$jersey_print_output = theme('fck_jp_attributes', array('jersey_print_values' => $jersey_print_values, 'jersey_print_data' => $jersey_print_data, 'show_price' => FALSE));	
+}
+
 
 $title = $wrapper->commerce_product->title->value();
 $commerce_price_data = $wrapper->commerce_total->value();
@@ -49,6 +63,7 @@ $dislay_path = $row->field_commerce_display_path[0]['raw']['value'];
 	<div class="product-body">
 		<div class="product-name">
 			<h3><?php print l($title, $dislay_path); ?></h3>
+			<?php print $jersey_print_output; ?>
 		</div>
 		<div class="cart-price">
 			<span><?php print t('Price') ?>:</span>

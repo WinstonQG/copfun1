@@ -29,51 +29,18 @@ $line_item = entity_load_single($type, $lid);
 $wrapper = entity_metadata_wrapper($type, $line_item);
 $title = $wrapper->commerce_product->title->value();
 
-$jersey_print_values = unserialize($wrapper->commerce_pricing_attributes->value());
-if (!empty($jersey_print_values)) {	
-	$jersey_print_values = $jersey_print_values['jersey_print'];
-}
-
 $jersey_print_output = '';
-$jersey_print_prices = array();
+// check if current product is Jersey print
 if (isset($wrapper->commerce_product->field_jersey_print)) {	
-	$jersey_print_data = $wrapper->commerce_product->field_jersey_print->value()['set_details'];
-	//dsm($jersey_print_values);
-	//dsm($jersey_print_data);
-
-	$jersey_print_output = theme('fck_jp_attributes', array('jersey_print_values' => $jersey_print_values, 'jersey_print_data' => $jersey_print_data));
-
-	/*
-	if ($jersey_print_values['field_superliga_badge']) {
-		// superliga badge option
-		$option = $jersey_print_data['field_superliga_badge']['options'][1];
-		$price = commerce_currency_format($option['price'], $option['currency_code']);
-		$jersey_print_prices['field_superliga_badge'] = $jersey_print_values['field_superliga_badge'] ? $price : '';
+	// get jersey print values from line item 
+	$jersey_print_values = unserialize($wrapper->commerce_pricing_attributes->value());
+	if (!empty($jersey_print_values)) {	
+		$jersey_print_values = $jersey_print_values['jersey_print'];
 	}
+	// get jersey print common data (info about Price per attribute to show)
+	$jersey_print_data = $wrapper->commerce_product->field_jersey_print->value()['set_details'];	
 
-	if ($jersey_print_values['field_autograph']) {
-		// autograph option
-		$option = $jersey_print_data['field_autograph']['options'][1];
-		$price = commerce_currency_format($option['price'], $option['currency_code']);
-		$jersey_print_prices['field_autograph'] = $jersey_print_values['field_autograph'] ? $price : '';
-	}
-
-	if (!is_null($jersey_print_values['field_players'])) {
-		// players option
-		$option = $jersey_print_data['field_players']['options'][$jersey_print_values['field_players']->tid];
-		$price = commerce_currency_format($option['price'], $option['currency_code']);	
-		$jersey_print_prices['field_players'] = $jersey_print_values['field_players'] ? $price : '';
-	}
-	// Label text option
-	$text_label = $jersey_print_values['field_text_label'];
-	if (!empty($text_label)) {		
-		$jersey_print_prices['field_text_label'] = fck_custom_get_custom_price($text_label, 'label');
-	}
-	// Number text option
-	$text_number = $jersey_print_values['field_text_number'];
-	if (!empty($text_number)) {			
-		$jersey_print_prices['field_text_number'] = fck_custom_get_custom_price($text_number, 'number');
-	}*/
+	$jersey_print_output = theme('fck_jp_attributes', array('jersey_print_values' => $jersey_print_values, 'jersey_print_data' => $jersey_print_data));	
 }
 
 ?>
