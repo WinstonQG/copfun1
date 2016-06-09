@@ -1,0 +1,240 @@
+<?php
+
+/**
+ * Implements hook_menu().
+ */
+function fck_order_menu() {  
+  $items['user/%user/invoices/%commerce_order'] = array(
+    'title callback' => 'commerce_order_ui_order_title',
+    'title arguments' => array(3),
+    'page callback' => 'fck_order_invoice_view',
+    'page arguments' => array(3, 'customer'),
+    'access callback' => 'commerce_order_customer_order_view_access',
+    'access arguments' => array(3),
+  ); 
+  $items['invoice-pdf/%commerce_order/preview'] = array(
+    'title' => 'Invoice Preview',
+    'page callback' => 'commerce_billy_pdf_preview',
+    'page arguments' => array(1),
+    'access callback' => TRUE,    
+    'type' => MENU_CALLBACK,
+  ); 
+  $items['invoice-pdf/%commerce_order/generate'] = array(
+    'title' => 'Invoice Generate',
+    'page callback' => 'commerce_billy_pdf_generate',
+    'page arguments' => array(1),
+    'access callback' => 'commerce_billy_pdf_view_access',
+    'access arguments' => array(1),
+    'type' => MENU_CALLBACK,
+  );
+  
+  return $items;
+}
+
+/**
+ * Implements hook_menu_alter().
+ */
+function fck_order_menu_alter(&$items) {  
+  
+  $items['admin/commerce/orders/%commerce_order/pdf-invoice']['page callback'] = 'fck_order_commerce_billy_pdf_redirect';
+  
+}
+
+/**
+ * Implements hook_theme().
+ */
+function fck_order_theme($existing, $type, $theme, $path) {  
+  return array(    
+    'fck_order_invoice_toptext' => array(
+      'variables' => array('uid' => NULL, 'order_id' => NULL),
+      'template' => 'fck-order-invoice-toptext',
+    ),
+  );
+}
+
+/**
+ * Implements hook_theme_registry_alter().
+ */
+function fck_order_theme_registry_alter(&$theme_registry) {
+  $theme_registry[ 'commerce_order__commerce_order__pdf' ]['path'] = drupal_get_path('module', 'fck_order') . '/templates';
+}
+
+function fck_order_preprocess_fck_order_invoice_toptext(&$variables) { 
+  $variables['param'] = '';  
+}
+
+/**
+ * Implements hook_entity_info_alter().
+ */
+function fck_order_entity_info_alter(&$entity_info) {
+  $entity_info['commerce_order']['view modes']['invoice'] = array(
+    'label' => t('Invoice'),
+    'custom settings' => FALSE,
+  );
+}
+
+/**
+ * Implements hook_commerce_order_view().
+ */
+function fck_order_commerce_order_view($order, $view_mode) {
+  if ($view_mode == "pdf" || $view_mode == 'canceled') {
+    //watchdog('ord', '<pre>'.print_r($order, TRUE).'</pre>');
+    $order->content['order_id']['#markup'] = t('Order NR') . ': ' . $order->order_id;
+    $order->content['order_date']['#markup'] = t('Order date') . ': ' . date('d/n Y', $order->created);
+    $order->content['customer_mail']['#markup'] = $order->mail;
+  }
+}
+
+/**
+ * Implements hook_field_extra_fields().
+ */
+function fck_order_field_extra_fields() {
+  $extra['commerce_order']['commerce_order'] = array(
+    'display' => array(
+      'invoice_top_text' => array(
+        'label' => t('Invoice top text'),
+        'description' => t('Invoice top text'),
+        'weight' => 0,
+      ),
+    )
+  );
+  return $extra;
+}
+
+/**
+ * Implements hook_entity_view().
+ */
+function fck_order_entity_view($entity, $type, $view_mode, $langcode) {
+  if ($type == 'commerce_order' && $entity->type == 'commerce_order') {
+    $uid = $entity->uid;
+    $order_id = $entity->order_id;
+    $entity->content['invoice_top_text'] = array(      
+      '#markup' => theme('fck_order_invoice_toptext', array('uid' => $uid, 'order_id' => $order_id)),
+      '#weight' => 10,    
+    );
+  }
+}
+
+/**
+ * Implements hook_permission().
+ */
+function fck_order_permission() {
+  return array(    
+    'administer fck_order' =>  array(
+      'title' => t('Administer FCK Order'),
+      'description ' => t('Perform administration tasks for FCK Order'),
+    ),
+  );
+}
+
+/**
+ * Implements hook_token_info().
+ */
+function fck_order_token_info() {
+  $type = array(
+    'name' => t('Orders', array(), array('context' => 'a drupal commerce order')),
+    'description' => t('Tokens related to individual orders.'),
+    'needs-data' => 'commerce-order',
+  );
+
+  $order = array();
+  $order['order-pdf-attachment'] = array(
+    'name' => t('FCK Order PDF Attachment'),
+    'description' => t('Generate pdf and return a path to file. Used in "Send html mail" action after order complete.'),
+  );
+  
+  return array(
+    'types' => array($type),
+    'tokens' => array($order),
+  );
+}	
+
+/**
+ * Implements hook_tokens().
+ */
+function fck_order_tokens($type, $tokens, array $data = array(), array $options = array()) {
+  $replacements = array();
+  $sanitize = !empty($options['sanitize']);
+
+  if ($type == 'commerce-order' && !empty($data['commerce-order'])) {
+    $order = $data['commerce-order'];
+
+    foreach ($tokens as $name => $original) {
+      if ($name == 'order-pdf-attachment') {
+        $replacements[$original] = commerce_billy_pdf_generate($order);
+      }
+    }      
+  }
+
+  return $replacements;
+}
+
+/**
+ * Generate an array for rendering the given order.
+ *
+ * @param $order
+ *   A fully loaded order object.
+ * @param $view_mode
+ *   The view mode for displaying the order, 'administrator' or 'customer'.
+ *
+ * @return
+ *   An array as expected by drupal_render().
+ */
+function fck_order_invoice_view($order, $view_mode = 'invoice') {
+  drupal_add_css(drupal_get_path('module', 'commerce_order') . '/theme/commerce_order.theme.css');
+  return entity_view('commerce_order', array($order->order_id => $order), 'invoice', NULL, TRUE);
+}
+
+/**
+ * HTML preview pdf version (for development)
+ */
+function commerce_billy_pdf_preview($order) {
+  $html = commerce_billy_pdf_html($order);   
+  print $html;
+}
+
+/**
+ * Generate pdf in files/order_attached/ folder. Used in 
+ * token to attach to mail after order is completed.
+ */
+function commerce_billy_pdf_generate($order) {
+  $html = commerce_billy_pdf_html($order); 
+  $filename = preg_replace('/[^a-z0-9]/', '_', drupal_strtolower('FanshopOrder-' . $order->order_number)) . '.pdf';
+
+  try {
+    //order_attachments
+    //commerce_billy_pdf_output($html, $filename);
+    return commerce_billy_pdf_generate_output($html, $filename);    
+  }
+  catch (DOMPDF_Exception $e) {
+    drupal_set_message(t('Error generating PDF invoice. Please contact the website administrator.'), 'error');
+    watchdog('commerce_billy_pdf', 'DOMPDF exception while generating pdf invoice: %message', array('%message' => $e->getMessage()), WATCHDOG_ERROR);
+    return '';
+  }
+}
+
+/**
+ * Transforms HTML to PDF and outputs it to the browser.
+ */
+function commerce_billy_pdf_generate_output($html, $filename) {
+  $dompdf = commerce_billy_pdf_prepare_dompdf($html, $filename);
+  if ($dompdf) {
+    $pdf = $dompdf->output();
+    
+    $filepath = variable_get('file_public_path', conf_path() . '/files') . '/order_attachments/' . $filename;    
+    file_put_contents($filepath, $pdf);
+
+    return $filepath;
+    //unlink($filepath . $filename);
+  }
+  else {
+    return t('DOMPDF not found');
+  }
+}
+
+/**
+ * Fix an Billy Pdf issue with showing view with theme templates
+ */
+function fck_order_commerce_billy_pdf_redirect($order) {  
+  drupal_goto('invoice-pdf/'.$order->order_id);
+}

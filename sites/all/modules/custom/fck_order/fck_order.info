@@ -1,0 +1,6 @@
+name = FCK Order
+description = Provide Commerce Order related features like invoices, pdf , mail templates, additional order related pages.
+package = FCK
+core = 7.x
+; Files
+dependencies[] = commerce_billy_pdf

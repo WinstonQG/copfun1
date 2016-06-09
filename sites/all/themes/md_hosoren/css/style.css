@@ -16746,10 +16746,6 @@ table > thead > tr > th {
   border-bottom-width: 1px;
   font-weight: normal;
 }
-table tr.even,
-table tr.odd {
-  background: none;
-}
 table a {
   color: #319db5;
 }
@@ -17193,14 +17189,16 @@ tr.component-type-commerce-price-formatted-amount {
   text-align: right;
 }
 /*Order*/
-.commerce-order-commerce-order .field-name-commerce-customer-billing {
-  margin: 20px 0;
-  padding: 30px;
-  background: #F9f9f9;
+/*
+.commerce-order-commerce-order .field-name-commerce-customer-billing{
+    margin: 20px 0;
+    padding: 30px;
+    background: #F9f9f9;
 }
-.commerce-order-commerce-order .field-name-commerce-customer-billing .field-label {
-  border-bottom: 2px solid #ccc;
+.commerce-order-commerce-order .field-name-commerce-customer-billing .field-label{
+    border-bottom: 2px solid #ccc;
 }
+*/
 .awe-counting > span.text-weight-normal {
   font-weight: normal;
 }
@@ -18684,6 +18682,13 @@ ul li {
   margin: 0;
   list-style: none;
 }
+.commerce-order-handler-area-order-total .commerce-price-formatted-components tr.odd,
+.commerce-order-handler-area-order-total .commerce-price-formatted-components tr.even {
+  background: #333;
+}
+.field-name-commerce-order-total .commerce-price-formatted-components tr.component-type-commerce-price-formatted-amount {
+  background: #333;
+}
 .block-facetapi {
   clear: both;
 }
@@ -18883,6 +18888,9 @@ ul li {
 }
 .view-wishlist-product .st_facebook_custom:after {
   content: 'Del pa facebook';
+}
+#emailshareMsg {
+  background: #ff0 !important;
 }
 #block-views-blog-isotope-list-block-1 ul {
   margin: 50px 0;

@@ -22,8 +22,10 @@
  * the view is modified.
  */
 
-$lid = $row->commerce_line_item_field_data_commerce_line_items_line_item_;
-$type = $row->field_data_commerce_total_commerce_line_item_entity_type;
+$lkey = key($row->_field_data);
+
+$lid = $row->_field_data[$lkey]['entity']->line_item_id;
+$type = 'commerce_line_item';
 
 $line_item = entity_load_single($type, $lid);
 $wrapper = entity_metadata_wrapper($type, $line_item);

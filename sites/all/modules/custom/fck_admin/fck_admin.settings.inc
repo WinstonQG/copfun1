@@ -44,6 +44,21 @@ function fck_admin_settings_form($form, &$form_state) {
     '#description' => '<strong>Note: </strong>1kr. = 100, 20kr.=2000',
   );
 
+  $form['invoices'] = array(
+    '#type' => 'fieldset',
+    '#title' => t('Invoices'),    
+  );
+  $form['invoices']['fck_invoice_redirect_page'] = array(
+    '#type' => 'textfield',
+    '#default_value' => variable_get('fck_invoice_redirect_page', 'home'),
+    '#title' => t('Continue shopping page'),    
+  );
+  $form['invoices']['fck_invoice_delivery_range'] = array(
+    '#type' => 'textfield',
+    '#default_value' => variable_get('fck_invoice_delivery_range', '1-3 days'),
+    '#title' => t('Delivery range'),    
+  );
+
   $form['shop_product'] = array(
     '#type' => 'fieldset',
     '#title' => t('Shop Product'),

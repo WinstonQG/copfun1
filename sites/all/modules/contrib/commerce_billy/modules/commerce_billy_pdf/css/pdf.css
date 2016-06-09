@@ -73,17 +73,18 @@ body {
   text-align: right;
 }
 .view-commerce-line-item-table td {
-  text-align: right;
-  height: 30px;
+  text-align: left;
+  padding: 10px 0;
 }
+
 .view-commerce-line-item-table .views-field-commerce-total {
   text-align: right;
   padding-right: 5px;
-  width: 200px;
+  /*width: 200px;*/
 }
 .view-commerce-line-item-table .views-field-line-item-title {
   text-align: left;
-  width: 300px;
+  /*width: 300px;*/
 }
 
 .order-total table {

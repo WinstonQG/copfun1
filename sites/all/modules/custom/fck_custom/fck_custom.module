@@ -313,7 +313,8 @@ function fck_custom_form_alter(&$form, &$form_state, $form_id) {
     // if product_id is passed - select proper product variant.
     // Only works for node_full view mode.
     if ($form_state['build_info']['args'][2]['view_mode'] == 'node_full') {           
-      if (isset($_GET['size'])) {
+      // pay attention that if only one attribute is left and other has been sold - 'attributes' field won't be shown
+      if (isset($_GET['size']) && isset($form['attributes'])) {
         // get size attribute field name
         $size_attribute = fck_product_form_get_size_attribute($form);
         // get dom id from size attribute field name
@@ -333,7 +334,7 @@ function fck_custom_form_alter(&$form, &$form_state, $form_id) {
         // and in this case select list has 100, 101 values.
         $product_ids = str_replace('commerce_cart_add_to_cart_form_', '', $form['form_id']['#value']);        
         $product_ids = explode('_', $product_ids);
-        $product_key = array_search($product_id, $product_ids);
+        $product_key = array_search($product_id, $product_ids);            
         $option_ids = array_keys($form['attributes'][$size_attribute]['#options']);
         if (isset($option_ids[$product_key])) {
           $option_key = $option_ids[$product_key];
@@ -341,6 +342,7 @@ function fck_custom_form_alter(&$form, &$form_state, $form_id) {
           $form['attributes'][$size_attribute]['#default_value'] = $option_key;
           $form['unchanged_attributes'][$size_attribute]['#value'] = $option_key;
         }
+        
       }
     }       
   }

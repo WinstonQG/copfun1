@@ -208,12 +208,14 @@ function commerce_billy_pdf_commerce_order_view($order, $view_mode) {
       '#markup' => isset($settings['invoice_text']) ? $settings['invoice_text'] : '',
     );
     $date_field_name = $view_mode == 'pdf' ? 'field_commerce_billy_i_date' : 'field_commerce_billy_cancel_date';
-    $date_formatted = format_date($order->{$date_field_name}[LANGUAGE_NONE][0]['value'], 'custom', $custom_date_format);
-    if (!empty($settings['invoice_location'])) {
-      $invoice_header_date_text = t('@location, @date', array('@location' => $settings['invoice_location'], '@date' => $date_formatted));
-    }
-    else {
-      $invoice_header_date_text = $date_formatted;
+    if (isset($order->{$date_field_name}[LANGUAGE_NONE])) {
+      $date_formatted = format_date($order->{$date_field_name}[LANGUAGE_NONE][0]['value'], 'custom', $custom_date_format);
+      if (!empty($settings['invoice_location'])) {
+        $invoice_header_date_text = t('@location, @date', array('@location' => $settings['invoice_location'], '@date' => $date_formatted));
+      }
+      else {
+        $invoice_header_date_text = $date_formatted;
+      }
     }
     $order->content['invoice_header_date'] = array(
       '#markup' => $invoice_header_date_text,

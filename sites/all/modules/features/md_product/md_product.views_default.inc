@@ -1089,7 +1089,7 @@ function md_product_views_default_views() {
   /* Display: LookBook */
   $handler = $view->new_display('block', 'LookBook', 'block_2');
   $handler->display->display_options['defaults']['arguments'] = FALSE;
-  /* Contextual filter: Content: LookBook (field_product_lookbook) */
+  /* Contextual filter: Content: Product LookBook (field_product_lookbook) */
   $handler->display->display_options['arguments']['field_product_lookbook_tid']['id'] = 'field_product_lookbook_tid';
   $handler->display->display_options['arguments']['field_product_lookbook_tid']['table'] = 'field_data_field_product_lookbook';
   $handler->display->display_options['arguments']['field_product_lookbook_tid']['field'] = 'field_product_lookbook_tid';
@@ -1558,7 +1558,7 @@ function md_product_views_default_views() {
   $handler->display->display_options['fields']['field_subtitle']['field'] = 'field_subtitle';
   $handler->display->display_options['fields']['field_subtitle']['label'] = '';
   $handler->display->display_options['fields']['field_subtitle']['element_label_colon'] = FALSE;
-  /* Field: Content: LookBook */
+  /* Field: Content: Product LookBook */
   $handler->display->display_options['fields']['field_product_lookbook']['id'] = 'field_product_lookbook';
   $handler->display->display_options['fields']['field_product_lookbook']['table'] = 'field_data_field_product_lookbook';
   $handler->display->display_options['fields']['field_product_lookbook']['field'] = 'field_product_lookbook';

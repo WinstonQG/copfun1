@@ -860,6 +860,13 @@ function md_product_strongarm() {
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
+  $strongarm->name = 'language_content_type_shop_product';
+  $strongarm->value = '0';
+  $export['language_content_type_shop_product'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
   $strongarm->name = 'menu_options_lookbook';
   $strongarm->value = array(
     0 => 'main-menu',
@@ -888,6 +895,57 @@ function md_product_strongarm() {
   $strongarm->name = 'menu_parent_shop_product';
   $strongarm->value = 'main-menu:0';
   $export['menu_parent_shop_product'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'nodeblock_comment_link_shop_product';
+  $strongarm->value = '0';
+  $export['nodeblock_comment_link_shop_product'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'nodeblock_node_link_shop_product';
+  $strongarm->value = '0';
+  $export['nodeblock_node_link_shop_product'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'nodeblock_node_overrides_shop_product';
+  $strongarm->value = array(
+    0 => 'nodeblock',
+  );
+  $export['nodeblock_node_overrides_shop_product'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'nodeblock_node_override_block_available_shop_product';
+  $strongarm->value = 'disabled';
+  $export['nodeblock_node_override_block_available_shop_product'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'nodeblock_node_override_block_title_field_shop_product';
+  $strongarm->value = 'nodeblock';
+  $export['nodeblock_node_override_block_title_field_shop_product'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'nodeblock_shop_product';
+  $strongarm->value = '1';
+  $export['nodeblock_shop_product'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'nodeblock_view_mode_shop_product';
+  $strongarm->value = 'modal_content';
+  $export['nodeblock_view_mode_shop_product'] = $strongarm;
 
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
