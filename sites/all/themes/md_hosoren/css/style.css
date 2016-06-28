@@ -18645,6 +18645,22 @@ ul li {
   padding: 4px 0;
   list-style: none;
 }
+.cart-discount-info {
+  font-family: FCK;
+  font-size: 18px;
+}
+.cart-discount-info .discount-note {
+  color: #f00;
+}
+.form-item-shipping-method label {
+  font-family: FCK;
+  font-size: 16px;
+}
+#coupon-code-container .coupon-code-label {
+  font-family: FCK;
+  font-size: 16px;
+  font-weight: bold;
+}
 #commerce-checkout-form-checkout input[type='text'],
 .page-checkout-review input[type='text'],
 #commerce-checkout-form-checkout select,

@@ -48,6 +48,7 @@ function fck_order_theme($existing, $type, $theme, $path) {
     'fck_order_invoice_toptext' => array(
       'variables' => array('uid' => NULL, 'order_id' => NULL),
       'template' => 'fck-order-invoice-toptext',
+      'path' => drupal_get_path('module', 'fck_order') . '/templates',
     ),
   );
 }
@@ -59,7 +60,167 @@ function fck_order_theme_registry_alter(&$theme_registry) {
   $theme_registry[ 'commerce_order__commerce_order__pdf' ]['path'] = drupal_get_path('module', 'fck_order') . '/templates';
 }
 
+/**
+ * Implements hook_form_alter().
+ */
+function fck_order_form_alter(&$form, &$form_state, $form_id) { 
+  if ($form_id == 'views_form_commerce_cart_form_default') {
+    global $user;
+    
+    $order = commerce_cart_order_load($user->uid);      
+
+    $subtotal = fck_get_order_subtotal($order);    
+    $discount_value = variable_get('fck_free_shipping_rate', 790.00);
+    $discount_value = $discount_value * 100;
+    $discount_message = '';
+    if ($subtotal >= $discount_value) {
+      $discount_message = t('<span class="discount-note">NOTE - You have earned free delivery</span>');
+    } else {
+      $diff = $discount_value - $subtotal;
+      $diff = commerce_currency_format($diff, commerce_default_currency());
+      $discount_message = t('<span class="discount-note">FREE DELIVERY</span> - Buy for <span class="discount-note">!diff</span> more and get free shipping', array('!diff' => $diff)); 
+    }
+
+    $discount_message = '<div class="cart-discount-info">'. $discount_message . '</div>';
+
+    // *************************
+    // Discount info
+    // *************************
+    if (!empty($discount_message)) {
+      $form['discount_info'] = array(
+        '#markup' => $discount_message,
+        '#weight' => 100,
+      );
+    }
+    // *************************
+    // Shipping container
+    // *************************
+    // Collect shipping rates for the order.
+    commerce_shipping_collect_rates($order);
+    // Generate an array of shipping service rate options.
+    $options = fck_commerce_shipping_service_rate_options($order, $form_state);
+    $default_shipping = fck_get_order_shipping($order);        
+
+    // check case when user visited Checkout page and came back to Cart page directly (without clicking Cancel button). In this case we have to drop order status to 'cart' as it's 'checkout_checkout' now and if user will click on 'Update cart' button it will be changed to 'cart' and shipping will be reseted as well. 
+    // So we have to check status and reset status and shipping manually
+    if ($order->status == 'checkout_checkout') {
+      $order->status = 'cart';      
+      fck_add_order_shipping($order, $default_shipping);      
+    }
+
+    $form['shipping_method'] = array(
+      '#type' => 'radios',
+      '#title' => t('Shipping methods'),
+      '#options' => $options,
+      '#default_value' => $default_shipping,
+      '#weight' => 101,
+      '#ajax' => array(
+        'callback' => 'fck_order_shipping_cart_refresh',        
+      ),
+    );
+    $form['order'] = array(
+      '#type' => 'value',
+      '#value' => $order,
+    );
+    $form['actions']['#weight'] = 103;
+    
+    // *************************
+    // Coupons container
+    // *************************
+    $form['coupon'] = array(
+      '#type' => 'container',
+      '#weight' => 102,
+      '#prefix' => '<div id="coupon-code-container">',
+      '#suffix' => '</div><div class="coupon-code-area-filler"></div>',
+    );
+
+    // If there's an active coupon
+    if (isset($order->commerce_coupons) && !empty($order->commerce_coupons)) {
+      $order_wrapper = entity_metadata_wrapper('commerce_order', $order);
+      foreach ($order_wrapper->commerce_coupons as $delta => $coupon_wrapper) {
+        $coupon = $coupon_wrapper->value();
+      }
+
+      $form['coupon']['coupon_code'] = array(
+        '#type' => 'markup',
+        '#markup' => t('Your voucher code').': <span class="active-voucher-code">' . $coupon->code .'</span>',
+        '#prefix' => '<div class="coupon-code-label active">',
+        '#suffix' => '</div>',
+      );
+      $form['coupon']['coupon_remove'] = array(
+        '#type' => 'submit',
+        '#value' => t('Remove'),
+        '#prefix' => '<div class="remove-voucher-button">',
+        '#suffix' => '</div>',
+        '#submit' => array('fck_order_remove_coupon_form_submit'),
+      );
+
+      $form['coupon']['coupon_id'] = array(
+        '#type' => 'hidden',
+        '#value' => $coupon->coupon_id,
+      );
+
+      // Else, if there isn't any active coupon
+    } else {
+      $form['coupon']['coupon_code_label'] = array(
+        '#type' => 'markup',
+        '#markup' => '<div class="coupon-code-label">'.t('Enter voucher code').'</div>',
+      );
+      $form['coupon']['coupon_code'] = array(
+        '#type' => 'textfield',        
+      );
+      $form['coupon']['coupon_add'] = array(
+        '#type' => 'submit',
+        '#value' => t('Activate'),
+        '#submit' => array('fck_order_add_coupon_form_submit'),
+      );
+    }
+  } 
+  elseif ($form_id == 'commerce_checkout_form_checkout') {    
+    // This code is needed to prevent checking default shipping service
+    // without updating Cart summary table (default Checkout feature bug)
+    // take order object
+    $order = $form_state['order'];
+    // if a form was updated by ajax or validation -
+    // refresh an order data because shipping line items can be updated
+    // in database
+    if (isset($form_state['triggering_element'])) {
+      $order = commerce_order_load($form_state['order']->order_id);
+    }
+
+    // check if updated order contains shipping line item 
+    // (it means that shipping service was picked)
+    $is_shipping_selected = fck_is_order_shipping_exists($order);
+    
+    // check if shipping was picked during validation 
+    // to prevent setup default shipping service after validation
+    $validation_status = TRUE;
+    if (sizeof($form_state['input']) && 
+      !sizeof($form_state['input']['commerce_shipping'])) {
+      $validation_status = FALSE;
+    }   
+
+    // two conditions: 
+    // * shipping line item doesn't exists and form wasn't updated
+    // OR
+    // * shipping servie is not set during validation 
+    // Uncheck default shipping service
+    if ((!$is_shipping_selected && 
+    !isset($form_state['triggering_element'])) ||
+    !$validation_status) { //
+      $form['commerce_shipping']['shipping_service']['#required'] = TRUE;
+      $form['commerce_shipping']['shipping_service']['#default_value'] = NULL;
+    }
+
+    $form['commerce_shipping']['shipping_service']['#ajax']['callback'] = 'fck_shipping_pane_service_details_refresh';
+  }
+}
+
+/**
+ * Implements hook_preprocess_fck_order_invoice_toptext().
+ */
 function fck_order_preprocess_fck_order_invoice_toptext(&$variables) { 
+  // TO BE USED TO GENERATE INVOICE PAGE
   $variables['param'] = '';  
 }
 
@@ -237,4 +398,235 @@ function commerce_billy_pdf_generate_output($html, $filename) {
  */
 function fck_order_commerce_billy_pdf_redirect($order) {  
   drupal_goto('invoice-pdf/'.$order->order_id);
+}
+
+/**
+ * Ajax callback: Returns the shipping details form elements that match the currently selected shipping service.
+ */
+function fck_shipping_pane_service_details_refresh($form, &$form_state, $checkout_pane, $order) { 
+  // get order from form
+  list($order, $checkout_pane) = $form_state['build_info']['args'];
+  // Load up to date order
+  $order = commerce_order_load($order->order_id);
+  commerce_cart_order_refresh($order);
+
+  // Get selected 
+  $service_name = $form['commerce_shipping']['shipping_service']['#default_value'];  
+  commerce_shipping_service_rate_order($service_name, $order);
+
+  // Delete any existing shipping line items from the order.
+  commerce_shipping_delete_shipping_line_items($order, TRUE);
+
+  // Extract the unit price from the calculated rate.
+  $rate_line_item = $order->shipping_rates[$service_name];
+  $rate_line_item_wrapper = entity_metadata_wrapper('commerce_line_item', $rate_line_item);
+  $unit_price = $rate_line_item_wrapper->commerce_unit_price->value();
+
+  // Create a new shipping line item with the calculated rate from the form.
+  $line_item = commerce_shipping_line_item_new($service_name, $unit_price, $order->order_id, $rate_line_item->data, $rate_line_item->type);
+
+  // Save and add the line item to the order.
+  $new_line_item = commerce_shipping_add_shipping_line_item($line_item, $order, TRUE);
+  commerce_order_save($order);    
+
+  // Update shipping form
+  $commands[] = ajax_command_replace('#' . $form['commerce_shipping']['service_details']['#id'], render($form['commerce_shipping']['service_details']));
+
+  // Update checkout cart review
+  list($view_id, $display_id) = explode('|', variable_get('commerce_cart_contents_pane_view', 'commerce_cart_summary|default'));
+  $commands[] = ajax_command_replace('.view-commerce-cart-summary', commerce_embed_view($view_id, $display_id, array($order->order_id)));
+
+  $commands[] = ajax_command_after('.main form', theme('status_messages'));
+
+  return array('#type' => 'ajax', '#commands' => $commands);
+}
+
+/**
+ * Add shipping to order
+ * @param  [type] $order        
+ * @param  [type] $service_name    
+ * Returns updated Commerce Order.          
+ */
+function fck_add_order_shipping($order, $service_name = NULL) {    
+  if (isset($service_name) && !isset($order->shipping_rates[$service_name])) {  
+    // Make the chosen service available to the order.     
+    commerce_shipping_service_rate_order($service_name, $order);
+  }
+  elseif (!isset($service_name)) {    
+    if (empty($order->shipping_rates)) {      
+      // No available rate.
+      return;
+    }
+    $service_name = key($order->shipping_rates);    
+  }
+  // reload an order before starting _delete_shipping_line_items 
+  // function to void system error https://www.drupal.org/node/2275495
+  // It usually happens if user swiches shipping on cart after 14+ sec 
+  // as page was reloaded. Unclear issue - like some data in order has 
+  // been expired after 14+ sec =)
+  $order = commerce_order_load($order->order_id);
+  // Delete any existing shipping line items from the order.
+  commerce_shipping_delete_shipping_line_items($order, TRUE);
+  // Extract the unit price from the calculated rate.
+  $rate_line_item = $order->shipping_rates[$service_name];
+  $rate_line_item_wrapper = entity_metadata_wrapper('commerce_line_item', $rate_line_item);
+  $unit_price = $rate_line_item_wrapper->commerce_unit_price->value();
+
+  // Create a new shipping line item with the calculated rate from the form.
+  $line_item = commerce_shipping_line_item_new($service_name, $unit_price, $order->order_id, $rate_line_item->data, $rate_line_item->type);
+
+  // Save and add the line item to the order.
+  $new_line_item = commerce_shipping_add_shipping_line_item($line_item, $order, TRUE);
+  commerce_order_save($order);
+
+  return $order;
+}
+
+/**
+ * Get shipping service by order. 
+ * Returns FALSE if no shipping is setup.
+ */
+function fck_get_order_shipping($order) {
+  $default_value = FALSE;
+  $order_wrapper = entity_metadata_wrapper('commerce_order', $order);  
+  foreach ($order_wrapper->commerce_line_items as $delta => $line_item_wrapper) {    
+    if ($line_item_wrapper->value() && $line_item_wrapper->type->value() == 'shipping') {      
+      $default_value = $line_item_wrapper->commerce_shipping_service->value();
+      break;
+    }
+  }
+
+  return $default_value;
+}
+
+/**
+ * Check if shipping is picked for order 
+ */
+function fck_is_order_shipping_exists($order) {
+  // check if updated order contains shipping line item 
+  // (it means that shipping service was picked)
+  $order_wrapper = entity_metadata_wrapper('commerce_order', $order);
+  $is_shipping_selected = FALSE;
+  if (isset($order_wrapper->commerce_line_items)) {                   
+    foreach ($order_wrapper->commerce_line_items as $li) {        
+      if (isset($li->type) && $li->type->value() == 'shipping') {
+        $is_shipping_selected = TRUE;  
+        break;    
+      }
+    }
+  }
+
+  return $is_shipping_selected;
+}
+
+/**
+ * Overrides commerce_shipping_service_rate_options() function to implement proper radios theming.
+ * Turns an array of shipping rates into a form element options array.
+ *
+ * @param $order
+ *   An order object with a shipping_rates property defined as an array of
+ *   shipping rate price arrays keyed by shipping service name.
+ *
+ * @return
+ *   An options array of calculated shipping rates labeled using the display
+ *   title of the shipping services.
+ */
+function fck_commerce_shipping_service_rate_options($order, &$form_state) {
+  $options = array();
+
+  foreach ($order->shipping_rates as $name => $line_item) {
+    $line_item_wrapper = entity_metadata_wrapper('commerce_line_item', $line_item);
+
+    $options[$name] = t('<span class="shipping-name">!shipping_service</span><span class="shipping-break">:</span> <span class="shipping-price">!price</span>', array(
+      '!shipping_service' => commerce_shipping_line_item_title($line_item),
+      '!price' => commerce_currency_format($line_item_wrapper->commerce_unit_price->amount->value(), $line_item_wrapper->commerce_unit_price->currency_code->value()),
+    ));
+  }
+
+  // Allow modules to alter the options array generated for the rates.
+  drupal_alter('commerce_shipping_service_rate_options', $options, $order, $form_state);
+
+  return $options;
+}
+
+/**
+ * AJAX Callback that is used on Cart form. 
+ * It saves picked shipping method into order and refreshes a page.
+ */
+function fck_order_shipping_cart_refresh($form, $form_state) {
+  ctools_include('ajax');
+  $shipping_method = $form_state['values']['shipping_method'];
+  $order = $form_state['values']['order'];  
+  fck_add_order_shipping($order, $shipping_method);
+  
+  $commands[] = ctools_ajax_command_reload();
+
+  print ajax_render($commands);
+  exit;
+}
+
+/**
+ * Coupon form handler that is used on Cart form. Add coupon to order.
+ */
+function fck_order_add_coupon_form_submit($form, &$form_state) {
+  $order = $form_state['order'];
+  $error = '';
+  if ($code = $form_state['values']['coupon_code']) {
+    if ($commerce_coupon = commerce_coupon_redeem_coupon_code($code, $order, $error)) {
+      drupal_set_message('Successfully added voucher code ' . $commerce_coupon->code . '.');
+    } else {
+      drupal_set_message($error, 'error');
+      return;
+    }
+  }
+
+  $form_state['no_redirect'] = FALSE;
+  return ;
+}
+
+/**
+ * Coupon form handler that is used on Cart form. Remove coupon from order.
+ */
+function fck_order_remove_coupon_form_submit($form, &$form_state) {
+  $order = $form_state['order'];
+  $coupon = commerce_coupon_load($form_state['values']['coupon_id']);
+
+  fck_order_remove_coupon($order, $coupon);
+  drupal_set_message(t('Voucher !code removed from order.', array('!code' => $coupon->code)));
+  
+  return;
+}
+
+/**
+ * Remove coupon from order.
+ */
+function fck_order_remove_coupon($order, $coupon) {
+  $order_wrapper = entity_metadata_wrapper('commerce_order', $order);
+  // remove the coupons from the order relationship.
+  foreach ($order_wrapper->commerce_coupons as $delta => $coupon_wrapper) {
+    if ($coupon_wrapper->value() == $coupon) {
+      $order_wrapper->commerce_coupons->offsetUnset($delta);
+    }
+  }
+  commerce_order_save($order);
+}
+
+/**
+ * Get order subtotal (products sum)
+ */
+function fck_get_order_subtotal($order) {
+  $wrapper = entity_metadata_wrapper('commerce_order', $order);    
+  $price_components = $wrapper
+    ->commerce_order_total
+    ->data
+    ->value();
+  $products_amount = 0;
+  foreach ($price_components['components'] as $component) {
+    if ($component['name'] == 'base_price') {
+      $products_amount = $component['price']['amount'];
+      break;
+    }
+  }
+
+  return $products_amount;
 }

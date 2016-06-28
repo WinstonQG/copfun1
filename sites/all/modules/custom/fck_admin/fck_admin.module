@@ -140,6 +140,25 @@ function fck_admin_block_view($delta = '') {
 }
 
 /**
+ * Implements hook_entity_property_info_alter.
+ */
+function fck_admin_entity_property_info_alter(&$info) {   
+  $info['site']['properties']['fck_free_shipping_rate'] = array(
+    'type' => 'decimal',
+    'label' => t('FCK free shipping rate'),   
+    'description' => t('Provide free shipping rate value'),
+    'getter callback' => 'fck_free_shipping_rate_get',    
+  );  
+}
+
+/**
+ * Gets the property value. May be used as 'getter callback'.
+ */
+function fck_free_shipping_rate_get() {  
+  return variable_get('fck_free_shipping_rate', 790.00);
+}
+
+/**
  * Get a list of content Categories
  */
 function fck_get_categories() {

@@ -84,7 +84,7 @@ function fck_modals_form_alter(&$form, &$form_state, $form_id) {
     $form['pass']['#suffix'] = ctools_modal_text_button(t('Forgot your password'), 'fck_modals/nojs/pass', t('Get a new password'));
 
     if (variable_get('user_register', USER_REGISTER_VISITORS_ADMINISTRATIVE_APPROVAL) != USER_REGISTER_ADMINISTRATORS_ONLY) {
-      $form['actions']['#suffix'] .= "\r<h2>" . t('I don\'t have an account') . "</h2>";
+      $form['actions']['#suffix'] = "\r<h2>" . t('I don\'t have an account') . "</h2>";
       $form['actions']['#suffix'] .= "\r" . ctools_modal_text_button(t('Create an account'), 'fck_modals/nojs/register', t('Get a new password'));
       $form['actions']['#suffix'] .= '</div>';
     }

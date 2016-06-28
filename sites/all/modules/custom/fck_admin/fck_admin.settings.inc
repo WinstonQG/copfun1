@@ -76,6 +76,16 @@ function fck_admin_settings_form($form, &$form_state) {
       2592000 => '30 days',
     ),
   );
+  $form['cart_checkout'] = array(
+    '#type' => 'fieldset',
+    '#title' => t('Cart/Checkout'),
+  );
+  $form['cart_checkout']['fck_free_shipping_rate'] = array(
+    '#type' => 'textfield',
+    '#default_value' => variable_get('fck_free_shipping_rate', 790.00),
+    '#title' => t('Free shipping rate'),
+    '#description' => '<strong>Note: </strong>1kr. = 1, 20kr.=20',
+  );
   
   $form['#submit'][] = 'fck_admin_settings_form_submit';
 
