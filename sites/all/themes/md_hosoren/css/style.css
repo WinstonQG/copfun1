@@ -18867,6 +18867,10 @@ ul li {
   color: #337ab7;
   text-transform: uppercase;
 }
+.view-wishlist-product table tr.even,
+.view-wishlist-product table tr.odd {
+  background-color: transparent;
+}
 .view-wishlist-product .view-header {
   display: table;
   width: 100%;
@@ -18903,7 +18907,7 @@ ul li {
   content: 'Send som e-mail';
 }
 .view-wishlist-product .st_facebook_custom:after {
-  content: 'Del på Facebook';
+  content: 'Del pa facebook';
 }
 #emailshareMsg {
   background: #ff0 !important;
