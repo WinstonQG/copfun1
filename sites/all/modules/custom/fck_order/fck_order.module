@@ -573,7 +573,7 @@ function fck_order_add_coupon_form_submit($form, &$form_state) {
   $error = '';
   if ($code = $form_state['values']['coupon_code']) {
     if ($commerce_coupon = commerce_coupon_redeem_coupon_code($code, $order, $error)) {
-      drupal_set_message('Successfully added voucher code ' . $commerce_coupon->code . '.');
+      drupal_set_message(t('Successfully added voucher code !code.', array('!code' => $commerce_coupon->code)));
     } else {
       drupal_set_message($error, 'error');
       return;
