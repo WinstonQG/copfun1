@@ -44,6 +44,44 @@ function fck_admin_settings_form($form, &$form_state) {
     '#description' => '<strong>Note: </strong>1kr. = 100, 20kr.=2000',
   );
 
+  $form['order_email_template'] = array(
+    '#type' => 'fieldset',
+    '#title' => t('Order E-mail Template'),
+  );
+
+  $form['order_email_template']['fck_oet_text_above_table'] = array(
+    '#title' => t('Text above Table'),
+    '#type' => 'textarea',
+    '#rows' => 5,
+    '#default_value' => variable_get('fck_oet_text_above_table', '<strong>Tak for din ordre!</strong> Lorem ipsum dolor sit amet, consectetur adipisicing elit'),
+  );
+
+  $form['order_email_template']['fck_oet_addrblock_below_table'] = array(
+    '#title' => t('Address Block above Table'),
+    '#type' => 'textarea',
+    '#rows' => 5,
+    '#default_value' => variable_get('fck_oet_addrblock_below_table', '<ul class="fck-shop-address">
+  <li>Med Vedlig hilsen</li>
+  <li>F.C. Kopenhavn fanshop</li>
+  <li>Oster Allen</li>
+  <li>2100 Kopenhavn 0</li>
+</ul>
+<ul class="fck-shop-phone">
+  <li>Telefon: 35 46 33 64, task #4</li>
+  <li>Mail: fanshop@fck.dk</li>  
+</ul>'
+    ),
+  );
+
+  $form['order_email_template']['fck_oet_text_below_addrblock'] = array(
+    '#title' => t('Text below Addressblock'),
+    '#type' => 'textarea',
+    '#rows' => 5,
+    '#default_value' => variable_get('fck_oet_text_below_addrblock', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Unde at, magnam totam eligendi ex nulla
+suscipit earum nesciunt quas, blanditiis quaerat nam et provident labore animi doloremque
+accusamus voluptate. Quo.'),
+  );
+
   $form['invoices'] = array(
     '#type' => 'fieldset',
     '#title' => t('Invoices'),    
@@ -80,9 +118,9 @@ function fck_admin_settings_form($form, &$form_state) {
     '#type' => 'fieldset',
     '#title' => t('Cart/Checkout'),
   );
-  $form['cart_checkout']['fck_free_shipping_rate'] = array(
+  $form['cart_checkout']['fck_postdanmark_free_shipping_rate'] = array(
     '#type' => 'textfield',
-    '#default_value' => variable_get('fck_free_shipping_rate', 790.00),
+    '#default_value' => variable_get('fck_postdanmark_free_shipping_rate', 799.00),
     '#title' => t('Free shipping rate'),
     '#description' => '<strong>Note: </strong>1kr. = 1, 20kr.=20',
   );

@@ -41,6 +41,18 @@ function fck_order_menu_alter(&$items) {
 }
 
 /**
+ * Implements hook_entity_property_info_alter().
+ */
+function fck_order_entity_property_info_alter(&$info) {
+  $info['site']['properties']['fck_postdanmark_free_shipping_rate'] = array(
+    'type' => 'commerce_price',
+    'label' => t('Post Danmarks Free Shipping Amount'),
+    'description' => t('Post Danmarks Free Shipping Amount'),
+    'getter callback' => 'fck_order_get_postdanmark_free_shipping_rate',
+  );
+}
+
+/**
  * Implements hook_theme().
  */
 function fck_order_theme($existing, $type, $theme, $path) {  
@@ -51,6 +63,18 @@ function fck_order_theme($existing, $type, $theme, $path) {
       'path' => drupal_get_path('module', 'fck_order') . '/templates',
     ),
   );
+}
+
+/**
+ * Implements hook_preprocess_entity().
+ */
+function fck_order_preprocess_entity(&$variables) {
+  $view_mode = $variables['view_mode'];
+  if ($view_mode == 'pdf') {
+    $variables['fck_oet_text_above_table'] = variable_get('fck_oet_text_above_table', '');
+    $variables['fck_oet_addrblock_below_table'] = variable_get('fck_oet_addrblock_below_table', '');
+    $variables['fck_oet_text_below_addrblock'] = variable_get('fck_oet_text_below_addrblock', '');
+  }  
 }
 
 /**
@@ -70,7 +94,7 @@ function fck_order_form_alter(&$form, &$form_state, $form_id) {
     $order = commerce_cart_order_load($user->uid);      
 
     $subtotal = fck_get_order_subtotal($order);    
-    $discount_value = variable_get('fck_free_shipping_rate', 790.00);
+    $discount_value = variable_get('fck_postdanmark_free_shipping_rate', 799.00);
     $discount_value = $discount_value * 100;
     $discount_message = '';
     if ($subtotal >= $discount_value) {
@@ -447,10 +471,24 @@ function fck_shipping_pane_service_details_refresh($form, &$form_state, $checkou
  * @param  [type] $service_name    
  * Returns updated Commerce Order.          
  */
-function fck_add_order_shipping($order, $service_name = NULL) {    
-  if (isset($service_name) && !isset($order->shipping_rates[$service_name])) {  
+function fck_add_order_shipping($order, $service_name = NULL) {  
+  if (empty($service_name)) {
+    return;
+  }
+  // reload an order to void system error https://www.drupal.org/node/2275495
+  // It usually happens if user switches shipping on the cart after 14+ sec 
+  // after page was reloaded. Unclear issue - like some data in order has 
+  // been expired after 14+ sec..  
+  //dsm('aaa');
+  $order = commerce_order_load($order->order_id);
+  
+  if (isset($order->shipping_rates)) {
+    unset($order->shipping_rates);
+  }
+
+  if (isset($service_name) && !isset($order->shipping_rates[$service_name])) { 
     // Make the chosen service available to the order.     
-    commerce_shipping_service_rate_order($service_name, $order);
+    commerce_shipping_service_rate_order($service_name, $order);    
   }
   elseif (!isset($service_name)) {    
     if (empty($order->shipping_rates)) {      
@@ -458,20 +496,17 @@ function fck_add_order_shipping($order, $service_name = NULL) {
       return;
     }
     $service_name = key($order->shipping_rates);    
-  }
-  // reload an order before starting _delete_shipping_line_items 
-  // function to void system error https://www.drupal.org/node/2275495
-  // It usually happens if user swiches shipping on cart after 14+ sec 
-  // as page was reloaded. Unclear issue - like some data in order has 
-  // been expired after 14+ sec =)
-  $order = commerce_order_load($order->order_id);
+  }      
+  //$order->shipping_rates = $shipping_rates_clone;
+  
   // Delete any existing shipping line items from the order.
   commerce_shipping_delete_shipping_line_items($order, TRUE);
+  
   // Extract the unit price from the calculated rate.
   $rate_line_item = $order->shipping_rates[$service_name];
   $rate_line_item_wrapper = entity_metadata_wrapper('commerce_line_item', $rate_line_item);
   $unit_price = $rate_line_item_wrapper->commerce_unit_price->value();
-
+  
   // Create a new shipping line item with the calculated rate from the form.
   $line_item = commerce_shipping_line_item_new($service_name, $unit_price, $order->order_id, $rate_line_item->data, $rate_line_item->type);
 
@@ -572,7 +607,12 @@ function fck_order_add_coupon_form_submit($form, &$form_state) {
   $order = $form_state['order'];
   $error = '';
   if ($code = $form_state['values']['coupon_code']) {
-    if ($commerce_coupon = commerce_coupon_redeem_coupon_code($code, $order, $error)) {
+    if ($commerce_coupon = commerce_coupon_redeem_coupon_code($code, $order, $error)) {      
+      commerce_cart_order_refresh($order);
+      commerce_order_save($order);
+      // Allow modules/rules to act when a coupon has been successfully added
+      // to the cart.
+      rules_invoke_all('commerce_coupon_applied_to_cart', $commerce_coupon, $order);
       drupal_set_message(t('Successfully added voucher code !code.', array('!code' => $commerce_coupon->code)));
     } else {
       drupal_set_message($error, 'error');
@@ -589,9 +629,11 @@ function fck_order_add_coupon_form_submit($form, &$form_state) {
  */
 function fck_order_remove_coupon_form_submit($form, &$form_state) {
   $order = $form_state['order'];
-  $coupon = commerce_coupon_load($form_state['values']['coupon_id']);
-
+  $coupon = commerce_coupon_load($form_state['values']['coupon_id']);  
   fck_order_remove_coupon($order, $coupon);
+  commerce_cart_order_refresh($order);
+  $shipping = fck_get_order_shipping($order);  
+  fck_add_order_shipping($order, $shipping);
   drupal_set_message(t('Voucher !code removed from order.', array('!code' => $coupon->code)));
   
   return;
@@ -606,9 +648,24 @@ function fck_order_remove_coupon($order, $coupon) {
   foreach ($order_wrapper->commerce_coupons as $delta => $coupon_wrapper) {
     if ($coupon_wrapper->value() == $coupon) {
       $order_wrapper->commerce_coupons->offsetUnset($delta);
+      
     }
   }
   commerce_order_save($order);
+}
+
+/**
+ * Callback handler for 'fck_postdanmark_free_shipping_rate' property
+ */
+function fck_order_get_postdanmark_free_shipping_rate() {
+  $amount = variable_get('fck_postdanmark_free_shipping_rate', 799.00);
+  $currency_code = variable_get('commerce_default_currency', 'DKK');
+  
+  return array(
+    'amount' => $amount * 100,
+    'currency_code' => $currency_code,
+    'data' => array(),
+  );  
 }
 
 /**
@@ -621,10 +678,10 @@ function fck_get_order_subtotal($order) {
     ->data
     ->value();
   $products_amount = 0;
-  foreach ($price_components['components'] as $component) {
-    if ($component['name'] == 'base_price') {
-      $products_amount = $component['price']['amount'];
-      break;
+  //
+  foreach ($price_components['components'] as $component) {        
+    if (strpos($component['name'], 'flat_rate') === FALSE) {
+      $products_amount += $component['price']['amount'];      
     }
   }
 

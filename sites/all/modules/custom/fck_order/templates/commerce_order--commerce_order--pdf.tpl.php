@@ -23,7 +23,7 @@
   </div>
 </div>
 
-<div class="text"><strong>Tak for din ordre!</strong> Lorem ipsum dolor sit amet, consectetur adipisicing elit.</div>
+<div class="text"><?php print $fck_oet_text_above_table; ?></div>
 
 <div class="line-items">
   <div class="line-items-view"><?php print render($content['commerce_line_items']); ?></div>
@@ -31,23 +31,16 @@
 </div>
 
 <div class="table-bottom-text">
+<?php if (0) : ?>
 <div class="text-right">Ved ordren bonuses:</div>
 <div>Gratis Levering 1 <span class="star">X</span> Gratis Levering 2 <span class="star">X</span></div>
-<ul>
-  <li>Med Vedlig hilsen</li>
-  <li>F.C. Kopenhavn fanshop</li>
-  <li>Oster Allen</li>
-  <li>2100 Kopenhavn 0</li>
-</ul>
-<ul>
-  <li>Telefon: 35 46 33 64, task #4</li>
-  <li>Mail: fanshop@fck.dk</li>  
-</ul>
+<?php endif ?>
+<?php print $fck_oet_addrblock_below_table; ?>
 </div>
 
 <hr/>
 
-<div class="text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Unde at, magnam totam eligendi ex nulla suscipit earum nesciunt quas, blanditiis quaerat nam et provident labore animi doloremque accusamus voluptate. Quo.</div>
+<div class="text"><?php print $fck_oet_text_below_addrblock; ?></div>
 
 <div class="text-line"><span class="text-line-title">Jeg returnere hermed</span></div>
 

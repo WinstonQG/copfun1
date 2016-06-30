@@ -18698,6 +18698,9 @@ ul li {
   margin: 0;
   list-style: none;
 }
+#commerce-checkout-form-checkout #commerce-checkout-coupon-ajax-wrapper {
+  display: none;
+}
 .commerce-order-handler-area-order-total .commerce-price-formatted-components tr.odd,
 .commerce-order-handler-area-order-total .commerce-price-formatted-components tr.even {
   background: #333;
