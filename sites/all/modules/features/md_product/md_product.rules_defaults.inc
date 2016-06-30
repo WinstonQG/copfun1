@@ -34,12 +34,7 @@ function md_product_default_rules_configuration() {
       "PLUGIN" : "reaction rule",
       "OWNER" : "rules",
       "TAGS" : [ "FCK" ],
-      "REQUIRES" : [
-        "rules",
-        "commerce_discount",
-        "commerce_line_item",
-        "commerce_shipping"
-      ],
+      "REQUIRES" : [ "rules", "fck_order", "commerce_line_item", "commerce_shipping" ],
       "ON" : { "commerce_shipping_calculate_rate" : [] },
       "IF" : [
         { "entity_has_field" : {
@@ -52,10 +47,10 @@ function md_product_default_rules_configuration() {
             "value" : "post_danmark"
           }
         },
-        { "commerce_order_compare_order_amount" : {
+        { "NOT commerce_order_nosh_compare_order_amount" : {
             "commerce_order" : [ "commerce-line-item:order" ],
-            "operator" : "\\u003E",
-            "total" : { "value" : { "amount" : 79900, "currency_code" : "DKK" } }
+            "operator" : "\\u003C",
+            "total" : [ "site:fck-postdanmark-free-shipping-rate" ]
           }
         }
       ],

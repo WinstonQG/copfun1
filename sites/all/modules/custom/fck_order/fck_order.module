@@ -609,10 +609,12 @@ function fck_order_add_coupon_form_submit($form, &$form_state) {
   if ($code = $form_state['values']['coupon_code']) {
     if ($commerce_coupon = commerce_coupon_redeem_coupon_code($code, $order, $error)) {      
       commerce_cart_order_refresh($order);
-      commerce_order_save($order);
+      $shipping = fck_get_order_shipping($order);  
+      fck_add_order_shipping($order, $shipping);
+      //commerce_order_save($order);
       // Allow modules/rules to act when a coupon has been successfully added
       // to the cart.
-      rules_invoke_all('commerce_coupon_applied_to_cart', $commerce_coupon, $order);
+      //rules_invoke_all('commerce_coupon_applied_to_cart', $commerce_coupon, $order);
       drupal_set_message(t('Successfully added voucher code !code.', array('!code' => $commerce_coupon->code)));
     } else {
       drupal_set_message($error, 'error');

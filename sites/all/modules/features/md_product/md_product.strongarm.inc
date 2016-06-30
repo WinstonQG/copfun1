@@ -860,6 +860,20 @@ function md_product_strongarm() {
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
+  $strongarm->name = 'i18n_node_extended_shop_product';
+  $strongarm->value = 1;
+  $export['i18n_node_extended_shop_product'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'i18n_node_options_shop_product';
+  $strongarm->value = array();
+  $export['i18n_node_options_shop_product'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
   $strongarm->name = 'language_content_type_shop_product';
   $strongarm->value = '0';
   $export['language_content_type_shop_product'] = $strongarm;
