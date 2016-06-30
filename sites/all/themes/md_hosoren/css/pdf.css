@@ -98,7 +98,7 @@ table th {
 }
 .order-total table {
   position: absolute;
-  left: 372px;
+  left: 322px;
   margin-top: 15px;
   border: 1px solid black;
   font-weight: bold;
@@ -106,7 +106,7 @@ table th {
 td.component-title {
   text-align: left;
   padding: 4px;
-  width: 150px;
+  width: 200px;
 }
 td.component-total {
   text-align: left;
