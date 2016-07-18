@@ -85,10 +85,59 @@ function fck_order_theme_registry_alter(&$theme_registry) {
 }
 
 /**
+ * Implements hook_commerce_cp_info().
+ */
+function fck_order_commerce_cp_info() {
+  $cart_panes = array();
+    
+  $cart_panes['discount_info'] = array(
+    'name' => t('Discount info'),    
+    'pane callback' => 'fck_order_discount_info_pane',    
+    'page' => 'cart',
+  );
+
+  return $cart_panes;
+}
+
+function fck_order_discount_info_pane($form, $form_state, $cart_order, $pane_weight) {
+  $pane_form = array();
+  global $user;
+    
+  $order = commerce_cart_order_load($user->uid);      
+
+  $subtotal = fck_get_order_subtotal($order);    
+  $discount_value = variable_get('fck_postdanmark_free_shipping_rate', 799.00);
+  $discount_value = $discount_value * 100;
+  $discount_message = '';
+  if ($subtotal >= $discount_value) {
+    $discount_message = t('<span class="discount-note">NOTE - You have earned free delivery</span>');
+  } else {
+    $diff = $discount_value - $subtotal;
+    $diff = commerce_currency_format($diff, commerce_default_currency());
+    $discount_message = t('<span class="discount-note">FREE DELIVERY</span> - Buy for <span class="discount-note">!diff</span> more and get free shipping', array('!diff' => $diff)); 
+  }
+
+  $discount_message = '<div class="cart-discount-info">'. $discount_message . '</div>';
+
+  // *************************
+  // Discount info
+  // *************************
+  if (!empty($discount_message)) {
+    $pane_form['discount_info'] = array(
+      '#markup' => $discount_message,
+      '#weight' => $pane_weight,
+    );
+  }
+
+  return $pane_form;
+}
+
+/**
  * Implements hook_form_alter().
  */
 function fck_order_form_alter(&$form, &$form_state, $form_id) { 
   if ($form_id == 'views_form_commerce_cart_form_default') {
+    return;
     global $user;
     
     $order = commerce_cart_order_load($user->uid);      
@@ -116,6 +165,7 @@ function fck_order_form_alter(&$form, &$form_state, $form_id) {
         '#weight' => 100,
       );
     }
+    
     // *************************
     // Shipping container
     // *************************
